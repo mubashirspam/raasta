@@ -68,16 +68,16 @@ export default function PropertyGallery() {
     <section className="py-[60px] px-[12px] relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-[60px] right-[60px] w-[240px] h-[240px] bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-[60px] left-[60px] w-[288px] h-[288px] bg-gradient-to-br from-purple-500/10 to-pink-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-[60px] right-[60px] w-[240px] h-[240px] bg-gradient-to-br from-red-600/15 to-red-800/15 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-[60px] left-[60px] w-[288px] h-[288px] bg-gradient-to-br from-emerald-600/15 to-emerald-800/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-[60px]">
           <div className="inline-flex items-center gap-[9px] mb-[12px]">
-            <Camera className="text-cyan-400" size={15} />
-            <span className="text-[0.875rem] text-cyan-400 font-medium">
+            <Camera className="text-red-300" size={15} />
+            <span className="text-[0.875rem] text-red-300 font-medium">
               Gallery
             </span>
           </div>
@@ -85,7 +85,7 @@ export default function PropertyGallery() {
           <h2 className="text-[2.5rem] md:text-[3.5rem] font-black mb-[24px] text-white leading-tight">
             Inside the Luxury
             <br />
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-300 via-emerald-400 to-white bg-clip-text text-transparent">
               Dubai Properties
             </span>
           </h2>
@@ -99,10 +99,10 @@ export default function PropertyGallery() {
               className={`${item.gridClass} group relative cursor-pointer overflow-hidden rounded-[18px]`}
             >
               {/* Background Glow */}
-              <div className="absolute -inset-[3px] bg-gradient-to-br from-cyan-400/30 to-purple-600/30 rounded-[21px] blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+              <div className="absolute -inset-[3px] bg-gradient-to-br from-red-600/30 to-emerald-600/30 rounded-[21px] blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
 
               {/* Main Container */}
-              <div className="relative h-full overflow-hidden rounded-[18px] border border-white/10 group-hover:border-cyan-400/30 transition-all duration-300">
+              <div className="relative h-full overflow-hidden rounded-[18px] border border-white/10 group-hover:border-red-400/30 transition-all duration-300">
                 {/* Property Image */}
                 <Image
                   src={item.image}
@@ -115,7 +115,7 @@ export default function PropertyGallery() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
 
                 {/* Room Number Badge */}
-                <div className="absolute top-[15px] right-[15px] w-[36px] h-[36px] bg-gradient-to-br from-cyan-400 to-blue-600 backdrop-blur-sm rounded-[9px] flex items-center justify-center text-white text-[0.875rem] font-black border border-white/30 shadow-lg">
+                <div className="absolute top-[15px] right-[15px] w-[36px] h-[36px] bg-gradient-to-br from-red-500 to-red-700 backdrop-blur-sm rounded-[9px] flex items-center justify-center text-white text-[0.875rem] font-black border border-white/30 shadow-lg">
                   {item.id}
                 </div>
 
@@ -129,7 +129,7 @@ export default function PropertyGallery() {
                 </div>
 
                 {/* Hover Overlay Icon */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-emerald-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="w-[54px] h-[54px] bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white/40 transform scale-75 group-hover:scale-100 transition-transform duration-300 shadow-xl">
                     <ArrowRight className="text-white" size={20} />
                   </div>

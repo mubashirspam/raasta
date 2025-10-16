@@ -74,13 +74,13 @@ export default function Hero({ scrollToSection }: HeroProps) {
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[10%] left-[5%] w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-gradient-to-r from-cyan-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-[10%] left-[5%] w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-gradient-to-r from-red-600/15 to-red-800/15 rounded-full blur-3xl animate-pulse"></div>
         <div
-          className="absolute bottom-[10%] right-[5%] w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-gradient-to-r from-purple-400/10 to-pink-600/10 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-[10%] right-[5%] w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-gradient-to-r from-emerald-600/15 to-emerald-800/15 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "1s" }}
         ></div>
         <div
-          className="absolute top-[50%] left-[50%] w-[150px] h-[150px] md:w-[250px] md:h-[250px] bg-gradient-to-r from-emerald-400/5 to-teal-600/5 rounded-full blur-3xl animate-pulse"
+          className="absolute top-[50%] left-[50%] w-[150px] h-[150px] md:w-[250px] md:h-[250px] bg-gradient-to-r from-black/10 to-gray-800/10 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         ></div>
       </div>
@@ -91,7 +91,7 @@ export default function Hero({ scrollToSection }: HeroProps) {
           <div className="text-center lg:text-left space-y-[24px] md:space-y-[30px] order-2 lg:order-1">
             {/* Location Badge */}
             <div className="inline-flex items-center gap-[9px] px-[18px] py-[9px] bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
-              <MapPin className="text-cyan-400" size={15} />
+              <MapPin className="text-red-300" size={15} />
               <span className="text-[0.875rem] text-white/80 font-medium">
                 Dubai Marina, UAE
               </span>
@@ -101,7 +101,7 @@ export default function Hero({ scrollToSection }: HeroProps) {
             <h1 className="text-[2.25rem] sm:text-[3rem] md:text-[3.75rem] lg:text-[4rem] font-black text-white leading-[1.1] tracking-tight">
               Discover Your
               <br />
-              <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-red-300 via-emerald-400 to-white bg-clip-text text-transparent">
                 Dream Home
               </span>
               <br />
@@ -120,14 +120,14 @@ export default function Hero({ scrollToSection }: HeroProps) {
                 {["R", "A", "S", "T", "A"].map((letter, i) => (
                   <div
                     key={i}
-                    className="w-[36px] h-[36px] bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full border-2 border-[#0a0a1f] flex items-center justify-center text-white text-[0.75rem] font-bold shadow-lg"
+                    className="w-[36px] h-[36px] bg-gradient-to-br from-red-600 to-red-700 rounded-full border-2 border-[#0a0a1f] flex items-center justify-center text-white text-[0.75rem] font-bold shadow-lg"
                     style={{
                       background:
                         i % 3 === 0
-                          ? "linear-gradient(135deg, #22d3ee, #3b82f6)"
+                          ? "linear-gradient(135deg, #dc2626, #991b1b)"
                           : i % 3 === 1
-                          ? "linear-gradient(135deg, #a855f7, #ec4899)"
-                          : "linear-gradient(135deg, #34d399, #14b8a6)",
+                          ? "linear-gradient(135deg, #059669, #064e3b)"
+                          : "linear-gradient(135deg, #374151, #111827)",
                     }}
                   >
                     {letter}
@@ -146,7 +146,7 @@ export default function Hero({ scrollToSection }: HeroProps) {
             <div className="flex flex-col sm:flex-row gap-[12px] justify-center lg:justify-start">
               <button
                 onClick={() => scrollToSection("services")}
-                className="group inline-flex items-center justify-center gap-[9px] px-[30px] py-[14px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 rounded-[12px] text-white font-bold text-[1rem] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30 shadow-xl"
+                className="group inline-flex items-center justify-center gap-[9px] px-[30px] py-[14px] bg-gradient-to-r from-red-600 via-emerald-600 to-black hover:from-red-500 hover:via-emerald-500 hover:to-gray-800 rounded-[12px] text-white font-bold text-[1rem] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/30 shadow-xl"
               >
                 <span>Explore Properties</span>
                 <ArrowRight
@@ -214,9 +214,9 @@ export default function Hero({ scrollToSection }: HeroProps) {
           <div className="relative order-1 lg:order-2 w-full">
             <div className="relative group w-full">
               {/* Decorative Elements */}
-              <div className="absolute -top-[12px] -left-[12px] w-[80px] h-[80px] bg-gradient-to-br from-cyan-400/30 to-blue-600/30 rounded-[18px] blur-xl animate-pulse"></div>
+              <div className="absolute -top-[12px] -left-[12px] w-[80px] h-[80px] bg-gradient-to-br from-red-600/30 to-red-800/30 rounded-[18px] blur-xl animate-pulse"></div>
               <div
-                className="absolute -bottom-[12px] -right-[12px] w-[80px] h-[80px] bg-gradient-to-br from-purple-400/30 to-pink-600/30 rounded-full blur-xl animate-pulse"
+                className="absolute -bottom-[12px] -right-[12px] w-[80px] h-[80px] bg-gradient-to-br from-emerald-600/30 to-emerald-800/30 rounded-full blur-xl animate-pulse"
                 style={{ animationDelay: "0.5s" }}
               ></div>
 
@@ -282,8 +282,8 @@ export default function Hero({ scrollToSection }: HeroProps) {
                 {/* Floating Info Badge */}
                 <div className="absolute bottom-[60px] left-[24px] right-[24px] backdrop-blur-xl bg-white/10 rounded-[15px] border border-white/20 p-[15px] shadow-xl">
                   <div className="flex items-center gap-[12px]">
-                    <div className="w-[42px] h-[42px] bg-gradient-to-br from-cyan-400/30 to-blue-600/30 rounded-[12px] flex items-center justify-center border border-cyan-400/30">
-                      <Building2 className="text-cyan-400" size={20} />
+                    <div className="w-[42px] h-[42px] bg-gradient-to-br from-red-600/30 to-emerald-600/30 rounded-[12px] flex items-center justify-center border border-red-500/30">
+                      <Building2 className="text-red-300" size={20} />
                     </div>
                     <div className="flex-1">
                       <div className="text-[0.875rem] md:text-[1rem] font-bold text-white">

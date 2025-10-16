@@ -27,7 +27,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/20 border-b border-white/10">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/30 border-b border-red-500/20">
       <div className="max-w-7xl mx-auto px-[12px]">
         <div className="flex items-center justify-between h-[48px]">
           {/* Logo */}
@@ -35,10 +35,10 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
             onClick={() => handleNavClick("home")}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-[30px] h-[30px] bg-gradient-to-br from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 rounded-full flex items-center justify-center text-blue-400 hover:text-blue-300 transition-all duration-300 hover:scale-110 border border-blue-500/20 hover:border-blue-400/40">
+            <div className="w-[30px] h-[30px] bg-gradient-to-br from-red-600/30 to-emerald-600/30 hover:from-red-500/40 hover:to-emerald-500/40 rounded-full flex items-center justify-center text-red-300 hover:text-white transition-all duration-300 hover:scale-110 border border-red-500/30 hover:border-emerald-400/50">
               <Building2 size={15} />
             </div>
-            <span className="text-[1.125rem] font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="text-[1.125rem] font-bold bg-gradient-to-r from-red-400 to-emerald-400 bg-clip-text text-transparent">
               Raasta Realty
             </span>
           </div>
@@ -51,8 +51,8 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
                 onClick={() => handleNavClick(item.id)}
                 className={`px-[12px] py-[6px] rounded-full text-[0.875rem] font-medium transition-all duration-300 ${
                   activeSection === item.id
-                    ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border border-blue-500/20"
-                    : "text-blue-200/80 hover:text-white hover:bg-white/5"
+                    ? "bg-gradient-to-r from-red-600/30 to-emerald-600/30 text-red-200 border border-red-500/30"
+                    : "text-white/80 hover:text-white hover:bg-emerald-500/10"
                 }`}
               >
                 {item.label}
@@ -64,7 +64,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
           <div className="hidden md:block">
             <button 
               onClick={() => handleNavClick("contact")}
-              className="px-[18px] py-[6px] bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 rounded-full border border-blue-500/20 hover:border-blue-400/40 text-blue-300 hover:text-white transition-all duration-300 text-[0.875rem] backdrop-blur-sm"
+              className="px-[18px] py-[6px] bg-gradient-to-r from-red-600/30 to-emerald-600/30 hover:from-red-500/40 hover:to-emerald-500/40 rounded-full border border-red-500/30 hover:border-emerald-400/50 text-white hover:text-red-200 transition-all duration-300 text-[0.875rem] backdrop-blur-sm shadow-lg shadow-red-500/10"
             >
               Get Started
             </button>
@@ -73,7 +73,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden w-[30px] h-[30px] bg-gradient-to-br from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 rounded-full flex items-center justify-center text-blue-400 hover:text-blue-300 transition-all duration-300 border border-blue-500/20 hover:border-blue-400/40"
+            className="md:hidden w-[30px] h-[30px] bg-gradient-to-br from-red-600/30 to-emerald-600/30 hover:from-red-500/40 hover:to-emerald-500/40 rounded-full flex items-center justify-center text-red-300 hover:text-white transition-all duration-300 border border-red-500/30 hover:border-emerald-400/50"
           >
             {isMenuOpen ? <X size={15} /> : <Menu size={15} />}
           </button>
@@ -81,7 +81,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 backdrop-blur-xl bg-black/40 border-b border-white/10">
+          <div className="md:hidden absolute top-full left-0 right-0 backdrop-blur-xl bg-black/50 border-b border-red-500/20">
             <div className="px-[12px] py-[18px] space-y-[9px]">
               {navItems.map((item) => (
                 <button
@@ -89,8 +89,8 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
                   onClick={() => handleNavClick(item.id)}
                   className={`block w-full text-left px-[12px] py-[9px] rounded-[9px] text-[0.875rem] font-medium transition-all duration-300 ${
                     activeSection === item.id
-                      ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border border-blue-500/20"
-                      : "text-blue-200/80 hover:text-white hover:bg-white/5"
+                      ? "bg-gradient-to-r from-red-600/30 to-emerald-600/30 text-red-200 border border-red-500/30"
+                      : "text-white/80 hover:text-white hover:bg-emerald-500/10"
                   }`}
                 >
                   {item.label}
@@ -98,7 +98,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
               ))}
               <button 
                 onClick={() => handleNavClick("contact")}
-                className="block w-full px-[12px] py-[9px] bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 rounded-[9px] border border-blue-500/20 hover:border-blue-400/40 text-blue-300 hover:text-white transition-all duration-300 text-[0.875rem] backdrop-blur-sm text-center mt-[12px]"
+                className="block w-full px-[12px] py-[9px] bg-gradient-to-r from-red-600/30 to-emerald-600/30 hover:from-red-500/40 hover:to-emerald-500/40 rounded-[9px] border border-red-500/30 hover:border-emerald-400/50 text-white hover:text-red-200 transition-all duration-300 text-[0.875rem] backdrop-blur-sm text-center mt-[12px] shadow-lg shadow-red-500/10"
               >
                 Get Started
               </button>

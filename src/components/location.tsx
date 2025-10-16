@@ -30,8 +30,8 @@ export default function Location() {
         {/* Section Header */}
         <div className="text-center mb-[45px]">
           <div className="flex items-center justify-center gap-[6px] mb-[9px]">
-            <div className="w-[6px] h-[6px] bg-cyan-400 rounded-full"></div>
-            <span className="text-[0.75rem] text-cyan-400 font-medium uppercase tracking-wider">Location</span>
+            <div className="w-[6px] h-[6px] bg-red-400 rounded-full"></div>
+            <span className="text-[0.75rem] text-red-400 font-medium uppercase tracking-wider">Location</span>
           </div>
           
           <h2 className="text-[2.25rem] md:text-[3rem] font-black text-white leading-tight">
@@ -66,15 +66,15 @@ export default function Location() {
               <span className="text-[0.875rem] text-white/60 font-medium">Address:</span>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-[12px] blur-lg opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-red-800/20 rounded-[12px] blur-lg opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
               <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-[12px] p-[18px] group-hover:border-white/20 transition-all duration-300">
                 <div className="flex items-center justify-center mb-[9px]">
-                  <div className="w-[30px] h-[30px] bg-gradient-to-br from-cyan-400 to-blue-600 rounded-[6px] flex items-center justify-center">
+                  <div className="w-[30px] h-[30px] bg-gradient-to-br from-red-500 to-red-700 rounded-[6px] flex items-center justify-center">
                     <MapPin className="text-white" size={15} />
                   </div>
                 </div>
                 <h3 className="text-[1.25rem] font-bold text-white mb-[3px]">Marina Walk Boulevard</h3>
-                <p className="text-[1rem] text-cyan-300 font-medium">Dubai, UAE</p>
+                <p className="text-[1rem] text-red-200 font-medium">Dubai, UAE</p>
               </div>
             </div>
           </div>
@@ -85,15 +85,15 @@ export default function Location() {
               <span className="text-[0.875rem] text-white/60 font-medium">Office:</span>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-600/20 rounded-[12px] blur-lg opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-gray-800/20 rounded-[12px] blur-lg opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
               <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-[12px] p-[18px] group-hover:border-white/20 transition-all duration-300">
                 <div className="flex items-center justify-center mb-[9px]">
-                  <div className="w-[30px] h-[30px] bg-gradient-to-br from-purple-400 to-pink-600 rounded-[6px] flex items-center justify-center">
+                  <div className="w-[30px] h-[30px] bg-gradient-to-br from-gray-600 to-black rounded-[6px] flex items-center justify-center">
                     <Building className="text-white" size={15} />
                   </div>
                 </div>
                 <h3 className="text-[1.25rem] font-bold text-white mb-[3px]">20th Floor</h3>
-                <p className="text-[1rem] text-purple-300 font-medium">With City View</p>
+                <p className="text-[1rem] text-gray-200 font-medium">With City View</p>
               </div>
             </div>
           </div>
@@ -102,13 +102,13 @@ export default function Location() {
         {/* Location Marker */}
         <div className="flex justify-center">
           <div className="relative group cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/30 to-purple-600/30 rounded-full blur-xl animate-pulse"></div>
-            <div className="relative w-[60px] h-[60px] bg-gradient-to-br from-cyan-400 to-purple-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20 group-hover:scale-110 transition-transform duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-red-600/30 to-emerald-600/30 rounded-full blur-xl animate-pulse"></div>
+            <div className="relative w-[60px] h-[60px] bg-gradient-to-br from-red-500 to-emerald-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20 group-hover:scale-110 transition-transform duration-300">
               <Building2 className="text-white" size={24} />
             </div>
             {/* Ripple effect */}
-            <div className="absolute inset-0 rounded-full border-2 border-cyan-400/50 animate-ping"></div>
-            <div className="absolute inset-0 rounded-full border-2 border-purple-400/50 animate-ping animation-delay-1000"></div>
+            <div className="absolute inset-0 rounded-full border-2 border-red-400/50 animate-ping"></div>
+            <div className="absolute inset-0 rounded-full border-2 border-emerald-400/50 animate-ping animation-delay-1000"></div>
           </div>
         </div>
       </div>

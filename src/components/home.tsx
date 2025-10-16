@@ -64,9 +64,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-slate-900/20"></div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-red-900 to-emerald-900 text-white relative overflow-hidden">
+      {/* Background decoration - UAE Flag inspired */}
+      <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-emerald-900/20 to-black/40"></div>
+      {/* UAE Flag accent stripes */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-white via-emerald-600 to-black"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-black via-emerald-600 via-white to-red-600"></div>
       <div className="relative z-10">
         <Navigation
           activeSection={activeSection}
@@ -103,10 +106,10 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Scroll to top button */}
+      {/* Scroll to top button - UAE themed */}
       <button
         onClick={() => scrollToSection("home")}
-        className="fixed bottom-[24px] right-[24px] w-[36px] h-[36px] bg-gradient-to-br from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 rounded-full flex items-center justify-center text-blue-400 hover:text-blue-300 transition-all duration-300 hover:scale-110 border border-blue-500/20 hover:border-blue-400/40 backdrop-blur-sm z-50"
+        className="fixed bottom-[24px] right-[24px] w-[36px] h-[36px] bg-gradient-to-br from-red-600/30 to-emerald-600/30 hover:from-red-500/40 hover:to-emerald-500/40 rounded-full flex items-center justify-center text-white hover:text-red-200 transition-all duration-300 hover:scale-110 border border-red-500/30 hover:border-emerald-400/50 backdrop-blur-sm z-50 shadow-lg shadow-red-500/20"
       >
         <ChevronUp size={15} />
       </button>

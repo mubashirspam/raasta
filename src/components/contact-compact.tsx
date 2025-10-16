@@ -36,21 +36,21 @@ export default function ContactCompact() {
     <section id="contact" className="py-[30px] px-[12px] relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-[30px] left-[30px] w-[180px] h-[180px] bg-gradient-to-br from-purple-500/10 to-pink-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[30px] right-[30px] w-[200px] h-[200px] bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-[30px] left-[30px] w-[180px] h-[180px] bg-gradient-to-br from-red-600/15 to-red-800/15 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[30px] right-[30px] w-[200px] h-[200px] bg-gradient-to-br from-emerald-600/15 to-emerald-800/15 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-[24px]">
           <div className="inline-flex items-center gap-[9px] mb-[12px]">
-            <div className="w-[30px] h-[30px] bg-gradient-to-br from-purple-400 to-pink-600 rounded-[9px] flex items-center justify-center text-white shadow-lg">
+            <div className="w-[30px] h-[30px] bg-gradient-to-br from-red-500 to-red-700 rounded-[9px] flex items-center justify-center text-white shadow-lg">
               <MessageSquare size={15} />
             </div>
-            <h2 className="text-[1.875rem] md:text-[2.25rem] font-black bg-gradient-to-r from-purple-300 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            <h2 className="text-[1.875rem] md:text-[2.25rem] font-black bg-gradient-to-r from-red-300 via-emerald-400 to-white bg-clip-text text-transparent">
               Get In Touch
             </h2>
-            <div className="w-[30px] h-[30px] bg-gradient-to-br from-cyan-400 to-blue-600 rounded-[9px] flex items-center justify-center text-white shadow-lg">
+            <div className="w-[30px] h-[30px] bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-[9px] flex items-center justify-center text-white shadow-lg">
               <Send size={15} />
             </div>
           </div>
@@ -62,14 +62,14 @@ export default function ContactCompact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px]">
           {/* Contact Form - Compact */}
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-[12px] blur-lg"></div>
-            <div className="relative backdrop-blur-xl bg-gradient-to-br from-cyan-500/20 via-blue-500/15 to-indigo-500/20 rounded-[12px] border border-cyan-300/30 p-[18px] shadow-xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-red-800/20 rounded-[12px] blur-lg"></div>
+            <div className="relative backdrop-blur-xl bg-gradient-to-br from-red-600/20 via-red-600/15 to-red-800/20 rounded-[12px] border border-red-400/30 p-[18px] shadow-xl">
               <div className="text-center mb-[15px]">
-                <div className="w-[36px] h-[36px] bg-gradient-to-br from-cyan-400 to-blue-600 rounded-[9px] flex items-center justify-center text-white mx-auto mb-[9px] shadow-lg">
+                <div className="w-[36px] h-[36px] bg-gradient-to-br from-red-500 to-red-700 rounded-[9px] flex items-center justify-center text-white mx-auto mb-[9px] shadow-lg">
                   <Send size={18} />
                 </div>
                 <h3 className="text-[1.125rem] font-black text-white mb-[3px]">Quick Contact</h3>
-                <p className="text-[0.75rem] text-cyan-100/80">Let&apos;s start a conversation</p>
+                <p className="text-[0.75rem] text-red-100/80">Let&apos;s start a conversation</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-[12px]">
@@ -80,7 +80,7 @@ export default function ContactCompact() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-[12px] py-[9px] bg-white/10 border border-cyan-300/30 rounded-[9px] text-white text-[0.875rem] placeholder-cyan-200/50 focus:outline-none focus:border-cyan-400/70 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full px-[12px] py-[9px] bg-white/10 border border-red-300/30 rounded-[9px] text-white text-[0.875rem] placeholder-red-200/50 focus:outline-none focus:border-red-400/70 transition-all duration-300 backdrop-blur-sm"
                       placeholder="Full Name"
                       required
                     />
@@ -91,7 +91,7 @@ export default function ContactCompact() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-[12px] py-[9px] bg-white/10 border border-cyan-300/30 rounded-[9px] text-white text-[0.875rem] placeholder-cyan-200/50 focus:outline-none focus:border-cyan-400/70 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full px-[12px] py-[9px] bg-white/10 border border-red-300/30 rounded-[9px] text-white text-[0.875rem] placeholder-red-200/50 focus:outline-none focus:border-red-400/70 transition-all duration-300 backdrop-blur-sm"
                       placeholder="Email"
                       required
                     />
@@ -105,7 +105,7 @@ export default function ContactCompact() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-[12px] py-[9px] bg-white/10 border border-cyan-300/30 rounded-[9px] text-white text-[0.875rem] placeholder-cyan-200/50 focus:outline-none focus:border-cyan-400/70 transition-all duration-300 backdrop-blur-sm"
+                      className="w-full px-[12px] py-[9px] bg-white/10 border border-red-300/30 rounded-[9px] text-white text-[0.875rem] placeholder-red-200/50 focus:outline-none focus:border-red-400/70 transition-all duration-300 backdrop-blur-sm"
                       placeholder="Phone"
                     />
                   </div>
@@ -138,7 +138,7 @@ export default function ContactCompact() {
 
                 <button
                   type="submit"
-                  className="w-full group px-[18px] py-[9px] bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 hover:from-cyan-400 hover:via-blue-400 hover:to-indigo-500 rounded-[9px] text-white font-bold text-[0.875rem] transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-[6px]"
+                  className="w-full group px-[18px] py-[9px] bg-gradient-to-r from-red-600 via-emerald-600 to-black hover:from-red-500 hover:via-emerald-500 hover:to-gray-800 rounded-[9px] text-white font-bold text-[0.875rem] transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-[6px]"
                 >
                   <Send className="group-hover:translate-x-[3px] transition-transform" size={15} />
                   Send Message
@@ -150,32 +150,32 @@ export default function ContactCompact() {
           {/* Contact Info & Social - Compact */}
           <div className="space-y-[12px]">
             {/* Contact Info Cards */}
-            <div className="backdrop-blur-xl bg-gradient-to-br from-purple-500/20 via-pink-500/15 to-cyan-500/20 rounded-[12px] border border-purple-300/30 p-[15px] shadow-xl">
+            <div className="backdrop-blur-xl bg-gradient-to-br from-emerald-600/20 via-emerald-600/15 to-emerald-800/20 rounded-[12px] border border-emerald-400/30 p-[15px] shadow-xl">
               <h3 className="text-[1.125rem] font-black text-white mb-[12px] flex items-center gap-[6px]">
-                <MapPin className="text-purple-400" size={15} />
+                <MapPin className="text-emerald-300" size={15} />
                 Contact Information
               </h3>
 
               <div className="space-y-[9px]">
                 {/* Email */}
                 <div className="flex items-center gap-[9px] p-[9px] rounded-[9px] bg-white/5 hover:bg-white/10 transition-all duration-300">
-                  <div className="w-[24px] h-[24px] bg-gradient-to-br from-purple-400 to-pink-600 rounded-[6px] flex items-center justify-center text-white flex-shrink-0">
+                  <div className="w-[24px] h-[24px] bg-gradient-to-br from-red-500 to-red-700 rounded-[6px] flex items-center justify-center text-white flex-shrink-0">
                     <Mail size={12} />
                   </div>
                   <div className="flex-1">
                     <h4 className="text-[0.75rem] font-bold text-white">Email</h4>
-                    <p className="text-purple-200 text-[0.625rem]">info@raastarealty.com</p>
+                    <p className="text-red-200 text-[0.625rem]">info@raastarealty.com</p>
                   </div>
                 </div>
 
                 {/* Phone */}
                 <div className="flex items-center gap-[9px] p-[9px] rounded-[9px] bg-white/5 hover:bg-white/10 transition-all duration-300">
-                  <div className="w-[24px] h-[24px] bg-gradient-to-br from-cyan-400 to-blue-600 rounded-[6px] flex items-center justify-center text-white flex-shrink-0">
+                  <div className="w-[24px] h-[24px] bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-[6px] flex items-center justify-center text-white flex-shrink-0">
                     <Phone size={12} />
                   </div>
                   <div className="flex-1">
                     <h4 className="text-[0.75rem] font-bold text-white">Phone</h4>
-                    <p className="text-cyan-200 text-[0.625rem]">+971 50 123 4567</p>
+                    <p className="text-emerald-200 text-[0.625rem]">+971 50 123 4567</p>
                   </div>
                 </div>
 
@@ -186,7 +186,7 @@ export default function ContactCompact() {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-[0.75rem] font-bold text-white">Office</h4>
-                    <p className="text-emerald-200 text-[0.625rem]">Dubai Marina, UAE</p>
+                    <p className="text-gray-200 text-[0.625rem]">Dubai Marina, UAE</p>
                   </div>
                 </div>
               </div>

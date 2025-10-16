@@ -92,8 +92,8 @@ export default function FeaturedDeals() {
     <section className="py-[60px] px-[12px] relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-[60px] right-[60px] w-[240px] h-[240px] bg-gradient-to-br from-purple-500/10 to-pink-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[60px] left-[60px] w-[288px] h-[288px] bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-[60px] right-[60px] w-[240px] h-[240px] bg-gradient-to-br from-red-600/15 to-red-800/15 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[60px] left-[60px] w-[288px] h-[288px] bg-gradient-to-br from-emerald-600/15 to-emerald-800/15 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -101,7 +101,7 @@ export default function FeaturedDeals() {
         <div className="mb-[48px]">
           <div className="flex items-center justify-between mb-[12px]">
             <div>
-              <h2 className="text-[2.25rem] md:text-[3rem] font-black bg-gradient-to-r from-purple-300 via-pink-400 to-orange-400 bg-clip-text text-transparent mb-[6px]">
+              <h2 className="text-[2.25rem] md:text-[3rem] font-black bg-gradient-to-r from-red-300 via-emerald-400 to-white bg-clip-text text-transparent mb-[6px]">
                 Featured Deals
               </h2>
               <p className="text-[1rem] text-white/70 font-medium">
@@ -111,10 +111,10 @@ export default function FeaturedDeals() {
             
             {/* Navigation Arrows */}
             <div className="hidden md:flex gap-[9px]">
-              <button className="w-[36px] h-[36px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 rounded-full flex items-center justify-center text-purple-300 hover:text-white transition-all duration-300 border border-purple-400/30">
+              <button className="w-[36px] h-[36px] bg-gradient-to-br from-red-600/30 to-emerald-600/30 hover:from-red-500/40 hover:to-emerald-500/40 rounded-full flex items-center justify-center text-red-300 hover:text-white transition-all duration-300 border border-red-500/30">
                 <ChevronLeft size={15} />
               </button>
-              <button className="w-[36px] h-[36px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 rounded-full flex items-center justify-center text-purple-300 hover:text-white transition-all duration-300 border border-purple-400/30">
+              <button className="w-[36px] h-[36px] bg-gradient-to-br from-red-600/30 to-emerald-600/30 hover:from-red-500/40 hover:to-emerald-500/40 rounded-full flex items-center justify-center text-red-300 hover:text-white transition-all duration-300 border border-red-500/30">
                 <ChevronRight size={15} />
               </button>
             </div>
@@ -126,7 +126,7 @@ export default function FeaturedDeals() {
           <div className="flex gap-[18px] overflow-x-auto scrollbar-hide pb-[12px]">
             {featuredProperties.map((property) => (
               <div key={property.id} className="flex-shrink-0 w-[280px] group relative cursor-pointer">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-[12px] blur-lg group-hover:blur-xl transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-red-600/20 to-emerald-600/20 rounded-[12px] blur-lg group-hover:blur-xl transition-all duration-300"></div>
                 <div className="relative backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/10 rounded-[12px] border border-white/20 hover:border-white/30 transition-all duration-300 group-hover:scale-105 overflow-hidden shadow-xl">
                   
                   {/* Property Image */}
@@ -188,7 +188,7 @@ export default function FeaturedDeals() {
 
                     {/* Address */}
                     <div className="flex items-start gap-[6px]">
-                      <MapPin size={12} className="text-purple-400 mt-[3px] flex-shrink-0" />
+                      <MapPin size={12} className="text-red-300 mt-[3px] flex-shrink-0" />
                       <div>
                         <p className="text-[0.875rem] font-medium text-white leading-tight">{property.address}</p>
                         <p className="text-[0.75rem] text-white/60">{property.location}</p>
@@ -203,7 +203,7 @@ export default function FeaturedDeals() {
 
         {/* View All Button */}
         <div className="text-center mt-[36px]">
-          <button className="px-[30px] py-[12px] bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-400 hover:via-pink-400 hover:to-orange-400 rounded-[12px] text-white font-bold text-[1.125rem] transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-purple-500/25">
+          <button className="px-[30px] py-[12px] bg-gradient-to-r from-red-600 via-emerald-600 to-black hover:from-red-500 hover:via-emerald-500 hover:to-gray-800 rounded-[12px] text-white font-bold text-[1.125rem] transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-red-500/25">
             View All Featured Deals
             <Star className="inline-block ml-[9px]" size={15} />
           </button>
