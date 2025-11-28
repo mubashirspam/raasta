@@ -4,7 +4,6 @@ import React from "react";
 import Navigation from "./Navigation";
 import HeroSection from "./HeroSection";
 import ExplorePrimeLocations from "./ExplorePrimeLocations";
-import BrandPartners from "./BrandPartners";
 import AboutUs from "./AboutUs";
 import OffplanLaunches from "./OffplanLaunches";
 import Consultation from "./Consultation";
@@ -17,21 +16,15 @@ import ContactSection from "./ContactSection";
 import Footer from "./Footer";
 import AnimatedSection from "./AnimatedSection";
 import ParallaxSection from "./ParallaxSection";
-import ScrollProgress from "./ScrollProgress";
-// import SideBanners from "./SideBanners";
+import ProgressiveBlur from "./ui/ProgressiveBlur";
+
 
 export default function Home() {
   return (
     <>
-      <ScrollProgress />
-      {/* <SideBanners /> */}
       <Navigation />
 
       <HeroSection />
-
-      <AnimatedSection direction="up" delay={0}>
-        <BrandPartners />
-      </AnimatedSection>
 
       <AnimatedSection direction="fade" delay={0.1}>
         <AboutUs />
@@ -61,11 +54,9 @@ export default function Home() {
         <Consultation />
       </AnimatedSection>
 
-      <ParallaxSection offset={60}>
-        <AnimatedSection direction="right" delay={0.1}>
-          <OurStory />
-        </AnimatedSection>
-      </ParallaxSection>
+      <AnimatedSection direction="right" delay={0.1}>
+        <OurStory />
+      </AnimatedSection>
 
       <AnimatedSection direction="up" delay={0}>
         <CounterSection />
@@ -84,6 +75,8 @@ export default function Home() {
       <AnimatedSection direction="fade" delay={0}>
         <Footer />
       </AnimatedSection>
+
+       <ProgressiveBlur />
     </>
   );
 }
