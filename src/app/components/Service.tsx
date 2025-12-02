@@ -1,113 +1,148 @@
-import React from "react";
-import Link from "next/link";
-import { Award, Target, Users, TrendingUp } from "lucide-react";
+"use client";
 
-export default function AboutUs() {
+import React from "react";
+import { Award, Users, Target, TrendingUp } from "lucide-react";
+import Image from "next/image";
+
+const ServicesSection = () => {
   const services = [
     {
       icon: Award,
       title: "Property Valuation",
       description:
         "All-inclusive real estate services to facilitate the easy and confident purchase, sale, and management of your properties.",
-      gradient: "from-yellow-400 to-pink-500",
+      tags: ["Appraisal", "Market Analysis", "Assessment", "Reports"],
+      number: "01",
+      image:
+        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=500&q=80",
     },
     {
       icon: Users,
       title: "Property Management",
       description:
         "All-inclusive real estate services to facilitate the easy and confident purchase, sale, and management of your properties.",
-      gradient: "from-sky-400 to-pink-500",
+      tags: ["Maintenance", "Tenant Relations", "Operations", "Support"],
+      number: "02",
+      image:
+        "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=500&q=80",
     },
     {
       icon: Target,
       title: "Business Consulting",
       description:
         "Business consulting involves providing expert advice and services to help real estate businesses improve performance and achieve their goals.",
-      gradient: "from-lime-400 to-cyan-400",
+      tags: ["Strategy", "Advisory", "Planning", "Growth"],
+      number: "03",
+      image:
+        "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=500&q=80",
     },
     {
       icon: TrendingUp,
       title: "Invest Opportunities",
       description:
         "Real estate services to help investors identify, evaluate, and act on high-potential property opportunities for growth.",
-      gradient: "from-yellow-400 to-pink-500",
+      tags: ["ROI Analysis", "Portfolio", "Market Research", "Due Diligence"],
+      number: "04",
+      image:
+        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=80",
     },
   ];
 
+  // Removed unused getCardStyle function to resolve lint warning
+
   return (
-    <section
-      id="about"
-      className="max-w-7xl mx-auto rounded-3xl bg- overflow-hidden "
-    >
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
+    <section className=" text-black dark:text-white">
+      {/* Hero Section */}
+      <div className="flex items-center justify-center px-8">
+        <div className="max-w-7xl w-full">
+          <div className="flex items-start justify-between">
+            <h1 className="text-8xl font-light tracking-tight">Services</h1>
+            <span className="text-6xl font-light text-red-600">(04)</span>
+          </div>
+          <div className="mt-8 flex gap-8 text-green-500">
+            <button className="hover:text-white transition-colors">×</button>
+            <button className="hover:text-white transition-colors">×</button>
+            <button className="hover:text-white transition-colors">×</button>
+            <button className="hover:text-white transition-colors">×</button>
+          </div>
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-            About Us
-          </h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-            We are a real estate firm with over 20 years of expertise, and our
-            main goal is to provide amazing locations to our partners.
-          </p>
-          <Link href="/about">
-            <button className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 shadow-lg">
-              Learn More
-            </button>
-          </Link>
-        </div>
-
-        {/* Services */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
-              <div
-                key={index}
-                className="relative w-full h-[340px] flex justify-center items-center group transition-all duration-500"
-              >
-                {/* Background layers (skewed gradient + blurred glow) */}
+      {/* Parallax Cards Section */}
+      <div className="relative w-full">
+        {services.map((service, index) => {
+          const Icon = service.icon;
+          return (
+            <div
+              key={index}
+              className="sticky top-0 h-[600px] flex items-center justify-end px-8  overflow-visible"
+              style={{ zIndex: index + 1 }}
+            >
+              <div className="w-full max-w-4xl h-[300px]">
                 <div
-                  className={`absolute top-0 left-10 w-1/2 h-full bg-gradient-to-br ${service.gradient} rounded-lg -skew-x-12 group-hover:skew-x-0 group-hover:left-5 group-hover:w-[calc(100%-70px)] transition-all duration-500`}
-                />
+                  className="transition-all duration-500 ease-out will-change-transform"
+                  style={{ opacity: 1 }}
+                >
+                  <div className="dark:bg-zinc-900 bg-zinc-200 overflow-hidden border-t border-zinc-800 dark:border-green-600 rounded-2xl">
+                    <div className="flex flex-col h-full p-8">
+                      {/* Top Section - Title and Image side by side */}
+                      <div className="flex gap-6 mb-6">
+                        {/* Left - Title and Tags */}
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-black font-bold text-base text-white">
+                              {service.number}
+                            </div>
+                            <h2 className="text-3xl font-light">
+                              {service.title}
+                            </h2>
+                          </div>
 
-                {/* Floating highlights */}
-                <span className="absolute inset-0 pointer-events-none z-10">
-                  <span className="absolute w-0 h-0 bg-gray-900/10 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 group-hover:w-24 group-hover:h-24 group-hover:-top-10 group-hover:left-10 transition-all duration-300 shadow-xl" />
-                  <span className="absolute w-full h-full bg-gray-900/10 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 group-hover:-bottom-10 group-hover:right-10 transition-all duration-500 shadow-xl" />
-                </span>
+                          <div className="flex flex-wrap gap-2">
+                            {service.tags.map((tag, i) => (
+                              <span
+                                key={i}
+                                className="px-4 py-2 rounded-full bg-zinc-800 text-xs text-gray-300 border border-zinc-700 hover:border-zinc-600 transition-colors"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
 
-                {/* Card Content */}
-                <div className="relative bg-white/8 backdrop-blur-lg text-white rounded-2xl p-6 z-20 shadow-xl w-[85%] group-hover:-translate-x-6 group-hover:py-10 transition-all duration-500">
-                  <div className="mb-3 w-12 h-12 flex items-center justify-center rounded-full bg-white/20">
-                    <Icon size={28} strokeWidth={2} />
+                        {/* Right - Image */}
+                        <div className="w-64 h-40 relative rounded-xl overflow-hidden flex-shrink-0">
+                          <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent z-10" />
+                          <Image
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            width={256}
+                            height={160}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Bottom Section - Description */}
+                      <div className="flex items-start gap-6">
+                        <div className="flex-1">
+                          <p className="text-gray-white text-base leading-relaxed">
+                            {service.description}
+                          </p>
+                        </div>
+                        <Icon className="w-12 h-12 text-gray-600 flex-shrink-0" />
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-white text-xs  leading-relaxed">
-                    {service.description}
-                  </p>
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        <div className="text-center bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
-          <p className="text-lg text-gray-300 leading-relaxed">
-            All-inclusive real estate services to facilitate the easy and
-            confident purchase, sale, and management of your properties.
-          </p>
-        </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
-}
+};
+
+export default ServicesSection;

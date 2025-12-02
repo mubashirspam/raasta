@@ -7,6 +7,7 @@ import { MessageCircle, Phone } from "lucide-react";
 import { useThemeContext } from "../../../context/ThemeContext";
 import LightRays from "./ui/LightRays";
 
+
 export default function HeroSection() {
   const { theme } = useThemeContext();
 
@@ -53,8 +54,8 @@ export default function HeroSection() {
               rayLength={5}
               followMouse={true}
               mouseInfluence={0.5}
-              noiseAmount={0.1}
-              distortion={0.05}
+              noiseAmount={0.3}
+              distortion={0.00}
               className="custom-rays"
             />
           ) : (
@@ -118,6 +119,8 @@ export default function HeroSection() {
             Explore a selection of high-value real estate opportunities designed
             for financial growth and stability.
           </motion.p>
+
+          {/* <StartFreeButton/> */}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, Phone, X } from "lucide-react";
 import ThemeToggle from "./ui/ThemeToggle";
-import ProgressiveBlur from "./ui/ProgressiveBlur";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

@@ -1,13 +1,6 @@
-import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeContextProvider } from "../../context/ThemeContext";
 import { Metadata } from "next";
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Raasta Realty - Real Estate with Purpose",

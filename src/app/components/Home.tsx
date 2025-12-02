@@ -8,16 +8,16 @@ import AboutUs from "./AboutUs";
 import OffplanLaunches from "./OffplanLaunches";
 import Consultation from "./Consultation";
 import OurStory from "./OurStory";
-import CounterSection from "./CounterSection";
+
 import GridMotionSection from "./GridMotionSection";
-import ReelSection from "./ReelSection";
+// import ReelSection from "./ReelSection";
 import BlogSection from "./BlogSection";
 import ContactSection from "./ContactSection";
 import Footer from "./Footer";
 import AnimatedSection from "./AnimatedSection";
 import ParallaxSection from "./ParallaxSection";
 import ProgressiveBlur from "./ui/ProgressiveBlur";
-
+import ServicesSection from "./Service"
 
 export default function Home() {
   return (
@@ -30,15 +30,19 @@ export default function Home() {
         <AboutUs />
       </AnimatedSection>
 
+      <AnimatedSection direction="fade" delay={0.1}>
+        <ServicesSection />
+      </AnimatedSection>
+
       <AnimatedSection direction="right" delay={0}>
         <OffplanLaunches />
       </AnimatedSection>
 
-      <ParallaxSection offset={80}>
+      {/* <ParallaxSection offset={80}>
         <AnimatedSection direction="fade" delay={0.1}>
           <ReelSection />
         </AnimatedSection>
-      </ParallaxSection>
+      </ParallaxSection> */}
 
       <AnimatedSection direction="left" delay={0}>
         <GridMotionSection gradientColor="rgba(5, 150, 105, 0.3)" />
@@ -58,10 +62,6 @@ export default function Home() {
         <OurStory />
       </AnimatedSection>
 
-      <AnimatedSection direction="up" delay={0}>
-        <CounterSection />
-      </AnimatedSection>
-
       <ParallaxSection offset={75}>
         <AnimatedSection direction="fade" delay={0.1}>
           <BlogSection />
@@ -76,7 +76,7 @@ export default function Home() {
         <Footer />
       </AnimatedSection>
 
-       <ProgressiveBlur />
+      <ProgressiveBlur />
     </>
   );
 }

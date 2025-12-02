@@ -6,7 +6,6 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
-
 export default function AboutUs() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -98,7 +97,6 @@ export default function AboutUs() {
         }}
         className="items-center mx-auto bg-[#10b981] dark:bg-green-600 transition-colors duration-300 py-20"
       >
-       
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section */}
           <div className="text-center mb-16">
@@ -124,9 +122,9 @@ export default function AboutUs() {
           </div>
 
           {/* Stats and Images Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
             {/* Stats Column */}
-            <div ref={ref} className="flex flex-col gap-6">
+            <div ref={ref} className="flex flex-col gap-1">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -139,7 +137,7 @@ export default function AboutUs() {
                     delay: index * 0.2,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 flex items-center justify-between transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+                  className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 flex items-center justify-between transition-all duration-300 hover:shadow-lg "
                 >
                   <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white">
                     <Counter
@@ -156,7 +154,7 @@ export default function AboutUs() {
             </div>
 
             {/* Images Column */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-1">
               <div className="relative h-full min-h-[300px] rounded-2xl overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800"
