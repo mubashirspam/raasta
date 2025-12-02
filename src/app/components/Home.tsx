@@ -17,7 +17,8 @@ import Footer from "./Footer";
 import AnimatedSection from "./AnimatedSection";
 import ParallaxSection from "./ParallaxSection";
 import ProgressiveBlur from "./ui/ProgressiveBlur";
-import ServicesSection from "./Service"
+import ServicesSection from "./Service";
+import CallToAction from "./CallToAction";
 
 export default function Home() {
   return (
@@ -38,11 +39,7 @@ export default function Home() {
         <OffplanLaunches />
       </AnimatedSection>
 
-      {/* <ParallaxSection offset={80}>
-        <AnimatedSection direction="fade" delay={0.1}>
-          <ReelSection />
-        </AnimatedSection>
-      </ParallaxSection> */}
+      <CallToAction />
 
       <AnimatedSection direction="left" delay={0}>
         <GridMotionSection gradientColor="rgba(5, 150, 105, 0.3)" />

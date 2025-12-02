@@ -5,8 +5,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { MessageCircle, Phone } from "lucide-react";
 import { useThemeContext } from "../../../context/ThemeContext";
-import LightRays from "./ui/LightRays";
+import dynamic from "next/dynamic";
 
+const LightRays = dynamic(() => import("./ui/LightRays"), { ssr: false });
 
 export default function HeroSection() {
   const { theme } = useThemeContext();
@@ -55,7 +56,7 @@ export default function HeroSection() {
               followMouse={true}
               mouseInfluence={0.5}
               noiseAmount={0.3}
-              distortion={0.00}
+              distortion={0.0}
               className="custom-rays"
             />
           ) : (
@@ -73,23 +74,23 @@ export default function HeroSection() {
             <div className="flex items-center -space-x-3">
               <Image
                 className="size-7 rounded-full object-cover border-2 border-white dark:border-slate-700"
-                height={50}
-                width={50}
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=50"
+                height={28}
+                width={28}
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=28"
                 alt="Investor 1"
               />
               <Image
                 className="size-7 rounded-full object-cover border-2 border-white dark:border-slate-700"
-                height={50}
-                width={50}
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=50"
+                height={28}
+                width={28}
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=28"
                 alt="Investor 2"
               />
               <Image
                 className="size-7 rounded-full object-cover border-2 border-white dark:border-slate-700"
-                height={50}
-                width={50}
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=50&h=50&auto=format&fit=crop"
+                height={28}
+                width={28}
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=28&h=28&auto=format&fit=crop"
                 alt="Investor 3"
               />
             </div>
@@ -98,17 +99,12 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-[1.15] md:leading-[1.1] font-semibold text-slate-900 dark:text-white mb-4 sm:mb-6 px-2"
-          >
+          <div className="text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-[1.15] md:leading-[1.1] font-semibold text-slate-900 dark:text-white mb-4 sm:mb-6 px-2">
             Find your perfect{" "}
             <span className="bg-gradient-to-r from-[#10b981] dark:from-[#22c55e] to-[#059669] dark:to-[#16a34a] bg-clip-text text-transparent">
               investment properties
             </span>
-          </motion.h1>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -173,7 +169,7 @@ export default function HeroSection() {
           </div> */}
         </motion.div>
       </section>
-{/* 
+      {/* 
       {showFloatingCTA && (
         <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-40 flex flex-col gap-2 sm:gap-3 animate-slide-up">
           <button
