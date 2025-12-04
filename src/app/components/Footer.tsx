@@ -1,216 +1,163 @@
-"use client";
-
-import React from "react";
 import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
   Mail,
   Phone,
   MapPin,
-  MessageCircle,
-  Instagram,
-  Linkedin,
-  Facebook,
+  ArrowRight,
+  Building2,
 } from "lucide-react";
 
-export default function Footer() {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-gray-400 border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div>
-            <h3 className="text-2xl font-black text-white mb-4">
-              Raasta Realty
-            </h3>
-            <p className="text-sm mb-4">
-              Your trusted partner in finding the perfect investment properties
-              in Dubai.
+    <footer className="relative bg-white z-50 dark:bg-gray-900 text-gray-600 dark:text-gray-300 transition-colors duration-500 border-t border-gray-100 dark:border-gray-800">
+      {/* Decorative top gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 opacity-80"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+          {/* Brand Section */}
+          <div className="space-y-6">
+            <div className="flex items-center space-x-2 group cursor-pointer">
+              <div className="p-2 bg-amber-500 rounded-lg transform transition-transform duration-300 group-hover:rotate-12">
+                <Building2 className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+                Raasta <span className="text-amber-500">Realty</span>
+              </span>
+            </div>
+            <p className="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              Elevating your lifestyle with premium real estate solutions in
+              Dubai. We bridge the gap between dream homes and reality.
             </p>
-            <div className="flex gap-3">
-              <a
-                href="https://wa.me/971501234567"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 hover:bg-green-600 rounded-full flex items-center justify-center transition-colors duration-300"
-              >
-                <MessageCircle size={18} />
-              </a>
-              <a
-                href="https://instagram.com/raastarealty"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 rounded-full flex items-center justify-center transition-colors duration-300"
-              >
-                <Instagram size={18} />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors duration-300"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors duration-300"
-              >
-                <Facebook size={18} />
-              </a>
+            <div className="flex space-x-4 pt-2">
+              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-amber-500 hover:text-white dark:hover:bg-amber-500 dark:hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#home"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#properties"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Properties
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#about"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#consultation"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Consultation
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Contact
-                </a>
-              </li>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 relative inline-block">
+              Quick Links
+              <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-amber-500 rounded-full"></span>
+            </h3>
+            <ul className="space-y-3">
+              {[
+                "Home",
+                "Properties",
+                "About Us",
+                "Consultation",
+                "Contact",
+              ].map((item) => (
+                <li key={item}>
+                  <a
+                    href="#"
+                    className="group flex items-center text-sm hover:text-amber-500 dark:hover:text-amber-400 transition-colors duration-200"
+                  >
+                    <ArrowRight className="w-3 h-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 text-amber-500" />
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-bold mb-4">Services</h4>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Luxury Properties
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Off-Plan Projects
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Commercial Real Estate
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Investment Advisory
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-green-600 transition-colors text-sm"
-                >
-                  Property Management
-                </a>
-              </li>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 relative inline-block">
+              Services
+              <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-amber-500 rounded-full"></span>
+            </h3>
+            <ul className="space-y-3">
+              {[
+                "Luxury Properties",
+                "Off-Plan Projects",
+                "Commercial Real Estate",
+                "Investment Advisory",
+                "Property Management",
+              ].map((item) => (
+                <li key={item}>
+                  <a
+                    href="#"
+                    className="group flex items-center text-sm hover:text-amber-500 dark:hover:text-amber-400 transition-colors duration-200"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2 transform scale-0 group-hover:scale-100 transition-transform duration-200"></span>
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Us */}
           <div>
-            <h4 className="text-white font-bold mb-4">Contact Us</h4>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <Mail size={16} className="text-green-600 mt-1 flex-shrink-0" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 relative inline-block">
+              Contact Us
+              <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-amber-500 rounded-full"></span>
+            </h3>
+            <ul className="space-y-5">
+              <li className="flex items-start space-x-3 group">
+                <Mail className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0 group-hover:animate-bounce" />
                 <a
                   href="mailto:info@raastarealty.com"
-                  className="text-sm hover:text-green-600 transition-colors"
+                  className="text-sm hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
                 >
                   info@raastarealty.com
                 </a>
-              </div>
-              <div className="flex items-start gap-3">
-                <Phone
-                  size={16}
-                  className="text-green-600 mt-1 flex-shrink-0"
-                />
+              </li>
+              <li className="flex items-start space-x-3 group">
+                <Phone className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0 group-hover:animate-pulse" />
                 <a
                   href="tel:+971501234567"
-                  className="text-sm hover:text-green-600 transition-colors"
+                  className="text-sm hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
                 >
                   +971 50 123 4567
                 </a>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin
-                  size={16}
-                  className="text-green-600 mt-1 flex-shrink-0"
-                />
-                <p className="text-sm">Dubai Marina, UAE</p>
-              </div>
-            </div>
+              </li>
+              <li className="flex items-start space-x-3">
+                <MapPin className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">
+                  Dubai Marina,
+                  <br />
+                  United Arab Emirates
+                </span>
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-center md:text-left">
-            © {currentYear} Raasta Realty. All rights reserved.
-          </p>
-          <div className="flex gap-6 text-sm">
-            <a href="#" className="hover:text-green-600 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-green-600 transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-green-600 transition-colors">
-              Cookie Policy
-            </a>
+        <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-500 dark:text-gray-500">
+            <p>&copy; {currentYear} Raasta Realty. All rights reserved.</p>
+            <div className="flex space-x-6">
+              <a href="#" className="hover:text-amber-500 transition-colors">
+                Privacy Policy
+              </a>
+              <a href="#" className="hover:text-amber-500 transition-colors">
+                Terms of Service
+              </a>
+              <a href="#" className="hover:text-amber-500 transition-colors">
+                Sitemap
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

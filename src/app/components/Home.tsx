@@ -19,6 +19,7 @@ import ParallaxSection from "./ParallaxSection";
 import ProgressiveBlur from "./ui/ProgressiveBlur";
 import ServicesSection from "./Service";
 import CallToAction from "./CallToAction";
+import Testimonials from "./Testmonail";
 
 export default function Home() {
   return (
@@ -54,6 +55,8 @@ export default function Home() {
       <AnimatedSection direction="fade" delay={0}>
         <Consultation />
       </AnimatedSection>
+
+      <Testimonials/>
 
       <AnimatedSection direction="right" delay={0.1}>
         <OurStory />
