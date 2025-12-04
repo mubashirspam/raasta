@@ -15,7 +15,6 @@ import BlogSection from "./BlogSection";
 import ContactSection from "./ContactSection";
 import Footer from "./Footer";
 import AnimatedSection from "./AnimatedSection";
-import ParallaxSection from "./ParallaxSection";
 import ProgressiveBlur from "./ui/ProgressiveBlur";
 import ServicesSection from "./Service";
 import CallToAction from "./CallToAction";
@@ -28,45 +27,31 @@ export default function Home() {
 
       <HeroSection />
 
-      <AnimatedSection direction="fade" delay={0.1}>
-        <AboutUs />
-      </AnimatedSection>
+      <AboutUs />
 
-      <AnimatedSection direction="fade" delay={0.1}>
-        <ServicesSection />
-      </AnimatedSection>
+      <ServicesSection />
 
-      <AnimatedSection direction="right" delay={0}>
-        <OffplanLaunches />
-      </AnimatedSection>
+      <OffplanLaunches />
 
       <CallToAction />
 
-      <AnimatedSection direction="left" delay={0}>
-        <GridMotionSection gradientColor="rgba(5, 150, 105, 0.3)" />
-      </AnimatedSection>
+      <GridMotionSection gradientColor="rgba(5, 150, 105, 0.3)" />
 
-      <ParallaxSection offset={70}>
-        <AnimatedSection direction="up" delay={0.1}>
-          <ExplorePrimeLocations />
-        </AnimatedSection>
-      </ParallaxSection>
+      <AnimatedSection direction="up" delay={0.1}>
+        <ExplorePrimeLocations />
+      </AnimatedSection>
 
       <AnimatedSection direction="fade" delay={0}>
         <Consultation />
       </AnimatedSection>
 
-      <Testimonials/>
+      <Testimonials />
 
-      <AnimatedSection direction="right" delay={0.1}>
-        <OurStory />
+      <OurStory />
+
+      <AnimatedSection direction="fade" delay={0.1}>
+        <BlogSection />
       </AnimatedSection>
-
-      <ParallaxSection offset={75}>
-        <AnimatedSection direction="fade" delay={0.1}>
-          <BlogSection />
-        </AnimatedSection>
-      </ParallaxSection>
 
       <AnimatedSection direction="left" delay={0}>
         <ContactSection />

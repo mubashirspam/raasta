@@ -12,6 +12,7 @@ body {
   scroll-behavior: smooth;
 }
 
+
 button {
   @apply cursor-pointer;
 }
@@ -47,14 +48,27 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 50% 50%, #10b981 0%, transparent 50%),
+  background-image: radial-gradient(
+      circle at 50% 50%,
+      #10b981 0%,
+      transparent 50%
+    ),
     radial-gradient(circle at 45% 45%, #22c55e 0%, transparent 45%),
     radial-gradient(circle at 55% 55%, #34d399 0%, transparent 45%),
     radial-gradient(circle at 45% 55%, #4ade80 0%, transparent 45%),
     radial-gradient(circle at 55% 45%, #4ade80 0%, transparent 45%);
-  mask: radial-gradient(circle at 50% 50%, transparent 0%, transparent 10%, black 25%);
-  -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0%, transparent 10%, black 25%);
+  mask: radial-gradient(
+    circle at 50% 50%,
+    transparent 0%,
+    transparent 10%,
+    black 25%
+  );
+  -webkit-mask: radial-gradient(
+    circle at 50% 50%,
+    transparent 0%,
+    transparent 10%,
+    black 25%
+  );
   animation: transform-animation 2s infinite alternate,
     opacity-animation 4s infinite;
   animation-timing-function: cubic-bezier(0.6, 0.8, 0.5, 1);
@@ -71,7 +85,8 @@ html {
 }
 
 @keyframes opacity-animation {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
   }
   15% {
@@ -83,14 +98,20 @@ html {
 }
 
 @keyframes loader-letter-anim {
-  0% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
   5% {
     opacity: 1;
     text-shadow: 0 0 8px #4ade80, 0 0 12px #4ade80;
     transform: scale(1.1) translateY(-2px);
   }
-  20% { opacity: 0.2; }
-  100% { opacity: 0; }
+  20% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .loader-letter {

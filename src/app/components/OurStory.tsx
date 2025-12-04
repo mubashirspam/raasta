@@ -3,7 +3,6 @@
 import React from "react";
 import Image from "next/image";
 
-
 export default function OurStory() {
   const timeline = [
     {
@@ -115,41 +114,6 @@ export default function OurStory() {
             </div>
           </div>
         ))}
-
-        {/* Final Stats Section - This will show after all stacked sections */}
-        <div
-          className="relative bg-black py-20 px-6"
-          style={{ zIndex: 10 + timeline.length }}
-        >
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-              <div className="p-8 bg-gray-900 rounded-2xl border border-gray-800">
-                <h3 className="text-5xl md:text-6xl font-black text-green-500 mb-3">
-                  500+
-                </h3>
-                <p className="text-gray-400 text-lg font-semibold">
-                  Happy Clients
-                </p>
-              </div>
-              <div className="p-8 bg-gray-900 rounded-2xl border border-gray-800">
-                <h3 className="text-5xl md:text-6xl font-black text-red-500 mb-3">
-                  1.2B+
-                </h3>
-                <p className="text-gray-400 text-lg font-semibold">
-                  AED in Sales
-                </p>
-              </div>
-              <div className="p-8 bg-gray-900 rounded-2xl border border-gray-800">
-                <h3 className="text-5xl md:text-6xl font-black text-green-500 mb-3">
-                  6%
-                </h3>
-                <p className="text-gray-400 text-lg font-semibold">
-                  To Charity
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

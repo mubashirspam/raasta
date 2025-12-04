@@ -36,7 +36,7 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`flex items-center justify-between fixed z-50 top-0 w-full px-6 md:px-12 lg:px-20 py-4 transition-all duration-300 ${
+      className={`flex items-center justify-between fixed z-50 top-0 w-full px-6 md:px-12 lg:px-20 py-4 transition-all duration-300 overflow-x-hidden ${
         isScrolled || isMobileMenuOpen
           ? "bg-white/40 dark:bg-black/40 backdrop-blur-md"
           : "bg-transparent dark:bg-transparent"

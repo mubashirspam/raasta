@@ -19,7 +19,6 @@ export default function HeroSection() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setShowFloatingCTA(scrollY > 400);
-      // Switch from sticky to normal scrolling after AboutUs section (around 800px scroll)
       setIsSticky(scrollY < 800);
     };
     window.addEventListener("scroll", handleScroll);
@@ -38,7 +37,7 @@ export default function HeroSection() {
     <>
       <section
         id="home"
-        className={`w-full min-h-screen overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 bg-[url('/light-hero-gradient.svg')] dark:bg-[url('/dark-hero-gradient.svg')] bg-no-repeat bg-cover z-10 ${
+        className={`w-full min-h-screen overflow-x-hidden flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 bg-[url('/light-hero-gradient.svg')] dark:bg-[url('/dark-hero-gradient.svg')] bg-no-repeat bg-cover z-10 ${
           isSticky ? "sticky top-0" : "relative"
         }`}
       >
@@ -141,59 +140,8 @@ export default function HeroSection() {
               <span>15-Minute Call</span>
             </button>
           </motion.div>
-
-          {/* <h3 className="text-xs sm:text-sm md:text-base text-center text-gray-400 mb-6 sm:mb-8 font-medium uppercase tracking-widest pt-12 sm:pt-16 md:pt-20 pb-2 sm:pb-3 px-4">
-            Trusted by leading developers
-          </h3>
-
-          <div className="relative mb-8 sm:mb-12 w-full">
-            <Marquee
-              className="w-full max-w-5xl mx-auto"
-              gradient={true}
-              speed={25}
-              gradientColor={theme === "dark" ? "#020617" : "#ffffff"}
-            >
-              <div className="flex items-center justify-center">
-                {[...companiesLogo, ...companiesLogo].map((company, index) => (
-                  <Image
-                    key={index}
-                    src={company.logo}
-                    alt={company.name}
-                    width={100}
-                    height={100}
-                    className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-6 sm:mx-8 md:mx-11 brightness-0 dark:invert opacity-50 hover:opacity-100 transition-opacity duration-300"
-                  />
-                ))}
-              </div>
-            </Marquee>
-          </div> */}
         </motion.div>
       </section>
-      {/* 
-      {showFloatingCTA && (
-        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-40 flex flex-col gap-2 sm:gap-3 animate-slide-up">
-          <button
-            onClick={handleWhatsApp}
-            className="group w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-2xl hover:shadow-green-500/50 transition-all duration-300 hover:scale-110 flex items-center justify-center relative"
-            aria-label="WhatsApp"
-          >
-            <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-            <span className="absolute right-full mr-3 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              WhatsApp Message
-            </span>
-          </button>
-          <button
-            onClick={handleCall}
-            className="group w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-2xl hover:shadow-red-500/50 transition-all duration-300 hover:scale-110 flex items-center justify-center relative"
-            aria-label="Call"
-          >
-            <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
-            <span className="absolute right-full mr-3 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              15-Minute Call
-            </span>
-          </button>
-        </div>
-      )} */}
 
       <style jsx>{`
         @keyframes slide-up {

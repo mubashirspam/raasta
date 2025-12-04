@@ -53,17 +53,15 @@ const ServicesSection = () => {
   return (
     <section className=" text-black dark:text-white">
       {/* Hero Section */}
-      <div className="flex items-center justify-center px-8">
+      <div className="flex items-center justify-center px-4 md:px-8">
         <div className="max-w-7xl w-full">
-          <div className="flex items-start justify-between">
-            <h1 className="text-8xl font-light tracking-tight">Services</h1>
-            <span className="text-6xl font-light text-red-600">(04)</span>
-          </div>
-          <div className="mt-8 flex gap-8 text-green-500">
-            <button className="hover:text-white transition-colors">×</button>
-            <button className="hover:text-white transition-colors">×</button>
-            <button className="hover:text-white transition-colors">×</button>
-            <button className="hover:text-white transition-colors">×</button>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
+            <h1 className="text-6xl sm:text-6xl md:text-8xl font-light tracking-tight">
+              Services
+            </h1>
+            <span className="text-3xl sm:text-3xl md:text-6xl font-light text-red-600 mt-2 sm:mt-0">
+              (04)
+            </span>
           </div>
         </div>
       </div>
@@ -75,7 +73,7 @@ const ServicesSection = () => {
           return (
             <div
               key={index}
-              className="sticky top-0 h-[600px] flex items-center justify-end px-8  overflow-visible"
+              className="sticky top-0 h-[600px] flex items-center justify-end px-4 md:px-8 overflow-visible"
               style={{ zIndex: index + 1 }}
             >
               <div className="w-full max-w-4xl h-[300px]">
@@ -84,21 +82,21 @@ const ServicesSection = () => {
                   style={{ opacity: 1 }}
                 >
                   <div className="dark:bg-zinc-900 bg-zinc-200 overflow-hidden border-t border-zinc-800 dark:border-green-600 rounded-2xl">
-                    <div className="flex flex-col h-full p-8">
-                      {/* Top Section - Title and Image side by side */}
-                      <div className="flex gap-6 mb-6">
+                    <div className="flex flex-col h-full p-4 md:p-8">
+                      {/* Top Section - Title and Image side by side on desktop, stacked on mobile */}
+                      <div className="flex flex-col sm:flex-row gap-6 mb-6">
                         {/* Left - Title and Tags */}
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-4">
                             <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-black font-bold text-base text-white">
                               {service.number}
                             </div>
-                            <h2 className="text-3xl font-light">
+                            <h2 className="text-2xl md:text-3xl font-light">
                               {service.title}
                             </h2>
                           </div>
 
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-2 mb-4 sm:mb-0">
                             {service.tags.map((tag, i) => (
                               <span
                                 key={i}
@@ -111,7 +109,7 @@ const ServicesSection = () => {
                         </div>
 
                         {/* Right - Image */}
-                        <div className="w-64 h-40 relative rounded-xl overflow-hidden flex-shrink-0">
+                        <div className="w-full sm:w-64 h-40 relative rounded-xl overflow-hidden flex-shrink-0">
                           <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent z-10" />
                           <Image
                             src={service.image}
@@ -125,13 +123,13 @@ const ServicesSection = () => {
                       </div>
 
                       {/* Bottom Section - Description */}
-                      <div className="flex items-start gap-6">
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
                         <div className="flex-1">
-                          <p className="text-gray-white text-base leading-relaxed">
+                          <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                             {service.description}
                           </p>
                         </div>
-                        <Icon className="w-12 h-12 text-gray-600 flex-shrink-0" />
+                        <Icon className="w-8 h-8 sm:w-12 sm:h-12 text-gray-600 dark:text-gray-400 flex-shrink-0 mt-2 sm:mt-0" />
                       </div>
                     </div>
                   </div>

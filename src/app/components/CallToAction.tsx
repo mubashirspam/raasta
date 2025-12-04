@@ -1,23 +1,23 @@
 import React, { useEffect, useRef } from "react";
-import { useThemeContext } from "../../../context/ThemeContext";
 
 const CallToAction = () => {
-  const { theme } = useThemeContext();
   const dotColor = "rgba(255, 255, 255, 1)";
   return (
     <section
-      className={`w-full h-screen p-4 sm:p-8 md:p-20 transition-colors duration-500`}
+      className={`w-full h-[60vh] sm:h-[80vh] md:h-screen p-4 sm:p-8 md:p-20 transition-colors duration-500`}
     >
       <div className="relative w-full h-full overflow-hidden bg-red-700  transition-colors duration-500 flex flex-col items-center justify-center rounded-3xl">
         <DotGrid dotColor={dotColor} />
 
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pointer-events-none select-none">
           <h1
-            className={`text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 leading-[1.2] transition-colors duration-500 text-white `}
+            className={`text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 leading-[1.2] transition-colors duration-500 text-white `}
           >
             Start your project <br />
             with Raasta
-            <sup className="text-2xl md:text-4xl align-top top-0">®</sup>
+            <sup className="text-xl sm:text-2xl md:text-4xl align-top top-0">
+              ®
+            </sup>
           </h1>
 
           <div className="mt-12 pointer-events-auto">
