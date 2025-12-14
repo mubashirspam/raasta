@@ -12,7 +12,6 @@ body {
   scroll-behavior: smooth;
 }
 
-
 button {
   @apply cursor-pointer;
 }
@@ -116,4 +115,18 @@ html {
 
 .loader-letter {
   animation: loader-letter-anim 4s infinite linear;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }

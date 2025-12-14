@@ -1,0 +1,8 @@
+export { Hero } from "./Hero";
+export { FeaturedListings } from "./FeaturedListings";
+export { Services } from "./Services";
+export { WhyDubai } from "./WhyDubai";
+export { Agents } from "./Agents";
+export { Testimonial } from "./Testimonial";
+export { FooterCTA } from "./FooterCTA";
+export { VideoShowcase } from "./VideoShowcase";

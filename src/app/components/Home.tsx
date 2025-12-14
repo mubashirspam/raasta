@@ -1,69 +1,41 @@
 "use client";
 
-import React from "react";
-import Navigation from "./Navigation";
-import HeroSection from "./HeroSection";
-import ExplorePrimeLocations from "./ExplorePrimeLocations";
-import AboutUs from "./AboutUs";
-import OffplanLaunches from "./OffplanLaunches";
-import Consultation from "./Consultation";
-import OurStory from "./OurStory";
-
-import GridMotionSection from "./GridMotionSection";
-// import ReelSection from "./ReelSection";
-import BlogSection from "./BlogSection";
-import ContactSection from "./ContactSection";
-import Footer from "./Footer";
-import AnimatedSection from "./AnimatedSection";
-import ProgressiveBlur from "./ui/ProgressiveBlur";
-import ServicesSection from "./Service";
-import CallToAction from "./CallToAction";
-import Testimonials from "./Testmonail";
+import React, { useState } from "react";
+import { Navbar, Footer } from "./layout";
+import { ContactModal } from "./ui";
+import {
+  Hero,
+  FeaturedListings,
+  VideoShowcase,
+  Services,
+  WhyDubai,
+  Agents,
+  Testimonial,
+  FooterCTA,
+} from "./sections";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <>
-      <Navigation />
+    <div className="min-h-screen bg-white text-slate-800 font-sans selection:bg-[#2EA8FF]/30">
+      <Navbar onContact={() => setIsModalOpen(true)} />
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+      <main className="relative z-10">
+        <Hero />
+        <VideoShowcase />
+        <FeaturedListings />
+        <Services />
+        <WhyDubai />
+        <Agents />
+        <Testimonial />
+        <FooterCTA onContact={() => setIsModalOpen(true)} />
+      </main>
 
-      <HeroSection />
-
-      <AboutUs />
-
-      <ServicesSection />
-
-      <OffplanLaunches />
-
-      <CallToAction />
-
-      <GridMotionSection gradientColor="rgba(5, 150, 105, 0.3)" />
-
-      <AnimatedSection direction="up" delay={0.1}>
-        <ExplorePrimeLocations />
-      </AnimatedSection>
-
-      <AnimatedSection direction="fade" delay={0}>
-        <Consultation />
-      </AnimatedSection>
-
-      <Testimonials />
-
-      <OurStory />
-
-      <AnimatedSection direction="fade" delay={0.1}>
-        <BlogSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="left" delay={0}>
-        <ContactSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="fade" delay={0}>
-        <Footer />
-      </AnimatedSection>
-
-      <ProgressiveBlur />
-    </>
+      <Footer />
+    </div>
   );
 }
-
-// https://reactbits.dev/components/flowing-menu
