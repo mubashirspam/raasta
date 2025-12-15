@@ -12,9 +12,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onContact }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
-    <nav className="relative bg-[#2DB3FF] left-0 right-0 z-50 px-15 py-5 ">
+    <nav className="fixed left-0 right-0 z-50 px-15 py-5 ">
       <GlassContainer
-        bgColor="rgba(46, 168, 255, 0.8)"
+        bgColor="rgba(1, 149, 255, 0.8)"
         highlightColor="rgba(255, 255, 255, 0.2)"
         blurAmount={5}
         className="transition-all duration-300"
@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContact }) => {
             </span>
           </div>
 
-          <div className="hidden md:flex items-center gap-8 text-white font-medium">
+          <div className="hidden md:flex items-center gap-8 text-white font-lg">
             <a href="#" className="hover:text-white/80 transition-colors">
               Buy
             </a>

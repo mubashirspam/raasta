@@ -23,9 +23,11 @@ export interface Agent {
 }
 
 export interface Service {
-  icon: React.ComponentType<{ size?: number }>;
+  id: number;
+  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
   title: string;
-  desc: string;
+  description: string;
+  gradient: string;
 }
 
 export interface Stat {

@@ -56,7 +56,7 @@ export const Hero: React.FC = () => {
           className="w-[95%] sm:w-[75%] md:w-[45rem] h-auto aspect-[1.07/1] object-cover"
         />
 
-        <div className="absolute inset-x-0 bottom-0 h-20 sm:h-40 md:h-[17rem] bg-gradient-to-b from-transparent to-white pointer-events-none z-30" />
+        <div className="absolute inset-x-0 bottom-0 h-20 sm:h-40 md:h-[17rem] bg-gradient-to-b from-transparent to-[#9EC2DF] pointer-events-none z-30" />
       </div>
 
       <div className="h-[120vh] flex-shrink-0" />

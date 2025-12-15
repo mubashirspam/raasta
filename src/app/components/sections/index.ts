@@ -6,3 +6,4 @@ export { Agents } from "./Agents";
 export { Testimonial } from "./Testimonial";
 export { FooterCTA } from "./FooterCTA";
 export { VideoShowcase } from "./VideoShowcase";
+export { Marquee } from "./Marquee";

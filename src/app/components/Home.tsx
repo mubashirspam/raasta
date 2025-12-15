@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Navbar, Footer } from "./layout";
 import { ContactModal } from "./ui";
 import {
-  Hero,
+  // Hero,
   FeaturedListings,
   VideoShowcase,
   Services,
@@ -12,6 +12,7 @@ import {
   Agents,
   Testimonial,
   FooterCTA,
+  Marquee,
 } from "./sections";
 
 export default function Home() {
@@ -25,10 +26,10 @@ export default function Home() {
         onClose={() => setIsModalOpen(false)}
       />
       <main className="relative z-10">
-        <Hero />
         <VideoShowcase />
-        <FeaturedListings />
         <Services />
+        <Marquee />
+        <FeaturedListings />
         <WhyDubai />
         <Agents />
         <Testimonial />
