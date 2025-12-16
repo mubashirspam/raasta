@@ -29,7 +29,7 @@ export const GlassContainer: React.FC<GlassContainerProps> = ({
   const variantClasses = {
     default: "rounded-lg",
     rounded: "rounded-4xl",
-    large: "rounded-[200px]",
+    large: "rounded-[2000px]",
   };
   const containerClasses = inline ? "inline-flex" : "block";
 

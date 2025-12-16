@@ -5,8 +5,7 @@ import { Search, Filter, MapPin } from "lucide-react";
 import Link from "next/link";
 import { PROPERTIES } from "../data";
 import { ListingCard } from "../components/cards";
-import { Breadcrumbs } from "../components/ui/Breadcrumbs";
-import { RevealSection } from "../components/ui";
+import { Breadcrumbs, RevealSection, ThemeBackground } from "../components/ui";
 import { Property } from "../types";
 
 export default function PropertiesPage() {
@@ -30,32 +29,36 @@ export default function PropertiesPage() {
   }, [searchQuery, areaFilter]);
 
   return (
-    <main className="min-h-screen bg-[#0B1121] text-white pt-24 pb-20">
-      <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#2EA8FF]/10 to-transparent pointer-events-none" />
+    <main className="min-h-screen relative font-sans selection:bg-[#2EA8FF]/20 selection:text-[#2EA8FF]">
+      <ThemeBackground />
 
-      <div className="px-6 max-w-7xl mx-auto relative z-10">
+      <div className="relative z-10 pt-28 pb-20 px-6 max-w-7xl mx-auto">
         <div className="mb-8">
           <Breadcrumbs items={[{ label: "Properties" }]} />
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
-              Explore Properties
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-slate-900 tracking-tight">
+              Explore{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] to-indigo-600">
+                Properties
+              </span>
             </h1>
-            <p className="text-slate-400 max-w-xl">
+            <p className="text-slate-600 max-w-xl text-lg leading-relaxed">
               Discover our exclusive portfolio of premium properties in
               Dubai&apos;s most sought-after locations.
             </p>
           </div>
         </div>
 
-        {/* Filters Section */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 mb-12">
+        {/* Glass Filters Section */}
+        <div className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-xl shadow-slate-200/50 rounded-2xl p-6 mb-12">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
+            {/* Search Input */}
+            <div className="flex-1 relative group">
               <Search
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#2EA8FF] transition-colors"
                 size={20}
               />
               <input
@@ -63,25 +66,26 @@ export default function PropertiesPage() {
                 placeholder="Search properties, locations..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-[#2EA8FF]/50 transition-colors"
+                className="w-full pl-12 pr-4 py-3 bg-white/60 border border-white/50 rounded-xl text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:bg-white transition-all"
               />
             </div>
 
-            <div className="w-full md:w-64 relative">
+            {/* Filter Dropdown */}
+            <div className="w-full md:w-64 relative group">
               <Filter
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#2EA8FF] transition-colors"
                 size={20}
               />
               <select
                 value={areaFilter}
                 onChange={(e) => setAreaFilter(e.target.value)}
-                className="w-full pl-12 pr-10 py-3 bg-white/5 border border-white/10 rounded-xl text-white appearance-none focus:outline-none focus:border-[#2EA8FF]/50 transition-colors cursor-pointer"
+                className="w-full pl-12 pr-10 py-3 bg-white/60 border border-white/50 rounded-xl text-slate-800 appearance-none focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:bg-white transition-all cursor-pointer"
               >
                 {areas.map((area) => (
                   <option
                     key={area}
                     value={area}
-                    className="bg-[#0B1121] text-white"
+                    className="bg-white text-slate-900"
                   >
                     {area}
                   </option>
@@ -112,7 +116,7 @@ export default function PropertiesPage() {
         {filteredProperties.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProperties.map((prop: Property, idx: number) => (
-              <RevealSection key={prop.id} delay={idx * 50}>
+              <RevealSection key={prop.id} delay={idx * 100}>
                 <Link href={`/properties/${prop.id}`}>
                   <ListingCard data={prop} />
                 </Link>
@@ -120,12 +124,14 @@ export default function PropertiesPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 bg-white/5 rounded-2xl border border-white/10">
-            <MapPin className="mx-auto text-slate-500 mb-4" size={48} />
-            <h3 className="text-xl font-bold text-white mb-2">
+          <div className="text-center py-20 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm">
+            <div className="inline-flex p-4 rounded-full bg-slate-100 mb-4">
+              <MapPin className="text-slate-400" size={32} />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">
               No properties found
             </h3>
-            <p className="text-slate-400">
+            <p className="text-slate-500 mb-6">
               Try adjusting your search criteria or clear filters
             </p>
             <button
@@ -133,7 +139,7 @@ export default function PropertiesPage() {
                 setSearchQuery("");
                 setAreaFilter("All");
               }}
-              className="mt-6 px-6 py-2 bg-[#2EA8FF] hover:bg-blue-600 text-white rounded-full transition-colors font-medium"
+              className="px-8 py-3 bg-[#2EA8FF] hover:bg-blue-600 text-white rounded-full transition-all shadow-lg shadow-blue-500/20 font-medium transform hover:-translate-y-1"
             >
               Clear Filters
             </button>

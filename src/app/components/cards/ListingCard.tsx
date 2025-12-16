@@ -10,7 +10,7 @@ interface ListingCardProps {
 
 export const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
   return (
-    <div className="group relative bg-white/80 backdrop-blur-sm border border-white rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2 h-full">
+    <div className="group relative bg-white/40 backdrop-blur-sm border border-white rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2 h-full">
       {/* Image Section */}
       <div className="relative h-72 overflow-hidden">
         <img
@@ -35,7 +35,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
 
         {/* Price Tag Overlay */}
         <div className="absolute bottom-4 left-4 right-4">
-          <div className="bg-white/95 backdrop-blur-md px-4 py-3 rounded-xl flex justify-between items-center shadow-lg">
+          <div className="bg-white/80 backdrop-blur-md px-4 py-3 rounded-xl flex justify-between items-center shadow-lg">
             <span className="text-indigo-900 font-bold">{data.price}</span>
             <span className="text-xs text-slate-500 font-medium">
               {data.type}
