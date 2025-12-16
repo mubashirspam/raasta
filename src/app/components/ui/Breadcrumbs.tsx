@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRight, Home } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 interface BreadcrumbItem {
@@ -17,26 +17,22 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   className = "",
 }) => {
   return (
-    <nav className={`flex items-center text-sm ${className}`}>
-      <Link
-        href="/"
-        className="flex items-center gap-1 text-slate-400 hover:text-[#2EA8FF] transition-colors"
-      >
-        <Home size={14} />
-        <span>Home</span>
+    <nav className={`flex items-center text-sm text-slate-500 ${className}`}>
+      <Link href="/" className="hover:text-[#2EA8FF] transition-colors">
+        Home
       </Link>
       {items.map((item, index) => (
         <React.Fragment key={index}>
-          <ChevronRight size={14} className="mx-2 text-slate-400" />
+          <ChevronRight size={14} className="mx-2 text-slate-300" />
           {item.href ? (
             <Link
               href={item.href}
-              className="text-slate-400 hover:text-[#2EA8FF] transition-colors"
+              className="hover:text-[#2EA8FF] transition-colors"
             >
               {item.label}
             </Link>
           ) : (
-            <span className="text-slate-200 font-medium">{item.label}</span>
+            <span className="text-slate-900 font-medium">{item.label}</span>
           )}
         </React.Fragment>
       ))}

@@ -62,9 +62,7 @@ export const FeaturedListings: React.FC = () => {
       {/* 3. Top Layer: Glassmorphism Overlay */}
       <div className="absolute inset-0 z-20 bg-white/50 backdrop-blur-xl pointer-events-none" />
 
-      {/* =========================================================================
-          CONTENT SECTION
-         ========================================================================= */}
+  
       <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-12 py-24">
         {/* Header Area */}
         <RevealSection>

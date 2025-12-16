@@ -35,3 +35,14 @@ export interface Stat {
   value: string;
   suffix: string;
 }
+
+// --- Types ---
+export interface Testimonial {
+  id: number;
+  name: string;
+  role: string; // e.g., "Investor from UK"
+  purchase: string; // e.g., "Penthouse in Downtown"
+  image: string;
+  content: string;
+  rating: number;
+}
