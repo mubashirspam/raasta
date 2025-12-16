@@ -7,3 +7,4 @@ export { Testimonial } from "./Testimonial";
 export { FooterCTA } from "./FooterCTA";
 export { VideoShowcase } from "./VideoShowcase";
 export { Marquee } from "./Marquee";
+export { GallerySection } from "./GallerySection";

@@ -34,6 +34,8 @@ export interface Stat {
   label: string;
   value: string;
   suffix: string;
+  valueColor?: string;
+  labelColor?: string;
 }
 
 // --- Types ---
