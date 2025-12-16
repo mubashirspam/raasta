@@ -13,6 +13,7 @@ import {
   Testimonial,
   FooterCTA,
   Marquee,
+  GallerySection,
 } from "./sections";
 
 export default function Home() {
@@ -26,12 +27,14 @@ export default function Home() {
         onClose={() => setIsModalOpen(false)}
       />
       <main className="relative z-10">
+        {/* <Hero /> */}
         <VideoShowcase />
         <Services />
         <Marquee />
         <FeaturedListings />
         <WhyDubai />
         <Agents />
+        <GallerySection />
         <Testimonial />
         <FooterCTA onContact={() => setIsModalOpen(true)} />
       </main>

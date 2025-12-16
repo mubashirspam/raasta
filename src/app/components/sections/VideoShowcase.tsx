@@ -85,6 +85,8 @@ export const VideoShowcase: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoDuration, setVideoDuration] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const isVideoReadyRef = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -99,7 +101,7 @@ export const VideoShowcase: React.FC = () => {
   });
 
   useMotionValueEvent(smoothProgress, "change", (latest) => {
-    if (videoRef.current && videoDuration > 0) {
+    if (videoRef.current && videoDuration > 0 && isVideoReadyRef.current) {
       const targetTime = latest * videoDuration;
 
       if (
@@ -107,7 +109,11 @@ export const VideoShowcase: React.FC = () => {
         targetTime >= 0 &&
         targetTime <= videoDuration
       ) {
-        videoRef.current.currentTime = targetTime;
+        try {
+          videoRef.current.currentTime = targetTime;
+        } catch (e) {
+          // Video not ready yet
+        }
       }
     }
 
@@ -130,14 +136,25 @@ export const VideoShowcase: React.FC = () => {
       }
     };
 
+    const handleCanPlay = () => {
+      isVideoReadyRef.current = true;
+      setIsVideoReady(true);
+    };
+
     video.addEventListener("loadedmetadata", handleLoadedMetadata);
+    video.addEventListener("canplay", handleCanPlay);
 
     if (video.readyState >= 1) {
       handleLoadedMetadata();
     }
+    if (video.readyState >= 3) {
+      isVideoReadyRef.current = true;
+      setIsVideoReady(true);
+    }
 
     return () => {
       video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      video.removeEventListener("canplay", handleCanPlay);
     };
   }, []);
 
@@ -158,10 +175,18 @@ export const VideoShowcase: React.FC = () => {
           muted
           playsInline
           preload="auto"
+          poster="/outputs-poster.jpg"
         >
           <source src="/outputs.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+
+        {/* Loading indicator */}
+        {!isVideoReady && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/60 z-10">
+            <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+          </div>
+        )}
 
         {/* <div className="absolute inset-0 bg-black/40 z-10" /> */}
 

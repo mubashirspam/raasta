@@ -36,12 +36,11 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
         >
           {/* --- Branding --- */}
           <div className="flex items-center gap-2.5 z-50 relative">
-            <div className="w-10 h-10 bg-[#2EA8FF] rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
-              <TrendingUp size={20} strokeWidth={2.5} />
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-slate-900 transition-colors">
-              Raasta<span className="font-light text-slate-600">Realty</span>
-            </span>
+            <img
+              src= {isScrolled? "/logo_black.svg": "/logo_white.svg"}
+              alt="Raasta Realty Logo"
+              className="h-12 rounded-xl"
+            />
           </div>
 
           {/* --- Desktop Links --- */}
@@ -50,7 +49,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
               <a
                 key={item}
                 href="#"
-                className="text-sm font-medium text-slate-700 hover:text-[#2EA8FF] transition-colors relative group"
+                className={`text-sm font-medium ${isScrolled? "text-slate-700": "text-white"} hover:text-[#2EA8FF] transition-colors relative group`}
               >
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2EA8FF] transition-all duration-300 group-hover:w-full"></span>
