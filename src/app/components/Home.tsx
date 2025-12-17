@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { Navbar, Footer } from "./layout";
 import { ContactModal } from "./ui";
 import {
-  // Hero,
+  Hero,
   FeaturedListings,
-  VideoShowcase,
+  // VideoShowcase,
   Services,
   WhyDubai,
   Agents,
@@ -27,8 +27,9 @@ export default function Home() {
         onClose={() => setIsModalOpen(false)}
       />
       <main className="relative z-10">
-        {/* <Hero /> */}
-        <VideoShowcase />
+        <Hero />
+        {/* <HeroSection /> */}
+        {/* <VideoShowcase /> */}
         <Services />
         <Marquee />
         <FeaturedListings />

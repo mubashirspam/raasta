@@ -46,23 +46,73 @@ export const Services: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <RevealSection>
-          <div className="text-center mb-20">
-            <span className="inline-block py-1 px-3 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-              Premium Real Estate
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6">
-              Tailored{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
-                Services
-              </span>{" "}
-              <br />
-              for the Elite
-            </h2>
-            <p className="max-w-2xl mx-auto text-lg text-slate-500 leading-relaxed">
-              Experience the pinnacle of Dubai real estate. From off-plan
-              investments in the Burj Khalifa district to waterfront villas, our
-              concierge approach ensures your legacy is secure.
-            </p>
+          <div className="text-center mb-20 relative">
+            {/* Decorative diamond */}
+            <div className="absolute left-1/2 -translate-x-1/2 -top-2">
+              <div className="w-3 h-3 rotate-45 bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-500/30" />
+            </div>
+            <div className="absolute left-1/2 -translate-x-1/2 top-3 w-px h-10 bg-gradient-to-b from-indigo-500 to-transparent" />
+
+            <div className="pt-16">
+              <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 text-indigo-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                Premium Real Estate
+              </span>
+
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.1]">
+                Tailored
+                <br />
+                <span className="relative inline-block">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                    Services
+                  </span>
+                  <svg
+                    className="absolute -bottom-1 left-0 w-full"
+                    viewBox="0 0 200 8"
+                    fill="none"
+                  >
+                    <path
+                      d="M2 6C50 2 150 2 198 6"
+                      stroke="url(#services-underline)"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="services-underline"
+                        x1="0"
+                        y1="0"
+                        x2="200"
+                        y2="0"
+                      >
+                        <stop stopColor="#4F46E5" />
+                        <stop offset="0.5" stopColor="#9333EA" />
+                        <stop offset="1" stopColor="#EC4899" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </span>
+              </h2>
+
+              <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-500 leading-relaxed">
+                Experience the pinnacle of Dubai real estate. From off-plan
+                investments to waterfront villas.
+              </p>
+            </div>
+
+            {/* Side decorative lines */}
+            <div className="hidden md:block absolute left-[10%] top-1/2 -translate-y-1/2">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-px bg-indigo-300" />
+                <div className="w-2 h-2 rounded-full bg-indigo-400/50" />
+              </div>
+            </div>
+            <div className="hidden md:block absolute right-[10%] top-1/2 -translate-y-1/2">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-purple-400/50" />
+                <div className="w-8 h-px bg-purple-300" />
+              </div>
+            </div>
           </div>
         </RevealSection>
 

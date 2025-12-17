@@ -1,31 +1,58 @@
 import { Agent } from "../types";
 
 export const AGENTS: Agent[] = [
-  {
+   {
     id: 1,
-    name: "Sarah Al-Fayed",
-    role: "Senior Consultant",
-    specialty: "Luxury Villas",
-    image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
-    contact: "+971 50 123 4567",
+    name: "Alexander Grahambell",
+    role: "Senior Partner",
+    specialty: "Palm Jumeirah",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop",
+    reviews: 124,
+    sales: "AED 450M+",
   },
   {
     id: 2,
-    name: "James Sterling",
-    role: "Investment Director",
-    specialty: "Off-plan Projects",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
-    contact: "+971 50 987 6543",
+    name: "Sarah Al-Fayed",
+    role: "Luxury Specialist",
+    specialty: "Downtown",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
+    reviews: 89,
+    sales: "AED 320M+",
   },
   {
     id: 3,
+    name: "James Wilson",
+    role: "Off-Plan Expert",
+    specialty: "Dubai Hills",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop",
+    reviews: 67,
+    sales: "AED 180M+",
+  },
+  {
+    id: 4,
     name: "Layla Hassan",
-    role: "Rental Specialist",
-    specialty: "Downtown & DIFC",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400",
-    contact: "+971 50 555 0199",
+    role: "Penthouse Lead",
+    specialty: "JBR",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800&auto=format&fit=crop",
+    reviews: 55,
+    sales: "AED 210M+",
+  },
+  {
+    id: 5,
+    name: "Omar Farooq",
+    role: "Commercial",
+    specialty: "DIFC",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+    reviews: 92,
+    sales: "AED 500M+",
+  },
+  {
+    id: 6,
+    name: "Elena Petrova",
+    role: "Villa Consultant",
+    specialty: "Emirates Hills",
+    image: "https://images.unsplash.com/photo-1554151228-14d9def656ec?q=80&w=800&auto=format&fit=crop",
+    reviews: 78,
+    sales: "AED 290M+",
   },
 ];

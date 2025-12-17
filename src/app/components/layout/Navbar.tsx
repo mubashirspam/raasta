@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Menu, X, TrendingUp } from "lucide-react";
+import { Menu, X, TrendingUp, ArrowUpRight } from "lucide-react";
+import { GlassContainer } from "../cards/glassmorphism";
 
 interface NavbarProps {
   onContact?: () => void;
@@ -23,10 +24,11 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
   return (
     <>
       <nav
-        className={`fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        className={`relative z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
           isScrolled
-            ? "top-2 left-4 right-4 md:left-12 md:right-12 py-4 rounded-full bg-sky-300/30 backdrop-blur-[5px] border border-white/40 shadow-xl shadow-blue-900/5 supports-[backdrop-filter]:bg-sky-100/30"
-            : "top-0 left-0 right-0 py-6 bg-transparent border-transparent"
+            ? // ? "top-2 left-4 right-4 md:left-12 md:right-12 py-4 rounded-full bg-sky-300/30 backdrop-blur-[5px] border border-white/40 shadow-xl shadow-blue-900/5 supports-[backdrop-filter]:bg-sky-100/30"
+              "top-0 left-0 right-0  py-6 bg-[#2DB3FF] border-transparent"
+            : "top-0 left-0 right-0  py-6 bg-[#2DB3FF] border-transparent"
         }`}
       >
         <div
@@ -37,7 +39,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
           {/* --- Branding --- */}
           <div className="flex items-center gap-2.5 z-50 relative">
             <img
-              src= {isScrolled? "/logo_black.svg": "/logo_white.svg"}
+              src={isScrolled ? "/logo_white.svg" : "/logo_white.svg"}
               alt="Raasta Realty Logo"
               className="h-12 rounded-xl"
             />
@@ -49,7 +51,9 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
               <a
                 key={item}
                 href="#"
-                className={`text-sm font-medium ${isScrolled? "text-slate-700": "text-white"} hover:text-[#2EA8FF] transition-colors relative group`}
+                className={`text-sm font-medium ${
+                  isScrolled ? "text-slate-700" : "text-white"
+                } hover:text-[#2EA8FF] transition-colors relative group`}
               >
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2EA8FF] transition-all duration-300 group-hover:w-full"></span>
@@ -57,16 +61,18 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
             ))}
 
             {/* Contact Button */}
-            <button
-              onClick={onContact}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 transform hover:-translate-y-0.5 ${
-                isScrolled
-                  ? "bg-[#2EA8FF] text-white hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/30"
-                  : "bg-white/80 backdrop-blur-md border border-white/40 text-slate-900 shadow-sm hover:bg-white hover:shadow-md"
-              }`}
+            <GlassContainer
+              variant="rounded"
+              bgColor="rgba(255, 255, 255, 0.15)"
+              blurAmount={20}
             >
-              Contact Us
-            </button>
+              <button
+                onClick={onContact}
+                className="group inline-flex h-10 items-center text-white px-6 rounded-full font-medium text-lg hover:shadow-xl transition-all"
+              >
+                <span>Contact Us</span>
+              </button>
+            </GlassContainer>
           </div>
 
           {/* --- Mobile Menu Toggle --- */}
