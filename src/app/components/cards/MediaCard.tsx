@@ -2,7 +2,8 @@
 
 import React from "react";
 import { Play, Heart } from "lucide-react";
-import { MediaItem } from "../../data/gallery";
+import { MediaItem } from "@/app/types";
+
 
 interface MediaCardProps {
   item: MediaItem;
