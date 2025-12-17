@@ -70,13 +70,13 @@ export const GallerySection: React.FC = () => {
         ></div>
       </div>
 
-      <div className="relative z-20 w-full h-[1200px]">
+      <div className="relative z-20 w-full h-[1500px]">
         <div className="text-center mb-16 px-4 relative">
           {/* Decorative elements */}
           <div className="absolute left-1/2 -translate-x-1/2 top-0 w-px h-12 bg-gradient-to-b from-transparent via-[#2EA8FF]/50 to-[#2EA8FF]" />
           <div className="absolute left-1/2 -translate-x-1/2 top-12 w-3 h-3 rounded-full bg-[#2EA8FF] shadow-lg shadow-[#2EA8FF]/50" />
 
-          <div className="pt-20">
+          <div className="pt-10">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#2EA8FF]/10 to-violet-500/10 border border-[#2EA8FF]/20 text-[#2EA8FF] text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm">
               <Instagram size={14} />
               <span>@RaastaRealty</span>

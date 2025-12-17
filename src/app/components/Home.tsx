@@ -14,6 +14,7 @@ import {
   FooterCTA,
   Marquee,
   GallerySection,
+  ContactSection,
 } from "./sections";
 
 export default function Home() {
@@ -38,6 +39,7 @@ export default function Home() {
         <GallerySection />
         <Testimonial />
         <FooterCTA onContact={() => setIsModalOpen(true)} />
+        <ContactSection />
       </main>
 
       <Footer />

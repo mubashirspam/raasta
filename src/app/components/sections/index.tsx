@@ -9,3 +9,4 @@ export { VideoShowcase } from "./VideoShowcase";
 export { Marquee } from "./Marquee";
 export { GallerySection } from "./GallerySection";
 export { HeroSection } from "./HeroSection";
+export { ContactSection } from "./ContactSection";
