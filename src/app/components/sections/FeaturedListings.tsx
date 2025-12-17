@@ -62,42 +62,62 @@ export const FeaturedListings: React.FC = () => {
       {/* 3. Top Layer: Glassmorphism Overlay */}
       <div className="absolute inset-0 z-20 bg-white/50 backdrop-blur-xl pointer-events-none" />
 
-  
       <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-12 py-24">
         {/* Header Area */}
         <RevealSection>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="w-8 h-[2px] bg-indigo-600"></span>
-                <span className="text-indigo-900 font-bold uppercase tracking-widest text-xs">
-                  Premium Portfolio
-                </span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">
-                Exclusive{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-                  Listings
-                </span>
-              </h2>
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="flex items-center gap-2 py-1.5 px-4 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-amber-700 text-xs font-bold tracking-widest uppercase shadow-sm">
+                <svg
+                  className="w-3 h-3"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                </svg>
+                Premium Portfolio
+              </span>
             </div>
 
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap gap-2 p-1.5 bg-white/60 backdrop-blur-md rounded-full border border-white/50 shadow-sm">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    activeCategory === cat
-                      ? "bg-slate-900 text-white shadow-lg"
-                      : "text-slate-600 hover:bg-white/50"
-                  }`}
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
+              Exclusive
+              <br />
+              <span className="relative inline-block">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500">
+                  Listings
+                </span>
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 200 10"
+                  fill="none"
                 >
-                  {cat}
-                </button>
-              ))}
-            </div>
+                  <path
+                    d="M2 8C50 2 150 2 198 8"
+                    stroke="url(#listings-underline)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="listings-underline"
+                      x1="0"
+                      y1="0"
+                      x2="200"
+                      y2="0"
+                    >
+                      <stop stopColor="#F59E0B" />
+                      <stop offset="0.5" stopColor="#F97316" />
+                      <stop offset="1" stopColor="#F43F5E" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+            </h2>
+
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed">
+              Handpicked luxury properties in Dubai&apos;s most prestigious
+              locations.
+            </p>
           </div>
         </RevealSection>
 

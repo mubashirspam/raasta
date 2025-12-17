@@ -34,7 +34,7 @@ export const GallerySection: React.FC = () => {
     { speed: 0.03, marginTop: "0px" },
     { speed: 0.1, marginTop: "150px" },
     { speed: 0.2, marginTop: "350px" },
-    { speed: 0.4, marginTop: "450px" },
+    { speed: 0.3, marginTop: "450px" },
   ];
 
   return (
@@ -42,11 +42,9 @@ export const GallerySection: React.FC = () => {
       ref={sectionRef}
       className="relative w-full py-24 overflow-hidden font-sans bg-slate-50"
     >
-      {/* --- Dynamic Background --- */}
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
         <div className="absolute inset-0 bg-slate-50"></div>
 
-        {/* Animated Gradient Orbs */}
         <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-r from-violet-200/30 via-pink-200/30 to-fuchsia-200/30 blur-[130px] animate-pulse mix-blend-multiply"></div>
         <div
           className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-l from-blue-200/30 via-cyan-200/30 to-sky-200/30 blur-[130px] animate-pulse mix-blend-multiply"
@@ -54,7 +52,6 @@ export const GallerySection: React.FC = () => {
         ></div>
         <div className="absolute top-[30%] left-[20%] w-[50%] h-[50%] rounded-full bg-indigo-300/10 blur-[100px] mix-blend-multiply"></div>
 
-        {/* Architectural Grid Pattern */}
         <div
           className="absolute inset-0"
           style={{
@@ -65,7 +62,6 @@ export const GallerySection: React.FC = () => {
           }}
         ></div>
 
-        {/* Noise Texture for Premium Paper Feel */}
         <div
           className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
           style={{
@@ -74,50 +70,87 @@ export const GallerySection: React.FC = () => {
         ></div>
       </div>
 
-      <div className="relative z-20 w-full">
-        {/* Header */}
-        <div className="text-center mb-12 px-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/50 text-[#2EA8FF] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-            <Instagram size={12} />
-            <span>@RaastaRealty</span>
+      <div className="relative z-20 w-full h-[1500px]">
+        <div className="text-center mb-16 px-4 relative">
+          {/* Decorative elements */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 w-px h-12 bg-gradient-to-b from-transparent via-[#2EA8FF]/50 to-[#2EA8FF]" />
+          <div className="absolute left-1/2 -translate-x-1/2 top-12 w-3 h-3 rounded-full bg-[#2EA8FF] shadow-lg shadow-[#2EA8FF]/50" />
+
+          <div className="pt-10">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#2EA8FF]/10 to-violet-500/10 border border-[#2EA8FF]/20 text-[#2EA8FF] text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm">
+              <Instagram size={14} />
+              <span>@RaastaRealty</span>
+            </div>
+
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
+              Where Dreams
+              <br />
+              <span className="relative inline-block">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] via-violet-500 to-fuchsia-500 animate-gradient">
+                  Come Home
+                </span>
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 200 12"
+                  fill="none"
+                >
+                  <path
+                    d="M2 8C50 2 150 2 198 8"
+                    stroke="url(#underline-gradient)"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="underline-gradient"
+                      x1="0"
+                      y1="0"
+                      x2="200"
+                      y2="0"
+                    >
+                      <stop stopColor="#2EA8FF" />
+                      <stop offset="0.5" stopColor="#8B5CF6" />
+                      <stop offset="1" stopColor="#D946EF" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+            </h2>
+
+            <p className="text-slate-500 text-lg md:text-xl max-w-md mx-auto mt-6">
+              Follow our journey through Dubai's most stunning properties
+            </p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-            Life at{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] to-violet-500">
-              Raasta
-            </span>
-          </h2>
+
+          {/* Side decorative dots */}
+          <div className="hidden md:block absolute left-[15%] top-1/2 -translate-y-1/2">
+            <div className="flex flex-col gap-2">
+              <div className="w-2 h-2 rounded-full bg-[#2EA8FF]/30" />
+              <div className="w-2 h-2 rounded-full bg-violet-500/30" />
+              <div className="w-2 h-2 rounded-full bg-fuchsia-500/30" />
+            </div>
+          </div>
+          <div className="hidden md:block absolute right-[15%] top-1/2 -translate-y-1/2">
+            <div className="flex flex-col gap-2">
+              <div className="w-2 h-2 rounded-full bg-fuchsia-500/30" />
+              <div className="w-2 h-2 rounded-full bg-violet-500/30" />
+              <div className="w-2 h-2 rounded-full bg-[#2EA8FF]/30" />
+            </div>
+          </div>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="h-[900px] overflow-hidden relative flex justify-center pt-[100px]">
-          {/* Left Fade Mask */}
+        <div className="h-[1200px] overflow-hidden relative pt-[100px] w-full">
           <div className="absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-slate-50 to-transparent z-30 pointer-events-none"></div>
-
-          {/* Right Fade Mask */}
           <div className="absolute inset-y-0 right-0 w-24 md:w-32 bg-gradient-to-l from-slate-50 to-transparent z-30 pointer-events-none"></div>
-
-          {/* Bottom Fade Mask */}
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-slate-50 to-transparent z-30 pointer-events-none"></div>
-
-          {/* Grid Container - Responsive with symmetric 50% edge cut
-              Mobile: 3 cols -> width 133% (4/3), margin -16.67%
-              Tablet: 5 cols -> width 120% (6/5), margin -10%
-              Desktop: 7 cols -> width 114% (8/7), margin -7.14%
-          */}
-          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2 items-start w-[133%] md:w-[120%] lg:w-[114%] -ml-[16.5%] md:-ml-[10%] lg:-ml-[7%]">
+          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2 items-start w-[133%] md:w-[120%] lg:w-[114%] left-1/2 -translate-x-1/2 relative">
             {GALLERY_COLUMNS.map((colData, colIndex) => {
-              // Responsive visibility:
-              // Mobile (3 cols): Show cols 2,3,4 (center 3)
-              // Tablet (5 cols): Show cols 1-5 (center 5)
-              // Desktop (7 cols): Show all 7
               const mobileVisible = colIndex >= 2 && colIndex <= 4;
               const tabletVisible = colIndex >= 1 && colIndex <= 5;
-
               return (
                 <div
                   key={colIndex}
-                  className={`flex-col gap-2 ${
+                  className={`flex-col gap-1 ${
                     mobileVisible ? "flex" : "hidden"
                   } ${tabletVisible ? "md:flex" : "md:hidden"} lg:flex`}
                   style={{
@@ -139,13 +172,6 @@ export const GallerySection: React.FC = () => {
               );
             })}
           </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-8 relative z-40">
-          <button className="px-8 py-3 rounded-full bg-slate-900 text-white font-bold text-sm shadow-xl hover:bg-[#2EA8FF] transition-colors duration-300">
-            View More on Instagram
-          </button>
         </div>
       </div>
     </section>

@@ -19,9 +19,9 @@ export interface Agent {
   role: string;
   specialty: string;
   image: string;
-  contact: string;
+  reviews: number;
+  sales: string;
 }
-
 export interface Service {
   id: number;
   icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
@@ -47,4 +47,19 @@ export interface Testimonial {
   image: string;
   content: string;
   rating: number;
+}
+
+
+// --- Types ---
+export interface OrbitItem {
+  id: number;
+  url: string;
+}
+
+export interface MediaItem {
+  id: number;
+  type: "video" | "image";
+  url: string;
+  caption?: string;
+  likes?: string;
 }

@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { Navbar, Footer } from "./layout";
 import { ContactModal } from "./ui";
 import {
-  // Hero,
+  Hero,
   FeaturedListings,
-  VideoShowcase,
+  // VideoShowcase,
   Services,
   WhyDubai,
   Agents,
@@ -14,6 +14,7 @@ import {
   FooterCTA,
   Marquee,
   GallerySection,
+  ContactSection,
 } from "./sections";
 
 export default function Home() {
@@ -27,8 +28,9 @@ export default function Home() {
         onClose={() => setIsModalOpen(false)}
       />
       <main className="relative z-10">
-        {/* <Hero /> */}
-        <VideoShowcase />
+        <Hero />
+        {/* <HeroSection /> */}
+        {/* <VideoShowcase /> */}
         <Services />
         <Marquee />
         <FeaturedListings />
@@ -37,6 +39,7 @@ export default function Home() {
         <GallerySection />
         <Testimonial />
         <FooterCTA onContact={() => setIsModalOpen(true)} />
+        <ContactSection />
       </main>
 
       <Footer />
