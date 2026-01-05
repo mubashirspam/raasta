@@ -1,0 +1,29 @@
+{
+  "name": "@raasta/sanity",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./lib": "./src/lib/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src/",
+    "build": "echo 'No build step needed'",
+    "seed:properties": "npx tsx scripts/seed-properties.ts",
+    "seed:testimonials": "npx tsx scripts/seed-testimonials.ts",
+    "seed:all": "npx tsx scripts/seed-properties.ts && npx tsx scripts/seed-testimonials.ts"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.21.0",
+    "next-sanity": "^9.8.12",
+    "sanity": "^3.68.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  }
+}
