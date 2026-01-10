@@ -1,139 +1,238 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight, MessageCircle, Play } from "lucide-react";
 
-const StarShape = () => (
-  <svg
-    viewBox="0 0 100 100"
-    className="absolute -inset-4 w-[140%] h-[140%] text-[#9B8CFF] fill-current z-0 rotate-12"
-    style={{ left: "-20%", top: "-20%" }}
-  >
-    <path d="M50 0L61 35H98L68 57L79 91L50 70L21 91L32 57L2 35H39L50 0Z" />
-  </svg>
-);
-
-const CloudShape = () => (
-  <svg
-    viewBox="0 0 120 80"
-    className="absolute -inset-2 w-[130%] h-[130%] text-slate-100 fill-white stroke-slate-300 stroke-2 z-0"
-    style={{ left: "-15%", top: "-15%" }}
-  >
-    <path d="M10,50 Q0,50 0,40 Q0,30 10,20 Q15,0 40,0 Q60,0 70,20 Q90,10 100,30 Q120,30 120,50 Q120,70 100,70 Q90,80 60,80 Q40,80 30,70 Q10,70 10,50 Z" />
-  </svg>
-);
-
-const StickyNoteShape = () => (
-  <svg
-    viewBox="0 0 100 100"
-    className="absolute -inset-3 w-[130%] h-[130%] text-[#FFE87F] fill-current z-0 rotate-[-8deg] shadow-sm"
-    style={{ left: "-15%", top: "-10%" }}
-  >
-    <path d="M0,0 H100 V90 L90,100 H0 V0 Z" />
-    <path d="M90,100 V90 H100 Z" className="fill-black/10" />
-  </svg>
-);
-
-export const Hero = () => {
+export const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-[100vh] w-full bg-white overflow-hidden flex flex-col items-center justify-center pt-24 pb-16">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none -z-0">
-        <div className="w-[934px] h-[616px] relative bg-radial-[at_3%_48%] from-[#ffdedc] from 22% via-[#f5c1f5] via 58% to-[#7fbdff] overflow-hidden blur-3xl opacity-50 scale-125">
-          <img
-            className="w-[934px] h-[616px] left-[1324px] top-[-773px] absolute"
-            src="https://placehold.co/934x616"
-            alt=""
+    <section className="relative min-h-screen w-full overflow-hidden">
+      {/* Gradient Background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background:
+            "linear-gradient(135deg, #e8f5e9 0%, #e0f7fa 30%, #f3e5f5 70%, #fce4ec 100%)",
+        }}
+      />
+
+      {/* Decorative Stars */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        className="absolute top-20 right-[45%] z-10"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"
+            fill="#6366f1"
           />
-        </div>
-      </div>
+        </svg>
+      </motion.div>
 
-      <div className="z-10 flex flex-col items-center text-center max-w-5xl px-4 w-full">
-        <h1 className="text-[2.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold tracking-tight text-slate-900 leading-[1.05] selection:bg-purple-100">
-          <div className="flex flex-wrap items-center justify-center gap-x-2 md:gap-x-4">
-            <span>Set goals</span>
-            <div className="relative inline-flex items-center justify-center w-[90px] h-[60px] md:w-[130px] md:h-[80px] mx-1.5">
-              <StarShape />
-              <span className="relative z-10 text-xl md:text-2xl font-handwriting rotate-[-10deg] text-white font-medium italic">
-                plan
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+        className="absolute top-32 right-[15%] z-10"
+      >
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"
+            fill="#f59e0b"
+          />
+        </svg>
+      </motion.div>
+
+      {/* Small decorative circles */}
+      <div className="absolute bottom-32 right-[12%] w-3 h-3 rounded-full border-2 border-emerald-400 z-10" />
+      <div className="absolute top-1/2 right-[8%] w-2 h-2 rounded-full bg-emerald-400 z-10" />
+
+      {/* Main Content Container */}
+      <div className="relative z-20 container mx-auto px-6 md:px-12 lg:px-20 min-h-screen flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full py-20">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-start"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm mb-8"
+            >
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              <span className="text-sm font-medium text-slate-700">
+                Your Trusted Real Estate Partner
               </span>
-            </div>
-            <span>Stay on</span>
-          </div>
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+            </motion.div>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-2 md:gap-x-4 mt-2 md:mt-3">
-            <span>track</span>
-            <div className="relative inline-flex items-center justify-center w-[90px] h-[55px] md:w-[120px] md:h-[70px] mx-1.5">
-              <CloudShape />
-              <span className="relative z-10 text-xl md:text-2xl font-handwriting rotate-[5deg] text-slate-600 italic">
-                step
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-slate-900 leading-[1.1] mb-6"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Find Your{" "}
+              <span
+                className="italic"
+                style={{
+                  backgroundImage: "linear-gradient(90deg, #2EA8FF, #06B6D4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Dream
               </span>
-            </div>
-            <span>Let time be your</span>
-          </div>
+              <br />
+              Property &amp; Grow
+              <br />
+              Your Portfolio
+            </motion.h1>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-2 md:gap-x-4 mt-2 md:mt-3">
-            <span>teammate</span>
-            <div className="relative inline-flex items-center justify-center w-[80px] h-[60px] md:w-[110px] md:h-[80px] mx-1.5">
-              <StickyNoteShape />
-              <span className="relative z-10 text-xl md:text-2xl font-handwriting rotate-[-5deg] text-slate-800 font-medium">
-                done
+            {/* Subtext */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="text-base md:text-lg text-slate-600 mb-8 max-w-md"
+            >
+              We have 10+ years of experience helping clients find the perfect
+              properties and investment opportunities in Dubai.
+            </motion.p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="flex items-center gap-4 flex-wrap"
+            >
+              <Link
+                href="/properties"
+                className="group flex items-center gap-2 px-7 py-4 bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white rounded-full font-semibold shadow-lg shadow-violet-500/30 hover:shadow-xl hover:shadow-violet-500/40 hover:scale-105 transition-all duration-300 uppercase tracking-wide text-sm"
+              >
+                <span>Explore Properties</span>
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+
+              <a
+                href="https://wa.me/971000000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 px-2 py-2 text-slate-800 font-semibold hover:scale-105 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center shadow-lg shadow-amber-400/30">
+                  <MessageCircle size={20} className="text-white" />
+                </div>
+                <span className="uppercase tracking-wide text-sm">
+                  Chat With Us
+                </span>
+              </a>
+            </motion.div>
+
+            {/* RERA Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="flex items-center gap-3 mt-10 px-4 py-2 bg-white/70 backdrop-blur-sm rounded-xl shadow-sm"
+            >
+              <span className="text-xs md:text-sm text-slate-600 font-medium">
+                RERA Licensed Brokerage
               </span>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 md:w-10 md:h-10 relative">
+                  <Image
+                    src="/hero/dld.svg"
+                    alt="DLD"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="w-8 h-8 md:w-10 md:h-10 relative">
+                  <Image
+                    src="/hero/rera.svg"
+                    alt="RERA"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="relative flex items-center justify-center"
+          >
+            {/* Circular Frame */}
+            <div className="relative">
+              {/* Outer circle border */}
+              <div className="absolute inset-0 rounded-full border-2 border-slate-200 scale-110" />
+
+              {/* Main image container */}
+              <div className="relative w-[300px] h-[400px] md:w-[380px] md:h-[500px] lg:w-[420px] lg:h-[560px] rounded-full overflow-hidden border-4 border-white shadow-2xl">
+                <Image
+                  src="/hero/IMG_3323-min.jpeg"
+                  alt="Dubai Property Expert"
+                  fill
+                  className="object-cover grayscale"
+                  priority
+                />
+              </div>
+
+              {/* Decorative curved arrow */}
+              <motion.svg
+                initial={{ opacity: 0, pathLength: 0 }}
+                animate={{ opacity: 1, pathLength: 1 }}
+                transition={{ delay: 0.8, duration: 1 }}
+                className="absolute -bottom-4 -left-16 w-32 h-24"
+                viewBox="0 0 120 80"
+                fill="none"
+              >
+                <motion.path
+                  d="M10 70 Q 60 80 80 40 Q 100 0 110 20"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  fill="none"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ delay: 0.8, duration: 1 }}
+                />
+                <motion.path
+                  d="M105 10 L 110 20 L 100 22"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.8, duration: 0.3 }}
+                />
+              </motion.svg>
             </div>
-          </div>
-        </h1>
-
-        <p className="mt-8 text-base md:text-lg text-slate-500 max-w-xl font-medium leading-relaxed">
-          Quests, challenges, and mini-victories are designed
-          <br className="hidden md:block" />
-          to help children learn to act with pleasure.
-        </p>
-
-        <button className="mt-8 px-8 py-4 bg-black text-white rounded-full font-bold text-base hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:shadow-black/20 hover:-translate-y-1 active:scale-95 duration-300 cursor-pointer">
-          Start the Quest
-        </button>
-      </div>
-
-      <div className="mt-16 flex items-center gap-6 md:gap-12 lg:gap-20 opacity-90 z-10">
-        <div className="text-center group cursor-default">
-          <div className="text-2xl md:text-3xl font-black text-slate-900 group-hover:text-amber-500 transition-colors">
-            120+
-          </div>
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">
-            Methods
-          </div>
+          </motion.div>
         </div>
-        <div className="w-px h-10 bg-slate-200" />
-        <div className="text-center group cursor-default">
-          <div className="text-2xl md:text-3xl font-black text-slate-900 group-hover:text-purple-500 transition-colors">
-            23.4K
-          </div>
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">
-            Successes
-          </div>
-        </div>
-        <div className="w-px h-10 bg-slate-200" />
-        <div className="text-center group cursor-default">
-          <div className="text-2xl md:text-3xl font-black text-slate-900 group-hover:text-blue-500 transition-colors">
-            100%
-          </div>
-          <div className="text-xs font-semibold text-slate-400 uppercase tracking-widest mt-1">
-            Outcome
-          </div>
-        </div>
-      </div>
-
-      <div className="hidden lg:block absolute left-[2%] bottom-[8%] xl:left-[8%] w-[200px] xl:w-[250px] animate-bounce-slow hover:scale-105 transition-transform duration-500">
-        <img
-          src="/hero/chick.svg"
-          alt="Chick with notebook"
-          className="w-full h-auto object-contain drop-shadow-2xl"
-        />
-      </div>
-
-      <div className="hidden lg:block absolute right-[2%] bottom-[8%] xl:right-[8%] w-[200px] xl:w-[250px] animate-float hover:scale-105 transition-transform duration-500">
-        <img
-          src="/hero/penguin.svg"
-          alt="Penguin with checklist"
-          className="w-full h-auto object-contain drop-shadow-2xl"
-        />
       </div>
     </section>
   );

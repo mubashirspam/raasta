@@ -67,8 +67,6 @@ export default function Home({
       <OffersPopup />
       <main className="relative z-10">
         <Hero />
-        {/* <HeroSection /> */}
-        {/* <VideoShowcase /> */}
         <Services />
         <Marquee />
         <WhoWeSupport />

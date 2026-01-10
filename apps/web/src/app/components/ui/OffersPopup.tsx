@@ -123,7 +123,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl bg-slate-900 rounded-3xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-4xl bg-slate-900 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto md:overflow-visible"
           >
             {/* Close Button */}
             <button
@@ -134,11 +134,11 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
               <X size={20} />
             </button>
 
-            <div className="flex flex-col md:flex-row">
-              {/* Left Side - Offers */}
-              <div className="flex-1 p-8 md:p-10 bg-gradient-to-r from-[#2EA8FF] to-cyan-500">
+            <div className="flex flex-col md:flex-row h-full rounded-3xl overflow-hidden">
+              {/* Left Side - Offers (Hidden on Mobile) */}
+              <div className="hidden md:flex flex-1 p-8 md:p-10 bg-gradient-to-r from-[#2EA8FF] to-cyan-500 flex-col justify-center">
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full mb-6 shadow-lg shadow-blue-900/10">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full mb-6 shadow-lg shadow-blue-900/10 self-start">
                   <Sparkles className="w-4 h-4 text-[#2EA8FF] fill-[#2EA8FF]" />
                   <span className="text-[#2EA8FF] text-sm font-bold tracking-wide uppercase">
                     Limited Time Offer
@@ -146,7 +146,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                 </div>
 
                 {/* Headline */}
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight drop-shadow-md">
+                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3 leading-tight drop-shadow-md">
                   Discover{" "}
                   <span className="text-yellow-300 relative inline-block">
                     Premium
@@ -167,12 +167,12 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                 </h2>
 
                 <p className="text-blue-50 mb-8 text-lg font-medium">
-                  Get exclusive access to Dubai&apos;s finest real estate
+                  Get exclusive access to Dubai's finest real estate
                   opportunities
                 </p>
 
                 {/* Investment Badge */}
-                <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl mb-8 shadow-sm">
+                <div className="inline-flex items-center gap-2 px-5 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl mb-8 shadow-sm self-start">
                   <div className="p-1.5 bg-yellow-400 rounded-full">
                     <Star className="w-3.5 h-3.5 text-yellow-950 fill-yellow-950" />
                   </div>
@@ -205,17 +205,26 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
               </div>
 
               {/* Right Side - Form */}
-              <div className="flex-1 p-8 md:p-10 bg-white">
-                {/* Header */}
-                <div className="flex items-center gap-4 mb-6">
+              <div className="flex-1 p-6 sm:p-8 md:p-10 bg-white">
+                {/* Header (Simplified for Mobile) */}
+                <div className="flex items-center gap-4 mb-4 sm:mb-6">
                   <img
                     src="/logo_black.svg"
                     alt="Raasta Realty Logo"
-                    className="h-12 md:h-12 rounded-xl"
+                    className="h-10 sm:h-12 rounded-xl"
                   />
                 </div>
 
-                <p className="text-slate-600 mb-6">
+                <div className="md:hidden mb-6">
+                  <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                    Discover Premium Properties
+                  </h2>
+                  <p className="text-slate-600">
+                    Enter your details for exclusive access.
+                  </p>
+                </div>
+
+                <p className="text-slate-600 mb-6 hidden md:block">
                   Enter your details to receive our exclusive property portfolio
                   and investment guide.
                 </p>
@@ -224,9 +233,9 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center py-12"
+                    className="text-center py-8 sm:py-12"
                   >
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
                         className="w-8 h-8 text-green-500"
                         fill="none"
@@ -241,15 +250,18 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         />
                       </svg>
                     </div>
-                    <h4 className="text-xl font-bold text-slate-900 mb-2">
+                    <h4 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">
                       Thank You!
                     </h4>
-                    <p className="text-slate-600">
+                    <p className="text-sm sm:text-base text-slate-600">
                       Our team will contact you shortly.
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-3 sm:space-y-4"
+                  >
                     {/* Name */}
                     <div>
                       <input
@@ -259,15 +271,17 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all"
+                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all text-sm sm:text-base"
                       />
                     </div>
 
                     {/* Phone with WhatsApp */}
                     <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-slate-500">
-                        <span className="text-sm font-medium">+971</span>
-                        <div className="w-px h-5 bg-slate-300" />
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1 sm:gap-2 text-slate-500">
+                        <span className="text-xs sm:text-sm font-medium">
+                          +971
+                        </span>
+                        <div className="w-px h-4 sm:h-5 bg-slate-300" />
                       </div>
                       <input
                         type="tel"
@@ -276,7 +290,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full pl-20 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all"
+                        className="w-full pl-16 sm:pl-20 pr-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all text-sm sm:text-base"
                       />
                     </div>
 
@@ -289,7 +303,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all"
+                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all text-sm sm:text-base"
                       />
                     </div>
 
@@ -300,7 +314,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.budget}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 appearance-none focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all cursor-pointer"
+                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 appearance-none focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all cursor-pointer text-sm sm:text-base"
                       >
                         {budgetOptions.map((opt, idx) => (
                           <option
@@ -322,7 +336,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4 bg-gradient-to-r from-[#2EA8FF] to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="w-full py-3.5 sm:py-4 bg-gradient-to-r from-[#2EA8FF] to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 disabled:opacity-70 text-sm sm:text-base"
                     >
                       {isSubmitting ? (
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -335,7 +349,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                     </button>
 
                     {/* Terms */}
-                    <p className="text-center text-xs text-slate-500">
+                    <p className="text-center text-[10px] sm:text-xs text-slate-500">
                       By signing up, you agree to our{" "}
                       <a href="#" className="text-[#2EA8FF] hover:underline">
                         Terms & Conditions
@@ -347,13 +361,13 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
 
                 {/* Contact Buttons */}
                 <div className="mt-6 pt-6 border-t border-slate-200">
-                  <p className="text-center text-sm text-slate-500 mb-4">
+                  <p className="text-center text-xs sm:text-sm text-slate-500 mb-4">
                     Or connect with us directly
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex gap-2 sm:gap-3">
                     <a
                       href="tel:+971501234567"
-                      className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-2.5 sm:py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                     >
                       <Phone size={18} />
                       Call Now
@@ -362,7 +376,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                       href="https://wa.me/971501234567"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
+                      className="flex-1 py-2.5 sm:py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                     >
                       <MessageCircle size={18} />
                       WhatsApp

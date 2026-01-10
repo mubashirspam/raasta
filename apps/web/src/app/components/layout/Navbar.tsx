@@ -27,7 +27,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);  
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -53,7 +53,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
       <nav
         className={`fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${getNavbarClasses()}`}
       >
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full relative">
           {/* --- Branding --- */}
           <div className="flex items-center gap-2.5 z-50 relative shrink-0">
             <Link href="/">
@@ -65,8 +65,8 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
             </Link>
           </div>
 
-          {/* --- Desktop Links --- */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* --- Desktop Links (Centered) --- */}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -86,22 +86,25 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
                 </Link>
               );
             })}
+          </div>
 
+          {/* --- Right Side (Contact + Mobile Toggle) --- */}
+          <div className="flex items-center gap-4">
             {/* Contact Button */}
-            <Link href="/contact">
+            <Link href="/contact" className="hidden md:block">
               <span className="inline-flex h-10 items-center px-6 rounded-full font-medium text-base bg-gradient-to-r from-[#2EA8FF] to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all hover:scale-[1.02]">
                 Contact Us
               </span>
             </Link>
-          </div>
 
-          {/* --- Mobile Menu Toggle --- */}
-          <button
-            className="md:hidden z-50 p-2 rounded-full transition-colors text-slate-800 hover:bg-black/5"
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-          >
-            {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+            {/* --- Mobile Menu Toggle --- */}
+            <button
+              className="md:hidden z-50 p-2 rounded-full transition-colors text-slate-800 hover:bg-black/5"
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+            >
+              {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
       </nav>
 
