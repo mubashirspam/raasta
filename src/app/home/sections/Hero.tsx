@@ -183,7 +183,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="w-full"
         >
-          <div className="container mx-auto w-full">
+          <div className="container mx-auto w-full px-0 md:px-20 max-w-7xl ">
             <Image
               src="/hero/hero1.png"
               alt="Dubai Skyline"
