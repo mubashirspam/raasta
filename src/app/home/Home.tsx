@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Navbar, Footer } from "./layout";
 import { ContactModal, OffersPopup } from "./ui";
 import {
-  Hero,
+  HeroSection,
   FeaturedListings,
   GallerySection,
   Services,
@@ -83,7 +83,7 @@ export default function Home({
       />
       <OffersPopup />
       <main className="relative z-10">
-        <Hero />
+        <HeroSection />
         <Services />
         <Marquee developers={sanityDevelopers} />
         <WhoWeSupport />

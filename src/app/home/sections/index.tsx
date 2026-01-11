@@ -1,4 +1,4 @@
-export { Hero } from "./Hero";
+export { HeroSection } from "./HeroSection";
 export { FeaturedListings } from "./FeaturedListings";
 export { Services } from "./Services";
 export { WhyDubai } from "./WhyDubai";
