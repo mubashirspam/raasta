@@ -31,10 +31,10 @@ export const Hero: React.FC = () => {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.8, duration: 0.5 }}
-        className="absolute bottom-4 right-4 md:bottom-8 md:right-8 z-20 flex flex-col items-center gap-2 px-3 md:px-4 py-2.5 md:py-3 bg-white/60 rounded-full"
+        className="absolute bottom-4 right-4 md:bottom-8 md:right-8 z-20 flex flex-col items-center gap-2 px-4 md:px-5 py-3 md:py-4 bg-white/80 backdrop-blur-sm rounded-2xl"
       >
-        <div className="flex items-center gap-2 md:gap-3">
-          <div className="w-10 h-10 md:w-14 md:h-14 relative">
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="w-12 h-12 md:w-20 md:h-20 relative">
             <Image
               src="/hero/dld.svg"
               alt="DLD"
@@ -42,7 +42,7 @@ export const Hero: React.FC = () => {
               className="object-contain"
             />
           </div>
-          <div className="w-10 h-10 md:w-14 md:h-14 relative">
+          <div className="w-12 h-12 md:w-20 md:h-20 relative">
             <Image
               src="/hero/rera.svg"
               alt="RERA"
@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
             />
           </div>
         </div>
-        <span className="text-[9px] md:text-[10px] text-slate-600 font-medium text-center leading-tight">
+        <span className="text-[10px] md:text-xs text-slate-700 font-semibold text-center leading-tight">
           RERA Licensed Real Estate Company
         </span>
       </motion.div>
@@ -101,12 +101,23 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-700 leading-tight tracking-tight"
-              style={{ fontFamily: "'Inter', sans-serif" }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 leading-[1.5] tracking-[-0.02em]"
+              style={{
+                fontFamily:
+                  "'Poppins', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif",
+                textShadow: "0 2px 4px rgba(0, 0, 0, 0.04)",
+              }}
             >
               Your{" "}
               <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500/50 to-cyan-500/50">
+                <span
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 font-extrabold"
+                  style={{
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    filter: "drop-shadow(0 1px 2px rgba(16, 185, 129, 0.2))",
+                  }}
+                >
                   Reliable
                 </span>
                 <svg
@@ -129,29 +140,25 @@ export const Hero: React.FC = () => {
                       x2="200"
                       y2="0"
                     >
-                      <stop
-                        offset="0"
-                        stopColor="#00e7f4ff"
-                        stopOpacity="0.3"
-                      />
+                      <stop offset="0" stopColor="#10b981" stopOpacity="0.6" />
                       <stop
                         offset="0.33"
-                        stopColor="#fde047"
-                        stopOpacity="0.5"
+                        stopColor="#14b8a6"
+                        stopOpacity="0.7"
                       />
                       <stop
                         offset="0.66"
-                        stopColor="#93c5fd"
-                        stopOpacity="0.5"
+                        stopColor="#06b6d4"
+                        stopOpacity="0.7"
                       />
-                      <stop offset="1" stopColor="#67e8f9" stopOpacity="0.5" />
+                      <stop offset="1" stopColor="#22d3ee" stopOpacity="0.6" />
                     </linearGradient>
                   </defs>
                 </svg>
               </span>{" "}
-              Real Estate
+              <span className="text-slate-700 mb-4 ">Real Estate</span>
               <br />
-              Partner in Dubai
+              <span className="text-slate-700">Partner in Dubai</span>
             </motion.h1>
 
             <motion.div
@@ -164,13 +171,14 @@ export const Hero: React.FC = () => {
                 href="https://wa.me/971529368338"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 p-2 pl-4 text-md font-[500] text-black bg-gradient-to-r from-green-300/30 via-yellow-300/50 via-blue-300/50 to-cyan-300/50 transition-all duration-300 rounded-full hover:shadow-lg hover:shadow-cyan-500/30"
+                className="group inline-flex items-center gap-3 p-2 pl-5 text-base font-semibold text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 transition-all duration-300 rounded-full hover:shadow-xl hover:shadow-cyan-500/25 hover:scale-[1.02]"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                <span>Connect with us</span>
-                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center ">
+                <span className="tracking-wide">Connect with us</span>
+                <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center group-hover:bg-white transition-colors">
                   <ArrowRight
-                    size={20}
-                    className="text-black rotate-[-45deg]"
+                    size={18}
+                    className="text-slate-700 rotate-[-45deg] group-hover:rotate-0 transition-transform duration-300"
                   />
                 </div>
               </a>
@@ -185,7 +193,7 @@ export const Hero: React.FC = () => {
         >
           <div className="container mx-auto w-full px-0 md:px-20 max-w-7xl ">
             <Image
-              src="/hero/hero1.png"
+              src="/hero/hero2.png"
               alt="Dubai Skyline"
               width={1400}
               height={600}

@@ -146,7 +146,7 @@ export const RealEstatePrinciples: React.FC = () => {
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700 aspect-[4/5] w-full">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
                 <Image
-                  src="/IMG_3323-min.JPG"
+                  src="https://images.unsplash.com/photo-1524234599372-a5bd0194758d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Dubai Real Estate Vision"
                   fill
                   className="object-cover"
