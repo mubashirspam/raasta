@@ -1,4 +1,4 @@
-import { getProperties } from "@raasta/sanity/lib";
+import { getProperties } from "@/sanity/lib";
 import PropertiesClient from "./PropertiesClient";
 
 export default async function PropertiesPage() {

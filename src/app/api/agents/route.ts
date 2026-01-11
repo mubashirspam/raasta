@@ -1,4 +1,4 @@
-import { getAgents } from "@raasta/sanity/lib";
+import { getAgents } from "@/sanity/lib";
 import { NextResponse } from "next/server";
 
 export async function GET() {

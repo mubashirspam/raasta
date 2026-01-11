@@ -1,5 +1,5 @@
 import Home from "./components/Home";
-import { getTestimonials, getFeaturedProperties } from "@raasta/sanity/lib";
+import { getTestimonials, getFeaturedProperties } from "@/sanity/lib";
 
 export default async function Page() {
   const [testimonials, properties] = await Promise.all([
