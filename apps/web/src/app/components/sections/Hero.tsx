@@ -1,238 +1,177 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle, Play } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, X } from "lucide-react";
+
 
 export const Hero: React.FC = () => {
+  const [rotation, setRotation] = useState(0);
+  const badgeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRotation((prev) => prev + 1);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Gradient Background */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            "linear-gradient(135deg, #e8f5e9 0%, #e0f7fa 30%, #f3e5f5 70%, #fce4ec 100%)",
-        }}
-      />
+    <section className="relative min-h-screen bg-linear-to-r from-[#ffdedc] from 14% via-[#f5c1f5] to-[#7fbdff] to 95%  w-full overflow-hidden">
 
-      {/* Decorative Stars */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="absolute top-20 right-[45%] z-10"
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"
-            fill="#6366f1"
-          />
-        </svg>
-      </motion.div>
+        <source
+          src="https://www.canva.com/design/DAG-F9sqUbI/43ZWGMNmhM9ZW_fIh5pLng/edit?ui=eyJBIjp7IkEiOiJkb3dubG9hZF9wbmciLCJGIjp0cnVlfX0"
+          type="video/mp4"
+        />
+      </video>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
-        className="absolute top-32 right-[15%] z-10"
-      >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"
-            fill="#f59e0b"
-          />
-        </svg>
-      </motion.div>
-
-      {/* Small decorative circles */}
-      <div className="absolute bottom-32 right-[12%] w-3 h-3 rounded-full border-2 border-emerald-400 z-10" />
-      <div className="absolute top-1/2 right-[8%] w-2 h-2 rounded-full bg-emerald-400 z-10" />
+      {/* Overlay for better text readability */}
 
       {/* Main Content Container */}
-      <div className="relative z-20 container mx-auto px-6 md:px-12 lg:px-20 min-h-screen flex items-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full py-20">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-start"
-          >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm mb-8"
-            >
-              <span className="w-2 h-2 rounded-full bg-cyan-400" />
-              <span className="text-sm font-medium text-slate-700">
-                Your Trusted Real Estate Partner
-              </span>
-              <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            </motion.div>
-
-            {/* Headline */}
+      <div className="relative  z-10 container mx-auto px-6 md:px-12 lg:px-20 min-h-screen flex flex-col justify-between py-8 pt-24">
+        {/* Main Hero Content */}
+        <div className="flex-1 flex flex-col justify-center">
+          {/* First Line - YOUR RELIABLE */}
+          <div className="flex items-center gap-4 md:gap-8 mb-2 md:mb-4">
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-slate-900 leading-[1.1] mb-6"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+              transition={{ duration: 0.6 }}
+              className="text-5xl sm:text-6xl md:text-8xl lg:text-[120px] xl:text-[160px] font-black text-slate-800 leading-[0.9] tracking-tighter"
+              style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Find Your{" "}
-              <span
-                className="italic"
-                style={{
-                  backgroundImage: "linear-gradient(90deg, #2EA8FF, #06B6D4)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Dream
-              </span>
-              <br />
-              Property &amp; Grow
-              <br />
-              Your Portfolio
+              YOUR
             </motion.h1>
 
-            {/* Subtext */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="text-base md:text-lg text-slate-600 mb-8 max-w-md"
-            >
-              We have 10+ years of experience helping clients find the perfect
-              properties and investment opportunities in Dubai.
-            </motion.p>
-
-            {/* CTA Buttons */}
+            {/* Rotating Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="flex items-center gap-4 flex-wrap"
+              ref={badgeRef}
+              className="relative w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 flex-shrink-0"
             >
-              <Link
-                href="/properties"
-                className="group flex items-center gap-2 px-7 py-4 bg-gradient-to-r from-[#7c3aed] to-[#6366f1] text-white rounded-full font-semibold shadow-lg shadow-violet-500/30 hover:shadow-xl hover:shadow-violet-500/40 hover:scale-105 transition-all duration-300 uppercase tracking-wide text-sm"
+              {/* Rotating text circle */}
+              <svg
+                className="w-full h-full"
+                viewBox="0 0 100 100"
+                style={{ transform: `rotate(${rotation}deg)` }}
               >
-                <span>Explore Properties</span>
-                <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </Link>
-
-              <a
-                href="https://wa.me/971000000000"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-2 py-2 text-slate-800 font-semibold hover:scale-105 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center shadow-lg shadow-amber-400/30">
-                  <MessageCircle size={20} className="text-white" />
-                </div>
-                <span className="uppercase tracking-wide text-sm">
-                  Chat With Us
-                </span>
-              </a>
-            </motion.div>
-
-            {/* RERA Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="flex items-center gap-3 mt-10 px-4 py-2 bg-white/70 backdrop-blur-sm rounded-xl shadow-sm"
-            >
-              <span className="text-xs md:text-sm text-slate-600 font-medium">
-                RERA Licensed Brokerage
-              </span>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 md:w-10 md:h-10 relative">
-                  <Image
-                    src="/hero/dld.svg"
-                    alt="DLD"
-                    fill
-                    className="object-contain"
+                <defs>
+                  <path
+                    id="circlePath"
+                    d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
                   />
-                </div>
-                <div className="w-8 h-8 md:w-10 md:h-10 relative">
-                  <Image
-                    src="/hero/rera.svg"
-                    alt="RERA"
-                    fill
-                    className="object-contain"
-                  />
+                </defs>
+                <text className="text-[9px] uppercase tracking-[0.3em] fill-white font-medium">
+                  <textPath href="#circlePath">
+                    • SEE PROPERTIES • SEE PROPERTIES • SEE PROPERTIES
+                  </textPath>
+                </text>
+              </svg>
+              {/* Center arrow */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full border-2 border-white flex items-center justify-center">
+                  <ArrowDownRight className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="relative flex items-center justify-center"
+          {/* Second Line - REAL ESTATE */}
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-[100px] xl:text-[120px] uppercase font-black text-slate-800 leading-[0.9] tracking-tighter"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            {/* Circular Frame */}
-            <div className="relative">
-              {/* Outer circle border */}
-              <div className="absolute inset-0 rounded-full border-2 border-slate-200 scale-110" />
-
-              {/* Main image container */}
-              <div className="relative w-[300px] h-[400px] md:w-[380px] md:h-[500px] lg:w-[420px] lg:h-[560px] rounded-full overflow-hidden border-4 border-white shadow-2xl">
-                <Image
-                  src="/hero/IMG_3323-min.jpeg"
-                  alt="Dubai Property Expert"
-                  fill
-                  className="object-cover grayscale"
-                  priority
-                />
-              </div>
-
-              {/* Decorative curved arrow */}
-              <motion.svg
-                initial={{ opacity: 0, pathLength: 0 }}
-                animate={{ opacity: 1, pathLength: 1 }}
-                transition={{ delay: 0.8, duration: 1 }}
-                className="absolute -bottom-4 -left-16 w-32 h-24"
-                viewBox="0 0 120 80"
-                fill="none"
-              >
-                <motion.path
-                  d="M10 70 Q 60 80 80 40 Q 100 0 110 20"
-                  stroke="#6366f1"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  fill="none"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 0.8, duration: 1 }}
-                />
-                <motion.path
-                  d="M105 10 L 110 20 L 100 22"
-                  stroke="#6366f1"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.8, duration: 0.3 }}
-                />
-              </motion.svg>
-            </div>
-          </motion.div>
+            <span className="text-[#f466d3] lg:text-[140px] ">RELIABLE</span>{" "}
+            REAL ESTATE PARTNER IN DUBAI
+          </motion.h1>
         </div>
+
+        {/* Bottom Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
+          className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pb-8"
+        >
+          {/* Left - Description & CTA */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-6 max-w-2xl">
+            <p className="text-white/80 text-sm md:text-base max-w-xs leading-relaxed">
+              We transform your property dreams into reality — from finding your
+              perfect home to smart investments — creating wealth that lasts
+              generations.
+            </p>
+
+            <Link
+              href="https://wa.me/971000000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-white/90 hover:scale-105 transition-all duration-300 whitespace-nowrap"
+            >
+              <span className="uppercase tracking-wide text-sm">
+                Let&apos;s Talk
+              </span>
+              <X
+                size={18}
+                strokeWidth={3}
+                className="group-hover:rotate-90 transition-transform duration-300"
+              />
+            </Link>
+          </div>
+
+          {/* Right - Social Links */}
+          <div className="flex flex-col gap-2 text-right">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-white hover:text-white/80 transition-colors"
+            >
+              <span className="text-sm font-medium">Facebook</span>
+              <ArrowUpRight
+                size={16}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-white hover:text-white/80 transition-colors"
+            >
+              <span className="text-sm font-medium">LinkedIn</span>
+              <ArrowUpRight
+                size={16}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-white hover:text-white/80 transition-colors"
+            >
+              <span className="text-sm font-medium">Instagram</span>
+              <ArrowUpRight
+                size={16}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
