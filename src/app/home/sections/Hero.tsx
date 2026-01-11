@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageCircle, Star } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import Image from "next/image";
 import { GlassContainer } from "../cards/glassmorphism";
 
@@ -101,12 +101,12 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-700 leading-tight tracking-tight"
               style={{ fontFamily: "'Inter', sans-serif" }}
             >
               Your{" "}
               <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500 animate-gradient-x">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500/50 to-cyan-500/50">
                   Reliable
                 </span>
                 <svg
@@ -129,9 +129,22 @@ export const Hero: React.FC = () => {
                       x2="200"
                       y2="0"
                     >
-                      <stop stopColor="#06B6D4" />
-                      <stop offset="0.5" stopColor="#3B82F6" />
-                      <stop offset="1" stopColor="#06B6D4" />
+                      <stop
+                        offset="0"
+                        stopColor="#00e7f4ff"
+                        stopOpacity="0.3"
+                      />
+                      <stop
+                        offset="0.33"
+                        stopColor="#fde047"
+                        stopOpacity="0.5"
+                      />
+                      <stop
+                        offset="0.66"
+                        stopColor="#93c5fd"
+                        stopOpacity="0.5"
+                      />
+                      <stop offset="1" stopColor="#67e8f9" stopOpacity="0.5" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -151,10 +164,15 @@ export const Hero: React.FC = () => {
                 href="https://wa.me/971529368338"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-7 py-3.5 text-white font-medium bg-gradient-to-r from-[#2EA8FF] to-cyan-500 text-white  hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 rounded-full"
+                className="group inline-flex items-center gap-2 p-2 pl-4 text-md font-[500] text-black bg-gradient-to-r from-green-300/30 via-yellow-300/50 via-blue-300/50 to-cyan-300/50 transition-all duration-300 rounded-full hover:shadow-lg hover:shadow-cyan-500/30"
               >
-                <MessageCircle size={20} className="text-white" />
-                <span>Chat with us now</span>
+                <span>Connect with us</span>
+                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center ">
+                  <ArrowRight
+                    size={20}
+                    className="text-black rotate-[-45deg]"
+                  />
+                </div>
               </a>
             </motion.div>
           </div>
@@ -165,7 +183,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="w-full"
         >
-          <div className="container mx-auto px-4 md:px-12 lg:px-20 max-w-7xl">
+          <div className="container mx-auto w-full">
             <Image
               src="/hero/hero1.png"
               alt="Dubai Skyline"

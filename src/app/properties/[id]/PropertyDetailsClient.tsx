@@ -22,10 +22,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeBackground } from "../../components/ui";
-import { Navbar } from "../../components/layout/Navbar";
-import { Footer } from "../../components/layout/Footer";
-import { ContactModal } from "../../components/ui/ContactModal";
+import { ThemeBackground } from "../../home/ui";
+import { Navbar } from "../../home/layout/Navbar";
+import { Footer } from "../../home/layout/Footer";
+import { ContactModal } from "../../home/ui/ContactModal";
 
 interface SanityProperty {
   _id: string;
@@ -111,8 +111,8 @@ export default function PropertyDetailsClient({
     property.status === "offplan"
       ? "Off-Plan"
       : property.featured
-        ? "Featured"
-        : "For Sale";
+      ? "Featured"
+      : "For Sale";
   const formattedPrice = `AED ${property.price?.toLocaleString() || 0}`;
   const propertyType = property.propertyType
     ? property.propertyType.charAt(0).toUpperCase() +

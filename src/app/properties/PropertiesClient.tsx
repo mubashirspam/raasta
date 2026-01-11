@@ -3,12 +3,12 @@
 import React, { useState, useMemo } from "react";
 import { Search, Filter, MapPin, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { ListingCard } from "../components/cards";
-import { Breadcrumbs, RevealSection, ThemeBackground } from "../components/ui";
+import { ListingCard } from "../home/cards";
+import { Breadcrumbs, RevealSection, ThemeBackground } from "../home/ui";
 import { Property } from "../types";
-import { Navbar } from "../components/layout/Navbar";
-import { Footer } from "../components/layout/Footer";
-import { ContactModal } from "../components/ui/ContactModal";
+import { Navbar } from "../home/layout/Navbar";
+import { Footer } from "../home/layout/Footer";
+import { ContactModal } from "../home/ui/ContactModal";
 import { PROPERTIES as FALLBACK_PROPERTIES } from "../data";
 
 const PROPERTY_TYPES = ["All", "Villa", "Penthouse", "Apartment", "Townhouse"];
@@ -63,8 +63,8 @@ const transformSanityProperty = (
     prop.status === "offplan"
       ? "Off-Plan"
       : prop.featured
-        ? "Featured"
-        : "For Sale",
+      ? "Featured"
+      : "For Sale",
 });
 
 export default function PropertiesClient({

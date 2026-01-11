@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Navbar } from "../components/layout/Navbar";
-import { Footer } from "../components/layout/Footer";
-import { ContactModal } from "../components/ui/ContactModal";
-import { ContactForm } from "../components/forms/ContactForm";
+import { Navbar } from "../home/layout/Navbar";
+import { Footer } from "../home/layout/Footer";
+import { ContactModal } from "../home/ui/ContactModal";
+import { ContactForm } from "../home/forms/ContactForm";
 import {
   TrendingUp,
   Shield,

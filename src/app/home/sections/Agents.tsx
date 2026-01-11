@@ -5,7 +5,7 @@ import { RevealSection } from "../ui";
 import { AgentCard } from "../cards";
 import { AGENTS } from "../../data";
 import { Agent } from "../../types";
-import { ArrowRight, Play, Star } from "lucide-react";
+import { ArrowRight, Play, Star, Users } from "lucide-react";
 
 export const Agents: React.FC = () => {
   const [mounted, setMounted] = useState(false);
@@ -38,78 +38,67 @@ export const Agents: React.FC = () => {
   }, []);
   return (
     <section className="relative w-full py-24 overflow-hidden font-sans">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            "linear-gradient(135deg, #fdfbf7 0%, #eef2ff 40%, #fdf2f8 100%)",
-        }}
-      />
-
-      <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 z-0">
         <div
-          className="absolute -left-[10%] -top-[10%] w-[50vw] h-[50vw] rounded-full blur-[100px] opacity-40 mix-blend-multiply"
-          style={{ background: "#ddd6fe", transform: "rotate(0deg)" }}
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%)",
+          }}
         />
-        <div
-          className="absolute -right-[5%] top-[10%] w-[50vw] h-[50vw] rounded-full blur-[100px] opacity-40 mix-blend-multiply"
-          style={{ background: "#bae6fd", transform: "rotate(-20deg)" }}
-        />
-        <div
-          className="absolute left-[10%] bottom-[10%] w-[40vw] h-[40vw] rounded-full blur-[100px] opacity-40 mix-blend-multiply"
-          style={{ background: "#fbcfe8" }}
-        />
-        <div
-          className="absolute right-[0%] -bottom-[10%] w-[40vw] h-[40vw] rounded-full blur-[100px] opacity-30 mix-blend-multiply"
-          style={{ background: "#fde68a" }}
-        />
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-xl" />
       </div>
-
-      <div className="absolute inset-0 z-20 bg-white/30 backdrop-blur-[60px]" />
-      <div
-        className="absolute inset-0 z-20 opacity-[0.05] mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      ></div>
 
       <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-12">
         <RevealSection>
           <div className="text-center mb-16 relative">
             {/* Decorative stars */}
-            <div className="absolute left-1/2 -translate-x-1/2 -top-2 flex items-center gap-1">
-              <Star size={8} className="text-[#2EA8FF]/40 fill-current" />
-              <Star size={12} className="text-[#2EA8FF] fill-current" />
-              <Star size={8} className="text-[#2EA8FF]/40 fill-current" />
+            <div className="absolute left-1/2 -translate-x-1/2 -top-8 flex items-center gap-1">
+              <Star size={8} className="text-[#fa93cb]/40 fill-current" />
+              <Star size={12} className="text-[#fa93cb] fill-current" />
+              <Star size={8} className="text-[#fa93cb]/40 fill-current" />
             </div>
-            <div className="absolute left-1/2 -translate-x-1/2 top-4 w-px h-8 bg-gradient-to-b from-[#2EA8FF] to-transparent" />
+            <div className="absolute left-1/2 -translate-x-1/2 top-4 w-px h-8 bg-gradient-to-b from-[#fa93cb] to-transparent" />
 
-            <div className="pt-14">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#2EA8FF]/10 to-purple-500/10 border border-[#2EA8FF]/20 text-[#2EA8FF] text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm">
-                <Star size={12} className="fill-current" />
-                <span>Expert Guidance</span>
-              </div>
-
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
-                Meet Our
-                <br />
-                <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] via-purple-500 to-pink-500">
-                    Elite Agents
-                  </span>
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1">
-                    <div className="w-8 h-0.5 rounded-full bg-[#2EA8FF]" />
-                    <div className="w-2 h-2 rounded-full bg-purple-500" />
-                    <div className="w-8 h-0.5 rounded-full bg-pink-500" />
-                  </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
+              Meet Our
+              <br />
+              <span className="relative inline-block">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-red-500">
+                  Elite Agents
                 </span>
-              </h2>
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 200 10"
+                  fill="none"
+                >
+                  <path
+                    d="M2 8C50 2 150 2 198 8"
+                    stroke="url(#agents-underline)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="agents-underline"
+                      x1="0"
+                      y1="0"
+                      x2="200"
+                      y2="0"
+                    >
+                      <stop stopColor="#EC4899" />
+                      <stop offset="0.5" stopColor="#F43F5E" />
+                      <stop offset="1" stopColor="#EF4444" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+            </h1>
 
-              <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
-                Industry leaders with specialized knowledge in Dubai's most
-                prestigious districts.
-              </p>
-            </div>
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
+              Industry leaders with specialized knowledge in Dubai's most
+              prestigious districts. Your success is our mission.
+            </p>
 
             {/* Side decorative elements */}
             <div className="hidden md:block absolute left-[12%] top-1/2 -translate-y-1/2">

@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Navbar } from "../components/layout/Navbar";
-import { Footer } from "../components/layout/Footer";
-import { AgentCard } from "../components/cards";
-import { ContactModal } from "../components/ui/ContactModal";
+import { Navbar } from "../home/layout/Navbar";
+import { Footer } from "../home/layout/Footer";
+import { AgentCard } from "../home/cards";
+import { ContactModal } from "../home/ui/ContactModal";
 import { AGENTS } from "../data";
 import { Agent } from "../types";
 import {

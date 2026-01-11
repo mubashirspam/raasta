@@ -133,22 +133,6 @@ export const WhoWeSupport: React.FC = () => {
     setTimeout(() => setIsPaused(false), 10000);
   };
 
-  // Scroll mobile selector into view when active persona changes
-  useEffect(() => {
-    if (scrollContainerRef.current) {
-      const activeButton = scrollContainerRef.current.querySelector(
-        `[data-persona-id="${activePersona}"]`
-      );
-      if (activeButton) {
-        activeButton.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-    }
-  }, [activePersona]);
-
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -200, behavior: "smooth" });

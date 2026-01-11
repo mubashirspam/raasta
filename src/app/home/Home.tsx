@@ -72,7 +72,7 @@ export default function Home({
         <WhoWeSupport />
         <RealEstatePrinciples />
         <FeaturedListings sanityProperties={sanityProperties} />
-        <WhyDubai />
+        {/* <WhyDubai /> */}
         <Agents />
         {/* <GallerySection /> */}
         <Testimonial sanityTestimonials={sanityTestimonials} />

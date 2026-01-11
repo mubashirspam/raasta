@@ -1,4 +1,4 @@
-import Home from "./components/Home";
+import Home from "./home/Home";
 import { getTestimonials, getFeaturedProperties } from "@/sanity/lib";
 
 export default async function Page() {
