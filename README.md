@@ -1,101 +1,242 @@
-# Raasta Realty - Real Estate Website
+# Raasta - Real Estate Platform
 
-A modern, futuristic real estate website built with Next.js, featuring glass morphism design and smooth animations.
-
-## Features
-
-- **Glass Morphism Design**: Modern UI with backdrop blur effects and translucent elements
-- **Responsive Layout**: Fully responsive design that works on all devices
-- **Smooth Animations**: Hover effects, transitions, and micro-interactions
-- **Interactive Navigation**: Smooth scrolling between sections with active state tracking
-- **Floating Particles**: Dynamic background animation for visual appeal
-- **Contact Form**: Functional contact form with multiple input types
-- **Social Impact Focus**: Dedicated sections highlighting charitable contributions
-
-## Design Elements
-
-- **Color Scheme**: Blue and purple gradients with glass morphism effects
-- **Typography**: Modern font hierarchy with gradient text effects
-- **Icons**: Lucide React icons throughout the interface
-- **Animations**: Hover states, scale transforms, and smooth transitions
-- **Layout**: Clean, modern sections with proper spacing and visual hierarchy
+A modern real estate platform built with Next.js, Sanity CMS, and Turbo monorepo architecture.
 
 ## Project Structure
 
-```
-src/
-components/
-home.tsx              # Main page component
-hero.tsx              # Hero section with company intro
-story.tsx             # Company story and values
-services.tsx          # Services for agents and investors
-legacy.tsx            # Impact and charity information
-knowledge-hub.tsx     # Resources and tools
-contact.tsx           # Contact form and information
-navigation.tsx        # Header navigation
-floating-particles.tsx # Background animation
-app/
-page.tsx              # Main page
-layout.tsx            # App layout
-```
+This is a monorepo managed with Turbo and pnpm that includes:
+
+- **`apps/web`** - Next.js frontend application
+- **`apps/studio`** - Sanity CMS studio for content management
+- **`packages/sanity`** - Shared Sanity schemas and utilities
+
+## Prerequisites
+
+- Node.js (v18 or higher)
+- pnpm (v9.15.0)
+- Git
 
 ## Getting Started
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+### 1. Install Dependencies
 
-2. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+```bash
+pnpm install
+```
 
-3. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+### 2. Environment Setup
 
-## Sections
+Create environment files as needed for each application:
 
-1. **Hero Section**: Company introduction with key statistics
-2. **Our Story**: Mission, vision, and company values
-3. **Services**: Information for agents, partners, and investors
-4. **Legacy & Impact**: Charitable contributions and social impact
-5. **Knowledge Hub**: Resources, tools, and market insights
-6. **Contact**: Contact form and company information
+```bash
+# For the web app
+cp apps/web/.env.example apps/web/.env.local
 
-## Technologies Used
+# For Sanity studio
+cp apps/studio/.env.example apps/studio/.env.local
+```
 
-- **Next.js 15**: React framework with App Router
-- **TypeScript**: Type-safe development
-- **Tailwind CSS**: Utility-first CSS framework
-- **Lucide React**: Modern icon library
-- **Glass Morphism**: Modern UI design trend
+## Development Commands
 
-## Key Features
+### Start All Applications
 
-- **6% Revenue to Charity**: Highlighting social impact commitment
-- **AED 635,000+ Contributed**: Showcasing charitable contributions
-- **Dubai Real Estate Focus**: Specialized in Dubai property market
-- **Agent & Investor Services**: Dual-focus business model
+```bash
+pnpm dev
+```
+
+Starts both the web app and Sanity studio in development mode.
+
+### Start Individual Applications
+
+**Web App (Next.js):**
+
+```bash
+pnpm dev:web
+# or
+cd apps/web && pnpm dev
+```
+
+- Runs on `http://localhost:3000`
+- Uses Turbopack for faster builds
+
+**Sanity Studio:**
+
+```bash
+pnpm dev:studio
+# or
+cd apps/studio && pnpm dev
+```
+
+- Runs on `http://localhost:3003`
+
+## Build Commands
+
+### Build All Applications
+
+```bash
+pnpm build
+```
+
+Builds all applications in the correct dependency order.
+
+### Build Individual Applications
+
+**Web App:**
+
+```bash
+pnpm build:web
+# or
+cd apps/web && pnpm build
+```
+
+**Sanity Studio:**
+
+```bash
+pnpm build:studio
+# or
+cd apps/studio && pnpm build
+```
+
+## Production
+
+### Start Production Server
+
+```bash
+cd apps/web && pnpm start
+```
+
+Starts the production server after building.
+
+### Deploy Sanity Studio
+
+```bash
+cd apps/studio && pnpm deploy
+```
+
+Deploys the Sanity studio to Sanity's hosting.
+
+## Development Tools
+
+### Linting
+
+```bash
+# Lint all applications
+pnpm lint
+
+# Lint specific application
+cd apps/web && pnpm lint
+cd apps/studio && pnpm lint
+cd packages/sanity && pnpm lint
+```
+
+### Cleaning
+
+```bash
+pnpm clean
+```
+
+Removes all build artifacts and node_modules.
+
+## Package Management
+
+This project uses **pnpm** as the package manager. All commands should use `pnpm` instead of `npm` or `yarn`.
+
+### Common pnpm Commands
+
+```bash
+# Add a dependency to web app
+cd apps/web && pnpm add package-name
+
+# Add a dev dependency
+cd apps/web && pnpm add -D package-name
+
+# Add dependency to root
+pnpm add -D package-name
+
+# Update dependencies
+pnpm update
+
+# Check for outdated packages
+pnpm outdated
+```
+
+## Technology Stack
+
+### Frontend (apps/web)
+
+- **Next.js 16** - React framework
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **GSAP** - Advanced animations
+- **Lucide React** - Icons
+
+### CMS (apps/studio)
+
+- **Sanity** - Headless CMS
+- **React 18** - UI library
+- **Styled Components** - Styling
+
+### Shared (packages/sanity)
+
+- **Sanity** - CMS utilities
+- **Next Sanity** - React integration
+
+### Development Tools
+
+- **Turbo** - Monorepo build system
+- **pnpm** - Package manager
+- **ESLint** - Code linting
+- **TypeScript** - Type checking
+
+## Environment Variables
+
+### Web App (apps/web/.env.local)
+
+```
+NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+NEXT_PUBLIC_SANITY_DATASET=your-dataset
+NEXT_PUBLIC_SANITY_API_VERSION=2023-05-03
+```
+
+### Sanity Studio (apps/studio/.env.local)
+
+```
+SANITY_STUDIO_PROJECT_ID=your-project-id
+SANITY_STUDIO_DATASET=your-dataset
+SANITY_STUDIO_API_VERSION=2023-05-03
+```
 
 ## Deployment
 
-This project can be deployed on:
-- Vercel (recommended)
-- Netlify
-- Any platform supporting Next.js
+### Vercel (Recommended for Web App)
 
-## Contact Information
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
 
-- **Location**: Business Bay, Dubai, UAE
-- **Email**: info@raastarealty.com
-- **Phone**: +971 XX XXX XXXX
+### Sanity Hosting
+
+1. Run `pnpm deploy` in the studio directory
+2. Follow the prompts to deploy to Sanity's hosting
+
+## Useful Links
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Sanity Documentation](https://www.sanity.io/docs)
+- [Turbo Documentation](https://turbo.build/repo/docs)
+- [pnpm Documentation](https://pnpm.io/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
 ## Contributing
 
-This is a custom website for Raasta Realty. For modifications or updates, please contact the development team.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
 
----
+## License
 
-Built with for Raasta Realty - Where every deal changes a life.
-# raasta
+This project is private and proprietary.

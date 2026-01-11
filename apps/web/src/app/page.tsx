@@ -1,0 +1,13 @@
+import Home from "./components/Home";
+import { getTestimonials, getFeaturedProperties } from "@raasta/sanity/lib";
+
+export default async function Page() {
+  const [testimonials, properties] = await Promise.all([
+    getTestimonials(),
+    getFeaturedProperties(),
+  ]);
+
+  return (
+    <Home sanityTestimonials={testimonials} sanityProperties={properties} />
+  );
+}
