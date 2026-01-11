@@ -50,19 +50,19 @@ export const RealEstatePrinciples: React.FC = () => {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, #e0f2fe 0%, #fae8ff 30%, #fef3c7 60%, #d1fae5 100%)",
+            "linear-gradient(135deg, #a6f5faff 0%, #fae8ff 30%, #fef3c7 60%, #d1fae5 100%)",
         }}
       />
 
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[10%] right-[15%] w-[40%] h-[40%] rounded-full bg-gradient-to-bl from-violet-300/30 via-purple-200/20 to-transparent blur-[80px] animate-pulse" />
+        <div className="absolute top-[10%] right-[15%] w-[40%] h-[40%] rounded-full bg-gradient-to-bl from-yellow-300/30 via-green-200/20 to-transparent blur-[80px] animate-pulse" />
         <div
-          className="absolute bottom-[10%] left-[10%] w-[35%] h-[35%] rounded-full bg-gradient-to-tr from-cyan-300/30 via-blue-200/20 to-transparent blur-[80px] animate-pulse"
+          className="absolute bottom-[10%] left-[10%] w-[35%] h-[35%] rounded-full bg-gradient-to-tr from-green-300/30 via-yellow-400/20 to-transparent blur-[80px] animate-pulse"
           style={{ animationDelay: "1s" }}
         />
         <div
-          className="absolute top-[40%] left-[40%] w-[30%] h-[30%] rounded-full bg-gradient-to-r from-amber-200/20 via-orange-200/15 to-transparent blur-[60px] animate-pulse"
+          className="absolute top-[40%] left-[40%] w-[30%] h-[30%] rounded-full bg-gradient-to-r from-green-200/20 via-yellow-400/15 to-transparent blur-[60px] animate-pulse"
           style={{ animationDelay: "2s" }}
         />
       </div>

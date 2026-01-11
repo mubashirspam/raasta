@@ -15,9 +15,9 @@ export const Services: React.FC = () => {
         <div className="absolute inset-0 bg-slate-50"></div>
 
         {/* Animated Gradient Orbs */}
-        <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-r from-green-200/30 via-blue-200/30 to-indigo-200/50 blur-[130px] animate-pulse mix-blend-multiply"></div>
+        <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-r from-green-200/30 via-cyan-500/30 to-indigo-200/50 blur-[130px] animate-pulse mix-blend-multiply"></div>
         <div
-          className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-l from-blue-200/30 via-cyan-200/30 to-sky-200/30 blur-[130px] animate-pulse mix-blend-multiply"
+          className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-l from-yellow-400/30 via-cyan-200/30 to-sky-200/30 blur-[130px] animate-pulse mix-blend-multiply"
           style={{ animationDelay: "1s" }}
         ></div>
         <div className="absolute top-[30%] left-[20%] w-[50%] h-[50%] rounded-full bg-indigo-300/10 blur-[100px] mix-blend-multiply"></div>

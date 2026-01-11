@@ -39,7 +39,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
       return `${baseClasses} top-4 py-3 bg-white/90 backdrop-blur-md border-slate-200/50 shadow-lg shadow-slate-200/10`;
     }
 
-    return `${baseClasses} top-6 py-4 backdrop-blur-md border-white/0`;
+    return `${baseClasses} top-2 py-2 border-white/0`;
   };
 
   const getTextColor = (isActive: boolean) => {
@@ -60,7 +60,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
               <img
                 src="/logo_black.svg"
                 alt="Raasta Realty Logo"
-                className="h-8 md:h-8 rounded-xl"
+                className="h-10 md:h-10 rounded-xl"
               />
             </Link>
           </div>

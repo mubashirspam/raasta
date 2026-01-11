@@ -19,29 +19,29 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+971 4 XXX XXXX",
-    link: "tel:+97140000000",
+    value: "+971 52 936 8338",
+    link: "tel:+971529368338",
     color: "from-blue-500 to-cyan-500",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "info@raastarealty.com",
-    link: "mailto:info@raastarealty.com",
+    value: "Connect@raastarealty.com",
+    link: "mailto:Connect@raastarealty.com",
     color: "from-purple-500 to-pink-500",
   },
   {
     icon: MapPin,
     label: "Office",
-    value: "Downtown Dubai, UAE",
-    link: "https://maps.google.com",
+    value: "1610, 16th Floor, The Prism Tower, Business Bay, Dubai, UAE",
+    link: "https://maps.google.com/?q=The+Prism+Tower+Business+Bay+Dubai",
     color: "from-orange-500 to-red-500",
   },
   {
     icon: Clock,
-    label: "Hours",
-    value: "Sun - Thu: 9AM - 6PM",
-    link: null,
+    label: "Landline",
+    value: "+971 04 576 0345",
+    link: "tel:+97145760345",
     color: "from-emerald-500 to-teal-500",
   },
 ];
@@ -185,7 +185,7 @@ export default function ContactPageContent() {
 
               {/* WhatsApp CTA */}
               <a
-                href="https://wa.me/971000000000"
+                href="https://wa.me/971529368338"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#25D366]/10 to-[#25D366]/5 border border-[#25D366]/30 hover:border-[#25D366]/50 transition-all group"

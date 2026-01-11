@@ -1,175 +1,179 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, X } from "lucide-react";
+import { ArrowRight, MessageCircle, Star } from "lucide-react";
+import Image from "next/image";
+import { GlassContainer } from "../cards/glassmorphism";
 
+const avatars = [
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face",
+];
 
 export const Hero: React.FC = () => {
-  const [rotation, setRotation] = useState(0);
-  const badgeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation((prev) => prev + 1);
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="relative min-h-screen bg-linear-to-r from-[#ffdedc] from 14% via-[#f5c1f5] to-[#7fbdff] to 95%  w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden bg-white">
+      <div className="absolute top-1/4 left-0 w-48 md:w-150 h-48 md:h-96 bg-cyan-500/25 rounded-full blur-3xl -translate-x-1/2" />
+      <div className="absolute top-1/4 right-0 w-48 md:w-150 h-48 md:h-96 bg-cyan-500/25 rounded-full blur-3xl translate-x-1/2" />
 
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+      <div className="absolute top-[-50px] md:top-[-100px] left-0 w-32 md:w-96 h-24 md:h-46 bg-red-500/25 rounded-full blur-2xl md:blur-3xl" />
+      <div className="absolute top-[-50px] md:top-[-100px] left-1/4 w-32 md:w-96 h-24 md:h-46 bg-green-500/25 rounded-full blur-2xl md:blur-3xl -translate-x-1/2" />
+      <div className="absolute top-[-50px] md:top-[-100px] left-1/2 w-32 md:w-96 h-24 md:h-46 bg-yellow-500/25 rounded-full blur-2xl md:blur-3xl -translate-x-1/2" />
+      <div className="absolute top-[-50px] md:top-[-100px] left-3/4 w-32 md:w-96 h-24 md:h-46 bg-purple-500/25 rounded-full blur-2xl md:blur-3xl -translate-x-1/2" />
+      <div className="absolute top-[-50px] md:top-[-100px] right-0 w-32 md:w-96 h-24 md:h-46 bg-blue-500/25 rounded-full blur-2xl md:blur-3xl translate-x-0" />
+
+      {/* RERA Licensed Badge - Bottom Right */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.8, duration: 0.5 }}
+        className="absolute bottom-4 right-4 md:bottom-8 md:right-8 z-20 flex flex-col items-center gap-2 px-3 md:px-4 py-2.5 md:py-3 bg-white/60 rounded-full"
       >
-        <source
-          src="https://www.canva.com/design/DAG-F9sqUbI/43ZWGMNmhM9ZW_fIh5pLng/edit?ui=eyJBIjp7IkEiOiJkb3dubG9hZF9wbmciLCJGIjp0cnVlfX0"
-          type="video/mp4"
-        />
-      </video>
+        <div className="flex items-center gap-2 md:gap-3">
+          <div className="w-10 h-10 md:w-14 md:h-14 relative">
+            <Image
+              src="/hero/dld.svg"
+              alt="DLD"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <div className="w-10 h-10 md:w-14 md:h-14 relative">
+            <Image
+              src="/hero/rera.svg"
+              alt="RERA"
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
+        <span className="text-[9px] md:text-[10px] text-slate-600 font-medium text-center leading-tight">
+          RERA Licensed Real Estate Company
+        </span>
+      </motion.div>
 
-      {/* Overlay for better text readability */}
-
-      {/* Main Content Container */}
-      <div className="relative  z-10 container mx-auto px-6 md:px-12 lg:px-20 min-h-screen flex flex-col justify-between py-8 pt-24">
-        {/* Main Hero Content */}
-        <div className="flex-1 flex flex-col justify-center">
-          {/* First Line - YOUR RELIABLE */}
-          <div className="flex items-center gap-4 md:gap-8 mb-2 md:mb-4">
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl sm:text-6xl md:text-8xl lg:text-[120px] xl:text-[160px] font-black text-slate-800 leading-[0.9] tracking-tighter"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              YOUR
-            </motion.h1>
-
-            {/* Rotating Badge */}
+      <div className="relative z-10 h-full flex flex-col justify-between pt-20 md:pt-24 pb-0">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center max-w-4xl mx-auto px-6">
+            {/* Rating with Avatars */}
             <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              ref={badgeRef}
-              className="relative w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 flex-shrink-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center justify-center gap-3 mb-6"
             >
-              {/* Rotating text circle */}
-              <svg
-                className="w-full h-full"
-                viewBox="0 0 100 100"
-                style={{ transform: `rotate(${rotation}deg)` }}
-              >
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                  />
-                </defs>
-                <text className="text-[9px] uppercase tracking-[0.3em] fill-white font-medium">
-                  <textPath href="#circlePath">
-                    • SEE PROPERTIES • SEE PROPERTIES • SEE PROPERTIES
-                  </textPath>
-                </text>
-              </svg>
-              {/* Center arrow */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full border-2 border-white flex items-center justify-center">
-                  <ArrowDownRight className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
+              <div className="flex -space-x-2">
+                {avatars.map((avatar, i) => (
+                  <div
+                    key={i}
+                    className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white overflow-hidden shadow-md"
+                  >
+                    <Image
+                      src={avatar}
+                      alt={`Customer ${i + 1}`}
+                      width={40}
+                      height={40}
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-white backdrop-blur-sm rounded-full">
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-3.5 h-3.5 md:w-4 md:h-4 text-amber-400 fill-amber-400"
+                    />
+                  ))}
                 </div>
+                <span className="text-xs md:text-sm text-slate-700 font-semibold">
+                  500+ Reviews
+                </span>
               </div>
             </motion.div>
-          </div>
 
-          {/* Second Line - REAL ESTATE */}
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-[100px] xl:text-[120px] uppercase font-black text-slate-800 leading-[0.9] tracking-tighter"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            <span className="text-[#f466d3] lg:text-[140px] ">RELIABLE</span>{" "}
-            REAL ESTATE PARTNER IN DUBAI
-          </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight tracking-tight"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              Your{" "}
+              <span className="relative inline-block">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500 animate-gradient-x">
+                  Reliable
+                </span>
+                <svg
+                  className="absolute -bottom-1 md:-bottom-2 left-0 w-full"
+                  viewBox="0 0 200 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 6C50 2 150 2 198 6"
+                    stroke="url(#hero-underline)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="hero-underline"
+                      x1="0"
+                      y1="0"
+                      x2="200"
+                      y2="0"
+                    >
+                      <stop stopColor="#06B6D4" />
+                      <stop offset="0.5" stopColor="#3B82F6" />
+                      <stop offset="1" stopColor="#06B6D4" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>{" "}
+              Real Estate
+              <br />
+              Partner in Dubai
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <a
+                href="https://wa.me/971529368338"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 px-7 py-3.5 text-white font-medium bg-gradient-to-r from-[#2EA8FF] to-cyan-500 text-white  hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 rounded-full"
+              >
+                <MessageCircle size={20} className="text-white" />
+                <span>Chat with us now</span>
+              </a>
+            </motion.div>
+          </div>
         </div>
-
-        {/* Bottom Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pb-8"
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="w-full"
         >
-          {/* Left - Description & CTA */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-6 max-w-2xl">
-            <p className="text-white/80 text-sm md:text-base max-w-xs leading-relaxed">
-              We transform your property dreams into reality — from finding your
-              perfect home to smart investments — creating wealth that lasts
-              generations.
-            </p>
-
-            <Link
-              href="https://wa.me/971000000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-white/90 hover:scale-105 transition-all duration-300 whitespace-nowrap"
-            >
-              <span className="uppercase tracking-wide text-sm">
-                Let&apos;s Talk
-              </span>
-              <X
-                size={18}
-                strokeWidth={3}
-                className="group-hover:rotate-90 transition-transform duration-300"
-              />
-            </Link>
-          </div>
-
-          {/* Right - Social Links */}
-          <div className="flex flex-col gap-2 text-right">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-white hover:text-white/80 transition-colors"
-            >
-              <span className="text-sm font-medium">Facebook</span>
-              <ArrowUpRight
-                size={16}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-white hover:text-white/80 transition-colors"
-            >
-              <span className="text-sm font-medium">LinkedIn</span>
-              <ArrowUpRight
-                size={16}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-white hover:text-white/80 transition-colors"
-            >
-              <span className="text-sm font-medium">Instagram</span>
-              <ArrowUpRight
-                size={16}
-                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              />
-            </a>
+          <div className="container mx-auto px-4 md:px-12 lg:px-20 max-w-7xl">
+            <Image
+              src="/hero/hero1.png"
+              alt="Dubai Skyline"
+              width={1400}
+              height={600}
+              className="w-full h-[300px] sm:h-[500px] md:h-auto object-cover md:object-contain"
+              priority
+            />
           </div>
         </motion.div>
       </div>
