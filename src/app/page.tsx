@@ -1,13 +1,26 @@
 import Home from "./home/Home";
-import { getTestimonials, getFeaturedProperties } from "@/sanity/lib";
+import {
+  getTestimonials,
+  getFeaturedProperties,
+  getDevelopers,
+  getGalleryVideos,
+} from "@/sanity/lib";
 
 export default async function Page() {
-  const [testimonials, properties] = await Promise.all([
-    getTestimonials(),
-    getFeaturedProperties(),
-  ]);
+  const [testimonials, properties, developers, galleryVideos] =
+    await Promise.all([
+      getTestimonials(),
+      getFeaturedProperties(),
+      getDevelopers(),
+      getGalleryVideos(),
+    ]);
 
   return (
-    <Home sanityTestimonials={testimonials} sanityProperties={properties} />
+    <Home
+      sanityTestimonials={testimonials}
+      sanityProperties={properties}
+      sanityDevelopers={developers}
+      sanityGalleryVideos={galleryVideos}
+    />
   );
 }

@@ -245,3 +245,46 @@ export async function getFeaturedTestimonials() {
     return [];
   }
 }
+
+export async function getDevelopers() {
+  const query = `*[_type == "developer" && active == true] | order(order asc) {
+    _id,
+    name,
+    logo {
+      asset -> {
+        url
+      }
+    },
+    order
+  }`;
+
+  try {
+    const developers = await client.fetch(query);
+    return developers;
+  } catch (error) {
+    console.error("Error fetching developers from Sanity:", error);
+    return [];
+  }
+}
+
+export async function getGalleryVideos() {
+  const query = `*[_type == "galleryItem" && mediaType == "video"] | order(order asc) {
+    _id,
+    title,
+    video {
+      asset -> {
+        url
+      }
+    },
+    likes,
+    order
+  }`;
+
+  try {
+    const videos = await client.fetch(query);
+    return videos;
+  } catch (error) {
+    console.error("Error fetching gallery videos from Sanity:", error);
+    return [];
+  }
+}

@@ -3,25 +3,34 @@
 import React from "react";
 import Image from "next/image";
 
-const companyLogos = [
+interface Developer {
+  _id: string;
+  name: string;
+  logo: {
+    asset: {
+      url: string;
+    };
+  };
+  order: number;
+}
+
+interface MarqueeProps {
+  developers?: Developer[];
+}
+
+const fallbackLogos = [
   { name: "Emaar", src: "/companies-logo/emaar.png" },
-  { name: "Damac", src: "/companies-logo/damac.png" },
-  { name: "Nakheel", src: "/companies-logo/nakheel.png" },
-  { name: "Sobha", src: "/companies-logo/sobha.png" },
-  { name: "Azizi", src: "/companies-logo/azizi.png" },
-  { name: "Danube", src: "/companies-logo/danube.png" },
-  // { name: "Ellington", src: "/companies-logo/ellington.png" },
-  { name: "Omniyat", src: "/companies-logo/omniyat.png" },
-  { name: "Samana", src: "/companies-logo/samana.png" },
-  // { name: "Aldar", src: "/companies-logo/aldar.png" },
-  { name: "Deyaar", src: "/companies-logo/deyaar.png" },
-  // { name: "Nshama", src: "/companies-logo/nshama.png" },
-  { name: "Tiger", src: "/companies-logo/tiger.png" },
-  // { name: "Dar Global", src: "/companies-logo/darglobal.png" },
-  { name: "Majid Al Futtaim", src: "/companies-logo/majidalfuttaim.png" },
 ];
 
-export const Marquee: React.FC = () => {
+export const Marquee: React.FC<MarqueeProps> = ({ developers }) => {
+  const logos =
+    developers && developers.length > 0
+      ? developers.map((dev) => ({
+          name: dev.name,
+          src: dev.logo.asset.url,
+        }))
+      : fallbackLogos;
+
   return (
     <div
       className="py-6 -rotate-1 overflow-hidden border-y-2 border-black relative z-50"
@@ -33,7 +42,7 @@ export const Marquee: React.FC = () => {
       <div className="flex whitespace-nowrap animate-marquee">
         {/* First set */}
         <div className="flex gap-12 items-center">
-          {companyLogos.map((company, idx) => (
+          {logos.map((company, idx) => (
             <div
               key={idx}
               className="flex-shrink-0 h-10 flex items-center justify-center"
@@ -51,7 +60,7 @@ export const Marquee: React.FC = () => {
         </div>
         {/* Duplicate for seamless loop */}
         <div className="flex gap-12 items-center ml-12">
-          {companyLogos.map((company, idx) => (
+          {logos.map((company, idx) => (
             <div
               key={`dup-${idx}`}
               className="flex-shrink-0 h-10 flex items-center justify-center"

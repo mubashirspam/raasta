@@ -40,6 +40,7 @@ export const galleryItem = defineType({
         accept: "video/*",
       },
       hidden: ({ parent }) => parent?.mediaType !== "video",
+      description: "Upload a single video file",
     }),
     defineField({
       name: "likes",

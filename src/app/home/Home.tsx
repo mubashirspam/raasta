@@ -6,7 +6,7 @@ import { ContactModal, OffersPopup } from "./ui";
 import {
   Hero,
   FeaturedListings,
-  // VideoShowcase,
+  GallerySection,
   Services,
   WhoWeSupport,
   RealEstatePrinciples,
@@ -15,8 +15,6 @@ import {
   Testimonial,
   FooterCTA,
   Marquee,
-  // GallerySection,
-  VideoShowcase,
   ContactSection,
 } from "./sections";
 
@@ -46,14 +44,33 @@ interface SanityProperty {
   mainImage?: { asset: { url: string } };
 }
 
+interface SanityDeveloper {
+  _id: string;
+  name: string;
+  logo: { asset: { url: string } };
+  order: number;
+}
+
+interface SanityGalleryVideo {
+  _id: string;
+  title: string;
+  video: { asset: { url: string } };
+  likes?: string;
+  order: number;
+}
+
 interface HomeProps {
   sanityTestimonials?: SanityTestimonial[];
   sanityProperties?: SanityProperty[];
+  sanityDevelopers?: SanityDeveloper[];
+  sanityGalleryVideos?: SanityGalleryVideo[];
 }
 
 export default function Home({
   sanityTestimonials,
   sanityProperties,
+  sanityDevelopers,
+  sanityGalleryVideos,
 }: HomeProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -68,13 +85,13 @@ export default function Home({
       <main className="relative z-10">
         <Hero />
         <Services />
-        <Marquee />
+        <Marquee developers={sanityDevelopers} />
         <WhoWeSupport />
         <RealEstatePrinciples />
         <FeaturedListings sanityProperties={sanityProperties} />
         {/* <WhyDubai /> */}
         <Agents />
-        {/* <GallerySection /> */}
+        <GallerySection videos={sanityGalleryVideos} />
         <Testimonial sanityTestimonials={sanityTestimonials} />
         <FooterCTA onContact={() => setIsModalOpen(true)} />
         <ContactSection />
