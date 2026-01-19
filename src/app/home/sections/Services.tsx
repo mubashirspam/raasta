@@ -8,13 +8,10 @@ import { SERVICES } from "../../data";
 
 export const Services: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-slate-50 py-24 px-6 md:px-12 lg:px-20">
-      {/* --- Dynamic Background --- */}
+    <section className="relative overflow-hidden bg-slate-50 py-15 px-6 md:px-12 lg:px-20">
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
-        {/* Deep ambient background */}
         <div className="absolute inset-0 bg-slate-50"></div>
 
-        {/* Animated Gradient Orbs */}
         <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-r from-green-200/30 via-cyan-500/30 to-indigo-200/50 blur-[130px] animate-pulse mix-blend-multiply"></div>
         <div
           className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-l from-yellow-400/30 via-cyan-200/30 to-sky-200/30 blur-[130px] animate-pulse mix-blend-multiply"
@@ -22,7 +19,6 @@ export const Services: React.FC = () => {
         ></div>
         <div className="absolute top-[30%] left-[20%] w-[50%] h-[50%] rounded-full bg-indigo-300/10 blur-[100px] mix-blend-multiply"></div>
 
-        {/* Architectural Grid Pattern */}
         <div
           className="absolute inset-0"
           style={{
@@ -33,7 +29,6 @@ export const Services: React.FC = () => {
           }}
         ></div>
 
-        {/* Noise Texture for Premium Paper Feel */}
         <div
           className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
           style={{
@@ -42,26 +37,17 @@ export const Services: React.FC = () => {
         ></div>
       </div>
 
-      {/* --- Main Content --- */}
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
         <RevealSection>
           <div className="text-center mb-20 relative">
-            {/* Decorative diamond */}
             <div className="absolute left-1/2 -translate-x-1/2 -top-2">
               <div className="w-3 h-3 rotate-45 bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-500/30" />
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 top-3 w-px h-10 bg-gradient-to-b from-indigo-500 to-transparent" />
 
-            <div className="pt-16">
-              <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 text-indigo-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
-                Premium Real Estate
-              </span>
-
+            <div className="pt-10">
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.1]">
-                Raasta
-                <br />
+                Raasta{" "}
                 <span className="relative inline-block pb-3">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] via-purple-500 to-pink-500">
                     Services
@@ -102,7 +88,6 @@ export const Services: React.FC = () => {
               </p>
             </div>
 
-            {/* Side decorative lines */}
             <div className="hidden md:block absolute left-[10%] top-1/2 -translate-y-1/2">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-px bg-indigo-300" />
@@ -118,7 +103,6 @@ export const Services: React.FC = () => {
           </div>
         </RevealSection>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES.map((service, idx) => (
             <RevealSection key={service.id} delay={idx * 100}>
@@ -127,7 +111,6 @@ export const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <RevealSection delay={600}>
           <div className="mt-20 text-center">
             <button className="relative px-8 py-4 bg-slate-900 text-white rounded-full font-semibold shadow-2xl shadow-slate-900/30 overflow-hidden group">

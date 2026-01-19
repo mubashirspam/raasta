@@ -288,3 +288,74 @@ export async function getGalleryVideos() {
     return [];
   }
 }
+
+export async function getTeamMembers(section?: string) {
+  const sectionFilter = section ? ` && section == "${section}"` : "";
+  const query = `*[_type == "teamMember"${sectionFilter}] | order(order asc) {
+    _id,
+    name,
+    slug,
+    role,
+    section,
+    bio,
+    phone,
+    email,
+    whatsapp,
+    languages,
+    specializations,
+    featured,
+    order,
+    image {
+      asset -> {
+        url
+      }
+    }
+  }`;
+
+  try {
+    const members = await client.fetch(query);
+    return members;
+  } catch (error) {
+    console.error("Error fetching team members from Sanity:", error);
+    return [];
+  }
+}
+
+export async function getTeamMembersBySection() {
+  const query = `{
+    "founders": *[_type == "teamMember" && section == "founders"] | order(order asc) {
+      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      image { asset -> { url } }
+    },
+    "management": *[_type == "teamMember" && section == "management"] | order(order asc) {
+      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      image { asset -> { url } }
+    },
+    "media": *[_type == "teamMember" && section == "media"] | order(order asc) {
+      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      image { asset -> { url } }
+    },
+    "elite_agents": *[_type == "teamMember" && section == "elite_agents"] | order(order asc) {
+      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      image { asset -> { url } }
+    },
+    "sales": *[_type == "teamMember" && section == "sales"] | order(order asc) {
+      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      image { asset -> { url } }
+    }
+  }`;
+
+  try {
+    const members = await client.fetch(query);
+    return members;
+  } catch (error) {
+    console.error("Error fetching team members by section from Sanity:", error);
+    return {
+      founders: [],
+      management: [],
+      media: [],
+      elite_agents: [],
+      sales: [],
+    };
+  }
+}

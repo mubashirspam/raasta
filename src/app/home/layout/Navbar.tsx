@@ -9,7 +9,7 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "Invest", href: "/invest" },
   { label: "Career", href: "/career" },
-  { label: "Agents", href: "/agents" },
+  { label: "About", href: "/about" },
   { label: "Properties", href: "/properties" },
 ];
 
@@ -33,7 +33,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
 
   const getNavbarClasses = () => {
     const baseClasses =
-      "fixed left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-7xl rounded-full transition-all duration-300 border px-6 md:px-10";
+      "fixed left-1/2 -translate-x-1/2 w-[calc(100%-24px)] max-w-[1400px] rounded-full transition-all duration-300 border px-4 md:px-3";
 
     if (isScrolled) {
       return `${baseClasses} top-4 py-3 bg-white/90 backdrop-blur-md border-slate-200/50 shadow-lg shadow-slate-200/10`;
@@ -43,19 +43,22 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
   };
 
   const getTextColor = (isActive: boolean) => {
-    return isActive ? "text-[#2EA8FF]" : "text-slate-600 hover:text-[#2EA8FF]";
+    return isActive
+      ? "text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 font-bold"
+      : "text-slate-600 hover:text-teal-500";
   };
 
-  const getUnderlineColor = () => "bg-[#2EA8FF]";
+  const getUnderlineColor = () =>
+    "bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500";
 
   return (
     <>
       <nav
-        className={`fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${getNavbarClasses()}`}
+        className={`fixed z-50 transition-all duration-500 ease-in-out ${getNavbarClasses()}`}
       >
         <div className="flex items-center justify-between w-full relative">
-          {/* --- Branding --- */}
-          <div className="flex items-center gap-2.5 z-50 relative shrink-0">
+          {/* --- Left Side: Logo Only --- */}
+          <div className="flex items-center z-50 relative shrink-0">
             <Link href="/">
               <img
                 src="/logo_black.svg"
@@ -65,34 +68,34 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
             </Link>
           </div>
 
-          {/* --- Desktop Links (Centered) --- */}
-          <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`text-sm font-medium transition-colors relative group ${getTextColor(
-                    isActive
-                  )}`}
-                >
-                  {item.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-0.5 ${getUnderlineColor()} transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
-                </Link>
-              );
-            })}
-          </div>
+          {/* --- Right Side: Links + Contact Button --- */}
+          <div className="flex items-center gap-8">
+            {/* Desktop Links */}
+            <div className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`text-sm font-medium transition-colors relative group ${getTextColor(
+                      isActive
+                    )}`}
+                  >
+                    {item.label}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-0.5 ${getUnderlineColor()} transition-all duration-300 ${
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
+            </div>
 
-          {/* --- Right Side (Contact + Mobile Toggle) --- */}
-          <div className="flex items-center gap-4">
             {/* Contact Button */}
             <Link href="/contact" className="hidden md:block">
-              <span className="inline-flex h-10 items-center px-6 rounded-full font-medium text-base bg-gradient-to-r from-[#2EA8FF] to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all hover:scale-[1.02]">
+              <span className="inline-flex h-10 items-center px-6 rounded-full font-medium text-base bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-xl hover:shadow-cyan-500/30 transition-all hover:scale-[1.02]">
                 Contact Us
               </span>
             </Link>
@@ -125,8 +128,8 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
               onClick={() => setIsMobileOpen(false)}
               className={`text-4xl font-bold transition-colors tracking-tight ${
                 isActive
-                  ? "text-[#2EA8FF]"
-                  : "text-slate-900 hover:text-[#2EA8FF]"
+                  ? "text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500"
+                  : "text-slate-900 hover:text-teal-500"
               }`}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
@@ -137,7 +140,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
         <Link
           href="/contact"
           onClick={() => setIsMobileOpen(false)}
-          className="mt-8 px-10 py-4 rounded-full bg-[#2EA8FF] text-white text-lg font-bold shadow-xl shadow-blue-500/30 transform transition-transform active:scale-95"
+          className="mt-8 px-10 py-4 rounded-full bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white text-lg font-bold shadow-xl shadow-cyan-500/30 transform transition-transform active:scale-95"
         >
           Contact Us
         </Link>

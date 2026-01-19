@@ -144,24 +144,15 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
         <RevealSection>
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
-              <span className="flex items-center gap-2 py-1.5 px-4 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-amber-700 text-xs font-bold tracking-widest uppercase shadow-sm">
-                <svg
-                  className="w-3 h-3"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                </svg>
-                Premium Portfolio
-              </span>
+              
             </div>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-              Exclusive
-              <br />
+              Hot{" "}
+              
               <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500">
-                  Listings
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-500 via-orange-500 to-rose-500">
+                  Offers
                 </span>
                 <svg
                   className="absolute -bottom-2 left-0 w-full"

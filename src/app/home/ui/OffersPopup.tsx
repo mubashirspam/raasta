@@ -128,7 +128,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
             {/* Close Button */}
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              className="absolute top-4 right-4 z-20 w-10 h-10 bg-slate-100/80 hover:bg-slate-200 text-slate-800 rounded-full flex items-center justify-center shadow-sm transition-colors"
               aria-label="Close popup"
             >
               <X size={20} />
@@ -188,8 +188,8 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                       key={idx}
                       className="flex items-center gap-4 p-4 bg-black/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-colors group"
                     >
-                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-900/5 group-hover:scale-110 transition-transform">
-                        <offer.icon className="w-6 h-6 text-[#2EA8FF]" />
+                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-teal-900/5 group-hover:scale-110 transition-transform">
+                        <offer.icon className="w-6 h-6 text-teal-600" />
                       </div>
                       <div>
                         <h4 className="text-white font-bold mb-0.5 text-lg">
@@ -271,7 +271,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all text-sm sm:text-base"
+                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm sm:text-base"
                       />
                     </div>
 
@@ -290,7 +290,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full pl-16 sm:pl-20 pr-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all text-sm sm:text-base"
+                        className="w-full pl-16 sm:pl-20 pr-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm sm:text-base"
                       />
                     </div>
 
@@ -303,7 +303,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all text-sm sm:text-base"
+                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm sm:text-base"
                       />
                     </div>
 
@@ -314,7 +314,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         value={formData.budget}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 appearance-none focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:border-[#2EA8FF] transition-all cursor-pointer text-sm sm:text-base"
+                        className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all cursor-pointer text-sm sm:text-base"
                       >
                         {budgetOptions.map((opt, idx) => (
                           <option
@@ -336,7 +336,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-3.5 sm:py-4 bg-gradient-to-r from-[#2EA8FF] to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 disabled:opacity-70 text-sm sm:text-base"
+                      className="w-full py-3.5 sm:py-4 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white font-bold rounded-xl transition-all shadow-lg shadow-teal-500/25 flex items-center justify-center gap-2 disabled:opacity-70 text-sm sm:text-base"
                     >
                       {isSubmitting ? (
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -351,7 +351,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                     {/* Terms */}
                     <p className="text-center text-[10px] sm:text-xs text-slate-500">
                       By signing up, you agree to our{" "}
-                      <a href="#" className="text-[#2EA8FF] hover:underline">
+                      <a href="#" className="text-teal-600 hover:underline">
                         Terms & Conditions
                       </a>{" "}
                       and consent to receive updates.

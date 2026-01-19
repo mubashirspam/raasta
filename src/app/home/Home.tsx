@@ -11,9 +11,8 @@ import {
   WhoWeSupport,
   RealEstatePrinciples,
   WhyDubai,
-  Agents,
+  AboutSection,
   Testimonial,
-  FooterCTA,
   Marquee,
   ContactSection,
 } from "./sections";
@@ -90,10 +89,10 @@ export default function Home({
         <RealEstatePrinciples />
         <FeaturedListings sanityProperties={sanityProperties} />
         {/* <WhyDubai /> */}
-        <Agents />
+        <AboutSection />
         <GallerySection videos={sanityGalleryVideos} />
         <Testimonial sanityTestimonials={sanityTestimonials} />
-        <FooterCTA onContact={() => setIsModalOpen(true)} />
+
         <ContactSection />
       </main>
 

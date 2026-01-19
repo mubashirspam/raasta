@@ -38,7 +38,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             </label>
             <input
               type="text"
-              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#2EA8FF] focus:ring-2 focus:ring-[#2EA8FF]/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all"
               placeholder="John Doe"
             />
           </div>
@@ -48,7 +48,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             </label>
             <input
               type="tel"
-              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#2EA8FF] focus:ring-2 focus:ring-[#2EA8FF]/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all"
               placeholder="+971 50..."
             />
           </div>
@@ -58,14 +58,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             </label>
             <input
               type="email"
-              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-[#2EA8FF] focus:ring-2 focus:ring-[#2EA8FF]/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all"
               placeholder="john@example.com"
             />
           </div>
 
           <button
             type="button"
-            className="w-full py-4 bg-[#2EA8FF] text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 hover:scale-[1.02] transition-all"
+            className="w-full py-4 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white rounded-xl font-bold shadow-lg shadow-teal-500/30 hover:shadow-teal-500/40 hover:scale-[1.02] transition-all"
           >
             Submit Request
           </button>

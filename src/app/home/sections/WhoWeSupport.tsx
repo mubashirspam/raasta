@@ -205,10 +205,7 @@ export const WhoWeSupport: React.FC = () => {
 
             <div className="pt-6 sm:pt-10">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#2EA8FF]/10 via-violet-500/10 to-rose-500/10 border border-[#2EA8FF]/20 text-[#2EA8FF] text-[10px] sm:text-xs font-bold tracking-widest uppercase mb-4 sm:mb-8 shadow-md backdrop-blur-sm">
-                <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#2EA8FF] animate-pulse" />
-                <span>Tailored For Every Journey</span>
-              </div>
+             
 
               {/* Main Title with Decorative SVG */}
               <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 sm:mb-6 leading-[1.1]">
