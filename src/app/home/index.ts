@@ -13,7 +13,5 @@ export {
   FeaturedListings,
   Services,
   WhyDubai,
-  Agents,
   Testimonial,
-  FooterCTA,
 } from "./sections";

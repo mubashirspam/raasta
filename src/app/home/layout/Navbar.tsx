@@ -7,9 +7,8 @@ import { Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Invest", href: "/invest" },
+  { label: "About Us", href: "/about" },
   { label: "Career", href: "/career" },
-  { label: "About", href: "/about" },
   { label: "Properties", href: "/properties" },
 ];
 
@@ -79,7 +78,7 @@ export const Navbar = ({ onContact = () => {} }: NavbarProps) => {
                     key={item.label}
                     href={item.href}
                     className={`text-sm font-medium transition-colors relative group ${getTextColor(
-                      isActive
+                      isActive,
                     )}`}
                   >
                     {item.label}

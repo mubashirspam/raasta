@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { MoveRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { RevealSection } from "../ui";
 import { ListingCard } from "../cards";
 import { PROPERTIES } from "../../data";
 import { Property } from "../../types";
 
-const AUTO_SLIDE_INTERVAL = 4000;
+const AUTO_SLIDE_INTERVAL = 5000;
 
 interface SanityProperty {
   _id: string;
@@ -53,40 +53,78 @@ const transformSanityProperty = (prop: SanityProperty): Property => ({
 export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
   sanityProperties,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [direction, setDirection] = useState(0);
 
   const properties = sanityProperties
     ? sanityProperties.map(transformSanityProperty)
-    : PROPERTIES.slice(0, 6);
+    : PROPERTIES.slice(0, 12);
 
-  const totalSlides = properties.length;
+  const totalItems = properties.length;
 
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % totalSlides);
-  }, [totalSlides]);
+  // Update items per page based on screen size
+  useEffect(() => {
+    const getItemsPerPage = () => {
+      if (typeof window === "undefined") return 3;
+      if (window.innerWidth < 768) return 1; // Mobile: 1 card
+      return 3; // Desktop: 3 cards
+    };
+    const handleResize = () => {
+      setItemsPerPage(getItemsPerPage());
+      setCurrentPage(0); // Reset to first page on resize
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-  }, [totalSlides]);
+  // Calculate total pages
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
+  // Get current page items
+  const getCurrentPageItems = () => {
+    const startIndex = currentPage * itemsPerPage;
+    return properties.slice(startIndex, startIndex + itemsPerPage);
   };
 
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(nextSlide, AUTO_SLIDE_INTERVAL);
-    return () => clearInterval(interval);
-  }, [isPaused, nextSlide]);
+  const nextPage = useCallback(() => {
+    setDirection(1);
+    setCurrentPage((prev) => (prev >= totalPages - 1 ? 0 : prev + 1));
+  }, [totalPages]);
 
-  const getVisibleProperties = () => {
-    const visible = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % totalSlides;
-      visible.push({ ...properties[index], displayIndex: i });
-    }
-    return visible;
+  const prevPage = useCallback(() => {
+    setDirection(-1);
+    setCurrentPage((prev) => (prev <= 0 ? totalPages - 1 : prev - 1));
+  }, [totalPages]);
+
+  const goToPage = (pageIndex: number) => {
+    setDirection(pageIndex > currentPage ? 1 : -1);
+    setCurrentPage(pageIndex);
+  };
+
+  // Auto-scroll
+  useEffect(() => {
+    if (isPaused || totalPages <= 1) return;
+    const interval = setInterval(nextPage, AUTO_SLIDE_INTERVAL);
+    return () => clearInterval(interval);
+  }, [isPaused, nextPage, totalPages]);
+
+  // Animation variants for page transitions
+  const pageVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? "100%" : "-100%",
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? "-100%" : "100%",
+      opacity: 0,
+    }),
   };
 
   return (
@@ -139,17 +177,12 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
       {/* 3. Top Layer: Glassmorphism Overlay */}
       <div className="absolute inset-0 z-20 bg-white/50 backdrop-blur-xl pointer-events-none" />
 
-      <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-12 py-24">
+      <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-12 py-5">
         {/* Header Area */}
         <RevealSection>
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-6">
-              
-            </div>
-
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
               Hot{" "}
-              
               <span className="relative inline-block">
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-500 via-orange-500 to-rose-500">
                   Offers
@@ -189,70 +222,65 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
         </RevealSection>
 
         {/* Carousel Container */}
-        <div
-          className="relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:bg-white hover:scale-110 transition-all duration-300"
-            aria-label="Previous slide"
+        <RevealSection>
+          <div
+            className="relative"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            <ChevronLeft size={24} />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg flex items-center justify-center text-slate-700 hover:bg-white hover:scale-110 transition-all duration-300"
-            aria-label="Next slide"
-          >
-            <ChevronRight size={24} />
-          </button>
-
-          {/* Carousel Track */}
-          <div className="overflow-hidden px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <AnimatePresence mode="popLayout">
-                {getVisibleProperties().map((prop) => (
-                  <motion.div
-                    key={`${prop.id}-${prop.displayIndex}-${currentIndex}`}
-                    initial={{ opacity: 0, x: 100 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -100 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                  >
-                    <Link
-                      href={
-                        sanityProperties
-                          ? `/properties/${(prop as Property & { slug?: { current: string } }).slug?.current || prop.id}`
-                          : `/properties/${prop.id}`
-                      }
-                    >
-                      <ListingCard data={prop} />
-                    </Link>
-                  </motion.div>
-                ))}
+            {/* Carousel Track - Page-based */}
+            <div className="overflow-hidden">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentPage}
+                  custom={direction}
+                  variants={pageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.2 },
+                  }}
+                  className={`grid gap-6 ${
+                    itemsPerPage === 1 ? "grid-cols-1 px-4" : "grid-cols-3"
+                  }`}
+                >
+                  {getCurrentPageItems().map((prop) => (
+                    <div key={prop.id} className="w-full">
+                      <Link
+                        href={
+                          sanityProperties
+                            ? `/properties/${(prop as Property & { slug?: { current: string } }).slug?.current || prop.id}`
+                            : `/properties/${prop.id}`
+                        }
+                        className="block h-full"
+                      >
+                        <ListingCard data={prop} />
+                      </Link>
+                    </div>
+                  ))}
+                </motion.div>
               </AnimatePresence>
             </div>
-          </div>
 
-          {/* Pagination Dots */}
-          <div className="flex justify-center gap-2 mt-8">
-            {properties.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "bg-gradient-to-r from-amber-500 to-orange-500 w-8"
-                    : "bg-slate-300 hover:bg-slate-400"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+            {/* Dot Indicators Only */}
+            <div className="flex items-center justify-center gap-3 mt-10">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToPage(index)}
+                  className={`h-3 rounded-full transition-all duration-300 ${
+                    index === currentPage
+                      ? "w-10 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-lg"
+                      : "w-3 bg-slate-300 hover:bg-slate-400"
+                  }`}
+                  aria-label={`Go to page ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        </RevealSection>
 
         {/* View All Button */}
         <RevealSection delay={600}>

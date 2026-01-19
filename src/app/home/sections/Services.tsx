@@ -39,13 +39,13 @@ export const Services: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <RevealSection>
-          <div className="text-center mb-20 relative">
+          <div className="text-center mb-10 relative">
             <div className="absolute left-1/2 -translate-x-1/2 -top-2">
               <div className="w-3 h-3 rotate-45 bg-gradient-to-br from-indigo-500 to-purple-500 shadow-lg shadow-indigo-500/30" />
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 top-3 w-px h-10 bg-gradient-to-b from-indigo-500 to-transparent" />
 
-            <div className="pt-10">
+            <div className="">
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.1]">
                 Raasta{" "}
                 <span className="relative inline-block pb-3">
@@ -103,7 +103,7 @@ export const Services: React.FC = () => {
           </div>
         </RevealSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {SERVICES.map((service, idx) => (
             <RevealSection key={service.id} delay={idx * 100}>
               <ServiceCard service={service} />

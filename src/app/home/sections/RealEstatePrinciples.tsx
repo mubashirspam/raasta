@@ -58,8 +58,8 @@ const VISION_CARDS = [
     subtitle: "Community First",
     description: "Building stronger, connected communities",
     image:
-      "https://images.unsplash.com/photo-1533929736562-6a63fbf96fb2?q=80&w=2070&auto=format&fit=crop",
-    link: "https://www.mediaoffice.ae/en/news/2023/January/04-01/Mohammad-bin-Rashid-launches-Dubai-Social-Agenda-33",
+      "https://images.unsplash.com/photo-1600450575795-410e03ec4a6f?q=80&w=2070&auto=format&fit=crop",
+    link: "https://u.ae/en/about-the-uae/strategies-initiatives-and-awards/strategies-plans-and-visions/social-affairs/dubai-social-agenda-33",
     color: "#8B5CF6",
     icon: Users,
   },
@@ -100,9 +100,44 @@ const CONTENT_STEPS = [
   },
 ];
 
+const ExpandableText = ({ content }: { content: string }) => {
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
+  return (
+    <div className="relative group/text">
+      <p
+        className={`text-lg text-white/90 leading-relaxed font-medium transition-all duration-300 ${
+          isExpanded ? "" : "line-clamp-3 md:line-clamp-none"
+        }`}
+      >
+        {content}
+      </p>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          setIsExpanded(!isExpanded);
+        }}
+        className={`mt-3 inline-flex items-center gap-1 text-sm font-bold text-white uppercase tracking-wider md:hidden ${
+          isExpanded ? "opacity-80" : "opacity-100"
+        }`}
+      >
+        {isExpanded ? (
+          <>
+            Show Less <span className="text-xs">▲</span>
+          </>
+        ) : (
+          <>
+            Read More <span className="text-xs">▼</span>
+          </>
+        )}
+      </button>
+    </div>
+  );
+};
+
 export const RealEstatePrinciples: React.FC = () => {
   return (
-    <section className="relative py-20 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section className="relative pt-10 md:py-20 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden">
       {/* Light gradient background */}
       <div
         className="absolute inset-0"
@@ -242,9 +277,7 @@ export const RealEstatePrinciples: React.FC = () => {
                         The Context
                       </h4>
                     </div>
-                    <p className="text-lg text-white/90 leading-relaxed font-medium">
-                      {CONTENT_STEPS[1].content}
-                    </p>
+                    <ExpandableText content={CONTENT_STEPS[1].content} />
                   </div>
 
                   {/* Bottom Accent */}
@@ -268,9 +301,7 @@ export const RealEstatePrinciples: React.FC = () => {
                         The Process
                       </h4>
                     </div>
-                    <p className="text-lg text-white/90 leading-relaxed font-medium">
-                      {CONTENT_STEPS[2].content}
-                    </p>
+                    <ExpandableText content={CONTENT_STEPS[2].content} />
                   </div>
 
                   {/* Bottom Accent */}
@@ -317,13 +348,17 @@ export const RealEstatePrinciples: React.FC = () => {
           </RevealSection>
         </div>
 
-
-  
-
-        {/* Vision Cards - 4 Cards with Images */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Vision Cards - Horizontal Scroll on Mobile */}
+        <div
+          className="flex lg:grid lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto pb-8 lg:pb-0 snap-x snap-mandatory -mx-4 px-4 no-scrollbar items-stretch"
+          style={{ scrollBehavior: "smooth" }}
+        >
           {VISION_CARDS.map((card, idx) => (
-            <RevealSection key={card.id} delay={0.3 + idx * 0.1}>
+            <RevealSection
+              key={card.id}
+              delay={0.3 + idx * 0.1}
+              className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-auto snap-center h-full"
+            >
               <a
                 href={card.link}
                 target="_blank"
