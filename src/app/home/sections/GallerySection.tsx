@@ -145,11 +145,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
             </div>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
-              Where Dreams
+              The Raasta 
               <br />
               <span className="relative inline-block">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] via-violet-500 to-fuchsia-500 animate-gradient">
-                  Come Home
+                  We Walked Together
                 </span>
                 <svg
                   className="absolute -bottom-2 left-0 w-full"
@@ -228,7 +228,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
                         key={`${colIndex}-${item.id}-${i}`}
                         item={item}
                       />
-                    )
+                    ),
                   )}
                 </div>
               );

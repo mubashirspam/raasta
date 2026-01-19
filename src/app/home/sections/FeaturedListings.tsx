@@ -183,8 +183,7 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
             </h2>
 
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed">
-              Handpicked luxury properties in Dubai&apos;s most prestigious
-              locations.
+              Handpicked opportunities. Real value. Right timing.
             </p>
           </div>
         </RevealSection>

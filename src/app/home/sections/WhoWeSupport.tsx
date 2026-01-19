@@ -23,7 +23,7 @@ const PERSONAS = [
     shortTitle: "First-Time Buyers",
     description: "We make your first step feel safe, clear, and confident.",
     longDescription:
-      "Navigating the Dubai real estate market for the first time can be overwhelming. We simplify every stage—from understanding areas and budgets to documentation and handover—so you feel confident with every decision.",
+      "Buying your first home is not just a transaction it’s a life milestone filled with dreams, doubts, and questions. At Raasta Realty, we walk beside you from the very first conversation. We explain everything clearly, without jargon or pressure, so you feel confident at every step. From understanding budgets and payment plans to choosing the right community for your future, we protect your interests like family. No shortcuts, no confusion only honest guidance and patient support. Your first home should bring peace, pride, and security, and our purpose is to make that journey feel safe, transparent, and truly rewarding.",
     icon: Home,
     color: "#2EA8FF",
     bgGradient: "from-blue-400/20 to-cyan-400/20",
@@ -37,7 +37,7 @@ const PERSONAS = [
     description:
       "We guide you to invest with clarity, conviction, and long-term vision.",
     longDescription:
-      "Our approach combines market analysis, government initiatives like D33 and 2040 Master Plan insights to help you invest strategically. Whether off-plan or ready properties, we help you build a portfolio designed for appreciation.",
+      "Real estate investment is about clarity, timing, and trust not hype. At Raasta Realty, we help investors make informed decisions backed by data, market insight, and long-term vision. Whether your goal is capital appreciation, rental income, or portfolio diversification, we focus on what truly suits your financial journey. We don’t sell projects we analyze opportunities, highlight risks, and align investments with your goals. With Dubai’s evolving market, you need a partner who thinks beyond today. Our commitment is simple: protect your capital, guide you honestly, and help your investments grow with purpose and confidence.",
     icon: TrendingUp,
     color: "#10B981",
     bgGradient: "from-emerald-400/20 to-teal-400/20",
@@ -50,7 +50,7 @@ const PERSONAS = [
     shortTitle: "NRI Clients",
     description: "No matter where you are, we stay close to your journey.",
     longDescription:
-      "Distance should never be a barrier to smart investing. We provide end-to-end virtual consultations, transparent documentation, and ongoing support for Non-Resident Indians looking to invest in Dubai's premium real estate.",
+      "Distance should never create doubt. For our NRI clients, Raasta Realty becomes your trusted presence in Dubai on the ground, always reachable, always transparent. From virtual walkthroughs and regular updates to legal clarity and post-handover support, we handle everything as if you were here yourself. We understand the emotional connection NRIs have with their hard earned savings, and we treat every decision with responsibility and care. No unanswered calls, no hidden details only consistent communication and complete trust. Wherever you are in the world, Raasta ensures your Dubai real estate journey feels close, secure, and stress-free.",
     icon: Globe,
     color: "#8B5CF6",
     bgGradient: "from-violet-400/20 to-purple-400/20",
@@ -63,7 +63,7 @@ const PERSONAS = [
     shortTitle: "End-Users",
     description: "We support you in finding a place you'll love living in.",
     longDescription:
-      "Beyond investment returns, we understand the emotional value of finding a home. We listen to your lifestyle preferences, family needs, and long-term goals to match you with properties that truly feel like home.",
+      "A home is not just walls and floors it’s where life unfolds. At Raasta Realty, we help end users find spaces that truly feel right for their lifestyle, family, and future. We listen deeply, understand your needs, and guide you toward homes that offer comfort, community, and long term value. From location selection to handover support, we stay involved beyond the sale. Our goal is not speed, but satisfaction. When you walk into your home years later, we want you to feel grateful you chose right. That sense of belonging and peace that’s what we build.",
     icon: Heart,
     color: "#F43F5E",
     bgGradient: "from-rose-400/20 to-pink-400/20",
@@ -77,7 +77,7 @@ const PERSONAS = [
     description:
       "We help to discover the rare assets that symbolize your success, status, and legacy.",
     longDescription:
-      "For clients seeking the extraordinary—ultra-premium penthouses, beachfront villas, and exclusive off-market opportunities. Our VIP concierge service provides white-glove treatment for the most discerning investors.",
+      "The 1% Circle is for those who seek rare opportunities, not common choices. It’s a curated space for discerning investors who value exclusivity, long term vision, and strategic positioning. At Raasta Realty, we identify limited-availability assets, high potential locations, and opportunities often unseen by the general market. This is not mass selling it’s precision investing. Members receive priority access, deeper insights, and a relationship built on discretion and trust. If you believe real wealth is created by early vision and informed decisions, the 1% Circle is where strategy meets opportunity with purpose at its core.",
     icon: Crown,
     color: "#F59E0B",
     bgGradient: "from-amber-400/20 to-orange-400/20",
@@ -90,7 +90,7 @@ const PERSONAS = [
     shortTitle: "Referrals",
     description: "Introduced with trust, welcomed like family.",
     longDescription:
-      "Word-of-mouth is our highest compliment. Clients referred to us receive the same personalized care and commitment that earned their trust in the first place. Every referral is treated as an extension of our family.",
+      "When someone is referred to Raasta Realty, they are not treated as a lead they are welcomed like family. A referral is built on trust, and we honor that responsibility with the highest level of care, honesty, and respect. From the first interaction to long after the deal is complete, we ensure your friends and family experience clarity, warmth, and genuine support. We don’t just aim to close deals we aim to protect relationships. Because when someone recommends Raasta, they’re sharing their trust. And for us, that trust is the most valuable asset we will always protect.",
     icon: Users,
     color: "#6366F1",
     bgGradient: "from-indigo-400/20 to-blue-400/20",
@@ -205,7 +205,6 @@ export const WhoWeSupport: React.FC = () => {
 
             <div className="pt-6 sm:pt-10">
               {/* Badge */}
-             
 
               {/* Main Title with Decorative SVG */}
               <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 sm:mb-6 leading-[1.1]">
@@ -245,7 +244,7 @@ export const WhoWeSupport: React.FC = () => {
               </h2>
 
               <p className="max-w-3xl mx-auto text-sm sm:text-lg md:text-xl text-slate-600 leading-relaxed px-2">
-                We support people at every stage of their journey—from
+                We support people at every stage of their journey from
                 understanding goals and shortlisting opportunities to
                 documentation, handover, and beyond.
               </p>
