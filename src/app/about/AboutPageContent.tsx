@@ -175,50 +175,75 @@ export default function AboutPageContent({
         onClose={() => setIsModalOpen(false)}
       />
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      {/* Hero - Our Story Section */}
+      <section className="relative pt-32 pb-10 md:pb-24 overflow-hidden">
+        {/* Background with emerald gradient */}
         <div className="absolute inset-0 z-0">
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 25%, #a7f3d0 50%, #6ee7b7 75%, #34d399 100%)",
+                "linear-gradient(180deg, #ecfdf5 0%, #d1fae5 25%, #a7f3d0 50%, #6ee7b7 75%, #34d399 100%)",
             }}
           />
           <div className="absolute inset-0 bg-white/30 backdrop-blur-xl" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-white/50 text-emerald-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm">
-              <Heart size={14} className="fill-current" />
-              <span>About Raasta Realty</span>
+        {/* Floating decorative elements */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-3xl animate-pulse" />
+        <div
+          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-teal-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
+        <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-gradient-to-br from-emerald-400/10 to-teal-400/10 rounded-full blur-2xl" />
+
+        <div className="absolute bottom-48 left-20 opacity-15">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect
+              x="5"
+              y="5"
+              width="30"
+              height="30"
+              rx="8"
+              stroke="#10b981"
+              strokeWidth="2"
+              fill="none"
+            />
+          </svg>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-3 md:px-12">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-b from-emerald-500 via-teal-500 to-cyan-500 text-white text-xs font-bold tracking-widest uppercase mb-6 shadow-xl shadow-emerald-500/25">
+              <Sparkles size={14} className="animate-pulse" />
+              <span>Our Story</span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
               A Path Where
               <br />
-              <span className="relative inline-block">
+              <span className="relative inline-block mt-2">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500">
                   Business Meets Belief
                 </span>
                 <svg
                   className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 200 10"
+                  viewBox="0 0 300 12"
                   fill="none"
                 >
                   <path
-                    d="M2 8C50 2 150 2 198 8"
-                    stroke="url(#about-underline)"
-                    strokeWidth="3"
+                    d="M2 10C80 4 220 4 298 10"
+                    stroke="url(#story-underline)"
+                    strokeWidth="4"
                     strokeLinecap="round"
                   />
                   <defs>
                     <linearGradient
-                      id="about-underline"
+                      id="story-underline"
                       x1="0"
                       y1="0"
-                      x2="200"
+                      x2="300"
                       y2="0"
                     >
                       <stop stopColor="#10B981" />
@@ -229,94 +254,178 @@ export default function AboutPageContent({
                 </svg>
               </span>
             </h1>
-
-            <p className="max-w-3xl mx-auto text-lg md:text-xl text-slate-700 leading-relaxed">
-              Raasta Realty is more than a real estate company. It is a
-              purpose-driven platform built to create long-term value,
-              meaningful growth, and lasting impact.
-            </p>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { value: "6%", label: "Revenue to Charity" },
-              { value: "Trust", label: "Our Foundation" },
-              { value: "Impact", label: "Our Goal" },
-              { value: "Legacy", label: "Our Vision" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50 text-center shadow-lg"
-              >
-                <p className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500 mb-1">
-                  {stat.value}
-                </p>
-                <p className="text-sm text-slate-600 uppercase tracking-wide">
-                  {stat.label}
-                </p>
+          {/* Main Card */}
+          <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
+            {/* Card Background with gradient and pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%2310b981%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
+
+            {/* Card Content */}
+            <div className="relative z-10 p-6 md:p-12">
+              <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                {/* Left - Content */}
+                <div className="order-2 lg:order-1">
+                  <div className="space-y-5 text-slate-700 leading-relaxed">
+                    {/* Mobile: Show limited content with Read More */}
+                    <div className="lg:hidden">
+                      <p className="text-lg">
+                        Raasta was not built overnight; it was shaped through
+                        conversations, trust, shared risks, and a deep belief in
+                        doing things the right way. Founded by{" "}
+                        <strong className="text-emerald-600">
+                          Muhammad Navas Nazar
+                        </strong>
+                        ,{" "}
+                        <strong className="text-emerald-600">
+                          Geetansh Suri
+                        </strong>
+                        , and{" "}
+                        <strong className="text-emerald-600">
+                          Muhammad Najeeb Nazar
+                        </strong>
+                        .
+                      </p>
+                      <details className="mt-4 group">
+                        <summary className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold cursor-pointer hover:shadow-lg transition-all duration-300 list-none">
+                          <span className="group-open:hidden">Read More</span>
+                          <span className="hidden group-open:inline">
+                            Show Less
+                          </span>
+                          <ArrowRight
+                            size={16}
+                            className="group-open:rotate-90 transition-transform"
+                          />
+                        </summary>
+                        <div className="mt-5 space-y-4 text-base animate-fadeIn">
+                          <p>
+                            At the heart of Raasta is a simple truth — every
+                            path we create begins with the client. Their goals,
+                            concerns, and dreams shape every decision we take.
+                          </p>
+                          <p>
+                            This journey is strengthened by a dedicated team
+                            that walks this path with us every day. Our people
+                            are our greatest strength.
+                          </p>
+                          <p>
+                            As we look ahead, our vision for Raasta goes beyond
+                            today. We are building something enduring — a
+                            platform that evolves with time.
+                          </p>
+                          <p className="text-lg font-semibold text-slate-800 pt-2">
+                            We don't see ourselves ahead of you — we walk with
+                            you.
+                          </p>
+                        </div>
+                      </details>
+                    </div>
+
+                    {/* Desktop: Show full content */}
+                    <div className="hidden lg:block space-y-5 text-lg">
+                      <p>
+                        Raasta was not built overnight; it was shaped through
+                        conversations, trust, shared risks, and a deep belief in
+                        doing things the right way.
+                      </p>
+                      <p>
+                        Founded by{" "}
+                        <strong className="text-emerald-600">
+                          Muhammad Navas Nazar
+                        </strong>
+                        ,{" "}
+                        <strong className="text-emerald-600">
+                          Geetansh Suri
+                        </strong>
+                        , and{" "}
+                        <strong className="text-emerald-600">
+                          Muhammad Najeeb Nazar
+                        </strong>
+                        .
+                      </p>
+                      <p>
+                        At the heart of Raasta is a simple truth — every path we
+                        create begins with the client. Their goals, concerns,
+                        and dreams shape every decision we take, because Raasta
+                        exists not to sell, but to serve with honesty and
+                        responsibility.
+                      </p>
+                      <p>
+                        This journey is strengthened by a dedicated team that
+                        walks this path with us every day. Our people are our
+                        greatest strength — they are the ones who believe in the
+                        vision, carry the values forward, and turn intent into
+                        action through their commitment and care.
+                      </p>
+                      <p>
+                        As we look ahead, our vision for Raasta goes beyond
+                        today. We are building something enduring — a platform
+                        that evolves with time, sets new standards, and
+                        redefines how trust is experienced in this industry.
+                      </p>
+                      <p className="text-xl font-semibold text-slate-800 pt-2">
+                        We don't see ourselves ahead of you — we walk with you.
+                      </p>
+                      <p className="text-slate-600 italic">
+                        This is our Raasta that we chose and together we walk
+                        proudly, each step of the journey that has just begun.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right - Image with Founders */}
+                <div className="order-1 lg:order-2">
+                  {/* Image Container */}
+                  <div className="relative group">
+                    {/* Decorative frame */}
+                    <div className="absolute -top-3 -left-3 w-16 h-16 border-t-4 border-l-4 border-emerald-400 rounded-tl-2xl opacity-70" />
+                    <div className="absolute -bottom-3 -right-3 w-16 h-16 border-b-4 border-r-4 border-teal-400 rounded-br-2xl opacity-70" />
+
+                    {/* Glow effect */}
+                    <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+
+                    <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+                      <img
+                        src="https://cdn.sanity.io/images/8dj8qon7/production/a072261628072bed1efabe3b92f407f96b05667d-2432x1550.png"
+                        alt="Raasta Realty Founders"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/30 via-transparent to-transparent" />
+                    </div>
+                  </div>
+
+                  {/* Founders Names - Below Image */}
+                  <div className="mt-6 space-y-3">
+                    {[
+                      { name: "Muhammad Navas Nazar" },
+                      { name: "Geetansh Suri" },
+                      { name: "Muhammad Najeeb Nazar" },
+                    ].map((founder, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-emerald-100/50  hover:border-emerald-200 transition-all duration-300 group"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform duration-300" />
+                          <p className="text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
+                            {founder.name}
+                          </p>
+                        </div>
+                        <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-1 rounded-full border border-emerald-100">
+                          Co-Founder
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Our Story Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 text-white text-xs font-bold tracking-widest uppercase mb-6 shadow-lg">
-                <Sparkles size={14} />
-                <span>Our Story</span>
-              </div>
-
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-                Three Minds. One Raasta.{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-purple-500">
-                  Built On Belief
-                </span>
-              </h2>
-
-              <div className="space-y-4 text-slate-600 leading-relaxed">
-                <p>
-                  Raasta was not built overnight; it was shaped through
-                  conversations, trust, shared risks, and a deep belief in doing
-                  things the right way.
-                </p>
-                <p>
-                  Founded by <strong>Muhammad Navas Nazar</strong>,{" "}
-                  <strong>Geetansh Suri</strong>, and{" "}
-                  <strong>Muhammad Najeeb Nazar</strong>.
-                </p>
-                <p>
-                  At the heart of Raasta is a simple truth — every path we
-                  create begins with the client. Their goals, concerns, and
-                  dreams shape every decision we take, because Raasta exists not
-                  to sell, but to serve with honesty and responsibility.
-                </p>
-                <p>
-                  We don't see ourselves ahead of you — we walk with you. This
-                  is our Raasta that we chose and together we walk proudly, each
-                  step of the journey that has just begun.
-                </p>
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://cdn.sanity.io/images/8dj8qon7/production/a072261628072bed1efabe3b92f407f96b05667d-2432x1550.png"
-                  alt="Raasta Realty Team - From Ours to Yours"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What Makes Us Different */}
       <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <SectionHeader
@@ -329,7 +438,7 @@ export default function AboutPageContent({
             gradientTo="to-orange-500"
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               {
                 icon: <Heart size={24} />,
@@ -376,19 +485,42 @@ export default function AboutPageContent({
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-8 rounded-3xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border border-slate-100"
+                className="p-6 md:p-8 rounded-3xl bg-white hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
               >
-                <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${item.gradient} flex items-center justify-center text-white mb-6 shadow-lg`}
-                >
-                  {item.icon}
+                <div className="flex items-center gap-2 mb-2 md:mb-4">
+                  <div
+                    className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-r ${item.gradient} flex items-center justify-center text-white shadow-lg flex-shrink-0`}
+                  >
+                    {item.icon}
+                  </div>
+                  <h3 className="text-lg md:text-xl font-bold text-slate-900 leading-tight">
+                    {item.title}
+                  </h3>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed">
+
+                {/* Desktop: Full text */}
+                <p className="hidden md:block text-slate-600 leading-relaxed text-sm md:text-base">
                   {item.description}
                 </p>
+
+                {/* Mobile: Read More */}
+                <div className="md:hidden">
+                  <details className="group">
+                    <summary className="list-none text-sm font-semibold text-emerald-600 cursor-pointer flex items-center gap-1">
+                      <span className="group-open:hidden">Read more</span>
+                      <span className="hidden group-open:inline">
+                        Show less
+                      </span>
+                      <ArrowRight
+                        size={14}
+                        className="group-open:rotate-90 transition-transform"
+                      />
+                    </summary>
+                    <p className="mt-2 text-slate-600 leading-relaxed text-sm animate-fadeIn">
+                      {item.description}
+                    </p>
+                  </details>
+                </div>
               </div>
             ))}
           </div>
@@ -396,34 +528,44 @@ export default function AboutPageContent({
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Mission */}
-            <div className="p-10 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-2xl">
-              <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-6">
-                <Target size={32} />
+            <div className="relative p-10 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Target size={28} />
+                  </div>
+                  <h3 className="text-3xl font-bold">Our Mission</h3>
+                </div>
+                <p className="text-white/90 text-lg leading-relaxed">
+                  To transform the lives of everyone connected to Raasta Realty
+                  i.e. clients, investors, agents, and referral partners, while
+                  extending our impact to the deserving souls supported through
+                  our legacy fund.
+                </p>
               </div>
-              <h3 className="text-3xl font-bold mb-4">Our Mission</h3>
-              <p className="text-white/90 text-lg leading-relaxed">
-                To transform the lives of everyone connected to Raasta Realty —
-                clients, investors, agents, and referral partners — while
-                extending our impact to the deserving souls supported through
-                our legacy fund.
-              </p>
             </div>
 
             {/* Vision */}
-            <div className="p-10 rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 text-white shadow-2xl">
-              <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-6">
-                <Eye size={32} />
+            <div className="relative p-10 rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 text-white shadow-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Eye size={28} />
+                  </div>
+                  <h3 className="text-3xl font-bold">Our Vision</h3>
+                </div>
+                <p className="text-white/90 text-lg leading-relaxed">
+                  Through every deal, we uplift lives. Our vision is to be
+                  remembered not for the number of sales we made, but for the
+                  difference we created in people’s lives.
+                </p>
               </div>
-              <h3 className="text-3xl font-bold mb-4">Our Vision</h3>
-              <p className="text-white/90 text-lg leading-relaxed">
-                Through every deal, we uplift lives. Our vision is to be
-                remembered not for the number of sales we made, but for the
-                difference we created in people's lives.
-              </p>
             </div>
           </div>
 
@@ -440,245 +582,406 @@ export default function AboutPageContent({
         </div>
       </section>
 
-      {/* Founders Section */}
-      {teamMembers.founders.length > 0 && (
-        <section className="py-20 bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <SectionHeader
-              badge="Founders"
-              badgeIcon={<Star size={14} className="fill-current" />}
-              title="The Visionaries"
-              titleHighlight="Behind Raasta"
-              description="Three minds united by a shared belief in doing things the right way."
-              gradientFrom="from-violet-500"
-              gradientTo="to-purple-500"
-            />
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {teamMembers.founders.map((member) => (
-                <TeamMemberCard
-                  key={member._id}
-                  member={member}
-                  variant="large"
-                  gradientColor="violet"
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Management Team */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <SectionHeader
-            badge="Management Team"
-            badgeIcon={<Users size={14} />}
-            title="The Quiet Strength"
-            titleHighlight="Behind the Scenes"
-            gradientFrom="from-blue-500"
-            gradientTo="to-cyan-500"
-          />
+      {/* Management Team */}
+      <section className="py-10 md:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-3 md:px-12">
+          {/* Card Container */}
+          <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
+            {/* Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%233b82f6%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Behind every smooth operation and growing team at Raasta is a
-              foundation built on care, clarity, and consistency.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Our Administration and HR leadership play a vital role in shaping
-              the culture we work in every day. From nurturing people and
-              managing processes to ensuring fairness, balance, and structure,
-              they create an environment where individuals can focus, grow, and
-              give their best.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              This responsibility is led by{" "}
-              <strong>Shaheen Fadil (Administrator)</strong> and{" "}
-              <strong>Selin John (HR Manager)</strong> — they are the quiet
-              strength behind the scenes. Through their dedication, they listen,
-              support, organize, and guide, ensuring that both people and
-              systems move forward together.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed">
-              At Raasta, their work keeps our path steady, aligned, and human at
-              its core.
-            </p>
-          </div>
+            <div className="relative z-10 p-6 md:p-12">
+              <SectionHeader
+                badge="Management Team"
+                badgeIcon={<Users size={14} />}
+                title="The Quiet Strength"
+                titleHighlight="Behind the Scenes"
+                gradientFrom="from-blue-500"
+                gradientTo="to-cyan-500"
+              />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamMembers.management.length > 0 ? (
-              teamMembers.management.map((member) => (
-                <TeamMemberCard
-                  key={member._id}
-                  member={member}
-                  gradientColor="blue"
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-slate-500 text-lg">
-                  Team members will appear here once added to Sanity CMS.
+              {/* Desktop: Full description */}
+              <div className="hidden md:block max-w-4xl mx-auto text-center mb-12 space-y-5">
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Behind every smooth operation and growing team at Raasta is a
+                  foundation built on care, clarity, and consistency.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Our Administration and HR leadership play a vital role in
+                  shaping the culture we work in every day. From nurturing
+                  people and managing processes to ensuring fairness, balance,
+                  and structure, they create an environment where individuals
+                  can focus, grow, and give their best.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  This responsibility is led by{" "}
+                  <strong>Shaheen Fadil (Administrator)</strong> and{" "}
+                  <strong>Selin John (HR Manager)</strong> — they are the quiet
+                  strength behind the scenes. Through their dedication, they
+                  listen, support, organize, and guide, ensuring that both
+                  people and systems move forward together.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  At Raasta, their work keeps our path steady, aligned, and
+                  human at its core.
                 </p>
               </div>
-            )}
+
+              {/* Mobile: Collapsed description with Read More */}
+              <div className="md:hidden max-w-4xl mx-auto text-center mb-8">
+                <div className="space-y-4 text-slate-700 text-base leading-relaxed">
+                  <p>
+                    Behind every smooth operation and growing team at Raasta is
+                    a foundation built on care, clarity, and consistency.
+                  </p>
+                  <p>
+                    Our Administration and HR leadership play a vital role in
+                    shaping the culture we work in every day. From nurturing
+                    people and managing processes to ensuring fairness, balance,
+                    and structure, they create an environment where individuals
+                    can focus, grow, and give their best.
+                  </p>
+
+                  <details className="group">
+                    <summary className="list-none text-sm font-semibold text-blue-600 cursor-pointer flex items-center justify-center gap-1 mt-3">
+                      <span className="group-open:hidden">Read more</span>
+                      <span className="hidden group-open:inline">
+                        Show less
+                      </span>
+                      <ArrowRight
+                        size={14}
+                        className="group-open:rotate-90 transition-transform"
+                      />
+                    </summary>
+                    <div className="mt-4 space-y-4 animate-fadeIn">
+                      <p>
+                        This responsibility is led by{" "}
+                        <strong>Shaheen Fadil (Administrator)</strong> and{" "}
+                        <strong>Selin John (HR Manager)</strong> — they are the
+                        quiet strength behind the scenes.
+                      </p>
+                      <p>
+                        At Raasta, their work keeps our path steady, aligned,
+                        and human at its core.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {teamMembers.management.length > 0 ? (
+                  teamMembers.management.map((member) => (
+                    <TeamMemberCard
+                      key={member._id}
+                      member={member}
+                      gradientColor="blue"
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-slate-500 text-lg">
+                      Team members will appear here once added to Sanity CMS.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Media Team */}
-      <section className="py-20 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <SectionHeader
-            badge="Media Team"
-            badgeIcon={<Camera size={14} />}
-            title="Giving Our Journey"
-            titleHighlight="A Voice"
-            gradientFrom="from-pink-500"
-            gradientTo="to-rose-500"
-          />
+      <section className="py-10 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-3 md:px-12">
+          <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ec4899%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Behind every post, reel, and story at Raasta is a creative team
-              that brings our journey to life.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Our Content Creators don't just manage platforms — they capture
-              purpose, people, and progress.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              By turning real moments into real stories, they shape how Raasta
-              is seen, felt, and remembered.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed font-semibold">
-              They don't market properties. They give our journey a voice.
-            </p>
-          </div>
+            <div className="relative z-10 p-6 md:p-12">
+              <SectionHeader
+                badge="Media Team"
+                badgeIcon={<Camera size={14} />}
+                title="Giving Our Journey"
+                titleHighlight="A Voice"
+                gradientFrom="from-pink-500"
+                gradientTo="to-rose-500"
+              />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamMembers.media.length > 0 ? (
-              teamMembers.media.map((member) => (
-                <TeamMemberCard
-                  key={member._id}
-                  member={member}
-                  gradientColor="pink"
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-slate-500 text-lg">
-                  Team members will appear here once added to Sanity CMS.
+              <div className="hidden md:block max-w-4xl mx-auto text-center mb-12 space-y-5">
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Behind every post, reel, and story at Raasta is a creative
+                  team that brings our journey to life.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Our Content Creators don't just manage platforms — they
+                  capture purpose, people, and progress.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  By turning real moments into real stories, they shape how
+                  Raasta is seen, felt, and remembered.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed font-semibold">
+                  They don't market properties. They give our journey a voice.
                 </p>
               </div>
-            )}
+
+              <div className="md:hidden max-w-4xl mx-auto text-center mb-8">
+                <div className="space-y-4 text-slate-700 text-base leading-relaxed">
+                  <p>
+                    Behind every post, reel, and story at Raasta is a creative
+                    team that brings our journey to life.
+                  </p>
+                  <p>
+                    Our Content Creators don't just manage platforms — they
+                    capture purpose, people, and progress.
+                  </p>
+
+                  <details className="group">
+                    <summary className="list-none text-sm font-semibold text-pink-600 cursor-pointer flex items-center justify-center gap-1 mt-3">
+                      <span className="group-open:hidden">Read more</span>
+                      <span className="hidden group-open:inline">
+                        Show less
+                      </span>
+                      <ArrowRight
+                        size={14}
+                        className="group-open:rotate-90 transition-transform"
+                      />
+                    </summary>
+                    <div className="mt-4 space-y-4 animate-fadeIn">
+                      <p>
+                        By turning real moments into real stories, they shape
+                        how Raasta is seen, felt, and remembered.
+                      </p>
+                      <p className="font-semibold">
+                        They don't market properties. They give our journey a
+                        voice.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {teamMembers.media.length > 0 ? (
+                  teamMembers.media.map((member) => (
+                    <TeamMemberCard
+                      key={member._id}
+                      member={member}
+                      gradientColor="pink"
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-slate-500 text-lg">
+                      Team members will appear here once added to Sanity CMS.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Elite Agents */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <SectionHeader
-            badge="Elite Agents"
-            badgeIcon={<Award size={14} />}
-            title="Expertise, Trust &"
-            titleHighlight="Market Intelligence"
-            gradientFrom="from-amber-500"
-            gradientTo="to-orange-500"
-          />
+      <section className="py-10 md:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-3 md:px-12">
+          <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23f59e0b%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              At Raasta Realty, our Elite Agents represent expertise, market
-              intelligence, and trust within Dubai's dynamic real estate
-              environment. They guide clients through high-value decisions with
-              clarity, professionalism, and a strong understanding of market
-              movements.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Focused on strategy rather than pressure, our Elite Agents align
-              the right opportunities with individual goals. Every interaction
-              is driven by transparency, precision, and long-term value
-              creation.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed font-semibold">
-              They act as trusted partners, protecting client interests while
-              delivering confident, informed real estate guidance at every
-              stage.
-            </p>
-          </div>
+            <div className="relative z-10 p-6 md:p-12">
+              <SectionHeader
+                badge="Elite Agents"
+                badgeIcon={<Award size={14} />}
+                title="Expertise, Trust &"
+                titleHighlight="Market Intelligence"
+                gradientFrom="from-amber-500"
+                gradientTo="to-orange-500"
+              />
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {teamMembers.elite_agents.length > 0 ? (
-              teamMembers.elite_agents.map((member) => (
-                <TeamMemberCard
-                  key={member._id}
-                  member={member}
-                  gradientColor="amber"
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-slate-500 text-lg">
-                  Team members will appear here once added to Sanity CMS.
+              <div className="hidden md:block max-w-4xl mx-auto text-center mb-12 space-y-5">
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  At Raasta Realty, our Elite Agents represent expertise, market
+                  intelligence, and trust within Dubai's dynamic real estate
+                  environment. They guide clients through high-value decisions
+                  with clarity, professionalism, and a strong understanding of
+                  market movements.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Focused on strategy rather than pressure, our Elite Agents
+                  align the right opportunities with individual goals. Every
+                  interaction is driven by transparency, precision, and
+                  long-term value creation.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed font-semibold">
+                  They act as trusted partners, protecting client interests
+                  while delivering confident, informed real estate guidance at
+                  every stage.
                 </p>
               </div>
-            )}
+
+              <div className="md:hidden max-w-4xl mx-auto text-center mb-8">
+                <div className="space-y-4 text-slate-700 text-base leading-relaxed">
+                  <p>
+                    At Raasta Realty, our Elite Agents represent expertise,
+                    market intelligence, and trust within Dubai's dynamic real
+                    estate environment.
+                  </p>
+                  <p>
+                    They guide clients through high-value decisions with
+                    clarity, professionalism, and a strong understanding of
+                    market movements.
+                  </p>
+
+                  <details className="group">
+                    <summary className="list-none text-sm font-semibold text-amber-600 cursor-pointer flex items-center justify-center gap-1 mt-3">
+                      <span className="group-open:hidden">Read more</span>
+                      <span className="hidden group-open:inline">
+                        Show less
+                      </span>
+                      <ArrowRight
+                        size={14}
+                        className="group-open:rotate-90 transition-transform"
+                      />
+                    </summary>
+                    <div className="mt-4 space-y-4 animate-fadeIn">
+                      <p>
+                        Focused on strategy rather than pressure, our Elite
+                        Agents align the right opportunities with individual
+                        goals.
+                      </p>
+                      <p className="font-semibold">
+                        They act as trusted partners, protecting client
+                        interests while delivering confident, informed real
+                        estate guidance at every stage.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {teamMembers.elite_agents.length > 0 ? (
+                  teamMembers.elite_agents.map((member) => (
+                    <TeamMemberCard
+                      key={member._id}
+                      member={member}
+                      gradientColor="amber"
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-slate-500 text-lg">
+                      Team members will appear here once added to Sanity CMS.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Sales Team */}
-      <section className="py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <SectionHeader
-            badge="Sales Team"
-            badgeIcon={<TrendingUp size={14} />}
-            title="Energy, Focus &"
-            titleHighlight="Responsibility"
-            gradientFrom="from-emerald-500"
-            gradientTo="to-teal-500"
-          />
+      <section className="py-10 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-3 md:px-12">
+          <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%2310b981%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Raasta Realty's Sales Team works with energy, focus, and a strong
-              sense of responsibility.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              They understand the pace of Dubai real estate and move quickly,
-              but never at the cost of trust or accuracy.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed mb-6">
-              Every follow-up, every conversation, and every closing is handled
-              with commitment and care. The team stays close to clients, keeps
-              communication clear, and ensures the journey is smooth and
-              stress-free.
-            </p>
-            <p className="text-slate-700 text-lg leading-relaxed font-semibold">
-              They don't just aim to close deals. They aim to do it right,
-              building confidence, long-term relationships, and a reputation
-              Raasta Realty is proud of.
-            </p>
-          </div>
+            <div className="relative z-10 p-6 md:p-12">
+              <SectionHeader
+                badge="Sales Team"
+                badgeIcon={<TrendingUp size={14} />}
+                title="Energy, Focus &"
+                titleHighlight="Responsibility"
+                gradientFrom="from-emerald-500"
+                gradientTo="to-teal-500"
+              />
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {teamMembers.sales.length > 0 ? (
-              teamMembers.sales.map((member) => (
-                <TeamMemberCard
-                  key={member._id}
-                  member={member}
-                  gradientColor="emerald"
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-slate-500 text-lg">
-                  Team members will appear here once added to Sanity CMS.
+              <div className="hidden md:block max-w-4xl mx-auto text-center mb-12 space-y-5">
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Raasta Realty's Sales Team works with energy, focus, and a
+                  strong sense of responsibility.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  They understand the pace of Dubai real estate and move
+                  quickly, but never at the cost of trust or accuracy.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Every follow-up, every conversation, and every closing is
+                  handled with commitment and care. The team stays close to
+                  clients, keeps communication clear, and ensures the journey is
+                  smooth and stress-free.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed font-semibold">
+                  They don't just aim to close deals. They aim to do it right,
+                  building confidence, long-term relationships, and a reputation
+                  Raasta Realty is proud of.
                 </p>
               </div>
-            )}
+
+              <div className="md:hidden max-w-4xl mx-auto text-center mb-8">
+                <div className="space-y-4 text-slate-700 text-base leading-relaxed">
+                  <p>
+                    Raasta Realty's Sales Team works with energy, focus, and a
+                    strong sense of responsibility.
+                  </p>
+                  <p>
+                    They understand the pace of Dubai real estate and move
+                    quickly, but never at the cost of trust or accuracy.
+                  </p>
+
+                  <details className="group">
+                    <summary className="list-none text-sm font-semibold text-emerald-600 cursor-pointer flex items-center justify-center gap-1 mt-3">
+                      <span className="group-open:hidden">Read more</span>
+                      <span className="hidden group-open:inline">
+                        Show less
+                      </span>
+                      <ArrowRight
+                        size={14}
+                        className="group-open:rotate-90 transition-transform"
+                      />
+                    </summary>
+                    <div className="mt-4 space-y-4 animate-fadeIn">
+                      <p>
+                        Every follow-up, every conversation, and every closing
+                        is handled with commitment and care. The team stays
+                        close to clients, keeps communication clear, and ensures
+                        the journey is smooth and stress-free.
+                      </p>
+                      <p className="font-semibold">
+                        They don't just aim to close deals. They aim to do it
+                        right, building confidence, long-term relationships, and
+                        a reputation Raasta Realty is proud of.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {teamMembers.sales.length > 0 ? (
+                  teamMembers.sales.map((member) => (
+                    <TeamMemberCard
+                      key={member._id}
+                      member={member}
+                      gradientColor="emerald"
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-slate-500 text-lg">
+                      Team members will appear here once added to Sanity CMS.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>

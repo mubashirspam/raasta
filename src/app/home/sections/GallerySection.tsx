@@ -102,37 +102,18 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-24 overflow-hidden font-sans bg-slate-50"
+      className="relative w-full py-10 overflow-hidden font-sans bg-slate-50"
     >
       <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
         <div className="absolute inset-0 bg-slate-50"></div>
 
-        <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-r from-violet-200/30 via-pink-200/30 to-fuchsia-200/30 blur-[130px] animate-pulse mix-blend-multiply"></div>
-        <div
-          className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-l from-blue-200/30 via-cyan-200/30 to-sky-200/30 blur-[130px] animate-pulse mix-blend-multiply"
-          style={{ animationDelay: "1s" }}
-        ></div>
-        <div className="absolute top-[30%] left-[20%] w-[50%] h-[50%] rounded-full bg-indigo-300/10 blur-[100px] mix-blend-multiply"></div>
-
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px)`,
-            backgroundSize: "64px 64px",
-            maskImage:
-              "linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)",
-          }}
-        ></div>
-
-        <div
-          className="absolute inset-0 opacity-[0.04] mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          }}
-        ></div>
+        <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-linear-to-r from-cyan-300/30 via-pink-300/30 to-violet-300/30 blur-[130px] "></div>
+        <div className="absolute -bottom-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-linear-to-l from-pink-300/30 via-cyan-300/30 to-sky-300/30 blur-[130px] "></div>
+        <div className="absolute top-[30%] left-[20%] w-[50%] h-[50%] rounded-full bg-indigo-300/10 blur-[100px]"></div>
+        <div className="absolute z-30 inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-100" />
       </div>
 
-      <div className="relative z-20 w-full h-[1500px]">
+      <div className="relative z-20 w-full h-[1200px]">
         <div className="text-center mb-16 px-4 relative">
           {/* Decorative elements */}
           <div className="absolute left-1/2 -translate-x-1/2 top-0 w-px h-12 bg-gradient-to-b from-transparent via-[#2EA8FF]/50 to-[#2EA8FF]" />
@@ -145,37 +126,39 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
             </div>
 
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
-              The Raasta 
+              The Raasta
               <br />
               <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] via-violet-500 to-fuchsia-500 animate-gradient">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#2EA8FF] via-violet-500 to-fuchsia-500 animate-gradient">
                   We Walked Together
                 </span>
-                <svg
-                  className="absolute -bottom-2 left-0 w-full"
-                  viewBox="0 0 200 12"
-                  fill="none"
-                >
-                  <path
-                    d="M2 8C50 2 150 2 198 8"
-                    stroke="url(#underline-gradient)"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="underline-gradient"
-                      x1="0"
-                      y1="0"
-                      x2="200"
-                      y2="0"
-                    >
-                      <stop stopColor="#2EA8FF" />
-                      <stop offset="0.5" stopColor="#8B5CF6" />
-                      <stop offset="1" stopColor="#D946EF" />
-                    </linearGradient>
-                  </defs>
-                </svg>
+                  <svg
+                    className="absolute -bottom-2 sm:-bottom-3 md:-bottom-4 left-0 w-full h-[8px] sm:h-[10px] md:h-[14px]"
+                    viewBox="0 0 200 10"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M2 6C30 2 50 8 100 5C150 2 170 8 198 5"
+                      stroke="url(#gallery-underline)"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      fill="none"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="gallery-underline"
+                        x1="0"
+                        y1="0"
+                        x2="200"
+                        y2="0"
+                      >
+                        <stop stopColor="#2EA8FF" />
+                        <stop offset="0.5" stopColor="#9333EA" />
+                        <stop offset="1" stopColor="#D946EF" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
               </span>
             </h2>
 
@@ -201,7 +184,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
           </div>
         </div>
 
-        <div className="h-[1200px] overflow-hidden relative pt-[100px] w-full">
+        <div className="h-[1000px] overflow-hidden relative pt-[100px] w-full">
           <div className="absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-slate-50 to-transparent z-30 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-24 md:w-32 bg-gradient-to-l from-slate-50 to-transparent z-30 pointer-events-none"></div>
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-slate-50 to-transparent z-30 pointer-events-none"></div>
@@ -222,7 +205,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
                     marginTop: colConfig[colIndex].marginTop,
                   }}
                 >
-                  {[...colData, ...colData, ...colData, ...colData].map(
+                  {[...colData].map(
                     (item, i) => (
                       <MediaCard
                         key={`${colIndex}-${item.id}-${i}`}

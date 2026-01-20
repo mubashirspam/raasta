@@ -85,6 +85,7 @@ export const HeroSection: React.FC = () => {
       <div className="absolute top-[-30px] sm:top-[-50px] md:top-[-100px] left-1/2 w-24 sm:w-32 md:w-96 h-20 sm:h-24 md:h-46 bg-yellow-500/20 rounded-full blur-xl sm:blur-2xl md:blur-3xl -translate-x-1/2" />
       <div className="absolute top-[-30px] sm:top-[-50px] md:top-[-100px] left-3/4 w-24 sm:w-32 md:w-96 h-20 sm:h-24 md:h-46 bg-purple-500/20 rounded-full blur-xl sm:blur-2xl md:blur-3xl -translate-x-1/2" />
       <div className="absolute top-[-30px] sm:top-[-50px] md:top-[-100px] right-0 w-24 sm:w-32 md:w-96 h-20 sm:h-24 md:h-46 bg-blue-500/20 rounded-full blur-xl sm:blur-2xl md:blur-3xl translate-x-0" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2724%27%20height=%2742%27%20viewBox=%270%200%2024%2042%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath%20d=%27M12%2021l-12-7V0l12%207V21zm12-7l-12%207V42l12-7V14z%27%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%20fill-rule=%27evenodd%27/%3E%3C/svg%3E')] opacity-100" />
 
       {/* Floating Chips - Scattered around content */}
       {chips.map((chip, i) => (
