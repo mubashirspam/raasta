@@ -388,7 +388,7 @@ export default function AboutPageContent({
 
                     <div className="relative aspect-4/3 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
                       <img
-                        src="https://cdn.sanity.io/images/8dj8qon7/production/a072261628072bed1efabe3b92f407f96b05667d-2432x1550.png"
+                        src="https://cdn.sanity.io/images/8dj8qon7/production/a59b2b9203cd812167fc0ccb744c191e5d34a2a5-768x512.jpg"
                         alt="Raasta Realty Founders"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
