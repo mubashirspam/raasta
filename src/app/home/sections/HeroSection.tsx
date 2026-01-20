@@ -252,7 +252,9 @@ export const HeroSection: React.FC = () => {
 
             {/* Explore Button */}
             <Link
-              href="#services"
+              href="https://calendly.com/the-real-mallu-realtor/lifechanging"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-slate-800 bg-white border-2 border-slate-200 transition-all duration-300 rounded-full hover:border-slate-300 hover:shadow-lg hover:scale-[1.02] w-full sm:w-auto justify-center"
             >
               <span className="tracking-wide">Book a meeting</span>

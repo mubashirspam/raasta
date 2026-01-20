@@ -162,29 +162,40 @@ export const Footer: React.FC = () => {
                 <ChevronRight size={18} />
               </button>
             </div>
-            <div className="mt-6 p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-xl">
+            <a
+              href="https://www.cbre.ae/insights/figures/uae-real-estate-market-review-q3-2025"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-6 p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-xl hover:shadow-md transition-all group/report"
+            >
               <div className="flex items-center justify-between text-xs font-bold text-slate-800">
                 <span>Latest Market Report</span>
-                <ArrowUpRight size={14} className="text-[#2EA8FF]" />
+                <ArrowUpRight
+                  size={14}
+                  className="text-[#2EA8FF] transition-transform group-hover/report:-translate-y-0.5 group-hover/report:translate-x-0.5"
+                />
               </div>
               <p className="text-[10px] text-slate-400 mt-1">
-                Q3 2024 Analysis Available
+                Q3 2026 Analysis Available
               </p>
-            </div>
+            </a>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-200/60 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-400">
-          <p>&copy; 2024 RaastaRealty Dubai. All rights reserved.</p>
+          <p>&copy; 2026 RaastaRealty Dubai. All rights reserved.</p>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-[#2EA8FF] transition-colors">
+            <a
+              href="/privacy"
+              className="hover:text-[#2EA8FF] transition-colors"
+            >
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-[#2EA8FF] transition-colors">
+            <a href="/terms" className="hover:text-[#2EA8FF] transition-colors">
               Terms of Service
             </a>
-            <a href="#" className="hover:text-[#2EA8FF] transition-colors">
+            <a href="/rera" className="hover:text-[#2EA8FF] transition-colors">
               RERA Info
             </a>
           </div>
