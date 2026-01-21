@@ -2,7 +2,7 @@
 export { RevealSection, SearchStrip, ContactModal } from "./ui";
 
 // Card Components
-export { ListingCard, ServiceCard, AgentCard, StatCard } from "./cards";
+export { ListingCard, ServiceCard, StatCard } from "./cards";
 
 // Layout Components
 export { Navbar, Footer } from "./layout";
