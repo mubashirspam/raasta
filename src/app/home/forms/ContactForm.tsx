@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, Send, Loader2 } from "lucide-react";
+import {
+  ChevronDown,
+  Send,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
 
 const COUNTRY_CODES = [
   { code: "+971", flag: "🇦🇪", country: "UAE" },
@@ -25,8 +31,9 @@ const BUDGET_RANGES = [
 ];
 
 interface ContactFormProps {
-  onSubmit?: (data: FormData) => void;
+  onSuccess?: () => void;
   variant?: "light" | "dark";
+  source?: "contact_form" | "contact_modal";
 }
 
 interface FormData {
@@ -39,8 +46,9 @@ interface FormData {
 }
 
 export const ContactForm: React.FC<ContactFormProps> = ({
-  onSubmit,
+  onSuccess,
   variant = "light",
+  source = "contact_form",
 }) => {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -51,22 +59,64 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     budgetRange: "700K - 1M",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const [showBudgetDropdown, setShowBudgetDropdown] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage("");
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("/api/submit-contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          source,
+        }),
+      });
 
-    onSubmit?.(formData);
-    setIsSubmitting(false);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit form");
+      }
+
+      setSubmitStatus("success");
+
+      // Reset form after successful submission
+      setTimeout(() => {
+        setFormData({
+          fullName: "",
+          email: "",
+          countryCode: "+971",
+          phone: "",
+          purpose: "investment",
+          budgetRange: "700K - 1M",
+        });
+        setSubmitStatus("idle");
+        onSuccess?.();
+      }, 2000);
+    } catch (error) {
+      setSubmitStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "An error occurred",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const selectedCountry = COUNTRY_CODES.find(
-    (c) => c.code === formData.countryCode
+    (c) => c.code === formData.countryCode,
   );
 
   const isDark = variant === "dark";
@@ -277,12 +327,28 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 rounded-xl text-lg font-medium bg-gradient-to-r from-[#2EA8FF] to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className={`w-full py-4 rounded-xl text-lg font-medium transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${
+          submitStatus === "success"
+            ? "bg-green-500 text-white"
+            : submitStatus === "error"
+              ? "bg-red-500 text-white"
+              : "bg-gradient-to-r from-[#2EA8FF] to-cyan-500 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30"
+        }`}
       >
         {isSubmitting ? (
           <>
             <Loader2 size={20} className="animate-spin" />
             Submitting...
+          </>
+        ) : submitStatus === "success" ? (
+          <>
+            <CheckCircle2 size={20} />
+            Submitted Successfully!
+          </>
+        ) : submitStatus === "error" ? (
+          <>
+            <AlertCircle size={20} />
+            Submission Failed
           </>
         ) : (
           <>
@@ -291,6 +357,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           </>
         )}
       </button>
+
+      {/* Error Message */}
+      {submitStatus === "error" && errorMessage && (
+        <div className="text-red-500 text-sm text-center">{errorMessage}</div>
+      )}
     </form>
   );
 };

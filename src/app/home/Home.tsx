@@ -50,10 +50,12 @@ interface SanityDeveloper {
   order: number;
 }
 
-interface SanityGalleryVideo {
+interface SanityGalleryMedia {
   _id: string;
   title: string;
-  video: { asset: { url: string } };
+  mediaType: "image" | "video";
+  video?: { asset: { url: string } };
+  image?: { asset: { url: string } };
   likes?: string;
   order: number;
 }
@@ -62,7 +64,7 @@ interface HomeProps {
   sanityTestimonials?: SanityTestimonial[];
   sanityProperties?: SanityProperty[];
   sanityDevelopers?: SanityDeveloper[];
-  sanityGalleryVideos?: SanityGalleryVideo[];
+  sanityGalleryVideos?: SanityGalleryMedia[];
 }
 
 export default function Home({

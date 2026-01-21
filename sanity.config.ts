@@ -5,6 +5,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "@/sanity/schemas";
 import { projectId, dataset } from "@/sanity/config";
+import { structure } from "@/sanity/desk/structure";
 
 export default defineConfig({
   name: "raasta-studio",
@@ -14,7 +15,12 @@ export default defineConfig({
   projectId,
   dataset,
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure,
+    }),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,

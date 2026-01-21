@@ -267,11 +267,17 @@ export async function getDevelopers() {
   }
 }
 
-export async function getGalleryVideos() {
-  const query = `*[_type == "galleryItem" && mediaType == "video"] | order(order asc) {
+export async function getGalleryMedia() {
+  const query = `*[_type == "galleryItem"] | order(order asc) {
     _id,
     title,
+    mediaType,
     video {
+      asset -> {
+        url
+      }
+    },
+    image {
       asset -> {
         url
       }
@@ -281,12 +287,17 @@ export async function getGalleryVideos() {
   }`;
 
   try {
-    const videos = await client.fetch(query);
-    return videos;
+    const media = await client.fetch(query);
+    return media;
   } catch (error) {
-    console.error("Error fetching gallery videos from Sanity:", error);
+    console.error("Error fetching gallery media from Sanity:", error);
     return [];
   }
+}
+
+// Keep the old function name for backward compatibility
+export async function getGalleryVideos() {
+  return getGalleryMedia();
 }
 
 export async function getTeamMembers(section?: string) {

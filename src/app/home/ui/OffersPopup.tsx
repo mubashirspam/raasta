@@ -7,15 +7,16 @@ import {
   Sparkles,
   Phone,
   MessageCircle,
-  Building2,
-  TrendingUp,
-  Shield,
+  Calendar,
+  Clock,
+  UserCheck,
   Gift,
   ChevronDown,
   Star,
 } from "lucide-react";
 
-const POPUP_DELAY = 10000; // 10 seconds
+const POPUP_DELAY = 30000; // 30 seconds
+const SESSION_KEY = "consultation_popup_shown";
 
 interface OffersPopupProps {
   forceShow?: boolean;
@@ -29,7 +30,7 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
     name: "",
     phone: "",
     email: "",
-    budget: "",
+    preferredTime: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -40,67 +41,91 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
       return;
     }
 
-    // Always show popup after 10 seconds on every page load/reload
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, POPUP_DELAY);
+    // Check if popup was already shown in this session
+    const wasShown = sessionStorage.getItem(SESSION_KEY);
 
-    return () => clearTimeout(timer);
+    if (!wasShown) {
+      // Show popup after 30 seconds on first visit in this session
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        sessionStorage.setItem(SESSION_KEY, "true");
+      }, POPUP_DELAY);
+
+      return () => clearTimeout(timer);
+    }
   }, [forceShow]);
 
   const handleClose = () => {
     setIsOpen(false);
+    // Mark as shown in this session
+    sessionStorage.setItem(SESSION_KEY, "true");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("/api/submit-offer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    setSubmitted(true);
+      const data = await response.json();
 
-    // Close popup after success message
-    setTimeout(() => {
-      setIsOpen(false);
-      setSubmitted(false);
-      setFormData({ name: "", phone: "", email: "", budget: "" });
-    }, 2000);
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit form");
+      }
+
+      setIsSubmitting(false);
+      setSubmitted(true);
+
+      // Close popup after success message
+      setTimeout(() => {
+        setIsOpen(false);
+        setSubmitted(false);
+        setFormData({ name: "", phone: "", email: "", preferredTime: "" });
+      }, 2000);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setIsSubmitting(false);
+      alert("Failed to submit form. Please try again.");
+    }
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const offers = [
+  const consultationBenefits = [
+    {
+      icon: Calendar,
+      title: "Free Consultation",
+      description: "One-on-one session with our experts",
+    },
+    {
+      icon: UserCheck,
+      title: "Personalized Advice",
+      description: "Tailored recommendations for your needs",
+    },
     {
       icon: Gift,
-      title: "Exclusive Offers",
-      description: "Get access to off-market properties",
-    },
-    {
-      icon: TrendingUp,
-      title: "Best ROI",
-      description: "Premium locations with high returns",
-    },
-    {
-      icon: Shield,
-      title: "Golden Visa",
-      description: "Free assistance with Golden Visa",
+      title: "Exclusive Insights",
+      description: "Market trends and investment opportunities",
     },
   ];
 
-  const budgetOptions = [
-    "Select Budget Range",
-    "Under AED 1 Million",
-    "AED 1M - 3M",
-    "AED 3M - 5M",
-    "AED 5M - 10M",
-    "AED 10M+",
+  const timeOptions = [
+    "Select Preferred Time",
+    "Morning (9 AM - 12 PM)",
+    "Afternoon (12 PM - 3 PM)",
+    "Evening (3 PM - 6 PM)",
+    "Flexible - Anytime",
   ];
 
   return (
@@ -147,9 +172,9 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
 
                 {/* Headline */}
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3 leading-tight drop-shadow-md">
-                  Discover{" "}
+                  Get a Free{" "}
                   <span className="text-yellow-300 relative inline-block">
-                    Premium
+                    One-to-One
                     <svg
                       className="absolute w-full h-2 -bottom-1 left-0 text-yellow-300/30"
                       viewBox="0 0 100 10"
@@ -163,12 +188,12 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                       />
                     </svg>
                   </span>{" "}
-                  Properties in Dubai
+                  Consultation
                 </h2>
 
                 <p className="text-blue-50 mb-8 text-lg font-medium">
-                  Get exclusive access to Dubai's finest real estate
-                  opportunities
+                  Book a personalized consultation with our Dubai real estate
+                  experts
                 </p>
 
                 {/* Investment Badge */}
@@ -181,22 +206,22 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                   </span>
                 </div>
 
-                {/* Offers Grid */}
+                {/* Benefits Grid */}
                 <div className="space-y-4">
-                  {offers.map((offer, idx) => (
+                  {consultationBenefits.map((benefit, idx) => (
                     <div
                       key={idx}
                       className="flex items-center gap-4 p-4 bg-black/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 transition-colors group"
                     >
                       <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-teal-900/5 group-hover:scale-110 transition-transform">
-                        <offer.icon className="w-6 h-6 text-teal-600" />
+                        <benefit.icon className="w-6 h-6 text-teal-600" />
                       </div>
                       <div>
                         <h4 className="text-white font-bold mb-0.5 text-lg">
-                          {offer.title}
+                          {benefit.title}
                         </h4>
                         <p className="text-blue-100 text-sm font-medium">
-                          {offer.description}
+                          {benefit.description}
                         </p>
                       </div>
                     </div>
@@ -217,16 +242,16 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
 
                 <div className="md:hidden mb-6">
                   <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                    Discover Premium Properties
+                    Free Consultation
                   </h2>
                   <p className="text-slate-600">
-                    Enter your details for exclusive access.
+                    Book your one-on-one session with our experts.
                   </p>
                 </div>
 
                 <p className="text-slate-600 mb-6 hidden md:block">
-                  Enter your details to receive our exclusive property portfolio
-                  and investment guide.
+                  Schedule a personalized consultation to discuss your real
+                  estate goals and get expert advice.
                 </p>
 
                 {submitted ? (
@@ -307,16 +332,16 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                       />
                     </div>
 
-                    {/* Budget */}
+                    {/* Preferred Time */}
                     <div className="relative">
                       <select
-                        name="budget"
-                        value={formData.budget}
+                        name="preferredTime"
+                        value={formData.preferredTime}
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 sm:py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 appearance-none focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all cursor-pointer text-sm sm:text-base"
                       >
-                        {budgetOptions.map((opt, idx) => (
+                        {timeOptions.map((opt, idx) => (
                           <option
                             key={idx}
                             value={idx === 0 ? "" : opt}
@@ -342,8 +367,8 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       ) : (
                         <>
-                          <Sparkles size={18} />
-                          Get Exclusive Access
+                          <Calendar size={18} />
+                          Book Free Consultation
                         </>
                       )}
                     </button>

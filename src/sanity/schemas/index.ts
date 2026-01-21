@@ -4,6 +4,8 @@ export { galleryItem } from "./gallery";
 export { testimonial } from "./testimonial";
 export { default as developer } from "./developer";
 export { teamMember } from "./teamMember";
+export { contactSubmission } from "./contactSubmission";
+export { consultationSubmission, offerSubmission } from "./offerSubmission";
 
 import { property } from "./property";
 import { agent } from "./agent";
@@ -11,6 +13,8 @@ import { galleryItem } from "./gallery";
 import { testimonial } from "./testimonial";
 import developer from "./developer";
 import { teamMember } from "./teamMember";
+import { contactSubmission } from "./contactSubmission";
+import { consultationSubmission, offerSubmission } from "./offerSubmission";
 
 export const schemaTypes = [
   property,
@@ -19,4 +23,6 @@ export const schemaTypes = [
   testimonial,
   developer,
   teamMember,
+  contactSubmission,
+  consultationSubmission,
 ];

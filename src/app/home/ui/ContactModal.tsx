@@ -2,6 +2,7 @@
 
 import React from "react";
 import { X } from "lucide-react";
+import { ContactForm } from "../forms/ContactForm";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -16,60 +17,28 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/30 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white/90 backdrop-blur-xl border border-white rounded-3xl shadow-2xl p-8 max-w-md w-full relative">
+      <div className="bg-white/90 backdrop-blur-xl border border-white rounded-3xl shadow-2xl p-8 max-w-md w-full relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors"
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors z-10"
         >
           <X size={20} />
         </button>
 
-        <h2 className="text-2xl font-bold text-slate-800 mb-2">
-          Request a Viewing
-        </h2>
+        <h2 className="text-2xl font-bold text-slate-800 mb-2">Get in Touch</h2>
         <p className="text-slate-500 text-sm mb-6">
           Leave your details and an agent will contact you shortly.
         </p>
 
-        <form className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all"
-              placeholder="John Doe"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all"
-              placeholder="+971 50..."
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all"
-              placeholder="john@example.com"
-            />
-          </div>
-
-          <button
-            type="button"
-            className="w-full py-4 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white rounded-xl font-bold shadow-lg shadow-teal-500/30 hover:shadow-teal-500/40 hover:scale-[1.02] transition-all"
-          >
-            Submit Request
-          </button>
-        </form>
+        <ContactForm
+          variant="light"
+          source="contact_modal"
+          onSuccess={() => {
+            setTimeout(() => {
+              onClose();
+            }, 2500);
+          }}
+        />
       </div>
     </div>
   );

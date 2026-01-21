@@ -16,6 +16,8 @@ export const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
   const [shouldLoad, setShouldLoad] = useState(false);
   const [cachedVideoUrl, setCachedVideoUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -80,7 +82,7 @@ export const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
       {
         rootMargin: "200px",
         threshold: 0.1,
-      }
+      },
     );
 
     if (cardRef.current) {
@@ -140,12 +142,44 @@ export const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
             />
           )
         ) : (
-          <img
-            src={item.url}
-            alt={item.caption}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          <>
+            {shouldLoad ? (
+              <>
+                {/* Loading placeholder while image loads */}
+                {!imageLoaded && !imageError && (
+                  <div className="absolute inset-0 w-full h-full bg-slate-300 animate-pulse flex items-center justify-center">
+                    <div className="text-slate-500 text-xs">Loading...</div>
+                  </div>
+                )}
+
+                {/* Error state for images */}
+                {imageError && (
+                  <div className="absolute inset-0 w-full h-full bg-slate-200 flex items-center justify-center">
+                    <div className="text-slate-400 text-xs text-center px-4">
+                      Image unavailable
+                    </div>
+                  </div>
+                )}
+
+                {/* Actual image */}
+                <img
+                  src={item.url}
+                  alt={item.caption}
+                  className={`w-full h-full object-cover transition-opacity duration-300 ${
+                    imageLoaded ? "opacity-100" : "opacity-0"
+                  }`}
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => {
+                    setImageError(true);
+                    console.error(`Failed to load image: ${item.url}`);
+                  }}
+                />
+              </>
+            ) : (
+              /* Initial placeholder before lazy loading triggers */
+              <div className="absolute inset-0 w-full h-full bg-slate-200" />
+            )}
+          </>
         )}
 
         {/* Hover Info Overlay */}
