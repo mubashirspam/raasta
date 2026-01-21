@@ -28,7 +28,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 4,
-    title: "Golden Visa Consultation",
+    title: "Golden Visa ",
     description:
       "Comprehensive legal guidance on obtaining your 10-year UAE Golden Residency through real estate investment.",
     icon: Stamp,

@@ -18,9 +18,7 @@ interface MarqueeProps {
   developers?: Developer[];
 }
 
-const fallbackLogos = [
-  { name: "Emaar", src: "/companies-logo/emaar.png" },
-];
+const fallbackLogos = [{ name: "Emaar", src: "/companies-logo/emaar.png" }];
 
 export const Marquee: React.FC<MarqueeProps> = ({ developers }) => {
   const logos =
@@ -33,15 +31,15 @@ export const Marquee: React.FC<MarqueeProps> = ({ developers }) => {
 
   return (
     <div
-      className="py-6 -rotate-1 overflow-hidden border-y-2 border-black relative z-50"
+      className="py-2 md:py-6 -rotate-3 md:-rotate-1 overflow-hidden border-y-2 border-black relative z-50"
       style={{
         background:
-          "linear-gradient(43deg, #eed7f5 0%, #fccec2 50%, #c6e1fb 100%)",
+          "linear-gradient(45deg, #eed7f5 0%, #fccec2 50%, #c6e1fb 100%)",
       }}
     >
-      <div className="flex whitespace-nowrap animate-marquee">
+      <div className="flex w-max animate-marquee">
         {/* First set */}
-        <div className="flex gap-12 items-center">
+        <div className="flex gap-8 md:gap-16 items-center px-4 md:px-8">
           {logos.map((company, idx) => (
             <div
               key={idx}
@@ -59,11 +57,11 @@ export const Marquee: React.FC<MarqueeProps> = ({ developers }) => {
           ))}
         </div>
         {/* Duplicate for seamless loop */}
-        <div className="flex gap-12 items-center ml-12">
+        <div className="flex gap-8 md:gap-16 items-center px-4 md:px-8">
           {logos.map((company, idx) => (
             <div
               key={`dup-${idx}`}
-              className="flex-shrink-0 h-10 flex items-center justify-center"
+              className="shrink-0 h-10 flex items-center justify-center"
             >
               <Image
                 src={company.src}

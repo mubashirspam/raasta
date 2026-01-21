@@ -13,7 +13,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="group relative p-6 md:p-8 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/20">
+    <div className="group relative p-4 md:p-8 rounded-xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-indigo-500/20">
       {/* Glassmorphism Background */}
       <div className="absolute inset-0 bg-white/40 backdrop-blur-xl border border-white/50 rounded-3xl z-0 transition-colors duration-300 group-hover:bg-white/60"></div>
 
@@ -48,7 +48,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
       {/* Content - Mobile Layout */}
       <div className="relative z-10 md:hidden">
         {/* Icon and Title Row */}
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-4">
           <div
             className={`p-3 rounded-2xl bg-gradient-to-br ${service.gradient} shadow-lg shadow-indigo-500/10 text-white flex-shrink-0`}
           >
@@ -57,23 +57,19 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           <h3 className="text-lg font-bold text-slate-800 tracking-tight flex-1">
             {service.title}
           </h3>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex items-center gap-4 text-sm font-semibold text-indigo-600 mt-2"
+          >
+            <ChevronDown
+              size={16}
+              className={`transition-transform duration-300 ${
+                isExpanded ? "rotate-180" : ""
+              }`}
+            />
+          </button>
         </div>
 
-        {/* Learn More Button */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 text-sm font-semibold text-indigo-600 mt-2"
-        >
-          <span>Learn More</span>
-          <ChevronDown
-            size={16}
-            className={`transition-transform duration-300 ${
-              isExpanded ? "rotate-180" : ""
-            }`}
-          />
-        </button>
-
-        {/* Expandable Description */}
         <div
           className={`grid transition-all duration-300 ${
             isExpanded ? "grid-rows-[1fr] mt-3" : "grid-rows-[0fr]"

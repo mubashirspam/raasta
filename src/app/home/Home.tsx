@@ -5,7 +5,7 @@ import { Navbar, Footer } from "./layout";
 import { ContactModal, OffersPopup } from "./ui";
 import {
   HeroSection,
-  FeaturedListings,
+ 
   GallerySection,
   Services,
   WhoWeSupport,
@@ -85,13 +85,14 @@ export default function Home({
       <OffersPopup />
       <main className="relative z-10">
         <HeroSection />
+         <AboutSection />
         <Services />
         <Marquee developers={sanityDevelopers} />
         <WhoWeSupport />
         <RealEstatePrinciples />
-        <FeaturedListings sanityProperties={sanityProperties} />
+        {/* <FeaturedListings sanityProperties={sanityProperties} /> */}
         {/* <WhyDubai /> */}
-        <AboutSection />
+       
         <GallerySection videos={sanityGalleryVideos} />
         <Testimonial sanityTestimonials={sanityTestimonials} />
 

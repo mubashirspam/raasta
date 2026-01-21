@@ -1,5 +1,5 @@
 export { HeroSection } from "./HeroSection";
-export { FeaturedListings } from "./FeaturedListings";
+// export { FeaturedListings } from "./FeaturedListings";
 export { Services } from "./Services";
 export { WhyDubai } from "./WhyDubai";
 export { AboutSection } from "./AboutSection";

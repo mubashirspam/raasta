@@ -75,7 +75,7 @@ const CONTENT_STEPS = [
     id: "context",
     title: "The Context",
     content:
-      "Before you invest even a single dirham, we believe you deserve clarity about where Dubai is heading, why certain locations matter, and how government visions shape real value over time. That's why we first educate you about Dubai's long-term direction: the 2040 Urban Master Plan, the D33 Economic and Social Agenda, and the future lifestyle strategies that define how communities will grow, connect, and appreciate.",
+      "Before you invest even a single dirham, we believe you deserve clarity about where Dubai is heading, why certain locations matter, and how government visions shape real value over time. That's why we first educate you about Dubai's long-term direction.",
     icon: Lightbulb,
     gradient: "from-[#2EA8FF] via-blue-500 to-cyan-500",
     shadow: "shadow-blue-500/20",
@@ -84,7 +84,7 @@ const CONTENT_STEPS = [
     id: "process",
     title: "The Process",
     content:
-      "We don't rush decisions. We help you see the bigger picture so your investment is not based on speculation, but on logic, planning, and purpose.",
+      "We don't rush decisions. We help you see the bigger picture so your investment is not based on speculation, but on logic, planning, and purpose Because when you learn first, you invest with confidence and only then you truly earn.",
     icon: Target,
     gradient: "from-violet-500 via-purple-500 to-fuchsia-500",
     shadow: "shadow-violet-500/20",
@@ -93,7 +93,7 @@ const CONTENT_STEPS = [
     id: "promise",
     title: "The Raasta Promise",
     content:
-      '"Because when you learn first, you invest with confidence and only then do you truly earn."',
+      '"Here are the 4 important things you should aware before investing in Dubai."',
     icon: Heart,
     gradient: "from-emerald-500 via-teal-500 to-cyan-500",
     shadow: "shadow-emerald-500/20",
@@ -107,7 +107,7 @@ const ExpandableText = ({ content }: { content: string }) => {
     <div className="relative group/text">
       <p
         className={`text-lg text-white/90 leading-relaxed font-medium transition-all duration-300 ${
-          isExpanded ? "" : "line-clamp-3 md:line-clamp-none"
+          isExpanded ? "" : "line-clamp-1 md:line-clamp-none"
         }`}
       >
         {content}
@@ -131,6 +131,123 @@ const ExpandableText = ({ content }: { content: string }) => {
           </>
         )}
       </button>
+    </div>
+  );
+};
+
+const MobileVisionSlider = ({ cards }: { cards: typeof VISION_CARDS }) => {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % cards.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [cards.length]);
+
+  const scrollToCard = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    <div className="lg:hidden w-full">
+      <div className="relative overflow-hidden w-full" ref={containerRef}>
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {cards.map((card) => (
+            <div key={card.id} className="min-w-full px-1">
+              <a
+                href={card.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block h-full"
+              >
+                <div className="relative h-full bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50">
+                  {/* Image Container */}
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Gradient overlay */}
+                    <div
+                      className="absolute inset-0 opacity-60"
+                      style={{
+                        background: `linear-gradient(to top, ${card.color}, transparent)`,
+                      }}
+                    />
+                    {/* Bottom Gradient for Text Contrast */}
+                    <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+                    {/* Icon Badge */}
+                    <div
+                      className="absolute top-4 left-4 w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md shadow-lg"
+                      style={{ background: `${card.color}CC` }}
+                    >
+                      <card.icon className="w-5 h-5 text-white" />
+                    </div>
+
+                    {/* External Link Icon */}
+                    <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <ExternalLink className="w-4 h-4 text-white" />
+                    </div>
+
+                    {/* Text Overlay on Image */}
+                    <div className="absolute bottom-3 left-4 right-4 z-20 text-left">
+                      <h4 className="text-xl font-bold text-white leading-tight shadow-black/50 drop-shadow-md">
+                        {card.title}
+                      </h4>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5 pt-4 text-left">
+                    <div
+                      className="text-xs font-bold uppercase tracking-wider mb-2"
+                      style={{ color: card.color }}
+                    >
+                      {card.subtitle}
+                    </div>
+
+                    <p className="text-sm text-slate-500 line-clamp-2 mb-3">
+                      {card.description}
+                    </p>
+
+                    {/* Read More Link */}
+                    <div
+                      className="inline-flex items-center gap-2 text-sm font-semibold"
+                      style={{ color: card.color }}
+                    >
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Dot Indicators */}
+      <div className="flex justify-center gap-2 mt-6">
+        {cards.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollToCard(idx)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              currentIndex === idx ? "w-6 bg-slate-800" : "w-2 bg-slate-300"
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -253,7 +370,7 @@ export const RealEstatePrinciples: React.FC = () => {
               <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-slate-900 border border-slate-800 shadow-xl shadow-slate-900/10">
                 <Sparkles className="w-4 h-4 text-amber-400 fill-amber-400" />
                 <span className="text-white font-bold tracking-widest uppercase text-sm">
-                  Raasta Philosophy
+                  Raasta Promise
                 </span>
                 <Sparkles className="w-4 h-4 text-amber-400 fill-amber-400" />
               </div>
@@ -274,7 +391,7 @@ export const RealEstatePrinciples: React.FC = () => {
                         <Lightbulb className="w-6 h-6 text-white" />
                       </div>
                       <h4 className="text-2xl font-bold text-white">
-                        The Context
+                        The Road Map
                       </h4>
                     </div>
                     <ExpandableText content={CONTENT_STEPS[1].content} />
@@ -323,10 +440,10 @@ export const RealEstatePrinciples: React.FC = () => {
                 <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-white/10 rounded-full blur-[100px]" />
 
                 <div className="relative z-10 max-w-4xl mx-auto">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-sm font-bold uppercase tracking-wider mb-6">
+                  {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white/90 text-sm font-bold uppercase tracking-wider mb-6">
                     <Heart className="w-4 h-4 text-emerald-100 fill-emerald-100" />
                     <span>The Raasta Promise</span>
-                  </div>
+                  </div> */}
 
                   <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-snug font-serif italic">
                     {CONTENT_STEPS[3].content}
@@ -343,94 +460,97 @@ export const RealEstatePrinciples: React.FC = () => {
                   className="absolute bottom-10 right-10 w-6 h-6 text-teal-200 animate-pulse opacity-50"
                   style={{ animationDelay: "1s" }}
                 />
+
+                <MobileVisionSlider cards={VISION_CARDS} />
+
+                {/* Desktop Grid */}
+                <div className="hidden lg:grid lg:grid-cols-4 gap-6 mt-8">
+                  {VISION_CARDS.map((card, idx) => (
+                    <RevealSection
+                      key={card.id}
+                      delay={0.3 + idx * 0.1}
+                      className="h-full"
+                    >
+                      <a
+                        href={card.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative block h-full"
+                      >
+                        <div className="relative h-full bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:shadow-slate-300/50 transition-all duration-500 hover:-translate-y-2">
+                          {/* Image Container */}
+                          <div className="relative h-40 overflow-hidden">
+                            <Image
+                              src={card.image}
+                              alt={card.title}
+                              fill
+                              className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            {/* Gradient overlay */}
+                            <div
+                              className="absolute inset-0 opacity-60 group-hover:opacity-70 transition-opacity duration-500"
+                              style={{
+                                background: `linear-gradient(to top, ${card.color}, transparent)`,
+                              }}
+                            />
+
+                            {/* Bottom Gradient for Text Contrast */}
+                            <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+                            {/* Icon Badge */}
+                            <div
+                              className="absolute top-3 left-3 w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                              style={{ background: `${card.color}CC` }}
+                            >
+                              <card.icon className="w-5 h-5 text-white" />
+                            </div>
+
+                            {/* External Link Icon */}
+                            <div className="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                              <ExternalLink className="w-4 h-4 text-white" />
+                            </div>
+
+                            {/* Text Overlay on Image */}
+                            <div className="absolute bottom-3 left-3 right-3 z-20">
+                              <h4 className="text-base font-bold text-white leading-tight shadow-black/50 drop-shadow-md">
+                                {card.title}
+                              </h4>
+                            </div>
+                          </div>
+
+                          {/* Content */}
+                          <div className="p-5 pt-3">
+                            <div
+                              className="text-[10px] font-bold uppercase tracking-wider mb-1"
+                              style={{ color: card.color }}
+                            >
+                              {card.subtitle}
+                            </div>
+
+                            <p className="text-xs text-slate-500 line-clamp-2">
+                              {card.description}
+                            </p>
+
+                            {/* Read More Link */}
+                            <div
+                              className="mt-3 inline-flex items-center gap-2 text-xs font-semibold transition-all duration-300 group-hover:gap-3"
+                              style={{ color: card.color }}
+                            >
+                              <span>Learn More</span>
+                              <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </RevealSection>
+                  ))}
+                </div>
               </div>
             </div>
           </RevealSection>
         </div>
 
         {/* Vision Cards - Horizontal Scroll on Mobile */}
-        <div
-          className="flex lg:grid lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto pb-8 lg:pb-0 snap-x snap-mandatory -mx-4 px-4 no-scrollbar items-stretch"
-          style={{ scrollBehavior: "smooth" }}
-        >
-          {VISION_CARDS.map((card, idx) => (
-            <RevealSection
-              key={card.id}
-              delay={0.3 + idx * 0.1}
-              className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-auto snap-center h-full"
-            >
-              <a
-                href={card.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block h-full"
-              >
-                <div className="relative h-full bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:shadow-slate-300/50 transition-all duration-500 hover:-translate-y-2">
-                  {/* Image Container */}
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    {/* Gradient overlay */}
-                    <div
-                      className="absolute inset-0 opacity-60 group-hover:opacity-70 transition-opacity duration-500"
-                      style={{
-                        background: `linear-gradient(to top, ${card.color}, transparent)`,
-                      }}
-                    />
-
-                    {/* Icon Badge */}
-                    <div
-                      className="absolute top-4 left-4 w-12 h-12 rounded-2xl flex items-center justify-center backdrop-blur-md shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
-                      style={{ background: `${card.color}CC` }}
-                    >
-                      <card.icon className="w-6 h-6 text-white" />
-                    </div>
-
-                    {/* External Link Icon */}
-                    <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                      <ExternalLink className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <div
-                      className="text-xs font-bold uppercase tracking-wider mb-2"
-                      style={{ color: card.color }}
-                    >
-                      {card.subtitle}
-                    </div>
-                    <h4 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
-                      {card.title}
-                    </h4>
-                    <p className="text-sm text-slate-500">{card.description}</p>
-
-                    {/* Read More Link */}
-                    <div
-                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300 group-hover:gap-3"
-                      style={{ color: card.color }}
-                    >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </div>
-                  </div>
-
-                  {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-slate-100">
-                    <div
-                      className="h-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700"
-                      style={{ background: card.color }}
-                    />
-                  </div>
-                </div>
-              </a>
-            </RevealSection>
-          ))}
-        </div>
       </div>
     </section>
   );

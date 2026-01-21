@@ -275,7 +275,8 @@ export default function AboutPageContent({
                         conversations, trust, shared risks, and a deep belief in
                         doing things the right way. Founded by{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Navas Nazar
+                        
+                           Muhammad Najeeb Nazar
                         </strong>
                         ,{" "}
                         <strong className="text-emerald-600">
@@ -283,7 +284,7 @@ export default function AboutPageContent({
                         </strong>
                         , and{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Najeeb Nazar
+                           Muhammad Navas Nazar
                         </strong>
                         .
                       </p>
@@ -396,29 +397,8 @@ export default function AboutPageContent({
                     </div>
                   </div>
 
-                  {/* Founders Names - Below Image */}
-                  <div className="mt-6 space-y-3">
-                    {[
-                      { name: "Muhammad Navas Nazar" },
-                      { name: "Geetansh Suri" },
-                      { name: "Muhammad Najeeb Nazar" },
-                    ].map((founder, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between p-4 rounded-xl bg-white/90 backdrop-blur-sm border border-emerald-100/50  hover:border-emerald-200 transition-all duration-300 group"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform duration-300" />
-                          <p className="text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
-                            {founder.name}
-                          </p>
-                        </div>
-                        <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-1 rounded-full border border-emerald-100">
-                          Co-Founder
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+
+                  
                 </div>
               </div>
             </div>

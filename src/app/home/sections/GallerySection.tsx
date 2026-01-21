@@ -32,7 +32,6 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
   const [offsetY, setOffsetY] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
-  //
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
@@ -60,9 +59,30 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
     { speed: 0.2, marginTop: "450px" },
   ];
 
+  const [deviceType, setDeviceType] = useState<"mobile" | "tablet" | "desktop">(
+    "desktop",
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setDeviceType("mobile");
+      } else if (width < 1024) {
+        setDeviceType("tablet");
+      } else {
+        setDeviceType("desktop");
+      }
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const distributeVideos = () => {
     if (!videos || videos.length === 0) {
-      return GALLERY_COLUMNS; // Fallback to static data
+      return GALLERY_COLUMNS;
     }
 
     const columns: MediaItem[][] = [[], [], [], [], [], [], []];
@@ -88,47 +108,74 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
       }));
 
     if (mediaItems.length === 0) {
-      return GALLERY_COLUMNS; // Fallback if no valid videos
+      return GALLERY_COLUMNS;
     }
 
-    // Define max items per column based on which devices will see it
-    // Column 0: Only tablet/desktop sees it - max 5 (tablet limit)
-    // Column 1-3: Mobile sees these - max 6 (mobile limit)
-    // Column 4: Only tablet/desktop sees it - max 5 (tablet limit)
-    // Column 5-6: Only desktop sees these - max 4 (desktop limit)
-    const columnMaxItems = [5, 6, 6, 6, 5, 4, 4];
+    // Default Desktop Logic (Sequential Filling)
+    let columnPriority: number[] = [0, 1, 2, 3, 4, 5, 6];
+    let columnMaxItems: number[] = [4, 4, 4, 4, 4, 4, 4];
 
-    // Distribute items round-robin across all columns respecting max limits
+    if (deviceType === "tablet") {
+      // Tablet Logic: 3 -> 2,4 -> 1,5,6,7 (0,5,6)
+      // Prioritize filling center outward partially
+      // Note: User priority group 1: [2], Max 5
+      // Group 2: [1, 3], Max 5
+      // Group 3: [0, 5, 6], Max 5 (Includes 4 in last group as fallback)
+      columnPriority = [2, 1, 3, 4, 5, 6];
+      columnMaxItems = [5, 5, 5, 5, 5, 5];
+    } else if (deviceType === "mobile") {
+      // Mobile Logic: 3 -> 2,4 -> 1,6,7 (0,5,6)
+      // Max 8 videos per column
+      columnPriority = [2, 1, 3, 4, 5, 6];
+      columnMaxItems = [0, 5, 6, 6, 6, 6];
+    }
+
     let itemIndex = 0;
-    let round = 0;
 
-    while (itemIndex < mediaItems.length) {
-      let addedThisRound = false;
+    // Fill based on priority groups if needed, or round-robin through priority list
+    // The user requested standard round-robin for desktop.
+    // For Tablet/Mobile: "start with X fill max... then Y fill max..."
+    // This implies filling each group to capacity before moving to next.
 
-      // Try to add one item to each column in this round
-      for (let colIdx = 0; colIdx < 7; colIdx++) {
+    if (deviceType === "desktop") {
+      while (itemIndex < mediaItems.length) {
+        let addedThisRound = false;
+        for (let i = 0; i < columnPriority.length; i++) {
+          const colIdx = columnPriority[i];
+          if (itemIndex >= mediaItems.length) break;
+          if (columns[colIdx].length < columnMaxItems[colIdx]) {
+            columns[colIdx].push(mediaItems[itemIndex]);
+            itemIndex++;
+            addedThisRound = true;
+          }
+        }
+        if (!addedThisRound) break;
+      }
+    } else {
+      // Priority Filling for Mobile/Tablet
+      // Priority Groups based on description
+      const priorityGroups =
+        deviceType === "tablet" ? [[2], [1, 3], [4, 5]] : [[2], [1, 3], [4, 5]];
+
+      for (const group of priorityGroups) {
         if (itemIndex >= mediaItems.length) break;
 
-        // Only add if column hasn't reached its max
-        if (columns[colIdx].length < columnMaxItems[colIdx]) {
-          columns[colIdx].push(mediaItems[itemIndex]);
-          itemIndex++;
-          addedThisRound = true;
+        // Fill current group until max or items run out
+        let groupFull = false;
+        while (!groupFull && itemIndex < mediaItems.length) {
+          let addedToGroup = false;
+          for (const colIdx of group) {
+            if (itemIndex >= mediaItems.length) break;
+            if (columns[colIdx].length < columnMaxItems[colIdx]) {
+              columns[colIdx].push(mediaItems[itemIndex]);
+              itemIndex++;
+              addedToGroup = true;
+            }
+          }
+          if (!addedToGroup) groupFull = true;
         }
       }
-
-      // If we couldn't add anything this round, all columns are full
-      if (!addedThisRound) break;
-      round++;
     }
-
-    // Fill empty columns with at least one item if available
-    columns.forEach((column, colIndex) => {
-      if (column.length === 0 && mediaItems.length > 0) {
-        const videoIndex = colIndex % mediaItems.length;
-        column.push(mediaItems[videoIndex]);
-      }
-    });
 
     return columns;
   };
@@ -149,9 +196,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
         <div className="absolute z-30 inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-100" />
       </div>
 
-      <div className="relative z-20 w-full h-[1150px] md:h-[1200px] lg:h-[1350px]">
+      <div className="relative z-20 w-full h-[1000px] md:h-[1200px] lg:h-[1350px]">
         <div className="text-center mb-16 px-4 relative">
-          {/* Decorative elements */}
           <div className="absolute left-1/2 -translate-x-1/2 top-0 w-px h-12 bg-linear-to-b from-transparent via-[#2EA8FF]/50 to-[#2EA8FF]" />
           <div className="absolute left-1/2 -translate-x-1/2 top-12 w-3 h-3 rounded-full bg-[#2EA8FF] shadow-lg shadow-[#2EA8FF]/50" />
 
@@ -203,7 +249,6 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
             </p>
           </div>
 
-          {/* Side decorative dots */}
           <div className="hidden md:block absolute left-[15%] top-1/2 -translate-y-1/2">
             <div className="flex flex-col gap-2">
               <div className="w-2 h-2 rounded-full bg-[#2EA8FF]/30" />
@@ -220,13 +265,13 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
           </div>
         </div>
 
-        <div className="h-[800px] md:h-[900px] lg:h-[1050px] overflow-hidden relative pt-[100px] w-full">
+        <div className="h-[700px] md:h-[900px] lg:h-[1050px] overflow-hidden relative pt-[100px] w-full">
           <div className="absolute inset-y-0 left-0 w-24 md:w-32 bg-linear-to-r from-pink-100 to-transparent z-30 pointer-events-none"></div>
           <div className="absolute inset-y-0 right-0 w-24 md:w-32 bg-linear-to-l from-pink-100 to-transparent z-30 pointer-events-none"></div>
           <div className="absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-pink-100 to-transparent z-30 pointer-events-none"></div>
-          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2 items-start w-[133%] md:w-[120%] lg:w-[114%] left-1/2 -translate-x-1/2 relative">
+          <div className="grid grid-cols-5 md:grid-cols-5 lg:grid-cols-7 gap-2 items-start w-[133%] md:w-[120%] lg:w-[114%] left-1/2 -translate-x-1/2 relative">
             {videoColumns.map((colData, colIndex) => {
-              const mobileVisible = colIndex >= 2 && colIndex <= 4;
+              const mobileVisible = colIndex >= 1 && colIndex <= 5;
               const tabletVisible = colIndex >= 1 && colIndex <= 5;
               const s = colData;
               return (

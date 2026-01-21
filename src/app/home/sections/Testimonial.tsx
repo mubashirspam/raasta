@@ -24,7 +24,7 @@ interface TestimonialProps {
 
 const transformSanityTestimonial = (
   t: SanityTestimonial,
-  idx: number
+  idx: number,
 ): TestimonialType => ({
   id: idx + 1,
   name: t.name,
@@ -43,12 +43,15 @@ export const Testimonial: React.FC<TestimonialProps> = ({
   const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const testimonials = sanityTestimonials
     ? sanityTestimonials.map(transformSanityTestimonial)
     : fallbackTestimonials;
 
-  const totalSlides = Math.ceil(testimonials.length / 3);
+  // Determine items per slide based on screen size
+  const itemsPerSlide = isMobile ? 1 : 3;
+  const totalSlides = Math.ceil(testimonials.length / itemsPerSlide);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % totalSlides);
@@ -63,14 +66,24 @@ export const Testimonial: React.FC<TestimonialProps> = ({
   }, []);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     if (isPaused || totalSlides <= 1) return;
     const interval = setInterval(nextSlide, AUTO_SLIDE_INTERVAL);
     return () => clearInterval(interval);
   }, [isPaused, nextSlide, totalSlides]);
 
   const getVisibleTestimonials = () => {
-    const startIndex = currentIndex * 3;
-    return testimonials.slice(startIndex, startIndex + 3);
+    const startIndex = currentIndex * itemsPerSlide;
+    return testimonials.slice(startIndex, startIndex + itemsPerSlide);
   };
 
   return (

@@ -10,7 +10,6 @@ export { Navbar, Footer } from "./layout";
 // Section Components
 export {
   HeroSection,
-  FeaturedListings,
   Services,
   WhyDubai,
   Testimonial,

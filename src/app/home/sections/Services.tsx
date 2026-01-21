@@ -100,7 +100,7 @@ export const Services: React.FC = () => {
           </div>
         </RevealSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {SERVICES.map((service, idx) => (
             <RevealSection key={service.id} delay={idx * 100}>
               <ServiceCard service={service} />
@@ -109,7 +109,7 @@ export const Services: React.FC = () => {
         </div>
 
         <RevealSection delay={600}>
-          <div className="mt-20 text-center">
+          <div className="mt-10 text-center">
             <button className="relative px-8 py-4 bg-slate-900 text-white rounded-full font-semibold shadow-2xl shadow-slate-900/30 overflow-hidden group">
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="relative flex items-center gap-2">

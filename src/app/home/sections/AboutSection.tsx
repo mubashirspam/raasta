@@ -20,8 +20,45 @@ export const AboutSection: React.FC = () => {
     setMounted(true);
   }, []);
 
+
+
+  const ExpandableText = ({ content }: { content: string }) => {
+    const [isExpanded, setIsExpanded] = React.useState(false);
+  
+    return (
+      <div className="relative group/text">
+        <p
+          className={`text-lg text-white/90 leading-relaxed font-medium transition-all duration-300 ${
+            isExpanded ? "" : "line-clamp-1 md:line-clamp-none"
+          }`}
+        >
+          {content}
+        </p>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setIsExpanded(!isExpanded);
+          }}
+          className={`mt-3 inline-flex items-center gap-1 text-sm font-bold text-white uppercase tracking-wider md:hidden ${
+            isExpanded ? "opacity-80" : "opacity-100"
+          }`}
+        >
+          {isExpanded ? (
+            <>
+              Show Less <span className="text-xs">▲</span>
+            </>
+          ) : (
+            <>
+              Read More <span className="text-xs">▼</span>
+            </>
+          )}
+        </button>
+      </div>
+    );
+  };
+
   return (
-    <section className="relative w-full py-24 overflow-hidden font-sans">
+    <section className="relative w-full py-16 overflow-hidden font-sans">
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0"
@@ -80,8 +117,8 @@ export const AboutSection: React.FC = () => {
             </h1>
 
             <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
-              More than a real estate company — a purpose-driven platform built
-              to create long-term value, meaningful growth, and lasting impact.
+              More than a real estate company a purpose driven platform built to
+              create long term value, meaningful growth, and lasting impact.
             </p>
 
             {/* Side decorative elements */}
@@ -128,7 +165,7 @@ export const AboutSection: React.FC = () => {
                     <p>
                       Founded by{" "}
                       <strong className="text-emerald-600">
-                        Muhammad Navas Nazar
+                        Muhammad Najeeb Nazar
                       </strong>
                       ,{" "}
                       <strong className="text-emerald-600">
@@ -136,17 +173,18 @@ export const AboutSection: React.FC = () => {
                       </strong>
                       , and{" "}
                       <strong className="text-emerald-600">
-                        Muhammad Najeeb Nazar
+                        Muhammad Navas Nazar
                       </strong>
                       .
                     </p>
                     <p>
-                      At the heart of Raasta is a simple truth — every path we
-                      create begins with the client. Their goals, concerns, and
-                      dreams shape every decision we take.
+                      Our concept is simple {"-> "}
+                      Real estate should never be about transactions alone. It
+                      can be a tool to create impact, not just income.
                     </p>
                     <p className="text-lg font-semibold text-slate-800 pt-2">
-                      We don't see ourselves ahead of you — we walk with you.
+                      We don't see ourselves ahead of our team, we walk with
+                      them.
                     </p>
 
                     <Link href="/about">
@@ -178,30 +216,6 @@ export const AboutSection: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/30 via-transparent to-transparent" />
                     </div>
                   </div>
-
-                  {/* Founders Names - Below Image */}
-                  <div className="mt-6 space-y-3">
-                    {[
-                      { name: "Muhammad Navas Nazar" },
-                      { name: "Geetansh Suri" },
-                      { name: "Muhammad Najeeb Nazar" },
-                    ].map((founder, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between p-3 rounded-xl bg-white/90 backdrop-blur-sm border border-emerald-100/50 hover:border-emerald-200 transition-all duration-300 group"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform duration-300" />
-                          <p className="text-sm font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
-                            {founder.name}
-                          </p>
-                        </div>
-                        <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-1 rounded-full border border-emerald-100">
-                          Co-Founder
-                        </p>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
@@ -209,12 +223,12 @@ export const AboutSection: React.FC = () => {
         </RevealSection>
 
         {/*  Mission & Vision */}
-        <div className="grid lg:grid-cols-2 gap-6 mb-12">
+        <div className="grid lg:grid-cols-3 gap-5 md:gap-6 mb-0">
           <RevealSection delay={500}>
-            <div className="relative h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-2xl overflow-hidden">
+            <div className="relative h-full p-5 md:p-7 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-2xl overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <Target size={28} />
                   </div>
@@ -222,66 +236,49 @@ export const AboutSection: React.FC = () => {
                     Our Mission
                   </h3>
                 </div>
-                <p className="text-white/90 text-base md:text-lg leading-relaxed">
-                  To transform the lives of everyone connected to Raasta Realty
-                  i.e. clients, investors, agents, and referral partners, while
-                  extending our impact to the deserving souls supported through
-                  our legacy fund.
-                </p>
+                <ExpandableText
+                  content="To transform the lives of everyone connected to Raasta Realty i.e. clients, investors, agents, and referral partners, while extending our impact to the deserving souls supported through our legacy fund."
+                />
               </div>
             </div>
           </RevealSection>
 
           <RevealSection delay={600}>
-            <div className="relative h-full p-8 md:p-10 rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 text-white shadow-2xl overflow-hidden">
+            <div className="relative h-full p-5 md:p-7 rounded-3xl bg-gradient-to-br from-orange-400 via-orange-400 to-pink-400 text-white shadow-2xl overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Heart size={28} />
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold">Why Raasta</h3>
+                </div>
+                <ExpandableText
+                  content="A fixed 6% of our revenue from every deal is dedicated to charitable causes education, healthcare, shelter, and essential needs."
+                />
+              </div>
+            </div>
+          </RevealSection>
+
+          <RevealSection delay={600}>
+            <div className="relative h-full p-5 md:p-7 rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 text-white shadow-2xl overflow-hidden">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <Eye size={28} />
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold">Our Vision</h3>
                 </div>
-                <p className="text-white/90 text-base md:text-lg leading-relaxed">
-                  Through every deal, we uplift lives. Our vision is to be
-                  remembered not for the number of sales we made, but for the
-                  difference we created in people's lives.
-                </p>
+                <ExpandableText
+                  content="Through every deal, we uplift lives. Our vision is to be remembered not for the number of sales we made, but for the difference we created in people's lives."
+                />
               </div>
             </div>
           </RevealSection>
         </div>
 
         {/* CTA */}
-        <div
-          className={`relative w-full rounded-[2.5rem] overflow-hidden transition-all duration-1000 delay-700 ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              }}
-            />
-          </div>
-          <div className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-6 py-16 md:py-20 text-center">
-            <Sparkles className="w-12 h-12 text-white/80 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Ready to Walk This Path With Us?
-            </h2>
-            <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-              Join us on a journey where success creates legacy.
-            </p>
-            <Link href="/about">
-              <button className="px-8 py-4 bg-white text-emerald-600 rounded-full font-bold flex items-center gap-2 hover:bg-slate-100 transition-colors shadow-xl mx-auto">
-                Learn More About Us
-                <ArrowRight size={18} />
-              </button>
-            </Link>
-          </div>
-        </div>
       </div>
     </section>
   );
