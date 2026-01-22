@@ -43,80 +43,61 @@ const TeamMemberCard: React.FC<{
   member: TeamMember;
   variant?: "large" | "medium" | "small";
   gradientColor?: "violet" | "blue" | "pink" | "amber" | "emerald";
-}> = ({ member, variant = "medium", gradientColor = "emerald" }) => {
+  index?: number;
+}> = ({ member, variant = "medium", gradientColor = "emerald", index = 0 }) => {
   const imageUrl =
     member.image?.asset?.url ||
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop";
 
-  const sizeClasses = {
-    large: "h-[420px]",
-    medium: "h-[320px]",
-    small: "h-[280px]",
-  };
+  const allGradients = [
+    "bg-gradient-to-br from-violet-200 via-purple-100 to-pink-200",
+    "bg-gradient-to-br from-blue-200 via-cyan-100 to-sky-200",
+    "bg-gradient-to-br from-pink-200 via-rose-100 to-orange-200",
+    "bg-gradient-to-br from-amber-200 via-yellow-100 to-orange-200",
+    "bg-gradient-to-br from-emerald-200 via-teal-100 to-cyan-200",
+    "bg-gradient-to-br from-rose-200 via-pink-100 to-fuchsia-200",
+    "bg-gradient-to-br from-teal-200 via-emerald-100 to-green-200",
+    "bg-gradient-to-br from-indigo-200 via-blue-100 to-cyan-200",
+    "bg-gradient-to-br from-orange-200 via-amber-100 to-yellow-200",
+    "bg-gradient-to-br from-fuchsia-200 via-purple-100 to-violet-200",
+  ];
 
-  const gradientColors = {
-    violet: "from-violet-500 via-purple-500/30 to-transparent",
-    blue: "from-cyan-500 via-blue-500/30 to-transparent",
-    pink: "from-rose-500 via-pink-500/30 to-transparent",
-    amber: "from-amber-500 via-orange-500/30 to-transparent",
-    emerald: "from-emerald-500 via-teal-500/30 to-transparent",
-  };
-
-  const overlayColors = {
-    violet: "from-[#8b5cf6] via-[#a855f7]/20",
-    blue: "from-[#00f6ff] via-[#03d0ff]/20",
-    pink: "from-[#f43f5e] via-[#ec4899]/20",
-    amber: "from-[#f59e0b] via-[#fb923c]/20",
-    emerald: "from-[#10b981] via-[#14b8a6]/20",
-  };
+  const bgClass = allGradients[index % allGradients.length];
 
   return (
-    <div
-      className={`group relative w-full ${sizeClasses[variant]} rounded-[1.25rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02]`}
+    <article
+      tabIndex={0}
+      aria-label={`${member.name} — ${member.role}`}
+      className={`group relative flex items-center justify-between overflow-hidden rounded-xl pt-3 pl-3 md:pt-5 md:pl-5   transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500 ${bgClass}`}
     >
-      {/* Background Image with Zoom Effect */}
-      <div className="absolute inset-0 bg-slate-200">
-        <img
-          src={imageUrl}
-          alt={member.name}
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-        />
-        {/* Base Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent" />
-      </div>
-
-      {/* Colored gradient overlay */}
-      <div
-        className={`absolute inset-0 z-10 bg-gradient-to-t ${overlayColors[gradientColor]} to-transparent opacity-60`}
-      />
-
-      {/* Role Badge - Top Left */}
-      <div className="absolute top-4 left-4 z-20">
-        <span
-          className={`px-3 py-1.5 bg-gradient-to-r ${gradientColors[gradientColor]} backdrop-blur-md text-xs font-bold uppercase tracking-wider text-white rounded-full shadow-lg`}
-        >
-          {member.role}
-        </span>
-      </div>
-
-      {/* Bio on Hover */}
-      {member.bio && (
-        <div className="absolute inset-0 z-15 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-          <p className="relative text-white/95 text-sm text-center line-clamp-5 max-w-[90%]">
-            {member.bio}
-          </p>
-        </div>
-      )}
-
-      {/* Bottom text content */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 p-5">
-        <h3 className="text-2xl font-bold text-white leading-tight mb-1 drop-shadow-lg">
+      {/* Left: Name + Role */}
+      <div className="min-w-0 mr-2 flex-1 flex flex-col">
+        <h3 className="text-xs md:text-base font-bold text-gray-900 line-clamp-2">
           {member.name}
         </h3>
-        <p className="text-sm text-white/90 font-medium">{member.role}</p>
+        <p className="mt-1 text-[10px] md:text-xs text-gray-700 font-bold uppercase line-clamp-3">
+          {member.role}
+        </p>
       </div>
-    </div>
+
+      {/* Right: Photo (circular, slightly overlapping card edge) */}
+      <div className="relative flex-shrink-0 w-18 md:w-28 h-20 md:h-30">
+        <div className="absolute -right-0 bottom-0 ">
+          <img
+            src={imageUrl}
+            alt={member.name}
+            className="w-full h-full object-cover object-center"
+            onError={(e) => {
+              const target = e.currentTarget as HTMLImageElement;
+              target.onerror = null;
+              target.src = `data:image/svg+xml;utf8,${encodeURIComponent(
+                `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><rect width='100%' height='100%' fill='%23e5e7eb'/><text x='50%' y='50%' font-size='40' text-anchor='middle' fill='%239ca3af' dy='.3em'>No Image</text></svg>`,
+              )}`;
+            }}
+          />
+        </div>
+      </div>
+    </article>
   );
 };
 
@@ -175,9 +156,7 @@ export default function AboutPageContent({
         onClose={() => setIsModalOpen(false)}
       />
 
-      {/* Hero - Our Story Section */}
       <section className="relative pt-32 pb-10 md:pb-24 overflow-hidden">
-        {/* Background with emerald gradient */}
         <div className="absolute inset-0 z-0">
           <div
             className="absolute inset-0"
@@ -189,7 +168,6 @@ export default function AboutPageContent({
           <div className="absolute inset-0 bg-white/30 backdrop-blur-xl" />
         </div>
 
-        {/* Floating decorative elements */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-3xl animate-pulse" />
         <div
           className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-teal-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse"
@@ -212,8 +190,7 @@ export default function AboutPageContent({
           </svg>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-3 md:px-12">
-          {/* Header */}
+        <div className="relative z-10 max-w-9xl mx-auto px-3 md:px-12">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-b from-emerald-500 via-teal-500 to-cyan-500 text-white text-xs font-bold tracking-widest uppercase mb-6 shadow-xl shadow-emerald-500/25">
               <Sparkles size={14} className="animate-pulse" />
@@ -256,27 +233,21 @@ export default function AboutPageContent({
             </h1>
           </div>
 
-          {/* Main Card */}
           <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
-            {/* Card Background with gradient and pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50" />
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%2310b981%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
-            {/* Card Content */}
             <div className="relative z-10 p-6 md:p-12">
               <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-                {/* Left - Content */}
                 <div className="order-2 lg:order-1">
                   <div className="space-y-5 text-slate-700 leading-relaxed">
-                    {/* Mobile: Show limited content with Read More */}
                     <div className="lg:hidden">
                       <p className="text-lg">
                         Raasta was not built overnight; it was shaped through
                         conversations, trust, shared risks, and a deep belief in
                         doing things the right way. Founded by{" "}
                         <strong className="text-emerald-600">
-                        
-                           Muhammad Najeeb Nazar
+                          Muhammad Najeeb Nazar
                         </strong>
                         ,{" "}
                         <strong className="text-emerald-600">
@@ -284,7 +255,7 @@ export default function AboutPageContent({
                         </strong>
                         , and{" "}
                         <strong className="text-emerald-600">
-                           Muhammad Navas Nazar
+                          Muhammad Navas Nazar
                         </strong>
                         .
                       </p>
@@ -323,7 +294,6 @@ export default function AboutPageContent({
                       </details>
                     </div>
 
-                    {/* Desktop: Show full content */}
                     <div className="hidden lg:block space-y-5 text-lg">
                       <p>
                         Raasta was not built overnight; it was shaped through
@@ -396,9 +366,6 @@ export default function AboutPageContent({
                       <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/30 via-transparent to-transparent" />
                     </div>
                   </div>
-
-
-                  
                 </div>
               </div>
             </div>
@@ -562,13 +529,9 @@ export default function AboutPageContent({
         </div>
       </section>
 
-      {/* Management Team */}
-      {/* Management Team */}
       <section className="py-10 md:py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-3 md:px-12">
-          {/* Card Container */}
+        <div className="max-w-9xl mx-auto px-3 md:px-12">
           <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
-            {/* Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-sky-50" />
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%233b82f6%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
@@ -582,198 +545,138 @@ export default function AboutPageContent({
                 gradientTo="to-cyan-500"
               />
 
-              {/* Desktop: Full description */}
-              <div className="hidden md:block max-w-4xl mx-auto text-center mb-12 space-y-5">
-                <p className="text-slate-700 text-lg leading-relaxed">
-                  Behind every smooth operation and growing team at Raasta is a
-                  foundation built on care, clarity, and consistency.
-                </p>
-                <p className="text-slate-700 text-lg leading-relaxed">
-                  Our Administration and HR leadership play a vital role in
-                  shaping the culture we work in every day. From nurturing
-                  people and managing processes to ensuring fairness, balance,
-                  and structure, they create an environment where individuals
-                  can focus, grow, and give their best.
-                </p>
-                <p className="text-slate-700 text-lg leading-relaxed">
-                  This responsibility is led by{" "}
-                  <strong>Shaheen Fadil (Administrator)</strong> and{" "}
-                  <strong>Selin John (HR Manager)</strong> — they are the quiet
-                  strength behind the scenes. Through their dedication, they
-                  listen, support, organize, and guide, ensuring that both
-                  people and systems move forward together.
-                </p>
-                <p className="text-slate-700 text-lg leading-relaxed">
-                  At Raasta, their work keeps our path steady, aligned, and
-                  human at its core.
-                </p>
-              </div>
+              <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                {/* Left - Management Images */}
+                <div className="order-1 lg:order-1">
+                  <div className="grid grid-cols-2 gap-4">
+                    {teamMembers.management.slice(0, 2).map((member, index) => (
+                      <div key={member._id} className="relative group">
+                        {/* Decorative frame */}
+                        <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-blue-400 rounded-tl-lg opacity-70" />
+                        <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-cyan-400 rounded-br-lg opacity-70" />
 
-              {/* Mobile: Collapsed description with Read More */}
-              <div className="md:hidden max-w-4xl mx-auto text-center mb-8">
-                <div className="space-y-4 text-slate-700 text-base leading-relaxed">
-                  <p>
-                    Behind every smooth operation and growing team at Raasta is
-                    a foundation built on care, clarity, and consistency.
-                  </p>
-                  <p>
-                    Our Administration and HR leadership play a vital role in
-                    shaping the culture we work in every day. From nurturing
-                    people and managing processes to ensuring fairness, balance,
-                    and structure, they create an environment where individuals
-                    can focus, grow, and give their best.
-                  </p>
+                        {/* Glow effect */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-sky-500 rounded-xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
 
-                  <details className="group">
-                    <summary className="list-none text-sm font-semibold text-blue-600 cursor-pointer flex items-center justify-center gap-1 mt-3">
-                      <span className="group-open:hidden">Read more</span>
-                      <span className="hidden group-open:inline">
-                        Show less
-                      </span>
-                      <ArrowRight
-                        size={14}
-                        className="group-open:rotate-90 transition-transform"
-                      />
-                    </summary>
-                    <div className="mt-4 space-y-4 animate-fadeIn">
+                        <div className="relative aspect-square rounded-xl overflow-hidden border-2 border-white">
+                          <img
+                            src={
+                              member.image?.asset?.url ||
+                              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop"
+                            }
+                            alt={member.name}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+
+                          {/* Gradient overlay with name */}
+                          <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#00f6ff] via-[#03d0ff]/20 to-transparent">
+                            <div className="absolute bottom-0 left-0 p-3">
+                              <h4 className="text-black font-bold text-sm">
+                                {member.name}
+                              </h4>
+                              <p className="text-black text-xs">
+                                {member.role}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right - Content */}
+                <div className="order-2 lg:order-2">
+                  <div className="space-y-5 text-slate-700 leading-relaxed">
+                    {/* Mobile: Show limited content with Read More */}
+                    <div className="lg:hidden">
+                      <p className="text-lg">
+                        Behind every smooth operation and growing team at Raasta
+                        is a foundation built on care, clarity, and consistency.
+                      </p>
+                      <p className="text-lg">
+                        Our Administration and HR leadership play a vital role
+                        in shaping the culture we work in every day.
+                      </p>
+                      <details className="mt-4 group">
+                        <summary className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold cursor-pointer hover:shadow-lg transition-all duration-300 list-none">
+                          <span className="group-open:hidden">Read More</span>
+                          <span className="hidden group-open:inline">
+                            Show Less
+                          </span>
+                          <ArrowRight
+                            size={16}
+                            className="group-open:rotate-90 transition-transform"
+                          />
+                        </summary>
+                        <div className="mt-5 space-y-4 text-base animate-fadeIn">
+                          <p>
+                            This responsibility is led by{" "}
+                            <strong className="text-blue-600">
+                              Shaheen Fadil (Administrator)
+                            </strong>{" "}
+                            and{" "}
+                            <strong className="text-blue-600">
+                              Selin John (HR Manager)
+                            </strong>{" "}
+                            — they are the quiet strength behind the scenes.
+                          </p>
+                          <p>
+                            At Raasta, their work keeps our path steady,
+                            aligned, and human at its core.
+                          </p>
+                        </div>
+                      </details>
+                    </div>
+
+                    {/* Desktop: Show full content */}
+                    <div className="hidden lg:block space-y-5 text-lg">
+                      <p>
+                        Behind every smooth operation and growing team at Raasta
+                        is a foundation built on care, clarity, and consistency.
+                      </p>
+                      <p>
+                        Our Administration and HR leadership play a vital role
+                        in shaping the culture we work in every day. From
+                        nurturing people and managing processes to ensuring
+                        fairness, balance, and structure, they create an
+                        environment where individuals can focus, grow, and give
+                        their best.
+                      </p>
                       <p>
                         This responsibility is led by{" "}
-                        <strong>Shaheen Fadil (Administrator)</strong> and{" "}
-                        <strong>Selin John (HR Manager)</strong> — they are the
-                        quiet strength behind the scenes.
+                        <strong className="text-blue-600">
+                          Shaheen Fadil (Administrator)
+                        </strong>{" "}
+                        and{" "}
+                        <strong className="text-blue-600">
+                          Selin John (HR Manager)
+                        </strong>{" "}
+                        — they are the quiet strength behind the scenes. Through
+                        their dedication, they listen, support, organize, and
+                        guide, ensuring that both people and systems move
+                        forward together.
                       </p>
                       <p>
                         At Raasta, their work keeps our path steady, aligned,
                         and human at its core.
                       </p>
                     </div>
-                  </details>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {teamMembers.management.length > 0 ? (
-                  teamMembers.management.map((member) => (
-                    <TeamMemberCard
-                      key={member._id}
-                      member={member}
-                      gradientColor="blue"
-                    />
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-12">
-                    <p className="text-slate-500 text-lg">
-                      Team members will appear here once added to Sanity CMS.
-                    </p>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Media Team */}
-      <section className="py-10 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-3 md:px-12">
-          <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50" />
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ec4899%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
-
-            <div className="relative z-10 p-6 md:p-12">
-              <SectionHeader
-                badge="Media Team"
-                badgeIcon={<Camera size={14} />}
-                title="Giving Our Journey"
-                titleHighlight="A Voice"
-                gradientFrom="from-pink-500"
-                gradientTo="to-rose-500"
-              />
-
-              <div className="hidden md:block max-w-4xl mx-auto text-center mb-12 space-y-5">
-                <p className="text-slate-700 text-lg leading-relaxed">
-                  Behind every post, reel, and story at Raasta is a creative
-                  team that brings our journey to life.
-                </p>
-                <p className="text-slate-700 text-lg leading-relaxed">
-                  Our Content Creators don't just manage platforms — they
-                  capture purpose, people, and progress.
-                </p>
-                <p className="text-slate-700 text-lg leading-relaxed">
-                  By turning real moments into real stories, they shape how
-                  Raasta is seen, felt, and remembered.
-                </p>
-                <p className="text-slate-700 text-lg leading-relaxed font-semibold">
-                  They don't market properties. They give our journey a voice.
-                </p>
-              </div>
-
-              <div className="md:hidden max-w-4xl mx-auto text-center mb-8">
-                <div className="space-y-4 text-slate-700 text-base leading-relaxed">
-                  <p>
-                    Behind every post, reel, and story at Raasta is a creative
-                    team that brings our journey to life.
-                  </p>
-                  <p>
-                    Our Content Creators don't just manage platforms — they
-                    capture purpose, people, and progress.
-                  </p>
-
-                  <details className="group">
-                    <summary className="list-none text-sm font-semibold text-pink-600 cursor-pointer flex items-center justify-center gap-1 mt-3">
-                      <span className="group-open:hidden">Read more</span>
-                      <span className="hidden group-open:inline">
-                        Show less
-                      </span>
-                      <ArrowRight
-                        size={14}
-                        className="group-open:rotate-90 transition-transform"
-                      />
-                    </summary>
-                    <div className="mt-4 space-y-4 animate-fadeIn">
-                      <p>
-                        By turning real moments into real stories, they shape
-                        how Raasta is seen, felt, and remembered.
-                      </p>
-                      <p className="font-semibold">
-                        They don't market properties. They give our journey a
-                        voice.
-                      </p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {teamMembers.media.length > 0 ? (
-                  teamMembers.media.map((member) => (
-                    <TeamMemberCard
-                      key={member._id}
-                      member={member}
-                      gradientColor="pink"
-                    />
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-12">
-                    <p className="text-slate-500 text-lg">
-                      Team members will appear here once added to Sanity CMS.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Elite Agents */}
       <section className="py-10 md:py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-3 md:px-12">
+        <div className="max-w-9xl mx-auto px-3 md:px-12">
           <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50" />
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23f59e0b%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
-            <div className="relative z-10 p-6 md:p-12">
+            <div className="relative z-10 px-2 pt-6 pb-2  md:p-12">
               <SectionHeader
                 badge="Elite Agents"
                 badgeIcon={<Award size={14} />}
@@ -844,12 +747,13 @@ export default function AboutPageContent({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3">
                 {teamMembers.elite_agents.length > 0 ? (
-                  teamMembers.elite_agents.map((member) => (
+                  teamMembers.elite_agents.map((member, index) => (
                     <TeamMemberCard
                       key={member._id}
                       member={member}
+                      index={index}
                       gradientColor="amber"
                     />
                   ))
@@ -866,14 +770,109 @@ export default function AboutPageContent({
         </div>
       </section>
 
-      {/* Sales Team */}
+      {/* Media Team */}
       <section className="py-10 md:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-3 md:px-12">
+        <div className="max-w-9xl mx-auto px-3 md:px-12">
+          <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ec4899%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
+
+            <div className="relative z-10 px-2 pt-6 pb-2  md:p-12">
+              <SectionHeader
+                badge="Media Team"
+                badgeIcon={<Camera size={14} />}
+                title="Giving Our Journey"
+                titleHighlight="A Voice"
+                gradientFrom="from-pink-500"
+                gradientTo="to-rose-500"
+              />
+
+              <div className="hidden md:block max-w-4xl mx-auto text-center mb-12 space-y-5">
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Behind every post, reel, and story at Raasta is a creative
+                  team that brings our journey to life.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  Our Content Creators don't just manage platforms — they
+                  capture purpose, people, and progress.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed">
+                  By turning real moments into real stories, they shape how
+                  Raasta is seen, felt, and remembered.
+                </p>
+                <p className="text-slate-700 text-lg leading-relaxed font-semibold">
+                  They don't market properties. They give our journey a voice.
+                </p>
+              </div>
+
+              <div className="md:hidden max-w-4xl mx-auto text-center mb-8">
+                <div className="space-y-4 text-slate-700 text-base leading-relaxed">
+                  <p>
+                    Behind every post, reel, and story at Raasta is a creative
+                    team that brings our journey to life.
+                  </p>
+                  <p>
+                    Our Content Creators don't just manage platforms — they
+                    capture purpose, people, and progress.
+                  </p>
+
+                  <details className="group">
+                    <summary className="list-none text-sm font-semibold text-pink-600 cursor-pointer flex items-center justify-center gap-1 mt-3">
+                      <span className="group-open:hidden">Read more</span>
+                      <span className="hidden group-open:inline">
+                        Show less
+                      </span>
+                      <ArrowRight
+                        size={14}
+                        className="group-open:rotate-90 transition-transform"
+                      />
+                    </summary>
+                    <div className="mt-4 space-y-4 animate-fadeIn">
+                      <p>
+                        By turning real moments into real stories, they shape
+                        how Raasta is seen, felt, and remembered.
+                      </p>
+                      <p className="font-semibold">
+                        They don't market properties. They give our journey a
+                        voice.
+                      </p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                {teamMembers.media.length > 0 ? (
+                  teamMembers.media.map((member, index) => (
+                    <TeamMemberCard
+                      key={member._id}
+                      member={member}
+                      index={index}
+                      variant="small"
+                      gradientColor="pink"
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-slate-500 text-lg">
+                      Team members will appear here once added to Sanity CMS.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sales Team */}
+      <section className="py-10 md:py-10 bg-white">
+        <div className="max-w-9xl mx-auto px-3 md:px-10">
           <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50" />
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%2310b981%27%20fill-opacity=%270.06%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
 
-            <div className="relative z-10 p-6 md:p-12">
+            <div className="relative z-10 px-2 pt-6 pb-2  md:p-12">
               <SectionHeader
                 badge="Sales Team"
                 badgeIcon={<TrendingUp size={14} />}
@@ -944,12 +943,14 @@ export default function AboutPageContent({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 {teamMembers.sales.length > 0 ? (
-                  teamMembers.sales.map((member) => (
+                  teamMembers.sales.map((member, index) => (
                     <TeamMemberCard
                       key={member._id}
                       member={member}
+                      index={index}
+                      variant="small"
                       gradientColor="emerald"
                     />
                   ))
