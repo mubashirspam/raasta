@@ -554,10 +554,8 @@ export default function AboutPageContent({
                         {/* Decorative frame */}
                         <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-blue-400 rounded-tl-lg opacity-70" />
                         <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-cyan-400 rounded-br-lg opacity-70" />
-
                         {/* Glow effect */}
                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-sky-500 rounded-xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-
                         <div className="relative aspect-square rounded-xl overflow-hidden border-2 border-white">
                           <img
                             src={

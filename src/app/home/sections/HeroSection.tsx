@@ -153,17 +153,17 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mt-8 mb-1 text-center px-4 max-w-5xl mx-auto"
           >
-            <div className="relative inline-block">
-              <h2 className="relative font-poppins text-xl md:text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-500 via-orange-500 to-red-600 animate-text-shimmer leading-tight py-2">
+            <div className="relative inline-block text-center">
+              <h2 className="relative font-Arsenal text-xl md:text-2xl lg:text-4xl font-medium text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 animate-text-shimmer leading-tight py-2">
                 "Every Deal. There is Charity, a life is changed"
               </h2>
             </div>
 
-            <div className="mt-0 font-script flex flex-col sm:flex-row items-center justify-center flex-wrap gap-x-3 gap-y-1 text-xl md:text-2xl lg:text-3xl font-medium text-slate-800">
+            <div className="mt-0 flex flex-col sm:flex-row items-center justify-center flex-wrap gap-x-3 gap-y-1 text-xl md:text-xl lg:text-xl text-slate-800">
               <span>This is not a Campaign.</span>
               <span className="flex items-baseline gap-2">
                 It's{" "}
-                <span className=" text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-orange-600 font-bold leading-none py-2">
+                <span className=" text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-orange-600 leading-none py-2">
                   Our Commitment
                 </span>
               </span>
