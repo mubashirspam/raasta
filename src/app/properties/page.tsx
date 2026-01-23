@@ -1,9 +1,9 @@
 import { getProperties } from "@/sanity/lib";
 import PropertiesClient from "./PropertiesClient";
 
-// Disable automatic time-based revalidation
-// We use on-demand revalidation via Sanity webhooks instead
-export const revalidate = false;
+// Use a short revalidation time as fallback (5 minutes)
+// Primary updates come from Sanity webhooks for instant changes
+export const revalidate = 300;
 
 export default async function PropertiesPage() {
   const properties = await getProperties();
