@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   ],
 };
 
+// Disable automatic time-based revalidation
+// We use on-demand revalidation via Sanity webhooks instead
+export const revalidate = false;
+
 export default async function AboutPage() {
   const teamMembers = await getTeamMembersBySection();
 

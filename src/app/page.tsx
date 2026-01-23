@@ -6,6 +6,11 @@ import {
   getGalleryVideos,
 } from "@/sanity/lib";
 
+// Disable automatic time-based revalidation
+// We use on-demand revalidation via Sanity webhooks instead
+// This means: NO API calls until you publish in Sanity!
+export const revalidate = false;
+
 export default async function Page() {
   const [testimonials, properties, developers, galleryVideos] =
     await Promise.all([

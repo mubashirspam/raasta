@@ -1,12 +1,13 @@
 import { createClient } from "next-sanity";
 import { projectId, dataset, apiVersion } from "../config";
 
-// Client for reading (with CDN)
+// Client for reading (without CDN for fresh data)
+// Set useCdn to false to get real-time updates from Sanity
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true,
+  useCdn: false, // Changed to false to prevent CDN caching
 });
 
 // Client for writing (server-side only, with token)

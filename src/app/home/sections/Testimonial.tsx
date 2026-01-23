@@ -178,7 +178,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
               </span>
             </h2>
 
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
+            <p className="max-w-4xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
               We facilitate life-changing investments. Hear from families who
               trusted us.
             </p>

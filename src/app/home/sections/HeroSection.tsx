@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
         alt=""
       />
 
-      <div className="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-0 py-8 sm:py-5">
+      <div className="relative z-10 min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-0 py-5 sm:py-5 ">
         <div className="text-center w-full max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -104,7 +104,7 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-[-0.03em] px-2 sm:px-4"
+            className="text-5xl md:text-6xl lg:text-8xl font-black text-slate-900 leading-[1.1] tracking-[-0.03em] px-2 sm:px-4  "
           >
             Real Estate{" "}
             <span className="relative inline-block group">
@@ -151,15 +151,16 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-8 mb-1 text-center px-4 max-w-5xl mx-auto"
+            className="mt-8 mb-1 text-center px-4 max-w-5xl mx-auto md:pb-20"
           >
             <div className="relative inline-block text-center">
-              <h2 className="relative font-Arsenal text-xl md:text-2xl lg:text-4xl font-medium text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 animate-text-shimmer leading-tight py-2">
-                "Every Deal. There is Charity, a life is changed"
+              <h2 className="relative font-Arsenal text-2xl md:text-2xl lg:text-4xl font-medium text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 animate-text-shimmer leading-tight ">
+                "Every Deal. There is Charity,
+                <br className="md:hidden" /> a life is changed"
               </h2>
             </div>
 
-            <div className="mt-0 flex flex-col sm:flex-row items-center justify-center flex-wrap gap-x-3 gap-y-1 text-xl md:text-xl lg:text-xl text-slate-800">
+            <div className="mt-0 flex flex-row items-center justify-center gap-y-1 text-xs md:text-xl lg:text-xl text-slate-800">
               <span>This is not a Campaign.</span>
               <span className="flex items-baseline gap-2">
                 It's{" "}

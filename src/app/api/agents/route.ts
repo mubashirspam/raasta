@@ -1,6 +1,10 @@
 import { getAgents } from "@/sanity/lib";
 import { NextResponse } from "next/server";
 
+// Force dynamic rendering - no caching
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET() {
   try {
     const agents = await getAgents();
@@ -25,7 +29,7 @@ export async function GET() {
     console.error("Error fetching agents:", error);
     return NextResponse.json(
       { error: "Failed to fetch agents" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

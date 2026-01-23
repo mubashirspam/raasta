@@ -146,7 +146,7 @@ export const WhoWeSupport: React.FC = () => {
   };
 
   return (
-    <section className="relative py-16 sm:py-20 lg:py-28 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden">
+    <section className="relative py-5 md:py-10 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden">
       {/* Beautiful Light Gradient Background */}
       <div
         className="absolute inset-0 z-0"
@@ -176,25 +176,11 @@ export const WhoWeSupport: React.FC = () => {
         />
       </div>
 
-      
-
       <div className="relative z-30 max-w-7xl mx-auto">
         {/* Premium Header with Illustrations */}
         <RevealSection>
-          <div className="text-center mb-10 sm:mb-16 lg:mb-20 relative">
+          <div className="text-center mb-5 sm:mb-10 relative">
             {/* Top Decorative Element */}
-            <div className="absolute left-1/2 -translate-x-1/2 -top-2 sm:-top-4 flex items-center gap-2">
-              <Sparkles
-                size={14}
-                className="text-amber-400 fill-current animate-pulse sm:w-4 sm:h-4"
-              />
-              <div className="w-8 sm:w-12 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
-              <Sparkles
-                size={14}
-                className="text-amber-400 fill-current animate-pulse sm:w-4 sm:h-4"
-                style={{ animationDelay: "0.5s" }}
-              />
-            </div>
 
             <div className="pt-6 sm:pt-10">
               {/* Badge */}

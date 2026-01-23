@@ -285,7 +285,7 @@ export const RealEstatePrinciples: React.FC = () => {
 
             {/* Main Title - Learn. Invest. Earn. with Clipped Gradient */}
             <div className="relative inline-flex items-center justify-center">
-              <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter flex items-center justify-center flex-wrap gap-x-4 sm:gap-x-6">
+              <h2 className="text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter flex items-center justify-center flex-wrap gap-x-4 sm:gap-x-6">
                 <span className="relative text-transparent bg-clip-text bg-linear-to-r from-[#2EA8FF] to-cyan-500 animate-gradient">
                   Learn
                 </span>
@@ -445,7 +445,7 @@ export const RealEstatePrinciples: React.FC = () => {
                     <span>The Raasta Promise</span>
                   </div> */}
 
-                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-snug font-serif italic">
+                  <p className="text-lg sm:text-3xl md:text-4xl font-bold text-white leading-snug font-serif italic">
                     {CONTENT_STEPS[3].content}
                   </p>
 

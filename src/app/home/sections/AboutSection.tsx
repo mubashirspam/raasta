@@ -72,7 +72,7 @@ export const AboutSection: React.FC = () => {
 
       <div className="relative z-30 max-w-7xl mx-auto px-6 md:px-12">
         <RevealSection>
-          <div className="text-center mb-16 relative">
+          <div className="text-center mb-5 relative">
             {/* Decorative stars */}
             <div className="absolute left-1/2 -translate-x-1/2 -top-8 flex items-center gap-1">
               <Star size={8} className="text-emerald-400/40 fill-current" />
@@ -183,8 +183,8 @@ export const AboutSection: React.FC = () => {
                       can be a tool to create impact, not just income.
                     </p>
                     <p className="text-lg font-semibold text-slate-800 pt-2">
-                      We don't see ourselves ahead of our team, we walk with
-                      them.
+                      We don't see ourselves ahead of you, we walk with
+                      you.
                     </p>
 
                     <Link href="/about">

@@ -13,6 +13,7 @@ import {
   Gift,
   ChevronDown,
   Star,
+  ArrowRight,
 } from "lucide-react";
 
 const POPUP_DELAY = 30000; // 30 seconds
@@ -240,14 +241,25 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                   />
                 </div>
 
-                <div className="md:hidden mb-6">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                    Free Consultation
-                  </h2>
-                  <p className="text-slate-600">
-                    Book your one-on-one session with our experts.
-                  </p>
-                </div>
+                  <h2 className="md:hidden text-xl lg:text-4xl font-bold text-black mb-3 leading-tight drop-shadow-md">
+                  Get a Free{" "}
+                  <span className="text-emerald-500 relative inline-block">
+                    One-to-One
+                    <svg
+                      className="absolute w-full h-2 -bottom-1 left-0 text-emerald-500/30"
+                      viewBox="0 0 100 10"
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        d="M0 5 Q 50 10 100 5"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                    </svg>
+                  </span>{" "}
+                  Consultation
+                </h2>
 
                 <p className="text-slate-600 mb-6 hidden md:block">
                   Schedule a personalized consultation to discuss your real
@@ -368,7 +380,8 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                       ) : (
                         <>
                           <Calendar size={18} />
-                          Book Free Consultation
+                          Get Exclusive Access
+                          <Star size={16} color="#FFD700" />
                         </>
                       )}
                     </button>

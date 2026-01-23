@@ -207,7 +207,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ videos }) => {
               <span>@RaastaRealty</span>
             </div>
 
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
+            <h2 className="text-3xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
               The Raasta
               <br />
               <span className="relative inline-block">

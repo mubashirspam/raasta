@@ -117,9 +117,7 @@ export const Services: React.FC = () => {
                 <ArrowRight size={18} />
               </span>
             </button>
-            <p className="mt-4 text-sm text-slate-400">
-              Trusted by over 500+ High Net Worth Individuals
-            </p>
+            
           </div>
         </RevealSection>
       </div>
