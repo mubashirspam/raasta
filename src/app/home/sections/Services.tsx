@@ -43,7 +43,7 @@ export const Services: React.FC = () => {
           
 
             <div className="">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.1]">
+              <h2 className="text-3xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.1]">
                 Raasta{" "}
                 <span className="relative inline-block pb-3">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2EA8FF] via-purple-500 to-pink-500">
@@ -78,7 +78,7 @@ export const Services: React.FC = () => {
                 </span>
               </h2>
 
-              <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-500 leading-relaxed">
+              <p className="max-w-2xl mx-auto text-md md:text-xl text-slate-500 leading-relaxed">
                 Your trusted partner in Dubai real estate. From off-plan
                 investments to luxury rentals, golden visa consultation to VIP
                 concierge services.

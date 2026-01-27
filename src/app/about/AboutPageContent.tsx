@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "../home/layout/Navbar";
 import { Footer } from "../home/layout/Footer";
 import { ContactModal } from "../home/ui/ContactModal";
@@ -24,6 +24,8 @@ interface TeamMember {
   role: string;
   section: string;
   bio?: string;
+  linkedinUrl?: string;
+  socialLink?: string;
   image?: { asset: { url: string } };
 }
 
@@ -38,6 +40,12 @@ interface TeamMembersBySection {
 interface AboutPageContentProps {
   teamMembers: TeamMembersBySection;
 }
+
+// Pagination constants
+const DESKTOP_ITEMS_PER_PAGE = 25; // 5 rows × 5 cards
+const MOBILE_ITEMS_PER_PAGE = 6; // 3 rows × 2 cards
+const DESKTOP_ITEMS_PER_LOAD = 25; // 5 rows on show more
+const MOBILE_ITEMS_PER_LOAD = 6; // 3 rows on show more
 
 const TeamMemberCard: React.FC<{
   member: TeamMember;
@@ -70,17 +78,18 @@ const TeamMemberCard: React.FC<{
       aria-label={`${member.name} — ${member.role}`}
       className={`group relative flex items-center justify-between overflow-hidden rounded-xl pt-3 pl-3 md:pt-5 md:pl-5   transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500 ${bgClass}`}
     >
-      {/* Left: Name + Role */}
-      <div className="min-w-0 mr-2 flex-1 flex flex-col">
-        <h3 className="text-xs md:text-base font-bold text-gray-900 line-clamp-2">
-          {member.name}
-        </h3>
-        <p className="mt-1 text-[10px] md:text-xs text-gray-700 font-bold uppercase line-clamp-3">
-          {member.role}
-        </p>
+      <div className="min-w-0 mr-2 flex-1 flex flex-col justify-between">
+        <div>
+          <h3 className="text-xs md:text-base font-bold text-gray-900 line-clamp-2">
+            {member.name}
+          </h3>
+          <p className="mt-1 text-[10px] md:text-xs text-gray-700 font-bold uppercase line-clamp-3">
+            {member.role}
+          </p>
+        </div>
       </div>
 
-      {/* Right: Photo (circular, slightly overlapping card edge) */}
+      {/* Right: Photo with Connect button overlay */}
       <div className="relative flex-shrink-0 w-18 md:w-28 h-20 md:h-30">
         <div className="absolute -right-0 bottom-0 ">
           <img
@@ -95,6 +104,18 @@ const TeamMemberCard: React.FC<{
               )}`;
             }}
           />
+
+          {/* Connect Button Overlay - Bottom Right */}
+          {(member.socialLink || member.linkedinUrl) && (
+            <a
+              href={member.socialLink || member.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-1 right-1 px-1 py-0.5 md:px-3 md:py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/50 hover:bg-white/90 text-white text-[8px] md:text-[10px] font-bold transition-all duration-200 hover:text-gray-900 hover:shadow-lg"
+            >
+              Connect me
+            </a>
+          )}
         </div>
       </div>
     </article>
@@ -147,6 +168,62 @@ export default function AboutPageContent({
   teamMembers,
 }: AboutPageContentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Track if mobile view - initialize based on SSR assumption (desktop)
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Pagination state for each section - start with mobile values to avoid flash
+  const [eliteAgentsVisible, setEliteAgentsVisible] = useState(
+    MOBILE_ITEMS_PER_PAGE,
+  );
+  const [salesVisible, setSalesVisible] = useState(MOBILE_ITEMS_PER_PAGE);
+  const [mediaVisible, setMediaVisible] = useState(MOBILE_ITEMS_PER_PAGE);
+
+  // Track if initial check has been done
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      // Only set initial values on first load
+      if (!initialized) {
+        const initialCount = mobile
+          ? MOBILE_ITEMS_PER_PAGE
+          : DESKTOP_ITEMS_PER_PAGE;
+        setEliteAgentsVisible(initialCount);
+        setSalesVisible(initialCount);
+        setMediaVisible(initialCount);
+        setInitialized(true);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, [initialized]);
+
+  // Get initial items count based on screen size
+  const getInitialItems = () =>
+    isMobile ? MOBILE_ITEMS_PER_PAGE : DESKTOP_ITEMS_PER_PAGE;
+
+  // Get items to load on "Show More" click
+  const getItemsPerLoad = () =>
+    isMobile ? MOBILE_ITEMS_PER_LOAD : DESKTOP_ITEMS_PER_LOAD;
+
+  // Handle show more for each section
+  const handleShowMoreEliteAgents = () => {
+    setEliteAgentsVisible((prev) => prev + getItemsPerLoad());
+  };
+
+  const handleShowMoreSales = () => {
+    setSalesVisible((prev) => prev + getItemsPerLoad());
+  };
+
+  const handleShowMoreMedia = () => {
+    setMediaVisible((prev) => prev + getItemsPerLoad());
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
@@ -303,7 +380,7 @@ export default function AboutPageContent({
                       <p>
                         Founded by{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Navas Nazar
+                          Muhammad Najeeb Nazar
                         </strong>
                         ,{" "}
                         <strong className="text-emerald-600">
@@ -311,7 +388,7 @@ export default function AboutPageContent({
                         </strong>
                         , and{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Najeeb Nazar
+                          Muhammad Navas Nazar
                         </strong>
                         .
                       </p>
@@ -337,10 +414,6 @@ export default function AboutPageContent({
                       </p>
                       <p className="text-xl font-semibold text-slate-800 pt-2">
                         We don't see ourselves ahead of you we walk with you.
-                      </p>
-                      <p className="text-slate-600 italic">
-                        This is our Raasta that we chose and together we walk
-                        proudly, each step of the journey that has just begun.
                       </p>
                     </div>
                   </div>
@@ -476,10 +549,10 @@ export default function AboutPageContent({
 
       {/* Mission & Vision */}
       <section className="py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-8">
+        <div className="max-w-7xl mx-auto px-3 md:px-10">
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-8">
             {/* Mission */}
-            <div className="relative p-10 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-2xl overflow-hidden">
+            <div className="relative p-6 md:p-10 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white shadow-2xl overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-6">
@@ -498,7 +571,7 @@ export default function AboutPageContent({
             </div>
 
             {/* Vision */}
-            <div className="relative p-10 rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 text-white shadow-2xl overflow-hidden">
+            <div className="relative p-6 md:p-10 rounded-3xl bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 text-white shadow-2xl overflow-hidden">
               <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width=%2740%27%20height=%2740%27%20viewBox=%270%200%2040%2040%27%20xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg%20fill=%27none%27%20fill-rule=%27evenodd%27%3E%3Cg%20fill=%27%23ffffff%27%20fill-opacity=%270.1%27%3E%3Cpath%20d=%27M0%2040L40%200H20L0%2020M40%2040V20L20%2040%27/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-6">
@@ -516,13 +589,13 @@ export default function AboutPageContent({
             </div>
           </div>
 
-          <div className="mt-12 p-10 rounded-3xl bg-gradient-to-r from-slate-900 to-slate-800 text-white text-center shadow-2xl">
-            <p className="text-md font-bold leading-relaxed">
+          <div className="mt-4 md:mt-10 p-6 md:p-10 rounded-3xl bg-gradient-to-r from-slate-900 to-slate-800 text-white text-center shadow-2xl">
+            <p className="hidden md:block text-md font-bold leading-relaxed">
               "Raasta Realty is not focused on short-term wins. We are building
               something enduring a name that stands for trust, impact, and
               progress"
             </p>
-            <p className="text-lg md:text-3xl pt-5 font-bold leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+            <p className="text-xl md:text-3xl md:pt-5 font-bold leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
               Raasta is not just a company, It's a Movement.
             </p>
           </div>
@@ -740,14 +813,16 @@ export default function AboutPageContent({
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-3">
                 {teamMembers.elite_agents.length > 0 ? (
-                  teamMembers.elite_agents.map((member, index) => (
-                    <TeamMemberCard
-                      key={member._id}
-                      member={member}
-                      index={index}
-                      gradientColor="amber"
-                    />
-                  ))
+                  teamMembers.elite_agents
+                    .slice(0, eliteAgentsVisible)
+                    .map((member, index) => (
+                      <TeamMemberCard
+                        key={member._id}
+                        member={member}
+                        index={index}
+                        gradientColor="amber"
+                      />
+                    ))
                 ) : (
                   <div className="col-span-full text-center py-12">
                     <p className="text-slate-500 text-lg">
@@ -756,6 +831,18 @@ export default function AboutPageContent({
                   </div>
                 )}
               </div>
+
+              {teamMembers.elite_agents.length > eliteAgentsVisible && (
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={handleShowMoreEliteAgents}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                    Show More
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -841,15 +928,17 @@ export default function AboutPageContent({
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 {teamMembers.sales.length > 0 ? (
-                  teamMembers.sales.map((member, index) => (
-                    <TeamMemberCard
-                      key={member._id}
-                      member={member}
-                      index={index}
-                      variant="small"
-                      gradientColor="emerald"
-                    />
-                  ))
+                  teamMembers.sales
+                    .slice(0, salesVisible)
+                    .map((member, index) => (
+                      <TeamMemberCard
+                        key={member._id}
+                        member={member}
+                        index={index}
+                        variant="small"
+                        gradientColor="emerald"
+                      />
+                    ))
                 ) : (
                   <div className="col-span-full text-center py-12">
                     <p className="text-slate-500 text-lg">
@@ -858,6 +947,18 @@ export default function AboutPageContent({
                   </div>
                 )}
               </div>
+
+              {teamMembers.sales.length > salesVisible && (
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={handleShowMoreSales}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                    Show More
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -887,7 +988,7 @@ export default function AboutPageContent({
                   team that brings our journey to life.
                 </p>
                 <p className="text-slate-700 text-lg leading-relaxed">
-                  Our Content Creators don't just manage platforms — they
+                  Our Content Creators don't just manage platforms they
                   capture purpose, people, and progress.
                 </p>
                 <p className="text-slate-700 text-lg leading-relaxed">
@@ -919,7 +1020,7 @@ export default function AboutPageContent({
                     </summary>
                     <div className="mt-4 space-y-4 animate-fadeIn">
                       <p>
-                        Our Content Creators don't just manage platforms — they
+                        Our Content Creators don't just manage platforms they
                         capture purpose, people, and progress.
                       </p>
                       <p>
@@ -937,15 +1038,17 @@ export default function AboutPageContent({
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
                 {teamMembers.media.length > 0 ? (
-                  teamMembers.media.map((member, index) => (
-                    <TeamMemberCard
-                      key={member._id}
-                      member={member}
-                      index={index}
-                      variant="small"
-                      gradientColor="pink"
-                    />
-                  ))
+                  teamMembers.media
+                    .slice(0, mediaVisible)
+                    .map((member, index) => (
+                      <TeamMemberCard
+                        key={member._id}
+                        member={member}
+                        index={index}
+                        variant="small"
+                        gradientColor="pink"
+                      />
+                    ))
                 ) : (
                   <div className="col-span-full text-center py-12">
                     <p className="text-slate-500 text-lg">
@@ -954,6 +1057,18 @@ export default function AboutPageContent({
                   </div>
                 )}
               </div>
+
+              {teamMembers.media.length > mediaVisible && (
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={handleShowMoreMedia}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                    Show More
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

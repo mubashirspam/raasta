@@ -70,6 +70,20 @@ export const teamMember = defineType({
       type: "string",
     }),
     defineField({
+      name: "linkedinUrl",
+      title: "LinkedIn URL",
+      type: "url",
+      description:
+        "Full LinkedIn profile URL (e.g., https://linkedin.com/in/username)",
+    }),
+    defineField({
+      name: "socialLink",
+      title: "Connect Link (Primary)",
+      type: "url",
+      description:
+        "Primary contact link (LinkedIn, WhatsApp, or any social media)",
+    }),
+    defineField({
       name: "languages",
       title: "Languages",
       type: "array",

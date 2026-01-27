@@ -335,23 +335,23 @@ export async function getTeamMembers(section?: string) {
 export async function getTeamMembersBySection() {
   const query = `{
     "founders": *[_type == "teamMember" && section == "founders"] | order(order asc) {
-      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      _id, name, slug, role, section, bio, phone, email, whatsapp, linkedinUrl, socialLink, languages, specializations, featured, order,
       image { asset -> { url } }
     },
     "management": *[_type == "teamMember" && section == "management"] | order(order asc) {
-      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      _id, name, slug, role, section, bio, phone, email, whatsapp, linkedinUrl, socialLink, languages, specializations, featured, order,
       image { asset -> { url } }
     },
     "media": *[_type == "teamMember" && section == "media"] | order(order asc) {
-      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      _id, name, slug, role, section, bio, phone, email, whatsapp, linkedinUrl, socialLink, languages, specializations, featured, order,
       image { asset -> { url } }
     },
     "elite_agents": *[_type == "teamMember" && section == "elite_agents"] | order(order asc) {
-      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      _id, name, slug, role, section, bio, phone, email, whatsapp, linkedinUrl, socialLink, languages, specializations, featured, order,
       image { asset -> { url } }
     },
     "sales": *[_type == "teamMember" && section == "sales"] | order(order asc) {
-      _id, name, slug, role, section, bio, phone, email, whatsapp, languages, specializations, featured, order,
+      _id, name, slug, role, section, bio, phone, email, whatsapp, linkedinUrl, socialLink, languages, specializations, featured, order,
       image { asset -> { url } }
     }
   }`;
@@ -368,5 +368,77 @@ export async function getTeamMembersBySection() {
       elite_agents: [],
       sales: [],
     };
+  }
+}
+
+export async function getJobPositions() {
+  const query = `*[_type == "jobPosition" && active == true] | order(order asc, publishedAt desc) {
+    _id,
+    title,
+    slug,
+    department,
+    location,
+    type,
+    description,
+    responsibilities,
+    requirements,
+    active,
+    order,
+    publishedAt
+  }`;
+
+  try {
+    const positions = await client.fetch(query);
+    return positions;
+  } catch (error) {
+    console.error("Error fetching job positions from Sanity:", error);
+    return [];
+  }
+}
+
+export async function getJobPositionBySlug(slug: string) {
+  const query = `*[_type == "jobPosition" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    department,
+    location,
+    type,
+    description,
+    responsibilities,
+    requirements,
+    active,
+    order,
+    publishedAt
+  }`;
+
+  try {
+    const position = await client.fetch(query, { slug });
+    return position;
+  } catch (error) {
+    console.error("Error fetching job position from Sanity:", error);
+    return null;
+  }
+}
+
+export async function getCareerGallery() {
+  const query = `*[_type == "careerGallery" && active == true] | order(order asc) {
+    _id,
+    title,
+    category,
+    order,
+    image {
+      asset -> {
+        url
+      }
+    }
+  }`;
+
+  try {
+    const images = await client.fetch(query);
+    return images;
+  } catch (error) {
+    console.error("Error fetching career gallery from Sanity:", error);
+    return [];
   }
 }

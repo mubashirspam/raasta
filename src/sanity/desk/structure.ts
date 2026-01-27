@@ -8,6 +8,8 @@ import {
   Image,
   Star,
   BriefcaseBusiness,
+  Briefcase,
+  Camera,
 } from "lucide-react";
 
 export const structure = (S: StructureBuilder) =>
@@ -55,6 +57,30 @@ export const structure = (S: StructureBuilder) =>
                     ),
                 ),
             ]),
+        ),
+
+      S.divider(),
+
+      // Job Positions
+      S.listItem()
+        .title("Job Positions")
+        .icon(Briefcase)
+        .child(
+          S.documentTypeList("jobPosition")
+            .title("All Job Positions")
+            .filter('_type == "jobPosition"')
+            .defaultOrdering([{ field: "order", direction: "asc" }]),
+        ),
+
+      // Career Gallery (Life at Raasta)
+      S.listItem()
+        .title("Career Gallery")
+        .icon(Camera)
+        .child(
+          S.documentTypeList("careerGallery")
+            .title("Life at Raasta Images")
+            .filter('_type == "careerGallery"')
+            .defaultOrdering([{ field: "order", direction: "asc" }]),
         ),
 
       S.divider(),

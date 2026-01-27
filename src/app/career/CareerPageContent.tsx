@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "../home/layout/Navbar";
 import { Footer } from "../home/layout/Footer";
 import { ContactModal } from "../home/ui/ContactModal";
@@ -11,86 +11,145 @@ import {
   Users,
   TrendingUp,
   Heart,
-  Award,
   MapPin,
   Clock,
   ArrowRight,
   Sparkles,
-  CheckCircle,
+  Globe,
 } from "lucide-react";
+
+interface JobPosition {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  department: string;
+  location: string;
+  type: string;
+  description: string;
+  responsibilities?: string[];
+  requirements?: string[];
+  active: boolean;
+  order: number;
+  publishedAt: string;
+}
+
+interface CareerGalleryImage {
+  _id: string;
+  title: string;
+  category: string;
+  order: number;
+  image: {
+    asset: {
+      url: string;
+    };
+  };
+}
+
+interface CareerPageContentProps {
+  jobPositions: JobPosition[];
+  careerGallery: CareerGalleryImage[];
+}
 
 const benefits = [
   {
-    icon: TrendingUp,
-    title: "Growth Opportunities",
+    icon: Heart,
+    title: "Purpose-Driven Work",
     description:
-      "Clear career progression paths with mentorship and training programs.",
+      "Makes an impact with each deal. 6% of every transaction goes to charity.",
   },
   {
-    icon: Heart,
-    title: "Purpose-Driven",
+    icon: TrendingUp,
+    title: "Growth & Learning",
     description:
-      "6% of every transaction goes to charity. Make an impact with every deal.",
+      "Regular training, mentorship, and clear career paths to help you level up.",
   },
   {
     icon: Users,
-    title: "Collaborative Culture",
+    title: "Supportive Team Culture",
     description:
-      "Work with passionate professionals in a supportive team environment.",
+      "Work with passionate professionals who support, challenge, and grow together.",
   },
   {
-    icon: Award,
-    title: "Competitive Rewards",
-    description:
-      "Industry-leading commissions, bonuses, and comprehensive benefits.",
+    icon: Globe,
+    title: "Diversity & Inclusion",
+    description: "We celebrate talent from different backgrounds and cultures.",
   },
 ];
 
-const openPositions = [
+// Default fallback images when no Sanity images available
+const defaultImages = [
   {
-    title: "Senior Real Estate Agent",
-    department: "Sales",
-    location: "Dubai, UAE",
-    type: "Full-time",
-    description:
-      "Looking for experienced agents with a proven track record in luxury real estate.",
+    url: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=500&auto=format&fit=crop",
+    alt: "Team work",
   },
   {
-    title: "Property Consultant",
-    department: "Sales",
-    location: "Dubai, UAE",
-    type: "Full-time",
-    description:
-      "Help clients find their perfect property in Dubai's most sought-after locations.",
+    url: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=500&auto=format&fit=crop",
+    alt: "Meeting",
   },
   {
-    title: "Marketing Specialist",
-    department: "Marketing",
-    location: "Dubai, UAE",
-    type: "Full-time",
-    description:
-      "Drive our brand presence and lead generation through innovative campaigns.",
+    url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=500&auto=format&fit=crop",
+    alt: "Office",
   },
   {
-    title: "Client Relations Manager",
-    department: "Operations",
-    location: "Dubai, UAE",
-    type: "Full-time",
-    description:
-      "Build lasting relationships with our valued clients and ensure exceptional service.",
+    url: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=500&auto=format&fit=crop",
+    alt: "Success",
   },
 ];
 
-const values = [
-  "Integrity in every transaction",
-  "Client success is our success",
-  "Continuous learning and growth",
-  "Giving back to the community",
-  "Innovation and excellence",
-];
-
-export default function CareerPageContent() {
+export default function CareerPageContent({
+  jobPositions,
+  careerGallery,
+}: CareerPageContentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [visibleImageIndices, setVisibleImageIndices] = useState([0, 1, 2, 3]);
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+  // Filter office images for hero section
+  const officeImages = careerGallery
+    .filter((item) => item.category === "office")
+    .map((item) => ({
+      url: item.image?.asset?.url,
+      alt: item.title,
+    }))
+    .filter((img) => img.url); // Only include images with valid URLs
+
+  // Default hero image if no office images
+  const defaultHeroImage =
+    "https://cdn.sanity.io/images/8dj8qon7/production/86913db8712c782ab816e76ad2bcea6419f20828-1200x843.jpg";
+
+  // Get images from Sanity or use defaults
+  const images =
+    careerGallery.length > 0
+      ? careerGallery.map((item) => ({
+          url: item.image?.asset?.url || defaultImages[0].url,
+          alt: item.title,
+        }))
+      : defaultImages;
+
+  // Rotate hero images (office category only)
+  useEffect(() => {
+    if (officeImages.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setHeroImageIndex((prev) => (prev + 1) % officeImages.length);
+    }, 4000); // Change every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [officeImages.length]);
+
+  // Rotate life at raasta images if more than 4 available
+  useEffect(() => {
+    if (images.length <= 4) return;
+
+    const interval = setInterval(() => {
+      setVisibleImageIndices((prev) => {
+        // Rotate: move each index forward by 1
+        return prev.map((idx) => (idx + 1) % images.length);
+      });
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
@@ -171,9 +230,9 @@ export default function CareerPageContent() {
                 transition={{ delay: 0.2 }}
                 className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8"
               >
-                Join Dubai's most purpose-driven real estate company. We're not
-                just selling properties – we're transforming lives and making an
-                impact.
+                Join one of Dubai’s fastest-growing, purpose-driven real estate
+                companies. At Raasta, we don’t just sell properties, we build
+                careers, transform lives, and create long-term impact.
               </motion.p>
 
               <motion.div
@@ -205,12 +264,27 @@ export default function CareerPageContent() {
               transition={{ delay: 0.3 }}
               className="relative"
             >
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop"
-                  alt="Team collaboration"
-                  className="w-full h-full object-cover"
-                />
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={heroImageIndex}
+                    src={
+                      officeImages.length > 0
+                        ? officeImages[heroImageIndex]?.url
+                        : defaultHeroImage
+                    }
+                    alt={
+                      officeImages.length > 0
+                        ? officeImages[heroImageIndex]?.alt
+                        : "Team collaboration"
+                    }
+                    className="w-full h-full object-cover absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6 }}
+                  />
+                </AnimatePresence>
               </div>
               <div className="absolute -bottom-6 -left-6 p-5 rounded-2xl bg-white shadow-xl border border-slate-100">
                 <div className="flex items-center gap-3">
@@ -218,7 +292,12 @@ export default function CareerPageContent() {
                     <Users size={24} />
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900">50+ Team Members</p>
+                    <p
+                      className="font-bold text-slate-900"
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                    >
+                      30+ Team Members
+                    </p>
                     <p className="text-sm text-slate-600">Growing fast</p>
                   </div>
                 </div>
@@ -229,19 +308,19 @@ export default function CareerPageContent() {
       </section>
 
       {/* Benefits */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
+      <section className="py-15 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Why Work With Us?
+              WHY Raasta?
             </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-              We offer more than just a job – we offer a career with purpose and
-              growth.
+            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
+              We believe great people build great companies. At Raasta, we focus
+              on growth, learning, and meaningful work, not just targets.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center">
             {benefits.map((benefit, idx) => (
               <motion.div
                 key={benefit.title}
@@ -251,12 +330,15 @@ export default function CareerPageContent() {
                 transition={{ delay: idx * 0.1 }}
                 className="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-lg hover:border-indigo-200 transition-all group"
               >
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
-                  <benefit.icon size={28} />
+                <div className="flex items-center gap-2">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform">
+                    <benefit.icon size={22} />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-2">
+                    {benefit.title}
+                  </h3>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">
-                  {benefit.title}
-                </h3>
+
                 <p className="text-slate-600">{benefit.description}</p>
               </motion.div>
             ))}
@@ -264,165 +346,188 @@ export default function CareerPageContent() {
         </div>
       </section>
 
-      {/* Our Values */}
+      {/* Open Positions */}
+      <section id="positions" className="py-10 md:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="text-center mb-5 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
+              Join Raasta Family
+            </h2>
+            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
+              Explore opportunities where your skills, ambition, and passion can
+              thrive.
+            </p>
+          </div>
+
+          {jobPositions.length === 0 ? (
+            <div className="text-center py-5 md:py-12">
+              <p className="text-slate-600 text-lg">
+                No open positions at the moment. Please check back later or
+                submit your CV for future opportunities.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {jobPositions.map((position, idx) => (
+                <motion.div
+                  key={position.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="p-6 rounded-2xl bg-white border border-slate-200 hover:shadow-lg hover:border-indigo-200 transition-all group"
+                >
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                        {position.title}
+                      </h3>
+                      <p className="text-slate-600 mb-3">
+                        {position.description}
+                      </p>
+                      <div className="flex flex-wrap gap-3">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm">
+                          <Briefcase size={14} />
+                          {position.department}
+                        </span>
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm">
+                          <MapPin size={14} />
+                          {position.location}
+                        </span>
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm">
+                          <Clock size={14} />
+                          {position.type}
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setIsModalOpen(true)}
+                      className="px-6 py-3 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap"
+                    >
+                      Apply Now
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Life at Raasta */}
       <section className="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-                Our Values
-              </h2>
-              <p className="text-slate-600 text-lg mb-8">
-                At Raasta Realty, our values guide everything we do. They define
-                who we are and how we work together to achieve excellence.
-              </p>
-              <div className="space-y-4">
-                {values.map((value, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center">
-                      <CheckCircle size={14} className="text-white" />
-                    </div>
-                    <span className="text-slate-800 font-medium">{value}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="aspect-square rounded-2xl overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=500&auto=format&fit=crop"
-                    alt="Team work"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=500&auto=format&fit=crop"
-                    alt="Meeting"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=500&auto=format&fit=crop"
-                    alt="Office"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="aspect-square rounded-2xl overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=500&auto=format&fit=crop"
-                    alt="Success"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Open Positions */}
-      <section id="positions" className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Open Positions
-            </h2>
-            <p className="text-slate-600 text-lg max-w-2xl mx-auto">
-              Find your perfect role and start making an impact today.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {openPositions.map((position, idx) => (
               <motion.div
-                key={position.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="p-6 rounded-2xl bg-white border border-slate-200 hover:shadow-lg hover:border-indigo-200 transition-all group"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-white/50 text-indigo-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm"
               >
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
-                      {position.title}
-                    </h3>
-                    <p className="text-slate-600 mb-3">
-                      {position.description}
-                    </p>
-                    <div className="flex flex-wrap gap-3">
-                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm">
-                        <Briefcase size={14} />
-                        {position.department}
-                      </span>
-                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm">
-                        <MapPin size={14} />
-                        {position.location}
-                      </span>
-                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm">
-                        <Clock size={14} />
-                        {position.type}
-                      </span>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="px-6 py-3 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap"
-                  >
-                    Apply Now
-                  </button>
-                </div>
+                <Sparkles size={14} />
+                <span>Our Culture</span>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+                Life at{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                  Raasta
+                </span>
+              </h2>
+              <p className="text-slate-600 text-lg mb-8">
+                We work hard, celebrate wins, and grow together. From team
+                outings to training sessions, we believe culture creates
+                success.
+              </p>
 
-      {/* Application Form Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Don't See Your Role?
-            </h2>
-            <p className="text-slate-600 text-lg">
-              We're always looking for talented individuals. Submit your
-              application and we'll keep you in mind.
-            </p>
-          </div>
-
-          <div className="p-8 md:p-10 rounded-3xl bg-slate-50 border border-slate-200">
-            <ContactForm variant="light" />
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg"
+              >
+                See Our Culture
+                <ArrowRight size={18} />
+              </button>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="aspect-square rounded-2xl overflow-hidden relative">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={visibleImageIndices[0]}
+                      src={images[visibleImageIndices[0]]?.url}
+                      alt={images[visibleImageIndices[0]]?.alt}
+                      className="w-full h-full object-cover absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </AnimatePresence>
+                </div>
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={visibleImageIndices[1]}
+                      src={images[visibleImageIndices[1]]?.url}
+                      alt={images[visibleImageIndices[1]]?.alt}
+                      className="w-full h-full object-cover absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </AnimatePresence>
+                </div>
+              </div>
+              <div className="space-y-4 pt-8">
+                <div className="aspect-4/3 rounded-2xl overflow-hidden relative">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={visibleImageIndices[2]}
+                      src={images[visibleImageIndices[2]]?.url}
+                      alt={images[visibleImageIndices[2]]?.alt}
+                      className="w-full h-full object-cover absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </AnimatePresence>
+                </div>
+                <div className="aspect-square rounded-2xl overflow-hidden relative">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={visibleImageIndices[3]}
+                      src={images[visibleImageIndices[3]]?.url}
+                      alt={images[visibleImageIndices[3]]?.alt}
+                      className="w-full h-full object-cover absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-[#2EA8FF] via-cyan-500 to-teal-400">
+      <section className="py-10 bg-gradient-to-r from-violet-500 to-indigo-500">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Sparkles className="w-12 h-12 text-white/80 mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
             Ready to Make a Difference?
           </h2>
-          <p className="text-white/80 text-lg mb-8">
+          <p className="text-white/80 text-base mb-8">
             Join our team and be part of something bigger. Your career starts
             here.
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-8 py-4 rounded-full bg-white text-[#2EA8FF] font-bold hover:bg-slate-100 transition-colors shadow-xl"
+            className="px-8 py-4 rounded-full bg-white text-violet-600 font-bold hover:bg-slate-100 transition-colors"
           >
             Apply Today
           </button>

@@ -6,6 +6,8 @@ export { default as developer } from "./developer";
 export { teamMember } from "./teamMember";
 export { contactSubmission } from "./contactSubmission";
 export { consultationSubmission, offerSubmission } from "./offerSubmission";
+export { jobPosition } from "./jobPosition";
+export { careerGallery } from "./careerGallery";
 
 import { property } from "./property";
 import { agent } from "./agent";
@@ -15,6 +17,8 @@ import developer from "./developer";
 import { teamMember } from "./teamMember";
 import { contactSubmission } from "./contactSubmission";
 import { consultationSubmission, offerSubmission } from "./offerSubmission";
+import { jobPosition } from "./jobPosition";
+import { careerGallery } from "./careerGallery";
 
 export const schemaTypes = [
   property,
@@ -25,4 +29,6 @@ export const schemaTypes = [
   teamMember,
   contactSubmission,
   consultationSubmission,
+  jobPosition,
+  careerGallery,
 ];

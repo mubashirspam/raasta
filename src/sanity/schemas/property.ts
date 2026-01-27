@@ -72,12 +72,18 @@ export const property = defineType({
         list: [
           { title: "Apartment", value: "apartment" },
           { title: "Villa", value: "villa" },
-          { title: "Penthouse", value: "penthouse" },
           { title: "Townhouse", value: "townhouse" },
           { title: "Duplex", value: "duplex" },
         ],
       },
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "hasPHPP",
+      title: "Has PHPP (Post Handover Payment Plan)",
+      type: "boolean",
+      initialValue: false,
+      description: "Whether this property offers a Post Handover Payment Plan",
     }),
     defineField({
       name: "status",

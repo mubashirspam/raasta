@@ -10,7 +10,7 @@ interface ListingCardProps {
 
 export const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
   return (
-    <div className="group relative bg-white/40 backdrop-blur-sm border border-white rounded-[2rem] overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2 h-full">
+    <div className="group relative bg-white/40 backdrop-blur-sm border border-white rounded-3xl md:rounded-4xl overflow-hidden hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 hover:-translate-y-2 h-full">
       {/* Image Section */}
       <div className="relative h-72 overflow-hidden">
         <img

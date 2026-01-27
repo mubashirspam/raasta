@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Instagram, Linkedin, ChevronRight, ArrowUpRight } from "lucide-react";
+import { Instagram, Linkedin, Facebook, Youtube, ChevronRight, ArrowUpRight } from "lucide-react";
 
 export const Footer: React.FC = () => {
   const [mounted, setMounted] = useState(false);
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
       <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12">
         {/* Main Footer Content */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16 transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
           {/* Column 1: Brand & Socials */}
           <div className="space-y-6">
@@ -92,35 +92,27 @@ export const Footer: React.FC = () => {
               >
                 <Linkedin size={18} />
               </a>
+              <a
+                href="https://www.facebook.com/people/Raasta-Realty/61582162074282/?mibextid=wwXIfr&rdid=C3beyC24lEyBtYdu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17qQijEB4k%2F%3Fmibextid%3DwwXIfr%26ref%3D1"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-[#2EA8FF] hover:text-white hover:border-[#2EA8FF] transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
+                href="https://youtube.com/@raastarealty?si=4pq1a5xN46XEPoKe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-[#2EA8FF] hover:text-white hover:border-[#2EA8FF] transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
+              >
+                <Youtube size={18} />
+              </a>
             </div>
           </div>
 
-          {/* Column 2: Properties Links */}
-          <div>
-            <h4 className="font-bold text-slate-900 mb-6 text-lg">
-              Properties
-            </h4>
-            <ul className="space-y-4 text-sm font-medium text-slate-500">
-              {[
-                "Dubai Marina",
-                "Palm Jumeirah",
-                "Downtown Dubai",
-                "Dubai Hills",
-                "New Projects",
-              ].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="group flex items-center gap-2 hover:text-[#2EA8FF] transition-colors"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-[#2EA8FF] transition-colors"></span>
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
 
+          
           {/* Column 3: Company Links */}
           <div>
             <h4 className="font-bold text-slate-900 mb-6 text-lg">Company</h4>

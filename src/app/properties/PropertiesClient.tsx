@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Search, Filter, MapPin, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { ListingCard } from "../home/cards";
@@ -11,9 +11,9 @@ import { Footer } from "../home/layout/Footer";
 import { ContactModal } from "../home/ui/ContactModal";
 import { PROPERTIES as FALLBACK_PROPERTIES } from "../data";
 
-const PROPERTY_TYPES = ["All", "Villa", "Penthouse", "Apartment", "Townhouse"];
+const PROPERTY_TYPES = ["All", "Villa", "Apartment", "Townhouse"];
 const BEDROOM_OPTIONS = ["Any", "1", "2", "3", "4", "5+"];
-const BATHROOM_OPTIONS = ["Any", "1", "2", "3", "4+"];
+const PHPP_OPTIONS = ["Any", "With PHPP", "Without PHPP"];
 const PRICE_RANGES = [
   { label: "Any Price", min: 0, max: Infinity },
   { label: "Under 2M", min: 0, max: 2000000 },
@@ -22,6 +22,10 @@ const PRICE_RANGES = [
   { label: "10M - 20M", min: 10000000, max: 20000000 },
   { label: "20M+", min: 20000000, max: Infinity },
 ];
+
+// Pagination constants
+const DESKTOP_ITEMS_PER_PAGE = 9; // 3 rows × 3 cards
+const MOBILE_ITEMS_PER_PAGE = 3; // 3 cards
 
 interface SanityProperty {
   _id: string;
@@ -35,6 +39,7 @@ interface SanityProperty {
   status: string;
   location: string;
   featured: boolean;
+  hasPHPP?: boolean;
   mainImage?: { asset: { url: string } };
 }
 
@@ -43,7 +48,7 @@ interface PropertiesClientProps {
 }
 
 const transformSanityProperty = (
-  prop: SanityProperty
+  prop: SanityProperty,
 ): Property & { slug: string } => ({
   id: prop._id as unknown as number,
   title: prop.title,
@@ -63,8 +68,8 @@ const transformSanityProperty = (
     prop.status === "offplan"
       ? "Off-Plan"
       : prop.featured
-      ? "Featured"
-      : "For Sale",
+        ? "Featured"
+        : "For Sale",
 });
 
 export default function PropertiesClient({
@@ -75,8 +80,38 @@ export default function PropertiesClient({
   const [propertyTypeFilter, setPropertyTypeFilter] = useState("All");
   const [priceRangeIndex, setPriceRangeIndex] = useState(0);
   const [bedroomFilter, setBedroomFilter] = useState("Any");
-  const [bathroomFilter, setBathroomFilter] = useState("Any");
+  const [phppFilter, setPhppFilter] = useState("Any");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Pagination state
+  const [isMobile, setIsMobile] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(MOBILE_ITEMS_PER_PAGE);
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      if (!initialized) {
+        setVisibleCount(
+          mobile ? MOBILE_ITEMS_PER_PAGE : DESKTOP_ITEMS_PER_PAGE,
+        );
+        setInitialized(true);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, [initialized]);
+
+  const handleShowMore = () => {
+    setVisibleCount(
+      (prev) =>
+        prev + (isMobile ? MOBILE_ITEMS_PER_PAGE : DESKTOP_ITEMS_PER_PAGE),
+    );
+  };
 
   // Transform Sanity properties or use fallback
   const allProperties = useMemo(() => {
@@ -117,11 +152,8 @@ export default function PropertiesClient({
           ? property.beds >= 5
           : property.beds === parseInt(bedroomFilter));
 
-      const matchesBathrooms =
-        bathroomFilter === "Any" ||
-        (bathroomFilter === "4+"
-          ? property.baths >= 4
-          : property.baths === parseInt(bathroomFilter));
+      // PHPP filter - for now always matches since we need to add hasPHPP to property type
+      const matchesPHPP = phppFilter === "Any" || true;
 
       return (
         matchesSearch &&
@@ -129,7 +161,7 @@ export default function PropertiesClient({
         matchesType &&
         matchesPrice &&
         matchesBedrooms &&
-        matchesBathrooms
+        matchesPHPP
       );
     });
   }, [
@@ -139,7 +171,7 @@ export default function PropertiesClient({
     propertyTypeFilter,
     priceRangeIndex,
     bedroomFilter,
-    bathroomFilter,
+    phppFilter,
   ]);
 
   // Determine if using Sanity data
@@ -156,12 +188,12 @@ export default function PropertiesClient({
       <main className="relative selection:bg-[#2EA8FF]/20 selection:text-[#2EA8FF]">
         <ThemeBackground />
 
-        <div className="relative z-10 pt-28 pb-20 px-6 max-w-7xl mx-auto">
+        <div className="relative z-10 pt-28 pb-20 px-3 max-w-7xl mx-auto">
           <div className="mb-8">
             <Breadcrumbs items={[{ label: "Properties" }]} />
           </div>
 
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="flex items-center gap-2 py-1.5 px-4 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-amber-700 text-xs font-bold tracking-widest uppercase shadow-sm">
                 <svg
@@ -217,7 +249,7 @@ export default function PropertiesClient({
           </div>
 
           {/* Glass Filters Section */}
-          <div className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-xl shadow-slate-200/50 rounded-2xl p-6 mb-12">
+          <div className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-xl shadow-slate-200/50 rounded-2xl p-6 mb-8 md:mb-12">
             {/* Row 1: Search and Location */}
             <div className="flex flex-col md:flex-row gap-4 mb-4">
               {/* Search Input */}
@@ -374,25 +406,23 @@ export default function PropertiesClient({
                 </div>
               </div>
 
-              {/* Bathrooms */}
+              {/* PHPP Filter */}
               <div className="relative group">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
-                  🚿
+                  📋
                 </span>
                 <select
-                  value={bathroomFilter}
-                  onChange={(e) => setBathroomFilter(e.target.value)}
+                  value={phppFilter}
+                  onChange={(e) => setPhppFilter(e.target.value)}
                   className="w-full pl-11 pr-10 py-3 bg-white/60 border border-white/50 rounded-xl text-slate-800 appearance-none focus:outline-none focus:ring-2 focus:ring-[#2EA8FF]/20 focus:bg-white transition-all cursor-pointer text-sm"
                 >
-                  {BATHROOM_OPTIONS.map((opt) => (
+                  {PHPP_OPTIONS.map((opt: string) => (
                     <option
                       key={opt}
                       value={opt}
                       className="bg-white text-slate-900"
                     >
-                      {opt === "Any"
-                        ? "Any Baths"
-                        : `${opt} Bath${opt === "1" ? "" : "s"}`}
+                      {opt === "Any" ? "PHPP Status" : opt}
                     </option>
                   ))}
                 </select>
@@ -414,7 +444,7 @@ export default function PropertiesClient({
             {(propertyTypeFilter !== "All" ||
               priceRangeIndex !== 0 ||
               bedroomFilter !== "Any" ||
-              bathroomFilter !== "Any" ||
+              phppFilter !== "Any" ||
               areaFilter !== "All") && (
               <div className="mt-4 pt-4 border-t border-white/40 flex items-center justify-between">
                 <span className="text-sm text-slate-600">
@@ -427,7 +457,7 @@ export default function PropertiesClient({
                     setPropertyTypeFilter("All");
                     setPriceRangeIndex(0);
                     setBedroomFilter("Any");
-                    setBathroomFilter("Any");
+                    setPhppFilter("Any");
                   }}
                   className="text-sm text-[#2EA8FF] hover:text-blue-600 font-medium transition-colors"
                 >
@@ -439,17 +469,33 @@ export default function PropertiesClient({
 
           {/* Grid */}
           {filteredProperties.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProperties.map((prop, idx: number) => (
-                <RevealSection key={prop.slug || prop.id} delay={idx * 100}>
-                  <Link
-                    href={`/properties/${usingSanity ? prop.slug : prop.id}`}
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProperties
+                  .slice(0, visibleCount)
+                  .map((prop, idx: number) => (
+                    <RevealSection key={prop.slug || prop.id} delay={idx * 100}>
+                      <Link
+                        href={`/properties/${usingSanity ? prop.slug : prop.id}`}
+                      >
+                        <ListingCard data={prop} />
+                      </Link>
+                    </RevealSection>
+                  ))}
+              </div>
+
+              {filteredProperties.length > visibleCount && (
+                <div className="flex justify-center mt-10">
+                  <button
+                    onClick={handleShowMore}
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold hover:shadow-lg hover:scale-105 transition-all duration-300"
                   >
-                    <ListingCard data={prop} />
-                  </Link>
-                </RevealSection>
-              ))}
-            </div>
+                    Show More Properties
+                    <ArrowRight size={18} />
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-20 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm">
               <div className="inline-flex p-4 rounded-full bg-slate-100 mb-4">
@@ -468,7 +514,7 @@ export default function PropertiesClient({
                   setPropertyTypeFilter("All");
                   setPriceRangeIndex(0);
                   setBedroomFilter("Any");
-                  setBathroomFilter("Any");
+                  setPhppFilter("Any");
                 }}
                 className="px-8 py-3 bg-[#2EA8FF] hover:bg-blue-600 text-white rounded-full transition-all shadow-lg shadow-blue-500/20 font-medium transform hover:-translate-y-1"
               >
@@ -480,18 +526,18 @@ export default function PropertiesClient({
       </main>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#2EA8FF] via-cyan-500 to-teal-400">
+      <section className="relative z-10 py-10 md:py-20 bg-linear-to-r from-amber-500 via-orange-500 to-rose-500">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <Sparkles className="w-12 h-12 text-white/80 mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
             Can't Find What You're Looking For?
           </h2>
-          <p className="text-white/80 text-lg mb-8">
+          <p className="text-white/80 text-base md:text-lg mb-8">
             Let our experts help you find your perfect property in Dubai.
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-8 py-4 rounded-full bg-white text-[#2EA8FF] font-bold hover:bg-slate-100 transition-colors shadow-xl inline-flex items-center gap-2"
+            className="px-8 py-4 rounded-full bg-white text-orange-500 font-bold hover:bg-slate-100 transition-colors inline-flex items-center gap-2"
           >
             Get Expert Help
             <ArrowRight size={18} />

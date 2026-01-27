@@ -21,6 +21,13 @@ const contactInfo = [
     color: "from-blue-500 to-cyan-500",
   },
   {
+    icon: Phone,
+    label: "Landline",
+    value: "+971 04 576 0345",
+    link: "tel:+97145760345",
+    color: "from-emerald-500 to-teal-500",
+  },
+  {
     icon: Mail,
     label: "Email",
     value: "Connect@raastarealty.com",
@@ -33,13 +40,6 @@ const contactInfo = [
     value: "1610, 16th Floor, The Prism Tower, Business Bay, Dubai, UAE",
     link: "https://maps.google.com/?q=The+Prism+Tower+Business+Bay+Dubai",
     color: "from-orange-500 to-red-500",
-  },
-  {
-    icon: Clock,
-    label: "Landline",
-    value: "+971 04 576 0345",
-    link: "tel:+97145760345",
-    color: "from-emerald-500 to-teal-500",
   },
 ];
 
@@ -56,7 +56,7 @@ export const ContactSection: React.FC = () => {
     <section
       ref={containerRef}
       id="contact"
-      className="relative w-full py-24 overflow-hidden font-sans"
+      className="relative w-full py-16 overflow-hidden font-sans"
     >
       {/* Light Animated Background */}
       <div className="absolute inset-0 z-0">
@@ -88,20 +88,20 @@ export const ContactSection: React.FC = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-7 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2EA8FF]/10 border border-[#2EA8FF]/20 text-[#2EA8FF] text-xs font-bold tracking-widest uppercase mb-6">
             <MessageCircle size={12} />
             <span>Get in Touch</span>
           </div>
 
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
             Start Your
             <br />
             <span className="relative inline-block">
@@ -136,13 +136,13 @@ export const ContactSection: React.FC = () => {
             </span>
           </h2>
 
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
+          <p className="max-w-2xl mx-auto text-md md:text-xl text-slate-600 leading-relaxed mt-6">
             Ready to make your move in Dubai's real estate market? Our experts
             are here to guide you.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
           {/* Left Side - Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -152,22 +152,23 @@ export const ContactSection: React.FC = () => {
             className="space-y-8"
           >
             {/* Contact Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {contactInfo.map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="group"
-                >
-                  {item.link ? (
+            <div className="space-y-4">
+              {/* Phone numbers - side by side on mobile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {contactInfo.slice(0, 2).map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="group"
+                  >
                     <a
                       href={item.link}
-                      className="block p-5 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 hover:bg-white/60 hover:shadow-lg hover:shadow-[#2EA8FF]/10 transition-all duration-300"
+                      className="block p-3 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 hover:bg-white/60 hover:shadow-lg hover:shadow-[#2EA8FF]/10 transition-all duration-300"
                     >
-                      <div className="flex items-start gap-4">
+                      <div className="flex flex-row gap-3">
                         <div
                           className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg`}
                         >
@@ -177,31 +178,46 @@ export const ContactSection: React.FC = () => {
                           <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
                             {item.label}
                           </p>
-                          <p className="text-slate-900 font-medium">
+                          <p className="text-slate-900 font-medium text-sm">
                             {item.value}
                           </p>
                         </div>
                       </div>
                     </a>
-                  ) : (
-                    <div className="p-5 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60">
-                      <div className="flex items-start gap-4">
-                        <div
-                          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white shadow-lg`}
-                        >
-                          <item.icon size={22} />
-                        </div>
-                        <div>
-                          <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
-                            {item.label}
-                          </p>
-                          <p className="text-slate-900 font-medium">
-                            {item.value}
-                          </p>
-                        </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Email and Address - full width */}
+              {contactInfo.slice(2).map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: (index + 2) * 0.1 }}
+                  className="group"
+                >
+                  <a
+                    href={item.link}
+                    className="block p-3 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 hover:bg-white/60 hover:shadow-lg hover:shadow-[#2EA8FF]/10 transition-all duration-300"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div
+                        className={`w-12 h-12 flex-shrink-0 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg`}
+                      >
+                        <item.icon size={22} />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                          {item.label}
+                        </p>
+                        <p className="text-slate-900 font-medium">
+                          {item.value}
+                        </p>
                       </div>
                     </div>
-                  )}
+                  </a>
                 </motion.div>
               ))}
             </div>
@@ -215,16 +231,21 @@ export const ContactSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.4 }}
-              className="flex items-center gap-4 p-6 rounded-2xl bg-white/40 backdrop-blur-xl border border-[#25D366]/30 hover:bg-white/60 hover:border-[#25D366]/50 transition-all group"
+              className="flex items-center gap-4 p-3 md:p-5 rounded-2xl bg-green-50 backdrop-blur-xl border border-[#25D366]/30 hover:bg-white/60 hover:border-[#25D366]/50 transition-all group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/30 group-hover:scale-110 transition-transform">
-                <MessageCircle size={28} />
+              <div className="w-14 h-14 group-hover:scale-110 transition-transform">
+                <img
+                  src="/whatsapp.svg"
+                  alt="WhatsApp"
+                  width={50}
+                  height={50}
+                />
               </div>
               <div className="flex-1">
-                <p className="text-slate-900 font-bold text-lg">
+                <p className="text-slate-900 font-bold text-base md:text-lg">
                   Chat on WhatsApp
                 </p>
-                <p className="text-slate-600 text-sm">
+                <p className="text-slate-600 text-xs md:text-sm">
                   Get instant response from our team
                 </p>
               </div>
@@ -257,11 +278,11 @@ export const ContactSection: React.FC = () => {
             className="relative"
           >
             {/* Form Card */}
-            <div className="relative p-8 md:p-10 rounded-3xl bg-white/50 backdrop-blur-2xl border border-white/60 shadow-xl shadow-slate-200/30">
+            <div className="relative p-4 md:p-10 rounded-3xl bg-white/50 backdrop-blur-2xl border border-white/60 shadow-xl shadow-slate-200/30">
               {/* Decorative gradient border */}
               <div className="absolute -inset-px rounded-3xl bg-gradient-to-b from-[#2EA8FF]/10 via-white/50 to-cyan-500/10 -z-10" />
 
-              <div className="text-center mb-8">
+              <div className="text-center mb-0">
                 <img
                   src="/logo_black.svg"
                   alt="Raasta Realty"

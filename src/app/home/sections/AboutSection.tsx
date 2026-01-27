@@ -20,11 +20,9 @@ export const AboutSection: React.FC = () => {
     setMounted(true);
   }, []);
 
-
-
   const ExpandableText = ({ content }: { content: string }) => {
     const [isExpanded, setIsExpanded] = React.useState(false);
-  
+
     return (
       <div className="relative group/text">
         <p
@@ -81,7 +79,7 @@ export const AboutSection: React.FC = () => {
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 top-4 w-px h-8 bg-gradient-to-b from-emerald-500 to-transparent" />
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
+            <h1 className="text-3xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
               About
               <br />
               <span className="relative inline-block">
@@ -116,7 +114,7 @@ export const AboutSection: React.FC = () => {
               </span>
             </h1>
 
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
+            <p className="max-w-2xl mx-auto text-md md:text-xl text-slate-600 leading-relaxed mt-6">
               More than a real estate company a purpose driven platform built to
               create long term value, meaningful growth, and lasting impact.
             </p>
@@ -178,13 +176,26 @@ export const AboutSection: React.FC = () => {
                       .
                     </p>
                     <p>
-                      Our concept is simple {"-> "}
+                      Our concept is simple
+                      <svg
+                        className="inline-block w-4 h-4 mx-1"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M5 12H19M19 12L12 5M19 12L12 19"
+                          stroke="#10B981"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                       Real estate should never be about transactions alone. It
                       can be a tool to create impact, not just income.
                     </p>
                     <p className="text-lg font-semibold text-slate-800 pt-2">
-                      We don't see ourselves ahead of you, we walk with
-                      you.
+                      We don't see ourselves ahead of you, we walk with you.
                     </p>
 
                     <Link href="/about">
@@ -236,9 +247,7 @@ export const AboutSection: React.FC = () => {
                     Our Mission
                   </h3>
                 </div>
-                <ExpandableText
-                  content="To transform the lives of everyone connected to Raasta Realty i.e. clients, investors, agents, and referral partners, while extending our impact to the deserving souls supported through our legacy fund."
-                />
+                <ExpandableText content="To transform the lives of everyone connected to Raasta Realty i.e. clients, investors, agents, and referral partners, while extending our impact to the deserving souls supported through our legacy fund." />
               </div>
             </div>
           </RevealSection>
@@ -253,9 +262,7 @@ export const AboutSection: React.FC = () => {
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold">Why Raasta</h3>
                 </div>
-                <ExpandableText
-                  content="A fixed 6% of our revenue from every deal is dedicated to charitable causes education, healthcare, shelter, and essential needs."
-                />
+                <ExpandableText content="A fixed 6% of our revenue from every deal is dedicated to charitable causes education, healthcare, shelter, and essential needs." />
               </div>
             </div>
           </RevealSection>
@@ -270,9 +277,7 @@ export const AboutSection: React.FC = () => {
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold">Our Vision</h3>
                 </div>
-                <ExpandableText
-                  content="Through every deal, we uplift lives. Our vision is to be remembered not for the number of sales we made, but for the difference we created in people's lives."
-                />
+                <ExpandableText content="Through every deal, we uplift lives. Our vision is to be remembered not for the number of sales we made, but for the difference we created in people's lives." />
               </div>
             </div>
           </RevealSection>

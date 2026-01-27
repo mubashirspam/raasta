@@ -87,7 +87,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
   };
 
   return (
-    <section className="relative w-full py-24 overflow-hidden font-sans">
+    <section className="relative w-full py-16 md:py-24 overflow-hidden font-sans">
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -143,7 +143,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
               <span>Trusted by the Elite</span>
             </div>
 
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-4 leading-[1.1]">
               Stories from
               <br />
               <span className="relative inline-block">
@@ -178,7 +178,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
               </span>
             </h2>
 
-            <p className="max-w-4xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mt-6">
+            <p className="max-w-4xl mx-auto text-base md:text-xl text-slate-600 leading-relaxed mt-6">
               We facilitate life-changing investments. Hear from families who
               trusted us.
             </p>
@@ -249,7 +249,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
 
           {/* Pagination Dots */}
           {totalSlides > 1 && (
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-2 mt-5">
               {Array.from({ length: totalSlides }).map((_, index) => (
                 <button
                   key={index}
@@ -267,26 +267,41 @@ export const Testimonial: React.FC<TestimonialProps> = ({
         </div>
 
         <div
-          className={`mt-20 pt-10 border-t border-white/40 flex flex-wrap justify-center md:justify-between items-center gap-8 transition-all duration-1000 delay-500 ${
+          className={`mt-10 pt-10 border-t border-white/40 flex flex-wrap justify-center md:justify-between items-center gap-8 transition-all duration-1000 delay-500 ${
             mounted ? "opacity-100" : "opacity-0"
           }`}
         >
           <div className="text-center md:text-left">
-            <h3 className="text-3xl font-bold text-slate-900">AED 2.5B+</h3>
+            <h3
+              className="text-3xl font-bold text-slate-900"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              AED 2.5B+
+            </h3>
             <p className="text-slate-500 text-sm font-medium uppercase tracking-wide">
               Property Sold
             </p>
           </div>
           <div className="hidden md:block w-px h-12 bg-slate-300/50"></div>
           <div className="text-center md:text-left">
-            <h3 className="text-3xl font-bold text-slate-900">50+</h3>
+            <h3
+              className="text-3xl font-bold text-slate-900"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              30+
+            </h3>
             <p className="text-slate-500 text-sm font-medium uppercase tracking-wide">
               Nationalities Served
             </p>
           </div>
           <div className="hidden md:block w-px h-12 bg-slate-300/50"></div>
           <div className="text-center md:text-left">
-            <h3 className="text-3xl font-bold text-slate-900">98%</h3>
+            <h3
+              className="text-3xl font-bold text-slate-900"
+              style={{ fontFamily: "Inter, sans-serif" }}
+            >
+              98%
+            </h3>
             <p className="text-slate-500 text-sm font-medium uppercase tracking-wide">
               Client Retention
             </p>

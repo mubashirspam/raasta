@@ -49,7 +49,7 @@ export const HeroSection: React.FC = () => {
       />
       <img
         className="absolute bottom-0 right-0 opacity-[0.07] w-1/2 object-cover pointer-events-none"
-        src="hero/c4.jpg"
+        src="hero/c6.jpg"
         alt=""
       />
 
@@ -160,10 +160,10 @@ export const HeroSection: React.FC = () => {
               </h2>
             </div>
 
-            <div className="mt-0 flex flex-row items-center justify-center gap-y-1 text-xs md:text-xl lg:text-xl text-slate-800">
-              <span>This is not a Campaign.</span>
-              <span className="flex items-baseline gap-2">
-                It's{" "}
+            <div className="mt-0 flex flex-row items-center justify-center gap-1 text-xs md:text-xl lg:text-xl text-slate-800">
+              <span>This is not a campaign. </span>
+              <span className="flex items-baseline gap-1">
+                It's
                 <span className=" text-transparent bg-clip-text bg-linear-to-r from-amber-500 to-orange-600 leading-none py-2">
                   Our Commitment
                 </span>

@@ -93,8 +93,9 @@ export default function Home({
         {/* <FeaturedListings sanityProperties={sanityProperties} /> */}
         {/* <WhyDubai /> */}
        
-        <GallerySection videos={sanityGalleryVideos} />
+        
         <Testimonial sanityTestimonials={sanityTestimonials} />
+        <GallerySection videos={sanityGalleryVideos} />
 
         <ContactSection />
       </main>
