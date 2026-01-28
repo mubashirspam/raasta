@@ -10,7 +10,6 @@ import {
   Services,
   WhoWeSupport,
   RealEstatePrinciples,
-  WhyDubai,
   AboutSection,
   Testimonial,
   Marquee,
@@ -92,8 +91,6 @@ export default function Home({
         <RealEstatePrinciples />
         {/* <FeaturedListings sanityProperties={sanityProperties} /> */}
         {/* <WhyDubai /> */}
-       
-        
         <Testimonial sanityTestimonials={sanityTestimonials} />
         <GallerySection videos={sanityGalleryVideos} />
 

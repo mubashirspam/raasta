@@ -49,7 +49,7 @@ export const Marquee: React.FC<MarqueeProps> = ({ developers }) => {
       >
         <div className="flex w-max animate-marquee">
           {/* First set */}
-          <div className="flex gap-8 md:gap-16 items-center px-4 md:px-8">
+          <div className="flex gap-7 items-center px-4 md:px-8">
             {logos.map((company, idx) => (
               <div
                 key={idx}
@@ -58,16 +58,16 @@ export const Marquee: React.FC<MarqueeProps> = ({ developers }) => {
                 <Image
                   src={company.src}
                   alt={company.name}
-                  width={120}
+                  width={0}
                   height={40}
                   className="h-10 w-auto object-contain grayscale brightness-0"
-                  style={{ maxWidth: "120px" }}
+                  sizes="100vw"
                 />
               </div>
             ))}
           </div>
           {/* Duplicate for seamless loop */}
-          <div className="flex gap-8 md:gap-16 items-center px-4 md:px-8">
+          <div className="flex gap-7 items-center px-4 md:px-8">
             {logos.map((company, idx) => (
               <div
                 key={`dup-${idx}`}
@@ -76,10 +76,10 @@ export const Marquee: React.FC<MarqueeProps> = ({ developers }) => {
                 <Image
                   src={company.src}
                   alt={company.name}
-                  width={120}
+                  width={0}
                   height={40}
                   className="h-10 w-auto object-contain grayscale brightness-0"
-                  style={{ maxWidth: "120px" }}
+                  sizes="100vw"
                 />
               </div>
             ))}

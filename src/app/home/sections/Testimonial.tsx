@@ -87,7 +87,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
   };
 
   return (
-    <section className="relative w-full py-16 md:py-24 overflow-hidden font-sans">
+    <section id="testimonials" className="relative w-full py-16 md:py-24 overflow-hidden font-sans">
       <div
         className="absolute inset-0 z-0"
         style={{

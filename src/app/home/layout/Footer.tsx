@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Instagram, Linkedin, Facebook, Youtube, ChevronRight, ArrowUpRight } from "lucide-react";
+import {
+  Instagram,
+  Linkedin,
+  Facebook,
+  Youtube,
+  ChevronRight,
+  ArrowUpRight,
+} from "lucide-react";
 
 export const Footer: React.FC = () => {
   const [mounted, setMounted] = useState(false);
@@ -9,7 +16,7 @@ export const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="relative w-full pt-20 pb-10 overflow-hidden font-sans">
+    <footer className="relative w-full pt-20 pb-0 overflow-hidden font-sans">
       {/* =========================================================================
           BACKGROUND COMPOSITION (Iridescent Grid Theme)
          ========================================================================= */}
@@ -60,7 +67,7 @@ export const Footer: React.FC = () => {
       <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12">
         {/* Main Footer Content */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16 transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-8 transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
           {/* Column 1: Brand & Socials */}
           <div className="space-y-6">
@@ -109,10 +116,30 @@ export const Footer: React.FC = () => {
                 <Youtube size={18} />
               </a>
             </div>
+
+            {/* Email Contacts */}
+            <div className="space-y-2 mt-6">
+              <div className="text-sm">
+                <span className="text-slate-600 font-semibold">General: </span>
+                <a
+                  href="mailto:Admin@lykarealty.ae"
+                  className="text-[#2EA8FF] hover:underline transition-colors"
+                >
+                  connect@raastarealty.com
+                </a>
+              </div>
+              <div className="text-sm">
+                <span className="text-slate-600 font-semibold">Career: </span>
+                <a
+                  href="mailto:hr@lykarealty.ae"
+                  className="text-[#2EA8FF] hover:underline transition-colors"
+                >
+                  hr@raastarealty.com
+                </a>
+              </div>
+            </div>
           </div>
 
-
-          
           {/* Column 3: Company Links */}
           <div>
             <h4 className="font-bold text-slate-900 mb-6 text-lg">Company</h4>
@@ -136,46 +163,35 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter */}
+          {/* Column 4: Office Location */}
           <div className="lg:pl-8">
-            <h4 className="font-bold text-slate-900 mb-6 text-lg">
-              Newsletter
-            </h4>
-            <p className="text-sm text-slate-500 mb-4">
-              Subscribe for the latest off-plan deals and market updates.
-            </p>
-            <div className="relative group">
-              <input
-                type="email"
-                placeholder="Email address"
-                className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#2EA8FF] focus:ring-4 focus:ring-[#2EA8FF]/10 transition-all shadow-sm"
-              />
-              <button className="absolute right-1.5 top-1.5 bottom-1.5 bg-[#2EA8FF] text-white rounded-lg px-3 hover:bg-blue-600 transition-colors shadow-md">
-                <ChevronRight size={18} />
-              </button>
-            </div>
-            <a
-              href="https://www.cbre.ae/insights/figures/uae-real-estate-market-review-q3-2025"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block mt-6 p-4 bg-white/60 backdrop-blur-sm border border-slate-100 rounded-xl hover:shadow-md transition-all group/report"
-            >
-              <div className="flex items-center justify-between text-xs font-bold text-slate-800">
-                <span>Latest Market Report</span>
-                <ArrowUpRight
-                  size={14}
-                  className="text-[#2EA8FF] transition-transform group-hover/report:-translate-y-0.5 group-hover/report:translate-x-0.5"
-                />
+            <h4 className="font-bold text-slate-900 mb-6 text-lg">Location</h4>
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm font-semibold text-slate-700 mb-2">
+                  Office
+                </p>
+                <p className="text-sm text-slate-500 leading-relaxed">
+                  1610, 16th Floor, The Prism Tower,
+                  <br />
+                  Business Bay, Dubai, UAE
+                </p>
               </div>
-              <p className="text-[10px] text-slate-400 mt-1">
-                Q3 2026 Analysis Available
-              </p>
-            </a>
+              <a
+                href="https://maps.google.com/?q=The+Prism+Tower+Business+Bay+Dubai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#2EA8FF] hover:underline transition-colors"
+              >
+                View on Map
+                <ArrowUpRight size={14} />
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-200/60 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-400">
+        <div className="border-t border-slate-200/60 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-400">
           <p>&copy; 2026 RaastaRealty Dubai. All rights reserved.</p>
           <div className="flex gap-8">
             <a
@@ -190,6 +206,19 @@ export const Footer: React.FC = () => {
             <a href="/rera" className="hover:text-[#2EA8FF] transition-colors">
               RERA Info
             </a>
+          </div>
+        </div>
+
+        {/* Animated Brand Marquee */}
+        <div className="relative w-screen left-1/2 right-1/2 -mx-[50vw] bottom-[-20px] md:bottom-[-50px] overflow-hidden border-t border-slate-200/60">
+          <div className="flex whitespace-nowrap animate-marquee">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center">
+                <span className="text-9xl md:text-[10rem] lg:text-[20rem] font-bold text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500  tracking-tighter px-12">
+                  Raasta Realty
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

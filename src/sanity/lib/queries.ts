@@ -426,8 +426,14 @@ export async function getCareerGallery() {
     _id,
     title,
     category,
+    mediaType,
     order,
     image {
+      asset -> {
+        url
+      }
+    },
+    video {
       asset -> {
         url
       }

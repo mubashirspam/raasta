@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "../home/layout/Navbar";
 import { Footer } from "../home/layout/Footer";
 import { ContactModal } from "../home/ui/ContactModal";
+import { GalleryModal } from "../home/ui/GalleryModal";
 import { ContactForm } from "../home/forms/ContactForm";
 import {
   Briefcase,
@@ -37,8 +38,14 @@ interface CareerGalleryImage {
   _id: string;
   title: string;
   category: string;
+  mediaType: "image" | "video";
   order: number;
-  image: {
+  image?: {
+    asset: {
+      url: string;
+    };
+  };
+  video?: {
     asset: {
       url: string;
     };
@@ -101,6 +108,7 @@ export default function CareerPageContent({
   careerGallery,
 }: CareerPageContentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
   const [visibleImageIndices, setVisibleImageIndices] = useState([0, 1, 2, 3]);
   const [heroImageIndex, setHeroImageIndex] = useState(0);
 
@@ -158,6 +166,11 @@ export default function CareerPageContent({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+      <GalleryModal
+        isOpen={isGalleryModalOpen}
+        onClose={() => setIsGalleryModalOpen(false)}
+        media={careerGallery}
+      />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
@@ -193,7 +206,7 @@ export default function CareerPageContent({
                 Build Your
                 <br />
                 <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
                     Career With Us
                   </span>
                   <svg
@@ -264,7 +277,7 @@ export default function CareerPageContent({
               transition={{ delay: 0.3 }}
               className="relative"
             >
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative">
+              <div className="aspect-4/3 rounded-3xl overflow-hidden shadow-2xl relative">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={heroImageIndex}
@@ -441,7 +454,7 @@ export default function CareerPageContent({
               </p>
 
               <button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => setIsGalleryModalOpen(true)}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg"
               >
                 See Our Culture
