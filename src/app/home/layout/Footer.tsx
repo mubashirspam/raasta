@@ -214,7 +214,7 @@ export const Footer: React.FC = () => {
           <div className="flex whitespace-nowrap animate-marquee">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="flex items-center">
-                <span className="text-9xl md:text-[10rem] lg:text-[20rem] font-bold text-transparent bg-clip-text bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500  tracking-tighter px-12">
+                <span className="text-9xl md:text-[10rem] lg:text-[20rem] font-bold text-transparent bg-clip-text bg-linear-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20  tracking-tighter px-12">
                   Raasta Realty
                 </span>
               </div>
