@@ -112,18 +112,15 @@ export default function CareerPageContent({
   const [visibleImageIndices, setVisibleImageIndices] = useState([0, 1, 2, 3]);
   const [heroImageIndex, setHeroImageIndex] = useState(0);
 
-  // Filter office images for hero section
+  // Filter and sort office images for hero section
   const officeImages = careerGallery
     .filter((item) => item.category === "office")
+    .sort((a, b) => a.order - b.order) // Sort by order (1, 2, 3...)
     .map((item) => ({
       url: item.image?.asset?.url,
       alt: item.title,
     }))
     .filter((img) => img.url); // Only include images with valid URLs
-
-  // Default hero image if no office images
-  const defaultHeroImage =
-    "https://cdn.sanity.io/images/8dj8qon7/production/86913db8712c782ab816e76ad2bcea6419f20828-1200x843.jpg";
 
   // Get images from Sanity or use defaults
   const images =
@@ -284,7 +281,7 @@ export default function CareerPageContent({
                     src={
                       officeImages.length > 0
                         ? officeImages[heroImageIndex]?.url
-                        : defaultHeroImage
+                        : defaultImages[0].url
                     }
                     alt={
                       officeImages.length > 0
@@ -292,10 +289,10 @@ export default function CareerPageContent({
                         : "Team collaboration"
                     }
                     className="w-full h-full object-cover absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6 }}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
                   />
                 </AnimatePresence>
               </div>

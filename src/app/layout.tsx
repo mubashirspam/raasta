@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 const SITE_URL = "https://www.raastarealty.com";
 const OG_IMAGE =
-  "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200&h=630&auto=format&fit=crop";
+  "https://cdn.sanity.io/images/8dj8qon7/production/fdc26806bce495156a6b1908fdb1f3b47041361b-1280x802.jpg";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   icons: {
-    icon: "/logo_black.svg",
+    icon: "/favicon.ico",
     apple: "/logo_black.svg",
   },
   verification: {
