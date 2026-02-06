@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Navbar } from "../home/layout/Navbar";
 import { Footer } from "../home/layout/Footer";
 import { ContactForm } from "../home/forms/ContactForm";
@@ -121,47 +122,107 @@ export default function ContactPageContent() {
           </div>
 
           {/* Contact Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {contactInfo.map((item) => (
-              <div
-                key={item.label}
-                className="group p-5 rounded-2xl bg-white border border-slate-200 hover:shadow-lg hover:border-[#2EA8FF]/30 transition-all cursor-pointer"
-              >
-                {item.link ? (
+          <div className="space-y-4 max-w-4xl mx-auto">
+            {/* Phone & Email - side by side on mobile */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {contactInfo.slice(0, 2).map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="group"
+                >
                   <a
                     href={item.link}
-                    target={item.link.startsWith("http") ? "_blank" : undefined}
-                    rel="noopener noreferrer"
+                    className="block p-3 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 hover:bg-white/60 hover:shadow-lg hover:shadow-[#2EA8FF]/10 transition-all duration-300"
                   >
-                    <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform shadow-lg`}
-                    >
-                      <item.icon size={22} />
+                    <div className="flex flex-row gap-3">
+                      <div
+                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg`}
+                      >
+                        <item.icon size={22} />
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                          {item.label}
+                        </p>
+                        <p className="text-slate-900 font-medium text-sm">
+                          {item.value}
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
-                      {item.label}
-                    </p>
-                    <p className="text-slate-900 font-medium text-sm">
-                      {item.value}
-                    </p>
                   </a>
-                ) : (
-                  <>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Office and Landline - full width */}
+            {contactInfo.slice(2).map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (index + 2) * 0.1 }}
+                className="group"
+              >
+                <a
+                  href={item.link}
+                  target={item.link.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="block p-3 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 hover:bg-white/60 hover:shadow-lg hover:shadow-[#2EA8FF]/10 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
                     <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white mb-4 shadow-lg`}
+                      className={`w-12 h-12 flex-shrink-0 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-lg`}
                     >
                       <item.icon size={22} />
                     </div>
-                    <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
-                      {item.label}
-                    </p>
-                    <p className="text-slate-900 font-medium text-sm">
-                      {item.value}
-                    </p>
-                  </>
-                )}
-              </div>
+                    <div className="flex-1">
+                      <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
+                        {item.label}
+                      </p>
+                      <p className="text-slate-900 font-medium">{item.value}</p>
+                    </div>
+                  </div>
+                </a>
+              </motion.div>
             ))}
+
+            {/* WhatsApp CTA */}
+            <motion.a
+              href="https://wa.me/971529368338"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              className="flex items-center gap-4 p-3 md:p-5 rounded-2xl bg-green-50 backdrop-blur-xl border border-[#25D366]/30 hover:bg-white/60 hover:border-[#25D366]/50 transition-all group"
+            >
+              <div className="w-14 h-14 group-hover:scale-110 transition-transform">
+                <img
+                  src="/whatsapp.svg"
+                  alt="WhatsApp"
+                  width={50}
+                  height={50}
+                />
+              </div>
+              <div className="flex-1">
+                <p className="text-slate-900 font-bold text-base md:text-lg">
+                  Chat on WhatsApp
+                </p>
+                <p className="text-slate-600 text-xs md:text-sm">
+                  Get instant response from our team
+                </p>
+              </div>
+              <ArrowRight
+                size={20}
+                className="text-[#25D366] group-hover:translate-x-1 transition-transform"
+              />
+            </motion.a>
           </div>
         </div>
       </section>
@@ -210,7 +271,7 @@ export default function ContactPageContent() {
               {/* Map */}
               <div className="rounded-2xl overflow-hidden h-[300px] bg-slate-200">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.178509345498!2d55.2707!3d25.2048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDEyJzE3LjMiTiA1NcKwMTYnMTQuNSJF!5e0!3m2!1sen!2sae!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.5!2d55.2611155!3d25.1874602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69152e1ad737%3A0x4d362051c3bd651b!2sRaasta%20Realty!5e0!3m2!1sen!2sae!4v1700000000000"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

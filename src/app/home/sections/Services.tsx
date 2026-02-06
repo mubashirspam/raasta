@@ -112,10 +112,10 @@ export const Services: React.FC = () => {
           <div className="mt-10 text-center">
             <button className="relative px-8 py-4 bg-slate-900 text-white rounded-full font-semibold shadow-2xl shadow-slate-900/30 overflow-hidden group">
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="relative flex items-center gap-2">
+              <a href="https://raastarealty.homes/Lead/form/RaastaTeam_4" className="relative flex items-center gap-2 ">
                 Schedule a Consultation
                 <ArrowRight size={18} />
-              </span>
+              </a>
             </button>
             
           </div>

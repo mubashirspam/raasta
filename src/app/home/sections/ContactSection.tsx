@@ -258,7 +258,7 @@ export const ContactSection: React.FC = () => {
             {/* Map */}
             <div className="rounded-2xl overflow-hidden h-[300px] bg-white/40 backdrop-blur-xl border border-white/60">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.178509345498!2d55.2707!3d25.2048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDEyJzE3LjMiTiA1NcKwMTYnMTQuNSJF!5e0!3m2!1sen!2sae!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.5!2d55.2611155!3d25.1874602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69152e1ad737%3A0x4d362051c3bd651b!2sRaasta%20Realty!5e0!3m2!1sen!2sae!4v1700000000000"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

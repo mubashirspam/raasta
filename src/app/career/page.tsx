@@ -3,16 +3,29 @@ import CareerPageContent from "./CareerPageContent";
 import { getJobPositions, getCareerGallery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "Careers at Raasta Realty | Join Our Team",
+  title: "Careers — Join Dubai's Purpose-Driven Real Estate Team",
   description:
-    "Join Dubai's most purpose-driven real estate company. Explore career opportunities at Raasta Realty and be part of a team that makes a difference.",
+    "Join Raasta Realty and build a meaningful career in Dubai real estate. Open positions for agents, managers & creatives. Mentorship, growth & purpose — not just a job.",
   keywords: [
     "raasta realty careers",
     "dubai real estate jobs",
     "real estate agent jobs dubai",
     "property jobs dubai",
     "raasta jobs",
+    "real estate career Dubai",
+    "join real estate company Dubai",
+    "property agent vacancy Dubai",
+    "real estate internship Dubai",
   ],
+  alternates: {
+    canonical: "https://www.raastarealty.com/career",
+  },
+  openGraph: {
+    title: "Careers at Raasta Realty — Join Our Team in Dubai",
+    description:
+      "Build a meaningful career in Dubai real estate. Open positions for agents, managers & creatives at Raasta Realty.",
+    url: "https://www.raastarealty.com/career",
+  },
 };
 
 export const revalidate = 60; // Revalidate every 60 seconds

@@ -178,7 +178,7 @@ export const Footer: React.FC = () => {
                 </p>
               </div>
               <a
-                href="https://maps.google.com/?q=The+Prism+Tower+Business+Bay+Dubai"
+                href="https://www.google.com/maps?ll=25.18746,55.261116&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=5563669925211235611"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#2EA8FF] hover:underline transition-colors"

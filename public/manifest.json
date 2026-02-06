@@ -1,0 +1,16 @@
+{
+  "name": "Raasta Realty — Top Dubai Real Estate Consultancy",
+  "short_name": "Raasta Realty",
+  "description": "Dubai's most trusted real estate consultancy. Buy, sell & invest in premium Dubai properties with RERA-certified experts.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "/logo_black.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

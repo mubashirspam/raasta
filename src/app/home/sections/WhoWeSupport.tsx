@@ -559,7 +559,9 @@ export const WhoWeSupport: React.FC = () => {
                         background: `linear-gradient(135deg, ${currentPersona.color}, ${currentPersona.color}DD)`,
                       }}
                     >
-                      <span>Get Started</span>
+                      <a href="https://raastarealty.homes/Lead/form/RaastaTeam_4">
+                        Get Started
+                      </a>
                       <ArrowRight size={18} />
                     </button>
                   </div>
