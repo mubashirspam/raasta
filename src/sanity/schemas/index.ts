@@ -8,6 +8,7 @@ export { contactSubmission } from "./contactSubmission";
 export { consultationSubmission, offerSubmission } from "./offerSubmission";
 export { jobPosition } from "./jobPosition";
 export { careerGallery } from "./careerGallery";
+export { careerApplication } from "./careerApplication";
 
 import { property } from "./property";
 import { agent } from "./agent";
@@ -19,6 +20,7 @@ import { contactSubmission } from "./contactSubmission";
 import { consultationSubmission, offerSubmission } from "./offerSubmission";
 import { jobPosition } from "./jobPosition";
 import { careerGallery } from "./careerGallery";
+import { careerApplication } from "./careerApplication";
 
 export const schemaTypes = [
   property,
@@ -31,4 +33,5 @@ export const schemaTypes = [
   consultationSubmission,
   jobPosition,
   careerGallery,
+  careerApplication,
 ];

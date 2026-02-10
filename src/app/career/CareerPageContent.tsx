@@ -6,7 +6,7 @@ import { Navbar } from "../home/layout/Navbar";
 import { Footer } from "../home/layout/Footer";
 import { ContactModal } from "../home/ui/ContactModal";
 import { GalleryModal } from "../home/ui/GalleryModal";
-import { ContactForm } from "../home/forms/ContactForm";
+import CareerApplicationForm from "./CareerApplicationForm";
 import {
   Briefcase,
   Users,
@@ -17,6 +17,7 @@ import {
   ArrowRight,
   Sparkles,
   Globe,
+  X,
 } from "lucide-react";
 
 interface JobPosition {
@@ -109,6 +110,7 @@ export default function CareerPageContent({
 }: CareerPageContentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState("");
   const [visibleImageIndices, setVisibleImageIndices] = useState([0, 1, 2, 3]);
   const [heroImageIndex, setHeroImageIndex] = useState(0);
 
@@ -411,7 +413,7 @@ export default function CareerPageContent({
                       </div>
                     </div>
                     <button
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => setSelectedPosition(position.title)}
                       className="px-6 py-3 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap"
                     >
                       Apply Now
@@ -524,6 +526,33 @@ export default function CareerPageContent({
         </div>
       </section>
 
+      {/* Career Application Modal */}
+      {selectedPosition && (
+        <div className="fixed inset-0 z-[60] flex items-end md:items-center justify-center md:p-4 bg-slate-900/30 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white/90 backdrop-blur-xl border border-white rounded-t-3xl md:rounded-3xl shadow-2xl p-6 md:p-8 max-w-xl w-full relative h-[95vh] md:h-auto md:max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setSelectedPosition("")}
+              className="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 text-slate-500 transition-colors z-10"
+            >
+              <X size={20} />
+            </button>
+
+            <h2 className="text-2xl font-bold text-slate-800 mb-2">
+              Career Application
+            </h2>
+
+            <CareerApplicationForm
+              position={selectedPosition}
+              onSuccess={() => {
+                setTimeout(() => {
+                  setSelectedPosition("");
+                }, 2500);
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* CTA */}
       <section className="py-10 bg-gradient-to-r from-violet-500 to-indigo-500">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -536,7 +565,7 @@ export default function CareerPageContent({
             here.
           </p>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setSelectedPosition("General Application")}
             className="px-8 py-4 rounded-full bg-white text-violet-600 font-bold hover:bg-slate-100 transition-colors"
           >
             Apply Today

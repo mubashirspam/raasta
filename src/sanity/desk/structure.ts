@@ -10,6 +10,7 @@ import {
   BriefcaseBusiness,
   Briefcase,
   Camera,
+  UserCheck,
 } from "lucide-react";
 
 export const structure = (S: StructureBuilder) =>
@@ -54,6 +55,22 @@ export const structure = (S: StructureBuilder) =>
                       S.document()
                         .documentId(documentId)
                         .schemaType("consultationSubmission"),
+                    ),
+                ),
+              S.listItem()
+                .title("Career Applications")
+                .icon(UserCheck)
+                .child(
+                  S.documentTypeList("careerApplication")
+                    .title("Career Applications")
+                    .filter('_type == "careerApplication"')
+                    .defaultOrdering([
+                      { field: "submittedAt", direction: "desc" },
+                    ])
+                    .child((documentId) =>
+                      S.document()
+                        .documentId(documentId)
+                        .schemaType("careerApplication"),
                     ),
                 ),
             ]),
