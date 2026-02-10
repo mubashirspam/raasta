@@ -277,7 +277,7 @@ export default function CareerApplicationForm({
           <span className="text-slate-400 font-normal">(Optional)</span>
         </label>
 
-        {/* {cvFile ? (
+        {cvFile ? (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -317,7 +317,7 @@ export default function CareerApplicationForm({
               <p className="text-xs text-slate-400">PDF or DOCX • Max 2MB</p>
             </div>
           </div>
-        )} */}
+        )}
 
         <input
           ref={fileInputRef}
