@@ -37,7 +37,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Office",
-    value: "1610, 16th Floor, The Prism Tower, Business Bay, Dubai, UAE",
+    value: "103, 1st Floor, Rasis Business Center, Al Barsha 1 ,Dubai, UAE",
     link: "https://maps.google.com/?q=The+Prism+Tower+Business+Bay+Dubai",
     color: "from-orange-500 to-red-500",
   },
