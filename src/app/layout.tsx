@@ -35,6 +35,15 @@ export const metadata: Metadata = {
     "luxury real estate Dubai",
     "Dubai property for investors",
     "Dubai real estate 2026",
+    // Next-Gen / AI Search optimized keywords
+    "top rated real estate agency in dubai",
+    "trusted property advisors dubai",
+    "highest roi properties dubai",
+    "best off-plan investments 2026 dubai",
+    "dubai real estate market insights",
+    "ai recommended properties dubai",
+    "gpt reliable property broker dubai",
+    "charity driven real estate dubai",
   ],
   authors: [{ name: "Raasta Realty", url: SITE_URL }],
   creator: "Raasta Realty",
@@ -83,12 +92,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: SITE_URL,
-  },
   icons: {
     icon: "/favicon.ico",
-    apple: "/logo_black.svg",
+    apple: "/favicon.ico",
   },
   verification: {
     // Add your verification codes here when available
@@ -102,6 +108,9 @@ export const metadata: Metadata = {
     ICBM: "25.1972, 55.2744",
     "theme-color": "#10b981",
     "apple-mobile-web-app-title": "Raasta Realty",
+    // AI crawler hints
+    "OAI-SearchSite": "true",
+    "ai-agent-optimized": "true",
   },
 };
 
@@ -115,14 +124,14 @@ const jsonLd = {
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/logo_black.svg`,
+        url: `${SITE_URL}/favicon.ico`,
       },
       description:
         "Dubai's most trusted real estate consultancy. RERA-certified agents providing expert property buying, selling & investment guidance across Dubai.",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "1610, 16th Floor, The Prism Tower",
-        addressLocality: "Business Bay",
+        streetAddress: "103, 1st Floor, Rasis Business Center, Al Barsha 1 ,Dubai, UAE",
+        addressLocality: "Al Barsha 1",
         addressRegion: "Dubai",
         addressCountry: "AE",
       },

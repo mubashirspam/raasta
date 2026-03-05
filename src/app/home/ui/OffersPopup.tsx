@@ -296,7 +296,14 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                   </motion.div>
                 ) : (
                   <form
-                    onSubmit={handleSubmit}
+                    // onSubmit={handleSubmit}
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      window.open(
+                        "https://calendly.com/the-real-mallu-realtor/lifechanging?month=2026-03",
+                        "_blank",
+                      );
+                    }}
                     className="space-y-3 sm:space-y-4"
                   >
                     {/* Name */}
@@ -404,14 +411,14 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({
                   </p>
                   <div className="flex gap-2 sm:gap-3">
                     <a
-                      href="tel:+971501234567"
+                      href="tel:+971529368338"
                       className="flex-1 py-2.5 sm:py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                     >
                       <Phone size={18} />
                       Call Now
                     </a>
                     <a
-                      href="https://wa.me/971501234567"
+                      href="https://wa.me/971529368338"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 py-2.5 sm:py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"

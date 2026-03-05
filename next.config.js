@@ -25,5 +25,24 @@ module.exports = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
   },
+  async redirects() {
+    return [
+      {
+        source: "/registration",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/jobs",
+        destination: "/career",
+        permanent: true,
+      },
+      {
+        source: "/all-projects/:path*",
+        destination: "/properties",
+        permanent: true,
+      },
+    ];
+  },
   compress: true,
 };

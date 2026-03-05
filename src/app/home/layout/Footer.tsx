@@ -172,7 +172,7 @@ export const Footer: React.FC = () => {
                   Office
                 </p>
                 <p className="text-sm text-slate-500 leading-relaxed">
-                    103, 1st Floor, Rasis Business Center",
+                  103, 1st Floor, Rasis Business Center
                   <br />
                   Al Barsha 1 ,Dubai, UAE
                 </p>
