@@ -1,4 +1,5 @@
 module.exports = {
+  reactStrictMode: false,
   allowedDevOrigins: [
     "http://192.168.18.237:3000",
     "http://192.168.18.237:3001",

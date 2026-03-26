@@ -53,10 +53,11 @@ export const property = defineType({
       validation: (Rule) => Rule.required().min(0),
     }),
     defineField({
-      name: "bathrooms",
-      title: "Bathrooms",
-      type: "number",
-      validation: (Rule) => Rule.required().min(0),
+      name: "paymentPlan",
+      title: "Payment Plan",
+      type: "string",
+      description: "e.g., 20/80, 30/70, 40/60",
+      placeholder: "20/80",
     }),
     defineField({
       name: "area",

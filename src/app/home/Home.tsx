@@ -33,7 +33,7 @@ interface SanityProperty {
   slug: { current: string };
   price: number;
   bedrooms: number;
-  bathrooms: number;
+  paymentPlan?: string;
   area: number;
   propertyType: string;
   status: string;

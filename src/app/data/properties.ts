@@ -7,7 +7,7 @@ export const PROPERTIES: Property[] = [
     location: "Dubai Marina",
     price: "AED 12,500,000",
     beds: 4,
-    baths: 5,
+    paymentPlan: "20/80",
     sqft: 4200,
     type: "Penthouse",
     image:
@@ -20,7 +20,7 @@ export const PROPERTIES: Property[] = [
     location: "The Palm",
     price: "AED 28,000,000",
     beds: 6,
-    baths: 7,
+    paymentPlan: "30/70",
     sqft: 8500,
     type: "Villa",
     image:
@@ -33,7 +33,7 @@ export const PROPERTIES: Property[] = [
     location: "Downtown Dubai",
     price: "AED 3,200,000",
     beds: 2,
-    baths: 2,
+    paymentPlan: "40/60",
     sqft: 1450,
     type: "Apartment",
     image:
@@ -46,7 +46,7 @@ export const PROPERTIES: Property[] = [
     location: "Emirates Hills",
     price: "AED 45,000,000",
     beds: 8,
-    baths: 10,
+    paymentPlan: "50/50",
     sqft: 15000,
     type: "Mansion",
     image:
@@ -59,7 +59,7 @@ export const PROPERTIES: Property[] = [
     location: "Jumeirah Beach Residence",
     price: "AED 5,800,000",
     beds: 3,
-    baths: 3,
+    paymentPlan: "20/80",
     sqft: 2100,
     type: "Apartment",
     image:
@@ -72,7 +72,7 @@ export const PROPERTIES: Property[] = [
     location: "Dubai Creek Harbour",
     price: "AED 9,100,000",
     beds: 4,
-    baths: 5,
+    paymentPlan: "30/70",
     sqft: 3800,
     type: "Penthouse",
     image:

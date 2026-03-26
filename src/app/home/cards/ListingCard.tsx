@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MapPin, Bed, Bath, Maximize, Heart, ArrowUpRight } from "lucide-react";
+import { MapPin, Bed, Maximize, Heart, ArrowUpRight, CreditCard } from "lucide-react";
 import { Property } from "../../types";
 
 interface ListingCardProps {
@@ -75,12 +75,12 @@ export const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
             </span>
           </div>
           <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-slate-50 group-hover:bg-indigo-50/50 transition-colors">
-            <Bath
+            <CreditCard
               size={20}
               className="text-slate-400 mb-1 group-hover:text-indigo-500"
             />
             <span className="text-xs font-bold text-slate-700">
-              {data.baths} Baths
+              {data.paymentPlan || "N/A"}
             </span>
           </div>
           <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-slate-50 group-hover:bg-indigo-50/50 transition-colors">

@@ -7,7 +7,7 @@ export interface Property {
   location: string;
   price: string;
   beds: number;
-  baths: number;
+  paymentPlan?: string;
   sqft: number;
   type: string;
   image: string;

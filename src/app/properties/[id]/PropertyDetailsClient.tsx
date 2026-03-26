@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import {
   MapPin,
   Bed,
-  Bath,
   Maximize,
   Star,
   Share2,
@@ -19,6 +18,7 @@ import {
   ChevronRight,
   X,
   Images,
+  CreditCard,
 } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -34,7 +34,7 @@ interface SanityProperty {
   price: number;
   pricePerSqft?: number;
   bedrooms: number;
-  bathrooms: number;
+  paymentPlan?: string;
   area: number;
   propertyType: string;
   status: string;
@@ -256,14 +256,14 @@ export default function PropertyDetailsClient({
                   <span className="text-slate-500 text-sm">Bedrooms</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 border-r border-slate-100 last:border-0">
-                  <Bath
+                  <CreditCard
                     className="text-[#2EA8FF] mb-2 w-8 h-8"
                     strokeWidth={1.5}
                   />
                   <span className="text-2xl font-bold text-slate-900">
-                    {property.bathrooms}
+                    {property.paymentPlan || "N/A"}
                   </span>
-                  <span className="text-slate-500 text-sm">Bathrooms</span>
+                  <span className="text-slate-500 text-sm">Payment Plan</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4">
                   <Maximize

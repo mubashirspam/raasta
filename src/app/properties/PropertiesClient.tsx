@@ -33,7 +33,7 @@ interface SanityProperty {
   slug: { current: string };
   price: number;
   bedrooms: number;
-  bathrooms: number;
+  paymentPlan?: string;
   area: number;
   propertyType: string;
   status: string;
@@ -56,7 +56,7 @@ const transformSanityProperty = (
   location: prop.location,
   price: `AED ${prop.price?.toLocaleString() || 0}`,
   beds: prop.bedrooms || 0,
-  baths: prop.bathrooms || 0,
+  paymentPlan: prop.paymentPlan,
   sqft: prop.area || 0,
   type: prop.propertyType
     ? prop.propertyType.charAt(0).toUpperCase() + prop.propertyType.slice(1)
