@@ -6,6 +6,7 @@ import {
   X, Sparkles, Phone, MessageCircle, Calendar, UserCheck,
   Gift, Star, ArrowLeft, CheckCircle2,
 } from "lucide-react";
+import { trackEvent } from "@/app/utils/analytics";
 
 const POPUP_DELAY = 30000;
 const SESSION_KEY = "consultation_popup_shown";
@@ -192,10 +193,12 @@ export const OffersPopup: React.FC<OffersPopupProps> = ({ forceShow = false }) =
                     <p className="text-center text-xs sm:text-sm text-slate-500 mb-4">Or connect with us directly</p>
                     <div className="flex gap-2 sm:gap-3">
                       <a href="tel:+971529368338"
+                        onClick={() => trackEvent("click_call", { location: "offers_popup" })}
                         className="flex-1 py-2.5 sm:py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
                         <Phone size={18} />Call Now
                       </a>
                       <a href="https://wa.me/971529368338" target="_blank" rel="noopener noreferrer"
+                        onClick={() => trackEvent("click_whatsapp", { location: "offers_popup" })}
                         className="flex-1 py-2.5 sm:py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
                         <MessageCircle size={18} />WhatsApp
                       </a>

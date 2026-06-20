@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { ArrowRight, Compass } from "lucide-react";
 import Image from "next/image";
+import { trackEvent } from "@/app/utils/analytics";
 
 export const HeroSection: React.FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -181,6 +182,7 @@ export const HeroSection: React.FC = () => {
               href="https://wa.me/971529368338"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("click_whatsapp", { location: "hero" })}
               className="group inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-white bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500 transition-all duration-300 rounded-full hover:shadow-xl hover:shadow-cyan-500/25 hover:scale-[1.02] w-full sm:w-auto justify-center"
             >
               <span className="tracking-wide">Connect with us</span>
@@ -196,6 +198,7 @@ export const HeroSection: React.FC = () => {
               href="https://calendly.com/the-real-mallu-realtor/lifechanging"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("click_book_call", { location: "hero" })}
               className="group inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-slate-800 bg-white border-2 border-slate-200 transition-all duration-300 rounded-full hover:border-slate-300 hover:shadow-lg hover:scale-[1.02] w-full sm:w-auto justify-center"
             >
               <span className="tracking-wide">Book a meeting</span>

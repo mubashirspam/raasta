@@ -11,6 +11,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { ContactForm } from "../forms/ContactForm";
+import { trackEvent } from "@/app/utils/analytics";
 
 const contactInfo = [
   {
@@ -38,7 +39,7 @@ const contactInfo = [
     icon: MapPin,
     label: "Office",
     value: "103, 1st Floor, Rasis Business Center, Al Barsha 1 ,Dubai, UAE",
-    link: "https://maps.google.com/?q=The+Prism+Tower+Business+Bay+Dubai",
+    link: "https://www.google.com/maps/dir/?api=1&destination=Raasta+Realty+Office+No+103+Al+Barsha+1+Al+Barsha+First+Dubai+UAE",
     color: "from-orange-500 to-red-500",
   },
 ];
@@ -166,6 +167,12 @@ export const ContactSection: React.FC = () => {
                   >
                     <a
                       href={item.link}
+                      onClick={() =>
+                        trackEvent("click_contact", {
+                          method: item.label,
+                          location: "home_contact",
+                        })
+                      }
                       className="block p-3 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 hover:bg-white/60 hover:shadow-lg hover:shadow-[#2EA8FF]/10 transition-all duration-300"
                     >
                       <div className="flex flex-row gap-3">
@@ -200,6 +207,12 @@ export const ContactSection: React.FC = () => {
                 >
                   <a
                     href={item.link}
+                    onClick={() =>
+                      trackEvent("click_contact", {
+                        method: item.label,
+                        location: "home_contact",
+                      })
+                    }
                     className="block p-3 rounded-2xl bg-white/40 backdrop-blur-xl border border-white/60 hover:bg-white/60 hover:shadow-lg hover:shadow-[#2EA8FF]/10 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
@@ -227,6 +240,9 @@ export const ContactSection: React.FC = () => {
               href="https://wa.me/971529368338"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("click_whatsapp", { location: "home_contact" })
+              }
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

@@ -14,6 +14,7 @@ import {
   Briefcase,
   MessageCircle,
 } from "lucide-react";
+import { trackEvent } from "@/app/utils/analytics";
 
 const COUNTRY_CODES = [
   { code: "+971", flag: "🇦🇪", country: "UAE" },
@@ -130,6 +131,7 @@ export default function CareerApplicationForm({
       }
 
       setSubmitStatus("success");
+      trackEvent("submit_career_application", {});
       setSubmittedData({
         fullName: formData.fullName,
         email: formData.email,

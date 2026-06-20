@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
               <div className="text-sm">
                 <span className="text-slate-600 font-semibold">General: </span>
                 <a
-                  href="mailto:Admin@lykarealty.ae"
+                  href="mailto:connect@raastarealty.com"
                   className="text-[#2EA8FF] hover:underline transition-colors"
                 >
                   connect@raastarealty.com
@@ -131,7 +131,7 @@ export const Footer: React.FC = () => {
               <div className="text-sm">
                 <span className="text-slate-600 font-semibold">Career: </span>
                 <a
-                  href="mailto:hr@lykarealty.ae"
+                  href="mailto:hr@raastarealty.com"
                   className="text-[#2EA8FF] hover:underline transition-colors"
                 >
                   hr@raastarealty.com
@@ -178,7 +178,7 @@ export const Footer: React.FC = () => {
                 </p>
               </div>
               <a
-                href="https://www.google.com/maps?ll=25.18746,55.261116&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=5563669925211235611"
+                href="https://www.google.com/maps/dir/?api=1&destination=Raasta+Realty+Office+No+103+Al+Barsha+1+Al+Barsha+First+Dubai+UAE"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[#2EA8FF] hover:underline transition-colors"

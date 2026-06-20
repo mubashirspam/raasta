@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
+import { trackEvent } from "@/app/utils/analytics";
 
 const COUNTRY_CODES = [
   { code: "+971", flag: "🇦🇪", country: "UAE" },
@@ -91,6 +92,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       }
 
       setSubmitStatus("success");
+      trackEvent("submit_contact_form", { purpose: formData.purpose });
 
       // Reset form after successful submission
       setTimeout(() => {

@@ -1,6 +1,10 @@
 import "./globals.css";
 import { ThemeContextProvider } from "../../context/ThemeContext";
 import { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { PostHogProvider } from "./providers";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const SITE_URL = "https://www.raastarealty.com";
 const OG_IMAGE =
@@ -168,8 +172,8 @@ const jsonLd = {
       priceRange: "AED 500K - AED 50M+",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "1610, 16th Floor, The Prism Tower",
-        addressLocality: "Business Bay",
+        streetAddress: "Office No. 103, Rasis Business Center, Al Barsha 1, Al Barsha First",
+        addressLocality: "Al Barsha",
         addressRegion: "Dubai",
         addressCountry: "AE",
       },
@@ -232,8 +236,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeContextProvider>{children}</ThemeContextProvider>
+        <PostHogProvider>
+          <ThemeContextProvider>{children}</ThemeContextProvider>
+        </PostHogProvider>
       </body>
+      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   );
 }
