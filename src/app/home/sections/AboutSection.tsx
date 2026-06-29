@@ -163,7 +163,7 @@ export const AboutSection: React.FC = () => {
                     <p>
                       Founded by{" "}
                       <strong className="text-emerald-600">
-                        Muhammad Najeeb Nazar
+                        Muhammed Najeeb Nazar
                       </strong>
                       ,{" "}
                       <strong className="text-emerald-600">
@@ -171,7 +171,7 @@ export const AboutSection: React.FC = () => {
                       </strong>
                       , and{" "}
                       <strong className="text-emerald-600">
-                        Muhammad Navas Nazar
+                        Muhammed Navas Nazar
                       </strong>
                       .
                     </p>

@@ -227,8 +227,8 @@ export default function RERAInfoContent() {
                   <strong>Phone:</strong> +971 52 936 8338
                 </p>
                 <p>
-                  <strong>Address:</strong> 1610, 16th Floor, The Prism Tower,
-                  Business Bay, Dubai, UAE
+                  <strong>Address:</strong> 103, 1st Floor, Rasis Business Center
+Al Barsha 1 ,Dubai, UAE
                 </p>
               </div>
             </div>

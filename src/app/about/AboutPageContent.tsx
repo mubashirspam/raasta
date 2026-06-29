@@ -324,7 +324,7 @@ export default function AboutPageContent({
                         conversations, trust, shared risks, and a deep belief in
                         doing things the right way. Founded by{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Najeeb Nazar
+                          Muhammed Najeeb Nazar
                         </strong>
                         ,{" "}
                         <strong className="text-emerald-600">
@@ -332,7 +332,7 @@ export default function AboutPageContent({
                         </strong>
                         , and{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Navas Nazar
+                          Muhammed Navas Nazar
                         </strong>
                         .
                       </p>
@@ -380,7 +380,7 @@ export default function AboutPageContent({
                       <p>
                         Founded by{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Najeeb Nazar
+                          Muhammed Najeeb Nazar
                         </strong>
                         ,{" "}
                         <strong className="text-emerald-600">
@@ -388,7 +388,7 @@ export default function AboutPageContent({
                         </strong>
                         , and{" "}
                         <strong className="text-emerald-600">
-                          Muhammad Navas Nazar
+                          Muhammed Navas Nazar
                         </strong>
                         .
                       </p>
@@ -686,12 +686,8 @@ export default function AboutPageContent({
                             This responsibility is led by{" "}
                             <strong className="text-blue-600">
                               Shaheen Fadil (Administrator)
-                            </strong>{" "}
-                            and{" "}
-                            <strong className="text-blue-600">
-                              Selin John (HR Manager)
-                            </strong>{" "}
-                            they are the quiet strength behind the scenes.
+                            </strong>,{" "}
+                            who is the quiet strength behind the scenes.
                           </p>
                         </div>
                       </details>
@@ -715,14 +711,10 @@ export default function AboutPageContent({
                         This responsibility is led by{" "}
                         <strong className="text-blue-600">
                           Shaheen Fadil (Administrator)
-                        </strong>{" "}
-                        and{" "}
-                        <strong className="text-blue-600">
-                          Selin John (HR Manager)
-                        </strong>{" "}
-                        they are the quiet strength behind the scenes. Through
-                        their dedication, they listen, support, organize, and
-                        guide, ensuring that both people and systems move
+                        </strong>,{" "}
+                        who is the quiet strength behind the scenes. Through
+                        her dedication, she listens, supports, organizes, and
+                        guides, ensuring that both people and systems move
                         forward together.
                       </p>
                     </div>
