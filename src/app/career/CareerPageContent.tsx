@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Navbar } from "../home/layout/Navbar";
 import { Footer } from "../home/layout/Footer";
 import { ContactModal } from "../home/ui/ContactModal";
@@ -111,52 +111,70 @@ export default function CareerPageContent({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
   const [selectedPosition, setSelectedPosition] = useState("");
-  const [visibleImageIndices, setVisibleImageIndices] = useState([0, 1, 2, 3]);
-  const [heroImageIndex, setHeroImageIndex] = useState(0);
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
+  const [batchStartIndex, setBatchStartIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
 
-  // Filter and sort office images for hero section
-  const officeImages = careerGallery
+  // Office images → hero marquee
+  const rawOfficeImages = careerGallery
     .filter((item) => item.category === "office")
-    .sort((a, b) => a.order - b.order) // Sort by order (1, 2, 3...)
-    .map((item) => ({
-      url: item.image?.asset?.url,
-      alt: item.title,
-    }))
-    .filter((img) => img.url); // Only include images with valid URLs
+    .sort((a, b) => a.order - b.order)
+    .map((item) => ({ url: item.image?.asset?.url, alt: item.title }))
+    .filter((img): img is { url: string; alt: string } => typeof img.url === "string");
 
-  // Get images from Sanity or use defaults
-  const images =
+  const heroMarqueeBase = rawOfficeImages.length >= 2 ? rawOfficeImages : defaultImages;
+  // Repeat to fill marquee (need ≥8 for seamless loop on wide screens)
+  const heroMarqueeImages = Array.from(
+    { length: Math.ceil(8 / heroMarqueeBase.length) },
+    () => heroMarqueeBase
+  ).flat();
+
+  // Culture images for accordion (non-office)
+  const cultureImages =
     careerGallery.length > 0
-      ? careerGallery.map((item) => ({
-          url: item.image?.asset?.url || defaultImages[0].url,
-          alt: item.title,
-        }))
-      : defaultImages;
+      ? careerGallery
+          .filter((item) => item.category !== "office")
+          .sort((a, b) => a.order - b.order)
+          .map((item) => ({
+            url: item.image?.asset?.url || defaultImages[0].url,
+            alt: item.title,
+            category: item.category,
+          }))
+          .filter((img) => img.url)
+      : defaultImages.map((img) => ({ ...img, category: "culture" }));
 
-  // Rotate hero images (office category only)
+  const displayCultureImages = cultureImages.length > 0
+    ? cultureImages
+    : defaultImages.map((img) => ({ ...img, category: "culture" }));
+
+  const visibleBatchImages = Array.from({ length: visibleCount }, (_, i) =>
+    displayCultureImages[(batchStartIndex + i) % displayCultureImages.length]
+  );
+
+  // Responsive card count
   useEffect(() => {
-    if (officeImages.length <= 1) return;
+    const update = () => setVisibleCount(window.innerWidth < 768 ? 3 : 4);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
-    const interval = setInterval(() => {
-      setHeroImageIndex((prev) => (prev + 1) % officeImages.length);
-    }, 4000); // Change every 4 seconds
-
-    return () => clearInterval(interval);
-  }, [officeImages.length]);
-
-  // Rotate life at raasta images if more than 4 available
+  // Auto-advance accordion + batch swap when a full cycle completes
   useEffect(() => {
-    if (images.length <= 4) return;
-
+    if (displayCultureImages.length <= 1) return;
     const interval = setInterval(() => {
-      setVisibleImageIndices((prev) => {
-        // Rotate: move each index forward by 1
-        return prev.map((idx) => (idx + 1) % images.length);
+      setActiveCardIndex((prev) => {
+        const next = prev + 1;
+        if (next >= visibleCount) {
+          setBatchStartIndex((b) => (b + visibleCount) % displayCultureImages.length);
+          return 0;
+        }
+        return next;
       });
-    }, 3000); // Change every 3 seconds
-
+    }, 2500);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [displayCultureImages.length, visibleCount]);
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
@@ -172,150 +190,164 @@ export default function CareerPageContent({
       />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      <section className="relative pt-32 pb-0 overflow-hidden bg-[#FAFAF9]">
+        {/* Decorative patterns */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Soft glow blobs — visible on all screens */}
+          <div className="absolute -left-16 top-28 w-48 h-48 md:w-72 md:h-72 md:left-0 rounded-full bg-indigo-300/20 blur-3xl" />
+          <div className="absolute -right-16 top-20 w-48 h-48 md:w-72 md:h-72 md:right-0 rounded-full bg-pink-300/20 blur-3xl" />
+
+          {/* Top corner accents — visible on mobile too */}
+          <svg
+            className="absolute left-4 top-28 w-14 h-14 md:left-16 md:top-72 md:w-24 md:h-24 text-pink-400/40"
+            viewBox="0 0 100 100"
+            fill="none"
+          >
+            <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="3" />
+            <circle cx="50" cy="50" r="26" stroke="currentColor" strokeWidth="3" />
+          </svg>
+          <svg
+            className="absolute right-4 top-24 w-12 h-12 md:right-20 md:top-40 md:w-20 md:h-20 text-indigo-400/50"
+            viewBox="0 0 100 100"
+            fill="none"
+          >
+            <path
+              d="M50 5 L61 39 L97 39 L68 61 L79 95 L50 73 L21 95 L32 61 L3 39 L39 39 Z"
+              stroke="currentColor"
+              strokeWidth="3"
+            />
+          </svg>
+
+          {/* Dotted grids — large screens only */}
           <div
-            className="absolute inset-0"
+            className="absolute left-8 top-44 w-40 h-40 opacity-[0.15] hidden lg:block"
             style={{
-              background:
-                "linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #ede9fe 100%)",
+              backgroundImage:
+                "radial-gradient(circle, #6366f1 1.5px, transparent 1.5px)",
+              backgroundSize: "18px 18px",
             }}
           />
-          <div className="absolute inset-0 bg-white/40 backdrop-blur-xl" />
+          <div
+            className="absolute right-8 top-56 w-40 h-40 opacity-[0.15] hidden lg:block"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, #a855f7 1.5px, transparent 1.5px)",
+              backgroundSize: "18px 18px",
+            }}
+          />
+
+          {/* Small accent dots */}
+          <div className="absolute right-8 top-48 w-2.5 h-2.5 md:right-32 md:top-80 md:w-3 md:h-3 rounded-full bg-purple-400/50" />
+          <div className="absolute left-10 top-52 w-2.5 h-2.5 md:left-40 md:w-3 md:h-3 rounded-full bg-indigo-400/50" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-white/50 text-indigo-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm"
-              >
-                <Briefcase size={14} />
-                <span>Join Our Team</span>
-              </motion.div>
+        {/* Text Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 pb-12 text-center flex flex-col items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-2 text-slate-400 text-xs font-bold tracking-[0.25em] uppercase mb-6"
+          >
+            <Briefcase size={14} />
+            <span>Join Our Team</span>
+          </motion.div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[1.1]"
-              >
-                Build Your
-                <br />
-                <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
-                    Career With Us
-                  </span>
-                  <svg
-                    className="absolute -bottom-2 left-0 w-full"
-                    viewBox="0 0 250 10"
-                    fill="none"
-                  >
-                    <path
-                      d="M2 8C70 2 180 2 248 8"
-                      stroke="url(#career-underline)"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="career-underline"
-                        x1="0"
-                        y1="0"
-                        x2="250"
-                        y2="0"
-                      >
-                        <stop stopColor="#6366F1" />
-                        <stop offset="0.5" stopColor="#A855F7" />
-                        <stop offset="1" stopColor="#EC4899" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </span>
-              </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-7xl font-black text-slate-900 tracking-tight mb-6 leading-[0.95]"
+          >
+            Build Your{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
+              Career
+            </span>
+            <br />
+            With Us
+          </motion.h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8"
-              >
-                Join one of Dubai’s fastest-growing, purpose-driven real estate
-                companies. At Raasta, we don’t just sell properties, we build
-                careers, transform lives, and create long-term impact.
-              </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg md:text-xl text-slate-500 leading-relaxed mb-8 max-w-2xl"
+          >
+            Join one of Dubai’s fastest-growing, purpose-driven real estate
+            companies. At Raasta, we don’t just sell properties, we build
+            careers, transform lives, and create long-term impact.
+          </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-wrap gap-4"
-              >
-                <a
-                  href="#positions"
-                  className="px-8 py-4 rounded-full bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors shadow-xl flex items-center gap-2"
-                >
-                  View Open Positions
-                  <ArrowRight size={18} />
-                </a>
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="px-8 py-4 rounded-full bg-white text-slate-900 font-bold border border-slate-200 hover:bg-slate-50 transition-colors"
-                >
-                  Submit Your CV
-                </button>
-              </motion.div>
-            </div>
-
-            {/* Right - Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="relative"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex flex-wrap gap-4 items-center justify-center"
+          >
+            <a
+              href="#positions"
+              className="px-8 py-4 rounded-full bg-slate-900 text-white font-bold hover:bg-slate-800 transition-colors shadow-lg flex items-center gap-2"
             >
-              <div className="aspect-4/3 rounded-3xl overflow-hidden shadow-2xl relative">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={heroImageIndex}
-                    src={
-                      officeImages.length > 0
-                        ? officeImages[heroImageIndex]?.url
-                        : defaultImages[0].url
-                    }
-                    alt={
-                      officeImages.length > 0
-                        ? officeImages[heroImageIndex]?.alt
-                        : "Team collaboration"
-                    }
-                    className="w-full h-full object-cover absolute inset-0"
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
+              View Open Positions
+              <ArrowRight size={18} />
+            </a>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-8 py-4 rounded-full bg-white text-slate-900 font-bold border border-slate-200 hover:bg-slate-50 transition-colors"
+            >
+              Submit Your CV
+            </button>
+          </motion.div>
+
+          {/* Stat row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex items-center gap-3 mt-8 text-slate-500"
+          >
+            <span className="text-2xl font-black text-slate-900">30+</span>
+            <span className="text-sm font-bold uppercase tracking-widest">
+              Team Members
+            </span>
+            <span className="w-px h-4 bg-slate-300" />
+            <span className="text-sm text-emerald-600 font-semibold flex items-center gap-1">
+              Growing fast <TrendingUp size={14} />
+            </span>
+          </motion.div>
+        </div>
+
+        {/* Arch Image Marquee — scrolls left to right */}
+        <div className="relative z-10">
+          {/* Fade edges */}
+          <div className="absolute top-0 left-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#FAFAF9] to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 right-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#FAFAF9] to-transparent z-10 pointer-events-none" />
+
+          <motion.div
+            className="flex gap-1.5 md:gap-2 w-max"
+            animate={{ x: ["-50%", "0%"] }}
+            transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+          >
+            {[...heroMarqueeImages, ...heroMarqueeImages].map((img, idx) => {
+              // Alternate top-left and top-right rounded for a varied look
+              const radius =
+                idx % 2 === 0
+                  ? "70px 16px 16px 16px"
+                  : "16px 70px 16px 16px";
+              return (
+                <div
+                  key={idx}
+                  className="flex-shrink-0 w-32 md:w-52 h-60 md:h-[400px] overflow-hidden bg-slate-100 group"
+                  style={{ borderRadius: radius }}
+                >
+                  <img
+                    src={img.url}
+                    alt={img.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                </AnimatePresence>
-              </div>
-              <div className="absolute -bottom-6 -left-6 p-5 rounded-2xl bg-white shadow-xl border border-slate-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white">
-                    <Users size={24} />
-                  </div>
-                  <div>
-                    <p
-                      className="font-bold text-slate-900"
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                    >
-                      30+ Team Members
-                    </p>
-                    <p className="text-sm text-slate-600">Growing fast</p>
-                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
@@ -427,101 +459,68 @@ export default function CareerPageContent({
       </section>
 
       {/* Life at Raasta */}
-      <section className="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-white/50 text-indigo-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm backdrop-blur-sm"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold tracking-widest uppercase mb-4 shadow-sm"
               >
                 <Sparkles size={14} />
                 <span>Our Culture</span>
               </motion.div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
                 Life at{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                   Raasta
                 </span>
               </h2>
-              <p className="text-slate-600 text-lg mb-8">
-                We work hard, celebrate wins, and grow together. From team
-                outings to training sessions, we believe culture creates
+              <p className="text-slate-500 text-lg mt-3 max-w-xl">
+                We work hard, celebrate wins, and grow together. Culture creates
                 success.
               </p>
+            </div>
+            <button
+              onClick={() => setIsGalleryModalOpen(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap"
+            >
+              See All Photos
+              <ArrowRight size={18} />
+            </button>
+          </div>
 
-              <button
-                onClick={() => setIsGalleryModalOpen(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity shadow-lg"
-              >
-                See Our Culture
-                <ArrowRight size={18} />
-              </button>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="aspect-square rounded-2xl overflow-hidden relative">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={visibleImageIndices[0]}
-                      src={images[visibleImageIndices[0]]?.url}
-                      alt={images[visibleImageIndices[0]]?.alt}
-                      className="w-full h-full object-cover absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  </AnimatePresence>
-                </div>
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={visibleImageIndices[1]}
-                      src={images[visibleImageIndices[1]]?.url}
-                      alt={images[visibleImageIndices[1]]?.alt}
-                      className="w-full h-full object-cover absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  </AnimatePresence>
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="aspect-4/3 rounded-2xl overflow-hidden relative">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={visibleImageIndices[2]}
-                      src={images[visibleImageIndices[2]]?.url}
-                      alt={images[visibleImageIndices[2]]?.alt}
-                      className="w-full h-full object-cover absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  </AnimatePresence>
-                </div>
-                <div className="aspect-square rounded-2xl overflow-hidden relative">
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={visibleImageIndices[3]}
-                      src={images[visibleImageIndices[3]]?.url}
-                      alt={images[visibleImageIndices[3]]?.alt}
-                      className="w-full h-full object-cover absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  </AnimatePresence>
-                </div>
-              </div>
-            </div>
+          {/* Culture Accordion Cards */}
+          <div className="flex gap-2 h-72 md:h-[500px]">
+            {visibleBatchImages.map((img, idx) => {
+              const isActive =
+                (hoveredCardIndex !== null ? hoveredCardIndex : activeCardIndex) === idx;
+              return (
+                <motion.div
+                  key={`${batchStartIndex}-${idx}`}
+                  animate={{ flex: isActive ? 4 : 1 }}
+                  transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="relative overflow-hidden rounded-2xl cursor-pointer min-w-0"
+                  onMouseEnter={() => setHoveredCardIndex(idx)}
+                  onMouseLeave={() => setHoveredCardIndex(null)}
+                  onClick={() => setIsGalleryModalOpen(true)}
+                >
+                  <motion.img
+                    key={img.url}
+                    src={img.url}
+                    alt={img.alt}
+                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
